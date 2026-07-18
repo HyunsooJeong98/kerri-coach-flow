@@ -77,21 +77,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      {
+        name: "description",
+        content:
+          "회원 관리, 일정, 결제, AI 레슨 리포트까지. 개인 레슨 코치를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요.",
+      },
+      { property: "og:title", content: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      {
+        property: "og:description",
+        content:
+          "회원 관리, 일정, 결제, AI 레슨 리포트까지. 개인 레슨 코치를 위한 올인원 운영 플랫폼 KERRI.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://cdn.jsdelivr.net", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
