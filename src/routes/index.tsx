@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import kerriAppHome from "@/assets/kerri-app-home.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
