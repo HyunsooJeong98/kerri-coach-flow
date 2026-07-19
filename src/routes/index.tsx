@@ -221,8 +221,17 @@ function Ops() {
                 <h3 className="text-lg font-bold">{c.t}</h3>
               </div>
               <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{c.d}</p>
-              <div className="mt-5 aspect-[16/10] rounded-xl bg-[var(--cream)] border border-dashed border-border grid place-items-center text-xs text-muted-foreground">
-                앱 화면 이미지 자리
+              <div className="mt-5 aspect-[16/10] rounded-xl bg-[var(--cream)] border border-dashed border-border grid place-items-center overflow-hidden">
+                {c.img ? (
+                  <img
+                    src={c.img}
+                    alt={`${c.t} 앱 화면`}
+                    loading="lazy"
+                    className="h-full w-auto object-contain py-2"
+                  />
+                ) : (
+                  <span className="text-xs text-muted-foreground">앱 화면 이미지 자리</span>
+                )}
               </div>
             </div>
           ))}
