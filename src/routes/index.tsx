@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import kerriAppHome from "@/assets/kerri-app-home.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -185,10 +187,10 @@ function Hero() {
 }
 
 function Ops() {
-  const cards = [
+  const cards: { t: string; d: string; img?: string }[] = [
     { t: "회원 관리", d: "회원 정보를 한곳에서 관리" },
     { t: "레슨 일정", d: "오늘의 레슨을 한눈에 확인" },
-    { t: "출석 · 횟수 관리", d: "남은 횟수를 자동 관리" },
+    { t: "출석 · 횟수 관리", d: "남은 횟수를 자동 관리", img: kerriAppHome.url },
     { t: "재등록 알림", d: "회원의 재등록 시점을 놓치지 않도록" },
     { t: "결제 관리", d: "미납 회원과 결제 현황을 쉽게 확인" },
     { t: "AI 레슨 리포트", d: "레슨이 끝나면 회원에게 자동 전달" },
@@ -219,8 +221,17 @@ function Ops() {
                 <h3 className="text-lg font-bold">{c.t}</h3>
               </div>
               <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{c.d}</p>
-              <div className="mt-5 aspect-[16/10] rounded-xl bg-[var(--cream)] border border-dashed border-border grid place-items-center text-xs text-muted-foreground">
-                앱 화면 이미지 자리
+              <div className="mt-5 aspect-[16/10] rounded-xl bg-[var(--cream)] border border-dashed border-border grid place-items-center overflow-hidden">
+                {c.img ? (
+                  <img
+                    src={c.img}
+                    alt={`${c.t} 앱 화면`}
+                    loading="lazy"
+                    className="h-full w-auto object-contain py-2"
+                  />
+                ) : (
+                  <span className="text-xs text-muted-foreground">앱 화면 이미지 자리</span>
+                )}
               </div>
             </div>
           ))}
