@@ -152,7 +152,7 @@ function Hero() {
       <div className="mx-auto max-w-6xl px-5 lg:px-8 pt-20 pb-24 lg:pt-32 lg:pb-36 grid lg:grid-cols-[1.05fr_1fr] gap-16 items-center">
         <div className="section-fade">
           <Eyebrow>Personal Coaching Platform</Eyebrow>
-          <h1 className="mt-6 text-[2.5rem] sm:text-6xl lg:text-[4.25rem] font-extrabold leading-[1.08]" style={{ letterSpacing: "-0.045em" }}>
+          <h1 className="mt-6 text-[2.5rem] sm:text-6xl lg:text-[3.75rem] font-extrabold leading-[1.1]" style={{ letterSpacing: "-0.045em" }}>
             레슨이 끝나면,
             <br />
             <span className="font-display text-primary">리포트</span>
