@@ -34,6 +34,21 @@
   --color-clay-dark: var(--clay-dark);
   --color-ink: var(--ink);
   --font-sans: "Pretendard", "Pretendard Variable", ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-serif: "Fraunces", "Pretendard", ui-serif, Georgia, serif;
+}
+
+@utility font-display {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 :root {
