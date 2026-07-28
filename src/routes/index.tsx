@@ -38,6 +38,9 @@ function Nav() {
               {i.label}
             </button>
           ))}
+          <Link to="/account-deletion" className="hover:text-primary transition-colors">
+            계정 삭제
+          </Link>
           <button
             onClick={() => scrollTo("install")}
             className="rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm font-semibold shadow-sm hover:bg-[var(--clay-dark)] transition-colors"
@@ -81,6 +84,13 @@ function Nav() {
                 {i.label}
               </button>
             ))}
+            <Link
+              to="/account-deletion"
+              onClick={() => setOpen(false)}
+              className="text-left py-3 text-foreground/90 font-medium border-b border-border/40"
+            >
+              계정 삭제
+            </Link>
             <button
               onClick={() => {
                 setOpen(false);
@@ -676,6 +686,7 @@ function Footer() {
             <li><a href="#" className="hover:text-primary">이용약관</a></li>
             <li><a href="#" className="hover:text-primary">개인정보처리방침</a></li>
             <li><a href="#" className="hover:text-primary">환불정책</a></li>
+            <li><Link to="/account-deletion" className="hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
           </ul>
         </div>
       </div>
