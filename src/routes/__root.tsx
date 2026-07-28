@@ -87,14 +87,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "회원 관리, 일정, 결제, AI 레슨 리포트까지. 개인 레슨 코치를 위한 올인원 운영 플랫폼 KERRI.",
+          "회원 관리, 일정, 결제, AI 레슨 리포트까지. 개인 레슨 코치를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      { name: "twitter:description", content: "회원 관리, 일정, 결제, AI 레슨 리포트까지. 개인 레슨 코치를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c765a3e0-b625-4715-802a-57fd858d3262/id-preview-2956137f--708ee843-d712-420a-ad0e-7218577e7379.lovable.app-1785231812569.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c765a3e0-b625-4715-802a-57fd858d3262/id-preview-2956137f--708ee843-d712-420a-ad0e-7218577e7379.lovable.app-1785231812569.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.jpg", type: "image/jpeg" },
+      { rel: "icon", href: "/favicon.jpg", type: "image/x-icon" },
       { rel: "preconnect", href: "https://cdn.jsdelivr.net", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
