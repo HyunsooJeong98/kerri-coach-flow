@@ -419,32 +419,50 @@ function Impact() {
   );
 }
 
-function StoreButtons() {
+function StoreButtons({ appStoreUrl }: { appStoreUrl: string }) {
   return (
     <div className="flex flex-wrap gap-2">
-      <div className="rounded-lg bg-[var(--ink)] text-white px-4 py-2.5 text-xs font-semibold flex items-center gap-2">
-         <span className="opacity-70">Download on the</span>
+      <a
+        href={appStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="rounded-lg bg-[var(--ink)] text-white px-4 py-2.5 text-xs font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
+      >
+        <span className="opacity-70">Download on the</span>
         <span className="font-bold">App Store</span>
-      </div>
-      <div className="rounded-lg bg-[var(--ink)] text-white px-4 py-2.5 text-xs font-semibold flex items-center gap-2">
-        <span className="opacity-70">GET IT ON</span>
+      </a>
+      <div
+        aria-disabled="true"
+        className="rounded-lg border border-border bg-muted text-foreground/50 px-4 py-2.5 text-xs font-semibold flex items-center gap-2 cursor-not-allowed"
+      >
+        <span className="opacity-70">준비 중</span>
         <span className="font-bold">Google Play</span>
       </div>
     </div>
   );
 }
 
-function QR() {
+function QR({ url, label }: { url: string; label: string }) {
   return (
-    <div className="hidden md:grid place-items-center h-20 w-20 rounded-lg bg-white border border-border">
-      <div className="grid grid-cols-5 gap-0.5">
-        {Array.from({ length: 25 }).map((_, i) => (
-          <div key={i} className={`h-2 w-2 ${Math.random() > 0.5 ? "bg-[var(--ink)]" : "bg-transparent"}`} />
-        ))}
-      </div>
-    </div>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${label} App Store QR 코드`}
+      className="hidden md:grid place-items-center h-20 w-20 rounded-lg bg-white border border-border overflow-hidden"
+    >
+      <img
+        src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=${encodeURIComponent(url)}`}
+        alt={`${label} App Store 다운로드 QR 코드`}
+        width={80}
+        height={80}
+        loading="lazy"
+        className="h-20 w-20"
+      />
+    </a>
   );
 }
+
 
 function AppSection() {
   return (
