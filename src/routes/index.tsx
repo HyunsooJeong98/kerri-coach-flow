@@ -419,6 +419,9 @@ function Impact() {
   );
 }
 
+const COACH_APP_URL = "https://apps.apple.com/kr/app/kerri/id6783224934";
+const MEMBER_APP_URL = "https://apps.apple.com/kr/app/kerri-member/id6783235236";
+
 function StoreButtons({ appStoreUrl }: { appStoreUrl: string }) {
   return (
     <div className="flex flex-wrap gap-2">
@@ -485,8 +488,8 @@ function AppSection() {
               레슨 운영을 하나로.
             </p>
             <div className="mt-7 flex items-center gap-4 flex-wrap">
-              <StoreButtons />
-              <QR />
+              <StoreButtons appStoreUrl={COACH_APP_URL} />
+              <QR url={COACH_APP_URL} label="KERRI Coach" />
             </div>
           </div>
           <div className="md:col-span-2 rounded-3xl bg-background border border-border/60 p-7 sm:p-10">
@@ -498,8 +501,8 @@ function AppSection() {
               내 레슨을 한곳에서.
             </p>
             <div className="mt-7 flex items-center gap-4 flex-wrap">
-              <StoreButtons />
-              <QR />
+              <StoreButtons appStoreUrl={MEMBER_APP_URL} />
+              <QR url={MEMBER_APP_URL} label="KERRI Member" />
             </div>
           </div>
         </div>
@@ -681,7 +684,7 @@ function Footer() {
             스포츠 강사를 위한 운영 플랫폼.
           </p>
           <div className="mt-5">
-            <StoreButtons />
+            <StoreButtons appStoreUrl={COACH_APP_URL} />
           </div>
         </div>
         <div className="text-sm text-foreground/70 space-y-1.5">
