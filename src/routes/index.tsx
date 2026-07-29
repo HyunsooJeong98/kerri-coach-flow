@@ -467,6 +467,81 @@ function QR({ url, label }: { url: string; label: string }) {
 }
 
 
+function MemberApp() {
+  const features = [
+    "오늘 레슨 기록",
+    "지난 레슨 기록",
+    "개인 연습 플랜",
+    "다음 레슨 일정",
+    "남은 레슨 횟수",
+    "리마인드 알림",
+    "성장 기록",
+  ];
+  const cards = [
+    {
+      t: "레슨을 더 잘 이해합니다.",
+      d: "오늘 배운 핵심 내용을 다시 확인하며 레슨 내용을 더 오래 기억할 수 있습니다.",
+    },
+    {
+      t: "혼자서도 연습할 수 있습니다.",
+      d: "AI가 제안하는 개인 연습 플랜으로 다음 레슨 전까지 꾸준히 운동할 수 있습니다.",
+    },
+    {
+      t: "성장이 눈에 보입니다.",
+      d: "레슨 기록이 쌓일수록 회원은 자신의 변화를 확인하고, 다음 레슨에 대한 동기를 얻습니다.",
+    },
+  ];
+  return (
+    <section id="member" className="py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+              회원도 함께 사용할 때,
+              <br />
+              <span className="text-primary">KERRI의 가치</span>가 커집니다.
+            </h2>
+            <p className="mt-6 text-foreground/70 leading-relaxed">
+              레슨이 끝난 뒤에도 회원이 계속 운동할 수 있도록 돕고, 코치는 회원별 성장 과정을
+              체계적으로 관리할 수 있습니다.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-[var(--cream)] border border-border/60 p-7">
+            <p className="text-sm font-semibold text-foreground/70">
+              회원은 KERRI Member 앱에서 언제든 확인할 수 있습니다.
+            </p>
+            <ul className="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-3">
+              {features.map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm font-medium">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 grid md:grid-cols-3 gap-5">
+          {cards.map((c) => (
+            <div
+              key={c.t}
+              className="rounded-2xl bg-card border border-border/60 p-7 hover:shadow-[0_20px_40px_-24px_rgba(62,43,34,0.25)] transition-shadow"
+            >
+              <h3 className="text-lg font-bold">{c.t}</h3>
+              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{c.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-10 text-center text-base sm:text-lg font-semibold text-foreground/80 max-w-3xl mx-auto leading-relaxed">
+          회원은 성장 과정을 확인하고, 코치는 더 체계적인 관리와 높은 재등록률을 기대할 수 있습니다.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+
 function AppSection() {
   return (
     <section id="install" className="py-20 lg:py-28 bg-[var(--cream)]">
@@ -746,6 +821,8 @@ function Landing() {
         <Report />
         <SampleReport />
         <Impact />
+        <MemberApp />
+
         <AppSection />
         <Pricing />
         <FAQ />
