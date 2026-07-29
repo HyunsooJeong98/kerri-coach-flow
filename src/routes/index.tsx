@@ -158,17 +158,15 @@ function Hero() {
             스포츠 강사를 위한 운영 플랫폼
           </div>
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15]">
-            당신의 코칭을,
+            평소처럼
             <br />
-            <span className="text-primary">눈에 보이는 가치</span>로 만드세요.
+            <span className="text-primary">레슨만</span> 하세요.
           </h1>
           <p className="mt-6 text-base sm:text-lg text-foreground/75 leading-relaxed">
-            AI가 회원별 레슨 기록을 자동으로 정리하고 전달합니다.
+            핀마이크를 착용하고 평소처럼 레슨하면 AI가 핵심 내용만 정리해 회원에게 자동으로 전달합니다.
           </p>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-            쌓인 기록은 회원의 성장 데이터가 되고,
-            <br />
-            코치의 전문성과 코칭 실적을 증명하는 자산이 됩니다.
+            녹음을 하지 않아도 괜찮습니다. 레슨이 끝난 후 30초만 투자해 음성이나 텍스트로 메모를 남기면 AI가 같은 형태의 레슨 기록을 자동으로 만들어드립니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
@@ -180,25 +178,59 @@ function Hero() {
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <PhoneMock>
-            <div className="text-left w-full py-8">
-              <div className="text-[10px] uppercase tracking-widest text-primary font-bold">KERRI Coach</div>
-              <div className="mt-1 text-sm font-bold text-foreground">오늘의 레슨</div>
-              <div className="mt-4 space-y-2">
-                {["김민수 · 15:00", "박서연 · 16:30", "이지훈 · 18:00"].map((t) => (
-                  <div key={t} className="rounded-xl bg-white/70 border border-border/60 px-3 py-2.5 text-xs text-foreground/80">
-                    {t}
-                  </div>
-                ))}
+          <PhoneMock bodyClassName="flex flex-col text-left">
+            <div className="shrink-0 px-4 pt-7 pb-3 bg-white/70 border-b border-border/60">
+              <div className="text-[9px] uppercase tracking-[0.18em] text-primary font-bold">KERRI Coach</div>
+              <div className="mt-1 text-[15px] font-extrabold text-foreground leading-tight">오늘의 레슨 기록</div>
+              <div className="mt-1 text-[10px] text-muted-foreground">김민수 회원 · 8회차</div>
+            </div>
+
+            <div className="flex-1 overflow-hidden px-4 py-3 space-y-2.5">
+              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
+                <div className="text-[10px] font-bold text-foreground/90">오늘의 레슨 내용</div>
+                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
+                  서비스 라인에서 포핸드 타점을 앞으로 가져가는 훈련을 진행했습니다. 지난 레슨보다 타점이 훨씬 안정적으로 형성되었고, 백핸드는 왼팔 리드가 부족해 상체가 먼저 열렸습니다.
+                </p>
               </div>
-              <div className="mt-5 rounded-xl bg-primary/10 border border-primary/20 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-primary">AI 리포트</div>
-                <div className="mt-1 text-[11px] text-foreground/80 leading-snug">
-                  포핸드 팔로우스루 안정. 백핸드 그립 개선 필요.
-                </div>
+
+              <div className="rounded-xl bg-primary/8 border border-primary/20 px-3 py-2.5">
+                <div className="text-[10px] font-bold text-primary">잘한 점</div>
+                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/75">
+                  포핸드 타점이 지난 레슨보다 안정적으로 좋아졌습니다.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
+                <div className="text-[10px] font-bold text-foreground/90">다음엔 이렇게 해보세요</div>
+                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
+                  백핸드를 칠 때 왼팔이 먼저 리드한다는 느낌으로, 몸이 열리지 않게 끝까지 유지해 보세요.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
+                <div className="text-[10px] font-bold text-foreground/90">오늘의 연습</div>
+                <ul className="mt-1 space-y-0.5 text-[10px] leading-[1.5] text-foreground/70">
+                  <li>• 벽치기 10분</li>
+                  <li>• 백핸드 스윙 30회</li>
+                  <li>• 왼팔 리드 동작 20회</li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl bg-[var(--ink)]/[0.04] border border-border/60 px-3 py-2.5">
+                <div className="text-[10px] font-bold text-foreground/90">다음 레슨 목표</div>
+                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
+                  백핸드 임팩트 안정성과 왼팔 리드 동작 익히기
+                </p>
               </div>
             </div>
+
+            <div className="shrink-0 border-t border-border/60 bg-white/70 px-4 py-3">
+              <span className="inline-flex items-center gap-1 rounded-full bg-primary/12 border border-primary/25 px-2.5 py-1 text-[9.5px] font-bold text-primary">
+                회원에게 전달 완료 ✓
+              </span>
+            </div>
           </PhoneMock>
+
         </div>
       </div>
     </section>
