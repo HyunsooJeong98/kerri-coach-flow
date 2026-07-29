@@ -210,12 +210,14 @@ function Ops() {
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="max-w-2xl">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            코치는 <span className="text-primary">레슨에만</span> 집중하세요
+            회원 관리부터 <span className="text-primary">AI 레슨 기록</span>까지.
+            <br />
+            케리 하나면 충분합니다.
           </h2>
           <p className="mt-5 text-base sm:text-lg text-foreground/70 leading-relaxed">
-            회원 관리부터 결제, 일정, 리포트까지.
+            코치는 레슨에만 집중하고,
             <br className="hidden sm:block" />
-            케리가 대신 관리합니다.
+            운영은 KERRI가 관리합니다.
           </p>
         </div>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
