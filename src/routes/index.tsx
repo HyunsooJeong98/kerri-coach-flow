@@ -821,6 +821,8 @@ function Landing() {
         <Report />
         <SampleReport />
         <Impact />
+        <MemberApp />
+
         <AppSection />
         <Pricing />
         <FAQ />
