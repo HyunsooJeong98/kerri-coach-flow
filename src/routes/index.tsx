@@ -479,14 +479,15 @@ function QR({ url, label }: { url: string; label: string }) {
 
 function MemberApp() {
   const features = [
-    "오늘 레슨 기록",
-    "지난 레슨 기록",
-    "개인 연습 플랜",
-    "다음 레슨 일정",
-    "남은 레슨 횟수",
-    "리마인드 알림",
-    "성장 기록",
+    { icon: ClipboardList, t: "오늘 레슨 기록", d: "오늘 배운 핵심 내용 확인" },
+    { icon: History, t: "지난 레슨 기록", d: "누적된 레슨 히스토리" },
+    { icon: Dumbbell, t: "개인 연습 플랜", d: "AI가 제안하는 맞춤 연습" },
+    { icon: CalendarDays, t: "다음 레슨 일정", d: "예정된 일정 한눈에" },
+    { icon: Ticket, t: "남은 레슨 횟수", d: "잔여 횟수 실시간 확인" },
+    { icon: BellRing, t: "리마인드 알림", d: "레슨 전 자동 알림" },
+    { icon: TrendingUp, t: "성장 기록", d: "변화하는 나의 데이터" },
   ];
+
   const cards = [
     {
       t: "레슨을 더 잘 이해합니다.",
