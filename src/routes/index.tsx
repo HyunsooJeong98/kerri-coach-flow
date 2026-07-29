@@ -688,10 +688,10 @@ function Footer() {
           </div>
         </div>
         <div className="text-sm text-foreground/70 space-y-1.5">
-          <div><span className="text-muted-foreground">회사명</span> · KERRI</div>
-          <div><span className="text-muted-foreground">대표자</span> · —</div>
-          <div><span className="text-muted-foreground">사업자등록번호</span> · —</div>
-          <div><span className="text-muted-foreground">연락처</span> · —</div>
+          <div><span className="text-muted-foreground">회사명</span> · 케리</div>
+          <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
+          <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
+          <div><span className="text-muted-foreground">연락처</span> · hyunsoo@kerri.co.kr</div>
         </div>
         <div className="text-sm">
           <div className="font-bold text-foreground">정책</div>
