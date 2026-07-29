@@ -1,5 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import {
+  ClipboardList,
+  History,
+  Dumbbell,
+  CalendarDays,
+  Ticket,
+  BellRing,
+  TrendingUp,
+} from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
