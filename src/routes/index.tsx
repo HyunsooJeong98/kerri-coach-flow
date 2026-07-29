@@ -1,5 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import {
+  ClipboardList,
+  History,
+  Dumbbell,
+  CalendarDays,
+  Ticket,
+  BellRing,
+  TrendingUp,
+} from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -469,14 +479,15 @@ function QR({ url, label }: { url: string; label: string }) {
 
 function MemberApp() {
   const features = [
-    "오늘 레슨 기록",
-    "지난 레슨 기록",
-    "개인 연습 플랜",
-    "다음 레슨 일정",
-    "남은 레슨 횟수",
-    "리마인드 알림",
-    "성장 기록",
+    { icon: ClipboardList, t: "오늘 레슨 기록", d: "오늘 배운 핵심 내용 확인" },
+    { icon: History, t: "지난 레슨 기록", d: "누적된 레슨 히스토리" },
+    { icon: Dumbbell, t: "개인 연습 플랜", d: "AI가 제안하는 맞춤 연습" },
+    { icon: CalendarDays, t: "다음 레슨 일정", d: "예정된 일정 한눈에" },
+    { icon: Ticket, t: "남은 레슨 횟수", d: "잔여 횟수 실시간 확인" },
+    { icon: BellRing, t: "리마인드 알림", d: "레슨 전 자동 알림" },
+    { icon: TrendingUp, t: "성장 기록", d: "변화하는 나의 데이터" },
   ];
+
   const cards = [
     {
       t: "레슨을 더 잘 이해합니다.",
@@ -506,19 +517,26 @@ function MemberApp() {
               체계적으로 관리할 수 있습니다.
             </p>
           </div>
-          <div className="rounded-2xl bg-[var(--cream)] border border-border/60 p-7">
+          <div className="rounded-2xl bg-[var(--cream)] border border-border/60 p-6 sm:p-7">
             <p className="text-sm font-semibold text-foreground/70">
               회원은 KERRI Member 앱에서 언제든 확인할 수 있습니다.
             </p>
-            <ul className="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <ul className="mt-5 grid grid-cols-2 gap-3">
               {features.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-sm font-medium">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                  {f}
+                <li
+                  key={f.t}
+                  className="rounded-xl bg-card border border-border/60 p-4 hover:shadow-[0_16px_32px_-24px_rgba(62,43,34,0.35)] transition-shadow"
+                >
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <f.icon size={18} />
+                  </span>
+                  <p className="mt-3 text-sm font-bold leading-snug">{f.t}</p>
+                  <p className="mt-1 text-xs text-foreground/60 leading-relaxed">{f.d}</p>
                 </li>
               ))}
             </ul>
           </div>
+
         </div>
 
         <div className="mt-12 grid md:grid-cols-3 gap-5">
