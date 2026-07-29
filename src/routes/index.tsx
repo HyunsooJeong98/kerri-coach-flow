@@ -136,7 +136,7 @@ function Hero() {
         <div className="section-fade">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            개인 레슨 코치를 위한 운영 플랫폼
+            스포츠 강사를 위한 운영 플랫폼
           </div>
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15]">
             당신의 코칭을,
@@ -660,7 +660,7 @@ function Footer() {
             KERRI
           </div>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-            개인 레슨 코치를 위한 운영 플랫폼.
+            스포츠 강사를 위한 운영 플랫폼.
           </p>
           <div className="mt-5">
             <StoreButtons />
