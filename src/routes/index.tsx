@@ -139,19 +139,17 @@ function Hero() {
             개인 레슨 코치를 위한 운영 플랫폼
           </div>
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15]">
-            레슨이 끝나면,
+            당신의 코칭을,
             <br />
-            <span className="text-primary">리포트</span>가 도착합니다
+            <span className="text-primary">눈에 보이는 가치</span>로 만드세요.
           </h1>
           <p className="mt-6 text-base sm:text-lg text-foreground/75 leading-relaxed">
-            회원 관리부터 AI 레슨 리포트까지.
-            <br />
-            개인 레슨 코치를 위한 운영 플랫폼 <b>KERRI</b>.
+            AI가 회원별 레슨 기록을 자동으로 정리하고 전달합니다.
           </p>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-            녹음 한 번이면 AI가 오늘 레슨을 정리해 회원에게 전달합니다.
+            쌓인 기록은 회원의 성장 데이터가 되고,
             <br />
-            코치는 코칭에만 집중하세요.
+            코치의 전문성과 코칭 실적을 증명하는 자산이 됩니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
@@ -159,12 +157,6 @@ function Hero() {
               className="rounded-full bg-primary px-6 py-3.5 text-primary-foreground font-semibold shadow-sm hover:bg-[var(--clay-dark)] hover:-translate-y-0.5 transition-all"
             >
               무료로 시작하기
-            </button>
-            <button
-              onClick={() => scrollTo("cta")}
-              className="rounded-full border border-foreground/15 bg-background px-6 py-3.5 text-foreground font-semibold hover:border-primary/40 hover:text-primary transition-colors"
-            >
-              데모 신청하기
             </button>
           </div>
         </div>
