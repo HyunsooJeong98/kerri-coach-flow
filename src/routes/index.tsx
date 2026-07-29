@@ -117,13 +117,21 @@ function Nav() {
   );
 }
 
-function PhoneMock({ children, className = "" }: { children?: React.ReactNode; className?: string }) {
+function PhoneMock({
+  children,
+  className = "",
+  bodyClassName = "flex items-center justify-center text-center px-6",
+}: {
+  children?: React.ReactNode;
+  className?: string;
+  bodyClassName?: string;
+}) {
   return (
     <div
       className={`relative mx-auto w-[260px] sm:w-[280px] aspect-[9/19] rounded-[2.5rem] bg-[var(--ink)] p-2 shadow-[0_30px_60px_-20px_rgba(62,43,34,0.35)] ${className}`}
     >
       <div className="absolute top-2 left-1/2 -translate-x-1/2 h-5 w-24 rounded-b-2xl bg-[var(--ink)] z-10" />
-      <div className="h-full w-full rounded-[2rem] bg-[var(--cream)] overflow-hidden flex items-center justify-center text-center px-6">
+      <div className={`h-full w-full rounded-[2rem] bg-[var(--cream)] overflow-hidden ${bodyClassName}`}>
         {children ?? (
           <span className="text-xs text-muted-foreground">[스크린샷 교체 예정]</span>
         )}
@@ -131,6 +139,7 @@ function PhoneMock({ children, className = "" }: { children?: React.ReactNode; c
     </div>
   );
 }
+
 
 function Hero() {
   return (
