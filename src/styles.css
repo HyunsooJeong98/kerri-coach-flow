@@ -185,6 +185,7 @@
   transform: translateY(-6px);
   animation: deviceFloat 5s ease-in-out infinite;
 }
+@utility cream-band {
   background-image: linear-gradient(
     180deg,
     color-mix(in oklab, var(--cream) 100%, transparent) 0%,
