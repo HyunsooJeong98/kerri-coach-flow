@@ -18,6 +18,9 @@ export const Route = createFileRoute("/")({
 function scrollTo(id: string) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+  }
 }
 
 function Nav() {
