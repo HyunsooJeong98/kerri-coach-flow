@@ -15,42 +15,63 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
+/** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
+function headerOffset() {
+  const header = document.querySelector("header");
+  if (!(header instanceof HTMLElement)) return 64;
+  // 헤더의 첫 번째 행(로고/메뉴 바)만 기준 — 모바일 메뉴가 열려 있어도 정확
+  const bar = header.firstElementChild;
+  const h = bar instanceof HTMLElement ? bar.offsetHeight : header.offsetHeight;
+  return Math.round(h);
+}
+
 function scrollTo(id: string) {
   if (typeof window === "undefined") return;
   const el = document.getElementById(id);
-  if (el) {
-    const header = document.querySelector("header");
-    const headerH = header instanceof HTMLElement ? header.offsetHeight : 64;
-    const gap = window.innerWidth < 640 ? 8 : 16;
-    const target = Math.max(0, el.getBoundingClientRect().top + window.scrollY - headerH - gap);
-
-    if (id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: target, behavior: "smooth" });
-    }
-
-    // 스크롤이 멈춘 뒤에 하이라이트를 발생시켜 이동 완료를 인지시킴
-    let last = -1;
-    let idle = 0;
-    const tick = () => {
-      const y = Math.round(window.scrollY);
-      if (y === last) {
-        idle += 1;
-      } else {
-        idle = 0;
-        last = y;
-      }
-      if (idle > 3) {
-        window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
-        return;
-      }
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+  if (!el) {
+    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
     return;
   }
-  window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+
+  const gap = window.innerWidth < 640 ? 8 : 16;
+  const targetTop = () =>
+    Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
+
+  if (id === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: targetTop(), behavior: "smooth" });
+  }
+
+  // 스크롤이 멈춘 뒤 헤더 높이를 다시 측정해 오차를 보정하고, 이동 완료를 알림
+  let last = -1;
+  let idle = 0;
+  let corrected = false;
+  const tick = () => {
+    const y = Math.round(window.scrollY);
+    if (y === last) idle += 1;
+    else {
+      idle = 0;
+      last = y;
+    }
+    if (idle > 3) {
+      if (!corrected && id !== "top") {
+        corrected = true;
+        const want = targetTop();
+        if (Math.abs(want - y) > 2) {
+          window.scrollTo({ top: want, behavior: "smooth" });
+          idle = 0;
+          last = -1;
+          requestAnimationFrame(tick);
+          return;
+        }
+      }
+      window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+      return;
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
 }
 
 /* ── Scroll reveal ─────────────────────────────────────────── */
