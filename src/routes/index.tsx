@@ -270,13 +270,29 @@ function Hero() {
           </div>
 
           <h1 className="hero-display mt-4">
-            평소처럼
-            <br />
-            <span className="text-primary">레슨만</span> 하세요.
+            <span className="sm:hidden">
+              평소처럼
+              <br />
+              <span className="text-primary">레슨만</span> 하세요.
+            </span>
+            <span className="hidden sm:inline">
+              평소처럼 <span className="text-primary">레슨만</span>
+              <br />
+              하세요.
+            </span>
           </h1>
 
           <p className="lead mt-4 max-w-sm text-balance">
-            평소처럼 레슨만 하면, AI가 기록을 정리하고 회원에게 전달합니다.
+            <span className="sm:hidden">
+              평소처럼 레슨만 하면,
+              <br />
+              AI가 기록을 정리하고 회원에게 전달합니다.
+            </span>
+            <span className="hidden sm:inline">
+              평소처럼 레슨만 하면, AI가 기록을 정리하고
+              <br />
+              회원에게 전달합니다.
+            </span>
           </p>
         </div>
 
