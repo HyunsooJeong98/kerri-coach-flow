@@ -143,10 +143,10 @@ function Nav() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <Container className="flex h-20 items-center justify-between">
+      <Container className="flex h-16 items-center justify-between">
         <button
           onClick={() => scrollTo("top")}
-          className="text-[1.35rem] font-extrabold text-foreground"
+          className="text-[1.35rem] font-extrabold leading-none text-foreground"
           style={{ letterSpacing: "-0.05em" }}
         >
           KERRI
