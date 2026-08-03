@@ -282,8 +282,9 @@ function Hero() {
 
         <Reveal delay={120} className="flex justify-center">
           <div className="relative">
+            <div className="phone-glow lg:hidden" />
             <div
-              className="pointer-events-none absolute -inset-10 -z-10 rounded-full opacity-70 blur-3xl lg:-inset-16"
+              className="pointer-events-none absolute -inset-10 -z-10 hidden rounded-full opacity-70 blur-3xl lg:-inset-16 lg:block"
               style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
             />
             <PhoneMock
