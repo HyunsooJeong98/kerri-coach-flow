@@ -1150,19 +1150,8 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-background py-20">
-      <Container className="grid gap-14 md:grid-cols-3">
-        <div>
-          <div className="text-[1.35rem] font-extrabold" style={{ letterSpacing: "-0.05em" }}>
-            KERRI
-          </div>
-          <p className="mt-4 text-[0.95rem] leading-[1.8] text-muted-foreground">
-            스포츠 강사를 위한 운영 플랫폼.
-          </p>
-          <div className="mt-7">
-            <StoreButtons appStoreUrl={COACH_APP_URL} />
-          </div>
-        </div>
+    <footer className="border-t border-border/60 bg-background py-14 sm:py-16">
+      <Container className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
         <div className="space-y-2.5 text-[0.95rem] text-foreground/75">
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
@@ -1179,7 +1168,7 @@ function Footer() {
         </div>
         <div className="text-[0.95rem]">
           <div className="font-bold">정책</div>
-          <ul className="mt-4 space-y-3 text-muted-foreground">
+          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5 text-muted-foreground">
             <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">개인정보처리방침</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">환불정책</a></li>
@@ -1187,7 +1176,7 @@ function Footer() {
           </ul>
         </div>
       </Container>
-      <Container className="mt-14 border-t border-border/60 pt-8 text-[0.8rem] text-muted-foreground">
+      <Container className="mt-12 border-t border-border/60 pt-8 text-[0.8rem] text-muted-foreground">
         © {new Date().getFullYear()} KERRI. All rights reserved.
       </Container>
     </footer>
