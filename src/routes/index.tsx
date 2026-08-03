@@ -245,7 +245,7 @@ function PhoneMock({
 }) {
   return (
     <div
-      className={`relative mx-auto aspect-[9/19] w-[280px] rounded-[2.9rem] bg-[var(--ink)] p-[10px] shadow-[var(--shadow-device)] ${className}`}
+      className={`relative mx-auto aspect-[9/19] rounded-[2.9rem] bg-[var(--ink)] p-[10px] shadow-[var(--shadow-device)] ${className}`}
     >
       <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] ring-1 ring-white/10" />
       <div className="absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
@@ -262,46 +262,32 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
       <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
-      <Container className="grid items-center gap-20 pb-28 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-40 lg:pt-28">
-        <div className="section-fade">
+      <Container className="grid grid-cols-1 items-center gap-8 pb-14 pt-8 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-40 lg:pt-28 lg:text-left">
+        <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
           </div>
 
-          <h1 className="display-1 mt-9">
+          <h1 className="hero-display mt-4">
             평소처럼
             <br />
             <span className="text-primary">레슨만</span> 하세요.
           </h1>
 
-          <p className="lead mt-10 max-w-xl">
-            핀마이크를 착용하고 평소처럼 레슨하면 AI가 핵심 내용만 정리해 회원에게 자동으로 전달합니다.
+          <p className="lead mt-4 max-w-sm text-balance">
+            평소처럼 레슨만 하면, AI가 기록을 정리하고 회원에게 전달합니다.
           </p>
-          <p className="mt-6 max-w-xl text-[1rem] leading-[1.85] text-muted-foreground">
-            녹음을 하지 않아도 괜찮습니다. 레슨이 끝난 후 30초만 투자해 음성이나 텍스트로 메모를 남기면 AI가
-            같은 형태의 레슨 기록을 자동으로 만들어드립니다.
-          </p>
-
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <button onClick={() => scrollTo("install")} className="btn-base btn-primary">
-              무료로 시작하기
-              <ArrowRight size={18} strokeWidth={1.75} />
-            </button>
-            <button onClick={() => scrollTo("report")} className="btn-base btn-ghost">
-              AI 리포트 살펴보기
-            </button>
-          </div>
         </div>
 
-        <Reveal delay={120} className="flex justify-center lg:justify-end">
+        <Reveal delay={120} className="flex justify-center">
           <div className="relative">
             <div
-              className="pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-70 blur-3xl"
+              className="pointer-events-none absolute -inset-10 -z-10 rounded-full opacity-70 blur-3xl lg:-inset-16"
               style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
             />
             <PhoneMock
-              className="w-[310px] sm:w-[360px] lg:w-[400px]"
+              className="w-[80%] min-w-[260px] max-w-[460px] lg:w-[400px]"
               bodyClassName="flex flex-col text-left"
             >
               <div className="shrink-0 border-b border-border/50 bg-white/75 px-5 pb-4 pt-9 backdrop-blur">
