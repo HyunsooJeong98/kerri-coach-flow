@@ -939,12 +939,12 @@ function Pricing() {
                     {annual ? (
                       <div>
                         <div className="text-[2.1rem] font-extrabold tracking-tight">
-                          {formatPrice(p.yearly)}원
+                          {p.yearly === 0 ? "무료" : `${formatPrice(p.yearly)}원`}
                           <span className="ml-1.5 text-[1rem] font-semibold text-muted-foreground">/년</span>
                         </div>
                         <div className="mt-1 flex items-center gap-2">
                           <span className="text-[0.9rem] text-muted-foreground">
-                            월 {formatPrice(yearlyEquiv)}원
+                            월 {p.yearly === 0 ? "무료" : `${formatPrice(yearlyEquiv)}원`}
                           </span>
                           {saving > 0 && (
                             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[0.72rem] font-bold text-primary">
