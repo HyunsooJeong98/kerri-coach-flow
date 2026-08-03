@@ -16,11 +16,41 @@ export const Route = createFileRoute("/")({
 });
 
 function scrollTo(id: string) {
+  if (typeof window === "undefined") return;
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+  if (el) {
+    const header = document.querySelector("header");
+    const headerH = header instanceof HTMLElement ? header.offsetHeight : 64;
+    const gap = window.innerWidth < 640 ? 8 : 16;
+    const target = Math.max(0, el.getBoundingClientRect().top + window.scrollY - headerH - gap);
+
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: target, behavior: "smooth" });
+    }
+
+    // 스크롤이 멈춘 뒤에 하이라이트를 발생시켜 이동 완료를 인지시킴
+    let last = -1;
+    let idle = 0;
+    const tick = () => {
+      const y = Math.round(window.scrollY);
+      if (y === last) {
+        idle += 1;
+      } else {
+        idle = 0;
+        last = y;
+      }
+      if (idle > 3) {
+        window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+        return;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    return;
   }
+  window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
 }
 
 /* ── Scroll reveal ─────────────────────────────────────────── */
@@ -775,7 +805,7 @@ function AppSection() {
   }, [pulse]);
 
   return (
-    <Section id="install" tone="cream">
+    <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36">
       <Container>
         <SectionHead
           eyebrow="Download"
@@ -788,7 +818,7 @@ function AppSection() {
           }
         />
 
-        <div className="mt-20 grid gap-6 md:grid-cols-5">
+        <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-5">
           <Reveal className="md:col-span-3">
             <div
               className={`surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
