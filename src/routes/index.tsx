@@ -18,6 +18,9 @@ export const Route = createFileRoute("/")({
 function scrollTo(id: string) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+  }
 }
 
 function Nav() {
@@ -602,8 +605,24 @@ function MemberApp() {
 
 
 function AppSection() {
+  const [pulse, setPulse] = useState(false);
+  useEffect(() => {
+    const onFocus = (e: Event) => {
+      if ((e as CustomEvent).detail !== "install") return;
+      setPulse(false);
+      window.setTimeout(() => setPulse(true), 450);
+    };
+    window.addEventListener("kerri:focus", onFocus as EventListener);
+    return () => window.removeEventListener("kerri:focus", onFocus as EventListener);
+  }, []);
+  useEffect(() => {
+    if (!pulse) return;
+    const t = window.setTimeout(() => setPulse(false), 2400);
+    return () => window.clearTimeout(t);
+  }, [pulse]);
+
   return (
-    <section id="install" className="py-20 lg:py-28 bg-[var(--cream)]">
+    <section id="install" className="scroll-mt-20 py-20 lg:py-28 bg-[var(--cream)]">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="max-w-2xl">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
@@ -613,7 +632,13 @@ function AppSection() {
           </h2>
         </div>
         <div className="mt-12 grid md:grid-cols-5 gap-6">
-          <div className="md:col-span-3 rounded-3xl bg-background border border-border/60 p-7 sm:p-10 shadow-[0_20px_50px_-30px_rgba(62,43,34,0.35)]">
+          <div
+            className={`md:col-span-3 rounded-3xl bg-background border p-7 sm:p-10 shadow-[0_20px_50px_-30px_rgba(62,43,34,0.35)] transition-all duration-500 ${
+              pulse
+                ? "border-primary ring-4 ring-primary/25 -translate-y-1 shadow-[0_28px_60px_-25px_rgba(192,117,90,0.55)] animate-[installPulse_1.1s_ease-in-out_2]"
+                : "border-border/60"
+            }`}
+          >
             <div className="text-xs font-bold text-primary uppercase tracking-widest">추천</div>
             <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold">KERRI Coach</h3>
             <p className="mt-4 text-sm sm:text-base text-foreground/75 leading-relaxed">
