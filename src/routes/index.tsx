@@ -302,7 +302,7 @@ function Hero() {
               style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
             />
             <PhoneMock
-              className="w-[80%] min-w-[260px] max-w-[460px] lg:w-[400px]"
+              className="device-float device-gloss w-[88%] min-w-[280px] max-w-[520px] lg:w-[440px]"
               bodyClassName="flex flex-col text-left"
             >
               <div className="shrink-0 border-b border-border/50 bg-white/75 px-5 pb-4 pt-9 backdrop-blur">
