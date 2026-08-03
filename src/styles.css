@@ -219,6 +219,13 @@
   letter-spacing: -0.04em;
 }
 
+@utility hero-display {
+  font-size: clamp(3rem, 12vw, 4.75rem);
+  line-height: 1.03;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
 @utility lead {
   font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
   line-height: 1.75;
