@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ClipboardList,
   History,
@@ -8,8 +8,8 @@ import {
   Ticket,
   BellRing,
   TrendingUp,
+  ArrowRight,
 } from "lucide-react";
-
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -23,50 +23,162 @@ function scrollTo(id: string) {
   }
 }
 
+/* ── Scroll reveal ─────────────────────────────────────────── */
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+  as?: "div" | "section" | "li" | "header";
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const Comp = Tag as any;
+  return (
+    <Comp
+      ref={ref as any}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`reveal ${shown ? "reveal-in" : ""} ${className}`}
+    >
+      {children}
+    </Comp>
+  );
+}
+
+/* ── Shell primitives ──────────────────────────────────────── */
+
+function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return <div className={`mx-auto w-full max-w-6xl px-6 lg:px-10 ${className}`}>{children}</div>;
+}
+
+function Section({
+  id,
+  children,
+  className = "",
+  tone = "plain",
+}: {
+  id?: string;
+  children: ReactNode;
+  className?: string;
+  tone?: "plain" | "cream";
+}) {
+  return (
+    <section
+      id={id}
+      className={`relative scroll-mt-24 py-28 sm:py-32 lg:py-40 ${
+        tone === "cream" ? "cream-band noise" : ""
+      } ${className}`}
+    >
+      {children}
+    </section>
+  );
+}
+
+function SectionHead({
+  eyebrow,
+  title,
+  body,
+  center = false,
+}: {
+  eyebrow?: string;
+  title: ReactNode;
+  body?: ReactNode;
+  center?: boolean;
+}) {
+  return (
+    <Reveal className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
+      {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+      <h2 className={`display-2 ${eyebrow ? "mt-6" : ""}`}>{title}</h2>
+      {body && <p className="lead mt-8">{body}</p>}
+    </Reveal>
+  );
+}
+
+/* ── Nav ───────────────────────────────────────────────────── */
+
 function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const items = [
     { label: "기능", id: "features" },
     { label: "AI 리포트", id: "report" },
     { label: "요금제", id: "pricing" },
     { label: "FAQ", id: "faq" },
   ];
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-border/60">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8 h-16 flex items-center justify-between">
+    <header
+      className={`sticky top-0 z-40 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/60"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <Container className="flex h-20 items-center justify-between">
         <button
           onClick={() => scrollTo("top")}
-          className="text-xl font-extrabold tracking-tight text-foreground"
-          style={{ letterSpacing: "-0.04em" }}
+          className="text-[1.35rem] font-extrabold text-foreground"
+          style={{ letterSpacing: "-0.05em" }}
         >
           KERRI
         </button>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
+
+        <nav className="hidden md:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
           {items.map((i) => (
             <button
               key={i.id}
               onClick={() => scrollTo(i.id)}
-              className="hover:text-primary transition-colors"
+              className="transition-colors duration-200 hover:text-foreground"
             >
               {i.label}
             </button>
           ))}
-          <Link to="/account-deletion" className="hover:text-primary transition-colors">
+          <Link to="/account-deletion" className="transition-colors duration-200 hover:text-foreground">
             계정 삭제
           </Link>
           <button
             onClick={() => scrollTo("install")}
-            className="rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm font-semibold shadow-sm hover:bg-[var(--clay-dark)] transition-colors"
+            className="btn-base btn-primary !min-h-[3rem] !px-6 !text-[0.95rem] !rounded-[0.95rem]"
           >
             무료로 시작하기
           </button>
         </nav>
+
         <button
-          className="md:hidden text-foreground p-2"
+          className="md:hidden -mr-2 p-2 text-foreground"
           aria-label="메뉴 열기"
           onClick={() => setOpen((v) => !v)}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
             {open ? (
               <>
                 <path d="M18 6 6 18" />
@@ -74,25 +186,25 @@ function Nav() {
               </>
             ) : (
               <>
-                <path d="M4 7h16" />
-                <path d="M4 12h16" />
-                <path d="M4 17h16" />
+                <path d="M4 8h16" />
+                <path d="M4 16h16" />
               </>
             )}
           </svg>
         </button>
-      </div>
+      </Container>
+
       {open && (
-        <div className="md:hidden border-t border-border/60 bg-background">
-          <div className="px-5 py-4 flex flex-col gap-1">
+        <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl">
+          <Container className="flex flex-col gap-1 py-6">
             {items.map((i) => (
               <button
                 key={i.id}
                 onClick={() => {
                   setOpen(false);
-                  setTimeout(() => scrollTo(i.id), 50);
+                  setTimeout(() => scrollTo(i.id), 60);
                 }}
-                className="text-left py-3 text-foreground/90 font-medium border-b border-border/40"
+                className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
               >
                 {i.label}
               </button>
@@ -100,145 +212,158 @@ function Nav() {
             <Link
               to="/account-deletion"
               onClick={() => setOpen(false)}
-              className="text-left py-3 text-foreground/90 font-medium border-b border-border/40"
+              className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
             >
               계정 삭제
             </Link>
             <button
               onClick={() => {
                 setOpen(false);
-                setTimeout(() => scrollTo("install"), 50);
+                setTimeout(() => scrollTo("install"), 60);
               }}
-              className="mt-3 rounded-full bg-primary px-5 py-3 text-primary-foreground font-semibold"
+              className="btn-base btn-primary mt-6 w-full"
             >
               무료로 시작하기
             </button>
-          </div>
+          </Container>
         </div>
       )}
     </header>
   );
 }
 
+/* ── Device ────────────────────────────────────────────────── */
+
 function PhoneMock({
   children,
   className = "",
   bodyClassName = "flex items-center justify-center text-center px-6",
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   bodyClassName?: string;
 }) {
   return (
     <div
-      className={`relative mx-auto w-[260px] sm:w-[280px] aspect-[9/19] rounded-[2.5rem] bg-[var(--ink)] p-2 shadow-[0_30px_60px_-20px_rgba(62,43,34,0.35)] ${className}`}
+      className={`relative mx-auto aspect-[9/19] w-[280px] rounded-[2.9rem] bg-[var(--ink)] p-[10px] shadow-[var(--shadow-device)] ${className}`}
     >
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 h-5 w-24 rounded-b-2xl bg-[var(--ink)] z-10" />
-      <div className={`h-full w-full rounded-[2rem] bg-[var(--cream)] overflow-hidden ${bodyClassName}`}>
-        {children ?? (
-          <span className="text-xs text-muted-foreground">[스크린샷 교체 예정]</span>
-        )}
+      <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] ring-1 ring-white/10" />
+      <div className="absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
+      <div className={`h-full w-full overflow-hidden rounded-[2.3rem] bg-[var(--cream)] ${bodyClassName}`}>
+        {children ?? <span className="text-xs text-muted-foreground">[스크린샷 교체 예정]</span>}
       </div>
     </div>
   );
 }
 
+/* ── Hero ──────────────────────────────────────────────────── */
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div
-        className="absolute inset-0 -z-10 opacity-60"
-        style={{
-          background:
-            "radial-gradient(1000px 500px at 85% -10%, rgba(192,117,90,0.18), transparent 60%), radial-gradient(700px 400px at 0% 30%, rgba(192,117,90,0.08), transparent 60%)",
-        }}
-      />
-      <div className="mx-auto max-w-6xl px-5 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28 grid lg:grid-cols-2 gap-14 items-center">
+    <section id="top" className="relative overflow-hidden noise">
+      <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
+      <Container className="grid items-center gap-20 pb-28 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-40 lg:pt-28">
         <div className="section-fade">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
           </div>
-          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15]">
+
+          <h1 className="display-1 mt-9">
             평소처럼
             <br />
             <span className="text-primary">레슨만</span> 하세요.
           </h1>
-          <p className="mt-6 text-base sm:text-lg text-foreground/75 leading-relaxed">
+
+          <p className="lead mt-10 max-w-xl">
             핀마이크를 착용하고 평소처럼 레슨하면 AI가 핵심 내용만 정리해 회원에게 자동으로 전달합니다.
           </p>
-          <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-            녹음을 하지 않아도 괜찮습니다. 레슨이 끝난 후 30초만 투자해 음성이나 텍스트로 메모를 남기면 AI가 같은 형태의 레슨 기록을 자동으로 만들어드립니다.
+          <p className="mt-6 max-w-xl text-[1rem] leading-[1.85] text-muted-foreground">
+            녹음을 하지 않아도 괜찮습니다. 레슨이 끝난 후 30초만 투자해 음성이나 텍스트로 메모를 남기면 AI가
+            같은 형태의 레슨 기록을 자동으로 만들어드립니다.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <button
-              onClick={() => scrollTo("install")}
-              className="rounded-full bg-primary px-6 py-3.5 text-primary-foreground font-semibold shadow-sm hover:bg-[var(--clay-dark)] hover:-translate-y-0.5 transition-all"
-            >
+
+          <div className="mt-12 flex flex-wrap items-center gap-4">
+            <button onClick={() => scrollTo("install")} className="btn-base btn-primary">
               무료로 시작하기
+              <ArrowRight size={18} strokeWidth={1.75} />
+            </button>
+            <button onClick={() => scrollTo("report")} className="btn-base btn-ghost">
+              AI 리포트 살펴보기
             </button>
           </div>
         </div>
-        <div className="flex justify-center lg:justify-end">
-          <PhoneMock bodyClassName="flex flex-col text-left">
-            <div className="shrink-0 px-4 pt-7 pb-3 bg-white/70 border-b border-border/60">
-              <div className="text-[9px] uppercase tracking-[0.18em] text-primary font-bold">KERRI Coach</div>
-              <div className="mt-1 text-[15px] font-extrabold text-foreground leading-tight">오늘의 레슨 기록</div>
-              <div className="mt-1 text-[10px] text-muted-foreground">김민수 회원 · 8회차</div>
-            </div>
 
-            <div className="flex-1 overflow-hidden px-4 py-3 space-y-2.5">
-              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-foreground/90">오늘의 레슨 내용</div>
-                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
-                  서비스 라인에서 포핸드 타점을 앞으로 가져가는 훈련을 진행했습니다. 지난 레슨보다 타점이 훨씬 안정적으로 형성되었고, 백핸드는 왼팔 리드가 부족해 상체가 먼저 열렸습니다.
-                </p>
+        <Reveal delay={120} className="flex justify-center lg:justify-end">
+          <div className="relative">
+            <div
+              className="pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-70 blur-3xl"
+              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
+            />
+            <PhoneMock
+              className="w-[310px] sm:w-[360px] lg:w-[400px]"
+              bodyClassName="flex flex-col text-left"
+            >
+              <div className="shrink-0 border-b border-border/50 bg-white/75 px-5 pb-4 pt-9 backdrop-blur">
+                <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Coach</div>
+                <div className="mt-1.5 text-[17px] font-extrabold leading-tight text-foreground">오늘의 레슨 기록</div>
+                <div className="mt-1.5 text-[11px] text-muted-foreground">김민수 회원 · 8회차</div>
               </div>
 
-              <div className="rounded-xl bg-primary/8 border border-primary/20 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-primary">잘한 점</div>
-                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/75">
-                  포핸드 타점이 지난 레슨보다 안정적으로 좋아졌습니다.
-                </p>
+              <div className="flex-1 space-y-3 overflow-hidden px-5 py-4">
+                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
+                  <div className="text-[11px] font-bold text-foreground/90">오늘의 레슨 내용</div>
+                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
+                    서비스 라인에서 포핸드 타점을 앞으로 가져가는 훈련을 진행했습니다. 지난 레슨보다 타점이 훨씬
+                    안정적으로 형성되었고, 백핸드는 왼팔 리드가 부족해 상체가 먼저 열렸습니다.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-primary/20 bg-primary/8 px-4 py-3">
+                  <div className="text-[11px] font-bold text-primary">잘한 점</div>
+                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/70">
+                    포핸드 타점이 지난 레슨보다 안정적으로 좋아졌습니다.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
+                  <div className="text-[11px] font-bold text-foreground/90">다음엔 이렇게 해보세요</div>
+                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
+                    백핸드를 칠 때 왼팔이 먼저 리드한다는 느낌으로, 몸이 열리지 않게 끝까지 유지해 보세요.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
+                  <div className="text-[11px] font-bold text-foreground/90">오늘의 연습</div>
+                  <ul className="mt-1.5 space-y-1 text-[11px] leading-[1.6] text-foreground/65">
+                    <li>· 벽치기 10분</li>
+                    <li>· 백핸드 스윙 30회</li>
+                    <li>· 왼팔 리드 동작 20회</li>
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl border border-border/50 bg-[var(--ink)]/[0.035] px-4 py-3">
+                  <div className="text-[11px] font-bold text-foreground/90">다음 레슨 목표</div>
+                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
+                    백핸드 임팩트 안정성과 왼팔 리드 동작 익히기
+                  </p>
+                </div>
               </div>
 
-              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-foreground/90">다음엔 이렇게 해보세요</div>
-                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
-                  백핸드를 칠 때 왼팔이 먼저 리드한다는 느낌으로, 몸이 열리지 않게 끝까지 유지해 보세요.
-                </p>
+              <div className="shrink-0 border-t border-border/50 bg-white/75 px-5 py-4 backdrop-blur">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 text-[10px] font-bold text-primary">
+                  회원에게 전달 완료 ✓
+                </span>
               </div>
-
-              <div className="rounded-xl bg-white/80 border border-border/60 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-foreground/90">오늘의 연습</div>
-                <ul className="mt-1 space-y-0.5 text-[10px] leading-[1.5] text-foreground/70">
-                  <li>• 벽치기 10분</li>
-                  <li>• 백핸드 스윙 30회</li>
-                  <li>• 왼팔 리드 동작 20회</li>
-                </ul>
-              </div>
-
-              <div className="rounded-xl bg-[var(--ink)]/[0.04] border border-border/60 px-3 py-2.5">
-                <div className="text-[10px] font-bold text-foreground/90">다음 레슨 목표</div>
-                <p className="mt-1 text-[10px] leading-[1.55] text-foreground/70">
-                  백핸드 임팩트 안정성과 왼팔 리드 동작 익히기
-                </p>
-              </div>
-            </div>
-
-            <div className="shrink-0 border-t border-border/60 bg-white/70 px-4 py-3">
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary/12 border border-primary/25 px-2.5 py-1 text-[9.5px] font-bold text-primary">
-                회원에게 전달 완료 ✓
-              </span>
-            </div>
-          </PhoneMock>
-
-        </div>
-      </div>
+            </PhoneMock>
+          </div>
+        </Reveal>
+      </Container>
     </section>
   );
 }
+
+/* ── Ops ───────────────────────────────────────────────────── */
 
 function Ops() {
   const cards = [
@@ -250,41 +375,45 @@ function Ops() {
     { t: "AI 레슨 리포트", d: "레슨이 끝나면 회원에게 자동 전달" },
   ];
   return (
-    <section id="features" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            코치는 <span className="text-primary">레슨에만</span> 집중하세요
-          </h2>
-          <p className="mt-5 text-base sm:text-lg text-foreground/70 leading-relaxed">
-            회원 관리부터 결제, 일정, 리포트까지.
-            <br className="hidden sm:block" />
-            케리가 대신 관리합니다.
-          </p>
-        </div>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <Section id="features">
+      <Container>
+        <SectionHead
+          eyebrow="Operations"
+          title={
+            <>
+              코치는 <span className="text-primary">레슨에만</span> 집중하세요
+            </>
+          }
+          body={
+            <>
+              회원 관리부터 결제, 일정, 리포트까지.
+              <br className="hidden sm:block" /> 케리가 대신 관리합니다.
+            </>
+          }
+        />
+
+        <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c, i) => (
-            <div
-              key={c.t}
-              className="group rounded-2xl bg-card border border-border/60 p-6 hover:shadow-[0_20px_40px_-24px_rgba(62,43,34,0.25)] hover:-translate-y-0.5 transition-all"
-            >
-              <div className="flex items-center gap-3">
-                <div className="grid place-items-center h-9 w-9 rounded-lg bg-primary/10 text-primary font-bold text-sm">
-                  {String(i + 1).padStart(2, "0")}
+            <Reveal key={c.t} delay={i * 70}>
+              <div className="surface surface-hover h-full p-8">
+                <div className="flex items-center gap-4">
+                  <span className="text-[0.8rem] font-bold tracking-[0.14em] text-primary/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-[1.2rem] font-bold tracking-tight">{c.t}</h3>
                 </div>
-                <h3 className="text-lg font-bold">{c.t}</h3>
+                <p className="mt-4 text-[0.975rem] leading-[1.8] text-muted-foreground">{c.d}</p>
+                <div className="mt-8 aspect-[16/10] rounded-2xl border border-border/60 bg-[var(--cream)]" />
               </div>
-              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{c.d}</p>
-              <div className="mt-5 aspect-[16/10] rounded-xl bg-[var(--cream)] border border-dashed border-border grid place-items-center text-xs text-muted-foreground">
-                앱 화면 이미지 자리
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
+
+/* ── Problem ───────────────────────────────────────────────── */
 
 function Problem() {
   const items = [
@@ -293,25 +422,33 @@ function Problem() {
     { h: "열심히 가르쳐도", p: "회원은 레슨의 가치를 눈으로 확인하기 어렵습니다." },
   ];
   return (
-    <section className="py-20 lg:py-28 bg-[var(--cream)]">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-3xl">
-          레슨은 기억에 남지만,
-          <br />
-          <span className="text-primary">기록</span>은 남지 않았습니다.
-        </h2>
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {items.map((i) => (
-            <div key={i.h} className="rounded-2xl bg-background border border-border/60 p-7">
-              <h3 className="text-lg font-bold text-foreground leading-snug">{i.h}</h3>
-              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{i.p}</p>
-            </div>
+    <Section tone="cream">
+      <Container>
+        <SectionHead
+          title={
+            <>
+              레슨은 기억에 남지만,
+              <br />
+              <span className="text-primary">기록</span>은 남지 않았습니다.
+            </>
+          }
+        />
+        <div className="mt-20 grid gap-6 md:grid-cols-3">
+          {items.map((i, idx) => (
+            <Reveal key={i.h} delay={idx * 90}>
+              <div className="surface surface-hover h-full p-9">
+                <h3 className="text-[1.2rem] font-bold leading-snug">{i.h}</h3>
+                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{i.p}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
+
+/* ── Report ────────────────────────────────────────────────── */
 
 function Report() {
   const steps = [
@@ -321,10 +458,10 @@ function Report() {
       d: "클립 녹음기 또는 휴대폰으로 녹음",
       mock: (
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 rounded-full bg-primary/15 grid place-items-center">
-            <div className="h-4 w-4 rounded-full bg-primary animate-pulse" />
+          <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-primary/12">
+            <div className="h-4 w-4 animate-pulse rounded-full bg-primary" />
           </div>
-          <div className="mt-3 text-xs font-semibold text-foreground">녹음 중 · 32:14</div>
+          <div className="mt-5 text-[13px] font-semibold text-foreground">녹음 중 · 32:14</div>
         </div>
       ),
     },
@@ -333,10 +470,13 @@ function Report() {
       t: "AI가 분석",
       d: "잘한 점, 개선 포인트, 연습 방법, 다음 레슨 목표를 자동 정리",
       mock: (
-        <div className="text-left w-full">
-          <div className="text-[10px] font-bold text-primary uppercase">AI 분석 결과</div>
+        <div className="w-full text-left">
+          <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary">AI 분석 결과</div>
           {["잘한 점", "개선 포인트", "연습 방법", "다음 목표"].map((k) => (
-            <div key={k} className="mt-2 rounded-lg bg-white/70 border border-border/60 px-3 py-2 text-[11px] font-medium text-foreground/80">
+            <div
+              key={k}
+              className="mt-2.5 rounded-xl border border-border/50 bg-white/80 px-3.5 py-2.5 text-[11.5px] font-medium text-foreground/80"
+            >
               {k}
             </div>
           ))}
@@ -348,10 +488,10 @@ function Report() {
       t: "회원앱 자동 전송",
       d: "회원은 언제든 나만의 레슨 기록을 확인",
       mock: (
-        <div className="text-left w-full">
-          <div className="text-[10px] uppercase tracking-widest text-primary font-bold">KERRI Member</div>
-          <div className="mt-1 text-sm font-bold">오늘의 리포트</div>
-          <div className="mt-3 rounded-xl bg-primary/10 border border-primary/20 p-3 text-[11px] leading-relaxed text-foreground/80">
+        <div className="w-full text-left">
+          <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary">KERRI Member</div>
+          <div className="mt-2 text-[15px] font-bold">오늘의 리포트</div>
+          <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/10 p-4 text-[11.5px] leading-[1.75] text-foreground/80">
             포핸드가 안정적이었어요. 다음 시간엔 스텝 워크를 집중 연습해요.
           </div>
         </div>
@@ -359,89 +499,102 @@ function Report() {
     },
   ];
   return (
-    <section id="report" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-widest">
-            AI 레슨 리포트
-          </div>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            녹음 → AI 분석 → 회원 전달
-            <br />
-            <span className="text-primary">3분이면 끝.</span>
-          </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-8 lg:gap-10">
-          {steps.map((s) => (
-            <div key={s.n} className="text-center">
-              <PhoneMock className="!w-[220px] sm:!w-[240px]">{s.mock}</PhoneMock>
-              <div className="mt-6 text-xs font-bold tracking-widest text-primary">{s.n}</div>
-              <h3 className="mt-2 text-xl font-bold">{s.t}</h3>
-              <p className="mt-2 text-sm text-foreground/70 leading-relaxed max-w-xs mx-auto">{s.d}</p>
-            </div>
+    <Section id="report">
+      <Container>
+        <SectionHead
+          eyebrow="AI 레슨 리포트"
+          title={
+            <>
+              녹음 → AI 분석 → 회원 전달
+              <br />
+              <span className="text-primary">3분이면 끝.</span>
+            </>
+          }
+        />
+        <div className="mt-24 grid gap-16 md:grid-cols-3 md:gap-10">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 110} className="text-center">
+              <PhoneMock className="!w-[228px] sm:!w-[248px]" bodyClassName="flex items-center justify-center px-6">
+                {s.mock}
+              </PhoneMock>
+              <div className="mt-10 text-[0.72rem] font-bold tracking-[0.18em] text-primary">{s.n}</div>
+              <h3 className="mt-3 text-[1.4rem] font-bold tracking-tight">{s.t}</h3>
+              <p className="mx-auto mt-4 max-w-xs text-[0.975rem] leading-[1.85] text-muted-foreground">{s.d}</p>
+            </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
 
+/* ── Sample report ─────────────────────────────────────────── */
+
 function SampleReport() {
+  const cards = [
+    {
+      tag: "코치 리포트",
+      title: "김민수 회원 · 8회차",
+      body: [
+        ["포핸드", "팔로우스루 안정. 스윙 궤도 일관됨."],
+        ["백핸드", "그립 두께 조정 필요. 임팩트 지점 앞으로."],
+        ["풋워크", "크로스 스텝 반응 속도 개선."],
+        ["다음 레슨", "발리 기본 자세 도입"],
+      ],
+    },
+    {
+      tag: "회원 리포트",
+      title: "오늘의 나의 레슨",
+      body: [
+        ["잘한 점", "포핸드 자세가 좋아졌어요!"],
+        ["개선할 점", "백핸드 그립을 조금 더 얇게 잡아보세요."],
+        ["연습 방법", "벽치기 10분, 그립 체크 5회"],
+        ["다음 목표", "발리 자세 익히기"],
+      ],
+    },
+  ];
   return (
-    <section className="py-20 lg:py-28 bg-[var(--cream)]">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-2xl">
-          <div className="text-xs font-bold text-primary uppercase tracking-widest">실제 리포트 예시</div>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            코치와 회원이
-            <br />
-            함께 보는 <span className="text-primary">레슨 기록</span>
-          </h2>
-        </div>
-        <div className="mt-12 grid md:grid-cols-2 gap-6">
-          {[
-            {
-              tag: "코치 리포트",
-              title: "김민수 회원 · 8회차",
-              body: [
-                ["포핸드", "팔로우스루 안정. 스윙 궤도 일관됨."],
-                ["백핸드", "그립 두께 조정 필요. 임팩트 지점 앞으로."],
-                ["풋워크", "크로스 스텝 반응 속도 개선."],
-                ["다음 레슨", "발리 기본 자세 도입"],
-              ],
-            },
-            {
-              tag: "회원 리포트",
-              title: "오늘의 나의 레슨",
-              body: [
-                ["잘한 점", "포핸드 자세가 좋아졌어요!"],
-                ["개선할 점", "백핸드 그립을 조금 더 얇게 잡아보세요."],
-                ["연습 방법", "벽치기 10분, 그립 체크 5회"],
-                ["다음 목표", "발리 자세 익히기"],
-              ],
-            },
-          ].map((c) => (
-            <div key={c.tag} className="rounded-3xl bg-background border border-border/60 p-6 sm:p-8 shadow-[0_20px_50px_-30px_rgba(62,43,34,0.3)]">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-primary bg-primary/10 rounded-full px-3 py-1">{c.tag}</span>
-                <span className="text-xs text-muted-foreground">2026.07.18</span>
+    <Section tone="cream">
+      <Container>
+        <SectionHead
+          eyebrow="실제 리포트 예시"
+          title={
+            <>
+              코치와 회원이
+              <br />
+              함께 보는 <span className="text-primary">레슨 기록</span>
+            </>
+          }
+        />
+        <div className="mt-20 grid gap-8 md:grid-cols-2">
+          {cards.map((c, i) => (
+            <Reveal key={c.tag} delay={i * 100}>
+              <div className="surface h-full rounded-[1.75rem] p-8 sm:p-10">
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-primary/10 px-3.5 py-1.5 text-[0.72rem] font-bold text-primary">
+                    {c.tag}
+                  </span>
+                  <span className="text-[0.8rem] text-muted-foreground">2026.07.18</span>
+                </div>
+                <h3 className="mt-6 text-[1.25rem] font-bold tracking-tight">{c.title}</h3>
+                <div className="mt-7 divide-y divide-border/60">
+                  {c.body.map(([k, v]) => (
+                    <div key={k} className="grid grid-cols-[88px_1fr] gap-4 py-4">
+                      <div className="pt-0.5 text-[0.8rem] font-bold text-muted-foreground">{k}</div>
+                      <div className="text-[0.975rem] leading-[1.8] text-foreground/85">{v}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="mt-4 text-lg font-bold">{c.title}</h3>
-              <div className="mt-5 divide-y divide-border/60">
-                {c.body.map(([k, v]) => (
-                  <div key={k} className="py-3 grid grid-cols-[80px_1fr] gap-3">
-                    <div className="text-xs font-bold text-foreground/60 pt-0.5">{k}</div>
-                    <div className="text-sm text-foreground/85 leading-relaxed">{v}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
+
+/* ── Impact ────────────────────────────────────────────────── */
 
 function Impact() {
   const items = [
@@ -450,49 +603,54 @@ function Impact() {
     { t: "회원 데이터 축적", d: "회원별 진도와 피드백이 자동으로 쌓여 다음 레슨 준비가 쉬워집니다." },
   ];
   return (
-    <section className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-3xl">
-          회원은 <span className="text-primary">더 오래</span> 다니고,
-          <br />
-          코치는 더 전문적으로 성장합니다.
-        </h2>
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {items.map((i) => (
-            <div
-              key={i.t}
-              className="rounded-2xl bg-card border border-border/60 p-7 hover:shadow-[0_20px_40px_-24px_rgba(62,43,34,0.25)] transition-shadow"
-            >
-              <h3 className="text-lg font-bold">{i.t}</h3>
-              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{i.d}</p>
-            </div>
+    <Section>
+      <Container>
+        <SectionHead
+          title={
+            <>
+              회원은 <span className="text-primary">더 오래</span> 다니고,
+              <br />
+              코치는 더 전문적으로 성장합니다.
+            </>
+          }
+        />
+        <div className="mt-20 grid gap-6 md:grid-cols-3">
+          {items.map((i, idx) => (
+            <Reveal key={i.t} delay={idx * 90}>
+              <div className="surface surface-hover h-full p-9">
+                <h3 className="text-[1.2rem] font-bold tracking-tight">{i.t}</h3>
+                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{i.d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
+
+/* ── Store ─────────────────────────────────────────────────── */
 
 const COACH_APP_URL = "https://apps.apple.com/kr/app/kerri/id6783224934";
 const MEMBER_APP_URL = "https://apps.apple.com/kr/app/kerri-member/id6783235236";
 
 function StoreButtons({ appStoreUrl }: { appStoreUrl: string }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-3">
       <a
         href={appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="rounded-lg bg-[var(--ink)] text-white px-4 py-2.5 text-xs font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
+        className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
       >
-        <span className="opacity-70">Download on the</span>
+        <span className="opacity-60">Download on the</span>
         <span className="font-bold">App Store</span>
       </a>
       <div
         aria-disabled="true"
-        className="rounded-lg border border-border bg-muted text-foreground/50 px-4 py-2.5 text-xs font-semibold flex items-center gap-2 cursor-not-allowed"
+        className="inline-flex cursor-not-allowed items-center gap-2 rounded-[0.95rem] border border-border bg-muted px-5 py-3.5 text-[0.85rem] font-semibold text-foreground/45"
       >
-        <span className="opacity-70">준비 중</span>
+        <span>준비 중</span>
         <span className="font-bold">Google Play</span>
       </div>
     </div>
@@ -506,20 +664,21 @@ function QR({ url, label }: { url: string; label: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} App Store QR 코드`}
-      className="hidden md:grid place-items-center h-20 w-20 rounded-lg bg-white border border-border overflow-hidden"
+      className="hidden h-24 w-24 place-items-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[var(--shadow-soft)] md:grid"
     >
       <img
-        src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=${encodeURIComponent(url)}`}
+        src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=6&data=${encodeURIComponent(url)}`}
         alt={`${label} App Store 다운로드 QR 코드`}
-        width={80}
-        height={80}
+        width={96}
+        height={96}
         loading="lazy"
-        className="h-20 w-20"
+        className="h-24 w-24"
       />
     </a>
   );
 }
 
+/* ── Member app ────────────────────────────────────────────── */
 
 function MemberApp() {
   const features = [
@@ -533,76 +692,69 @@ function MemberApp() {
   ];
 
   const cards = [
-    {
-      t: "레슨을 더 잘 이해합니다.",
-      d: "오늘 배운 핵심 내용을 다시 확인하며 레슨 내용을 더 오래 기억할 수 있습니다.",
-    },
-    {
-      t: "혼자서도 연습할 수 있습니다.",
-      d: "AI가 제안하는 개인 연습 플랜으로 다음 레슨 전까지 꾸준히 운동할 수 있습니다.",
-    },
-    {
-      t: "성장이 눈에 보입니다.",
-      d: "레슨 기록이 쌓일수록 회원은 자신의 변화를 확인하고, 다음 레슨에 대한 동기를 얻습니다.",
-    },
+    { t: "레슨을 더 잘 이해합니다.", d: "오늘 배운 핵심 내용을 다시 확인하며 레슨 내용을 더 오래 기억할 수 있습니다." },
+    { t: "혼자서도 연습할 수 있습니다.", d: "AI가 제안하는 개인 연습 플랜으로 다음 레슨 전까지 꾸준히 운동할 수 있습니다." },
+    { t: "성장이 눈에 보입니다.", d: "레슨 기록이 쌓일수록 회원은 자신의 변화를 확인하고, 다음 레슨에 대한 동기를 얻습니다." },
   ];
+
   return (
-    <section id="member" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+    <Section id="member">
+      <Container>
+        <div className="grid items-start gap-16 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <h2 className="display-2">
               회원도 함께 사용할 때,
               <br />
               <span className="text-primary">KERRI의 가치</span>가 커집니다.
             </h2>
-            <p className="mt-6 text-foreground/70 leading-relaxed">
-              레슨이 끝난 뒤에도 회원이 계속 운동할 수 있도록 돕고, 코치는 회원별 성장 과정을
-              체계적으로 관리할 수 있습니다.
+            <p className="lead mt-8">
+              레슨이 끝난 뒤에도 회원이 계속 운동할 수 있도록 돕고, 코치는 회원별 성장 과정을 체계적으로
+              관리할 수 있습니다.
             </p>
-          </div>
-          <div className="rounded-2xl bg-[var(--cream)] border border-border/60 p-6 sm:p-7">
-            <p className="text-sm font-semibold text-foreground/70">
-              회원은 KERRI Member 앱에서 언제든 확인할 수 있습니다.
-            </p>
-            <ul className="mt-5 grid grid-cols-2 gap-3">
-              {features.map((f) => (
-                <li
-                  key={f.t}
-                  className="rounded-xl bg-card border border-border/60 p-4 hover:shadow-[0_16px_32px_-24px_rgba(62,43,34,0.35)] transition-shadow"
-                >
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <f.icon size={18} />
-                  </span>
-                  <p className="mt-3 text-sm font-bold leading-snug">{f.t}</p>
-                  <p className="mt-1 text-xs text-foreground/60 leading-relaxed">{f.d}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </Reveal>
 
+          <Reveal delay={120}>
+            <div className="rounded-[1.75rem] border border-border/60 bg-[var(--cream)] p-7 sm:p-9">
+              <p className="text-[0.95rem] font-semibold text-foreground/70">
+                회원은 KERRI Member 앱에서 언제든 확인할 수 있습니다.
+              </p>
+              <ul className="mt-7 grid grid-cols-2 gap-4">
+                {features.map((f) => (
+                  <li key={f.t} className="surface surface-hover p-5">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-foreground/[0.05] text-foreground/70">
+                      <f.icon size={18} strokeWidth={1.6} />
+                    </span>
+                    <p className="mt-4 text-[0.95rem] font-bold leading-snug">{f.t}</p>
+                    <p className="mt-1.5 text-[0.8rem] leading-[1.7] text-muted-foreground">{f.d}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {cards.map((c) => (
-            <div
-              key={c.t}
-              className="rounded-2xl bg-card border border-border/60 p-7 hover:shadow-[0_20px_40px_-24px_rgba(62,43,34,0.25)] transition-shadow"
-            >
-              <h3 className="text-lg font-bold">{c.t}</h3>
-              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{c.d}</p>
-            </div>
+        <div className="mt-20 grid gap-6 md:grid-cols-3">
+          {cards.map((c, i) => (
+            <Reveal key={c.t} delay={i * 90}>
+              <div className="surface surface-hover h-full p-9">
+                <h3 className="text-[1.2rem] font-bold tracking-tight">{c.t}</h3>
+                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{c.d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        <p className="mt-10 text-center text-base sm:text-lg font-semibold text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-          회원은 성장 과정을 확인하고, 코치는 더 체계적인 관리와 높은 재등록률을 기대할 수 있습니다.
-        </p>
-      </div>
-    </section>
+        <Reveal delay={80}>
+          <p className="mx-auto mt-20 max-w-3xl text-center text-[1.15rem] font-semibold leading-[1.85] text-foreground/80">
+            회원은 성장 과정을 확인하고, 코치는 더 체계적인 관리와 높은 재등록률을 기대할 수 있습니다.
+          </p>
+        </Reveal>
+      </Container>
+    </Section>
   );
 }
 
+/* ── Install ───────────────────────────────────────────────── */
 
 function AppSection() {
   const [pulse, setPulse] = useState(false);
@@ -622,53 +774,64 @@ function AppSection() {
   }, [pulse]);
 
   return (
-    <section id="install" className="scroll-mt-20 py-20 lg:py-28 bg-[var(--cream)]">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            코치와 회원,
-            <br />
-            <span className="text-primary">모두를 위한</span> 레슨 플랫폼
-          </h2>
-        </div>
-        <div className="mt-12 grid md:grid-cols-5 gap-6">
-          <div
-            className={`md:col-span-3 rounded-3xl bg-background border p-7 sm:p-10 shadow-[0_20px_50px_-30px_rgba(62,43,34,0.35)] transition-all duration-500 ${
-              pulse
-                ? "border-primary ring-4 ring-primary/25 -translate-y-1 shadow-[0_28px_60px_-25px_rgba(192,117,90,0.55)] animate-[installPulse_1.1s_ease-in-out_2]"
-                : "border-border/60"
-            }`}
-          >
-            <div className="text-xs font-bold text-primary uppercase tracking-widest">추천</div>
-            <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold">KERRI Coach</h3>
-            <p className="mt-4 text-sm sm:text-base text-foreground/75 leading-relaxed">
-              회원 관리 · 레슨 일정 · 결제 관리 · AI 레슨 리포트.
+    <Section id="install" tone="cream">
+      <Container>
+        <SectionHead
+          eyebrow="Download"
+          title={
+            <>
+              코치와 회원,
               <br />
-              레슨 운영을 하나로.
-            </p>
-            <div className="mt-7 flex items-center gap-4 flex-wrap">
-              <StoreButtons appStoreUrl={COACH_APP_URL} />
-              <QR url={COACH_APP_URL} label="KERRI Coach" />
+              <span className="text-primary">모두를 위한</span> 레슨 플랫폼
+            </>
+          }
+        />
+
+        <div className="mt-20 grid gap-6 md:grid-cols-5">
+          <Reveal className="md:col-span-3">
+            <div
+              className={`surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
+                pulse
+                  ? "!border-primary ring-4 ring-primary/20 -translate-y-1.5 shadow-[0_36px_70px_-30px_rgba(192,117,90,0.5)] animate-[installPulse_1.1s_ease-in-out_2]"
+                  : ""
+              }`}
+            >
+              <div className="eyebrow">추천</div>
+              <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">KERRI Coach</h3>
+              <p className="mt-6 max-w-md text-[1.02rem] leading-[1.85] text-muted-foreground">
+                회원 관리 · 레슨 일정 · 결제 관리 · AI 레슨 리포트.
+                <br />
+                레슨 운영을 하나로.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-5">
+                <StoreButtons appStoreUrl={COACH_APP_URL} />
+                <QR url={COACH_APP_URL} label="KERRI Coach" />
+              </div>
             </div>
-          </div>
-          <div className="md:col-span-2 rounded-3xl bg-background border border-border/60 p-7 sm:p-10">
-            <div className="text-xs font-bold text-foreground/60 uppercase tracking-widest">회원용</div>
-            <h3 className="mt-2 text-xl sm:text-2xl font-extrabold">KERRI Member</h3>
-            <p className="mt-4 text-sm text-foreground/75 leading-relaxed">
-              오늘의 레슨 · AI 리포트 · 성장 기록 · 남은 횟수 확인.
-              <br />
-              내 레슨을 한곳에서.
-            </p>
-            <div className="mt-7 flex items-center gap-4 flex-wrap">
-              <StoreButtons appStoreUrl={MEMBER_APP_URL} />
-              <QR url={MEMBER_APP_URL} label="KERRI Member" />
+          </Reveal>
+
+          <Reveal delay={110} className="md:col-span-2">
+            <div className="surface h-full rounded-[1.85rem] p-8 sm:p-12">
+              <div className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">회원용</div>
+              <h3 className="mt-4 text-[1.6rem] font-extrabold tracking-tight sm:text-[1.8rem]">KERRI Member</h3>
+              <p className="mt-6 text-[0.975rem] leading-[1.85] text-muted-foreground">
+                오늘의 레슨 · AI 리포트 · 성장 기록 · 남은 횟수 확인.
+                <br />
+                내 레슨을 한곳에서.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-5">
+                <StoreButtons appStoreUrl={MEMBER_APP_URL} />
+                <QR url={MEMBER_APP_URL} label="KERRI Member" />
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
+
+/* ── Pricing ───────────────────────────────────────────────── */
 
 function Pricing() {
   const plans = [
@@ -677,69 +840,77 @@ function Pricing() {
     { name: "PRO", price: "월 19,000원", reports: "월 50회", note: "", badge: "가장 인기", highlight: true },
   ];
   return (
-    <section id="pricing" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            부담 없이 시작하고,
-            <br />
-            <span className="text-primary">필요한 만큼</span> 사용하세요.
-          </h2>
-        </div>
+    <Section id="pricing">
+      <Container>
+        <SectionHead
+          eyebrow="Pricing"
+          title={
+            <>
+              부담 없이 시작하고,
+              <br />
+              <span className="text-primary">필요한 만큼</span> 사용하세요.
+            </>
+          }
+        />
 
-        <div className="mt-10 rounded-2xl bg-primary/10 border border-primary/25 px-5 sm:px-7 py-5 flex flex-wrap items-center gap-4">
-          <div className="text-xs font-bold text-primary bg-background rounded-full px-3 py-1">6개월 선결제</div>
-          <div className="text-base sm:text-lg font-bold text-foreground">99,000원</div>
-          <div className="text-sm text-foreground/75">클립형 녹음기 제공 <span className="text-muted-foreground">(6개월 이용 완료 시 무상)</span></div>
-        </div>
+        <Reveal delay={60}>
+          <div className="mt-14 flex flex-wrap items-center gap-5 rounded-[1.5rem] border border-primary/20 bg-primary/[0.06] px-7 py-6">
+            <div className="rounded-full bg-card px-4 py-1.5 text-[0.75rem] font-bold text-primary">6개월 선결제</div>
+            <div className="text-[1.15rem] font-bold">99,000원</div>
+            <div className="text-[0.95rem] text-foreground/75">
+              클립형 녹음기 제공 <span className="text-muted-foreground">(6개월 이용 완료 시 무상)</span>
+            </div>
+          </div>
+        </Reveal>
 
-        <div className="mt-8 grid md:grid-cols-3 gap-5 items-stretch">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={`relative rounded-3xl p-7 sm:p-8 border transition-all ${
-                p.highlight
-                  ? "bg-background border-primary shadow-[0_25px_60px_-25px_rgba(192,117,90,0.5)] md:scale-[1.04]"
-                  : "bg-card border-border/60"
-              }`}
-            >
-              {p.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground">
-                  {p.badge}
-                </div>
-              )}
-              <div className="text-xs font-bold text-primary tracking-widest">{p.name}</div>
-              <div className="mt-3 text-3xl font-extrabold">{p.price}</div>
-              <div className="mt-6 border-t border-border/60 pt-6 space-y-2">
-                <div className="flex items-baseline justify-between">
-                  <span className="text-sm text-foreground/70">AI 리포트</span>
-                  <span className="text-base font-bold text-foreground">{p.reports}</span>
-                </div>
-                {p.note && <p className="text-xs text-muted-foreground mt-3">{p.note}</p>}
-              </div>
-              <button
-                onClick={() => scrollTo("install")}
-                className={`mt-8 w-full rounded-full py-3 text-sm font-semibold transition-colors ${
+        <div className="mt-10 grid items-stretch gap-6 md:grid-cols-3">
+          {plans.map((p, i) => (
+            <Reveal key={p.name} delay={i * 90}>
+              <div
+                className={`relative h-full rounded-[1.75rem] p-9 sm:p-10 transition-all duration-500 ${
                   p.highlight
-                    ? "bg-primary text-primary-foreground hover:bg-[var(--clay-dark)]"
-                    : "bg-foreground/[0.06] text-foreground hover:bg-foreground/10"
+                    ? "border border-primary/60 bg-card shadow-[0_32px_70px_-32px_rgba(192,117,90,0.45)] md:-translate-y-2"
+                    : "surface surface-hover"
                 }`}
               >
-                시작하기
-              </button>
-            </div>
+                {p.badge && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1.5 text-[0.72rem] font-bold text-primary-foreground shadow-[0_10px_24px_-12px_rgba(192,117,90,0.9)]">
+                    {p.badge}
+                  </div>
+                )}
+                <div className="text-[0.75rem] font-bold tracking-[0.18em] text-primary">{p.name}</div>
+                <div className="mt-5 text-[2.1rem] font-extrabold tracking-tight">{p.price}</div>
+                <div className="mt-8 space-y-3 border-t border-border/60 pt-8">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-[0.95rem] text-muted-foreground">AI 리포트</span>
+                    <span className="text-[1.05rem] font-bold">{p.reports}</span>
+                  </div>
+                  {p.note && <p className="pt-2 text-[0.85rem] leading-relaxed text-muted-foreground">{p.note}</p>}
+                </div>
+                <button
+                  onClick={() => scrollTo("install")}
+                  className={`btn-base mt-10 w-full !text-[0.95rem] ${p.highlight ? "btn-primary" : "btn-ghost"}`}
+                >
+                  시작하기
+                </button>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-8 text-sm text-foreground/70 leading-relaxed">
-          리포트 충전권을 추가 구매할 수 있습니다.
-          <br />
-          충전권은 유효기간 없이 사용할 수 있습니다.
-        </div>
-      </div>
-    </section>
+        <Reveal>
+          <p className="mt-12 text-[0.95rem] leading-[1.85] text-muted-foreground">
+            리포트 충전권을 추가 구매할 수 있습니다.
+            <br />
+            충전권은 유효기간 없이 사용할 수 있습니다.
+          </p>
+        </Reveal>
+      </Container>
+    </Section>
   );
 }
+
+/* ── FAQ ───────────────────────────────────────────────────── */
 
 function FAQ() {
   const items = [
@@ -762,132 +933,147 @@ function FAQ() {
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-[var(--cream)]">
-      <div className="mx-auto max-w-3xl px-5 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-          자주 묻는 <span className="text-primary">질문</span>
-        </h2>
-        <div className="mt-10 divide-y divide-border rounded-2xl bg-background border border-border/60">
-          {items.map((it, idx) => {
-            const isOpen = open === idx;
-            return (
-              <div key={it.q}>
-                <button
-                  className="w-full text-left px-6 py-5 flex items-start justify-between gap-4 hover:bg-foreground/[0.02] transition-colors"
-                  onClick={() => setOpen(isOpen ? null : idx)}
-                >
-                  <span className="text-base sm:text-lg font-bold text-foreground">{it.q}</span>
-                  <span
-                    className={`shrink-0 mt-1 h-6 w-6 rounded-full bg-primary/10 text-primary grid place-items-center font-bold transition-transform ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
+    <Section id="faq" tone="cream">
+      <div className="mx-auto w-full max-w-3xl px-6 lg:px-10">
+        <SectionHead
+          eyebrow="FAQ"
+          title={
+            <>
+              자주 묻는 <span className="text-primary">질문</span>
+            </>
+          }
+        />
+        <Reveal delay={80}>
+          <div className="surface mt-16 divide-y divide-border/60 overflow-hidden rounded-[1.5rem]">
+            {items.map((it, idx) => {
+              const isOpen = open === idx;
+              return (
+                <div key={it.q}>
+                  <button
+                    className="flex w-full items-start justify-between gap-6 px-7 py-7 text-left transition-colors duration-200 hover:bg-foreground/[0.015]"
+                    onClick={() => setOpen(isOpen ? null : idx)}
                   >
-                    +
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-6 pb-6 -mt-1 text-sm text-foreground/75 leading-relaxed whitespace-pre-line">
-                    {it.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+                    <span className="text-[1.05rem] font-bold sm:text-[1.15rem]">{it.q}</span>
+                    <span
+                      className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-foreground/[0.05] text-foreground/60 transition-transform duration-300 ${
+                        isOpen ? "rotate-45" : ""
+                      }`}
+                    >
+                      +
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="whitespace-pre-line px-7 pb-8 -mt-2 text-[0.975rem] leading-[1.9] text-muted-foreground">
+                      {it.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }
+
+/* ── Final CTA ─────────────────────────────────────────────── */
 
 function FinalCTA() {
   return (
     <section
       id="cta"
-      className="py-20 lg:py-28"
-      style={{
-        background:
-          "linear-gradient(140deg, #C0755A 0%, #A55E45 100%)",
-      }}
+      className="noise relative overflow-hidden py-28 sm:py-32 lg:py-40"
+      style={{ background: "linear-gradient(145deg, #C0755A 0%, #A55E45 55%, #8E4E39 100%)" }}
     >
-      <div className="mx-auto max-w-4xl px-5 lg:px-8 text-center text-[var(--cream)]">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-          회원 관리부터 AI 레슨 리포트까지.
-          <br />
-          케리 하나면 충분합니다.
-        </h2>
-        <p className="mt-6 text-base sm:text-lg opacity-90 leading-relaxed">
-          코치는 레슨에만 집중하고,
-          <br className="sm:hidden" />
-          운영은 KERRI가 관리합니다.
-        </p>
-        <button
-          onClick={() => scrollTo("install")}
-          className="mt-9 rounded-full bg-[var(--cream)] text-[var(--ink)] px-8 py-4 font-bold hover:-translate-y-0.5 transition-transform shadow-[0_20px_40px_-20px_rgba(0,0,0,0.4)]"
-        >
-          코치앱 설치하기
-        </button>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-50"
+        style={{ background: "radial-gradient(700px 380px at 20% 0%, rgba(255,255,255,0.22), transparent 60%)" }}
+      />
+      <div className="relative mx-auto max-w-4xl px-6 text-center text-[var(--cream)] lg:px-10">
+        <Reveal>
+          <h2 className="display-2">
+            회원 관리부터 AI 레슨 리포트까지.
+            <br />
+            케리 하나면 충분합니다.
+          </h2>
+          <p className="mt-8 text-[1.1rem] leading-[1.85] opacity-85">
+            코치는 레슨에만 집중하고,
+            <br className="sm:hidden" /> 운영은 KERRI가 관리합니다.
+          </p>
+          <button onClick={() => scrollTo("install")} className="btn-base btn-light mt-12">
+            코치앱 설치하기
+            <ArrowRight size={18} strokeWidth={1.75} />
+          </button>
+        </Reveal>
       </div>
     </section>
   );
 }
 
+/* ── Footer ────────────────────────────────────────────────── */
+
 function Footer() {
   return (
-    <footer className="border-t border-border/60 py-14 bg-background">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8 grid md:grid-cols-3 gap-10">
+    <footer className="border-t border-border/60 bg-background py-20">
+      <Container className="grid gap-14 md:grid-cols-3">
         <div>
-          <div className="text-xl font-extrabold tracking-tight" style={{ letterSpacing: "-0.04em" }}>
+          <div className="text-[1.35rem] font-extrabold" style={{ letterSpacing: "-0.05em" }}>
             KERRI
           </div>
-          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-4 text-[0.95rem] leading-[1.8] text-muted-foreground">
             스포츠 강사를 위한 운영 플랫폼.
           </p>
-          <div className="mt-5">
+          <div className="mt-7">
             <StoreButtons appStoreUrl={COACH_APP_URL} />
           </div>
         </div>
-        <div className="text-sm text-foreground/70 space-y-1.5">
+        <div className="space-y-2.5 text-[0.95rem] text-foreground/75">
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
           <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
-          <div><span className="text-muted-foreground">연락처</span> · <a href="mailto:hyunsoo@kerri.co.kr" className="underline underline-offset-2 hover:text-primary transition-colors">hyunsoo@kerri.co.kr</a></div>
+          <div>
+            <span className="text-muted-foreground">연락처</span> ·{" "}
+            <a
+              href="mailto:hyunsoo@kerri.co.kr"
+              className="underline underline-offset-4 transition-colors hover:text-primary"
+            >
+              hyunsoo@kerri.co.kr
+            </a>
+          </div>
         </div>
-        <div className="text-sm">
-          <div className="font-bold text-foreground">정책</div>
-          <ul className="mt-3 space-y-2 text-foreground/70">
-            <li><a href="#" className="hover:text-primary">이용약관</a></li>
-            <li><a href="#" className="hover:text-primary">개인정보처리방침</a></li>
-            <li><a href="#" className="hover:text-primary">환불정책</a></li>
-            <li><Link to="/account-deletion" className="hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
+        <div className="text-[0.95rem]">
+          <div className="font-bold">정책</div>
+          <ul className="mt-4 space-y-3 text-muted-foreground">
+            <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>
+            <li><a href="#" className="transition-colors hover:text-primary">개인정보처리방침</a></li>
+            <li><a href="#" className="transition-colors hover:text-primary">환불정책</a></li>
+            <li><Link to="/account-deletion" className="transition-colors hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
           </ul>
         </div>
-      </div>
-      <div className="mx-auto max-w-6xl px-5 lg:px-8 mt-10 pt-6 border-t border-border/60 text-xs text-muted-foreground">
+      </Container>
+      <Container className="mt-14 border-t border-border/60 pt-8 text-[0.8rem] text-muted-foreground">
         © {new Date().getFullYear()} KERRI. All rights reserved.
-      </div>
+      </Container>
     </footer>
   );
 }
+
+/* ── Sticky mobile CTA ─────────────────────────────────────── */
 
 function StickyMobileCTA() {
   const [hide, setHide] = useState(false);
   useEffect(() => {
     const target = document.getElementById("install");
     if (!target) return;
-    const io = new IntersectionObserver(
-      (entries) => setHide(entries[0].isIntersecting),
-      { threshold: 0.2 },
-    );
+    const io = new IntersectionObserver((entries) => setHide(entries[0].isIntersecting), { threshold: 0.2 });
     io.observe(target);
     return () => io.disconnect();
   }, []);
   if (hide) return null;
   return (
-    <div className="md:hidden fixed bottom-0 inset-x-0 z-40 p-3 bg-gradient-to-t from-background via-background/95 to-transparent pt-8">
-      <button
-        onClick={() => scrollTo("install")}
-        className="w-full rounded-full bg-primary text-primary-foreground py-4 font-bold shadow-[0_20px_40px_-15px_rgba(192,117,90,0.6)]"
-      >
+    <div className="fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-background via-background/95 to-transparent p-4 pt-10 md:hidden">
+      <button onClick={() => scrollTo("install")} className="btn-base btn-primary w-full">
         앱 설치하기
       </button>
     </div>
@@ -906,7 +1092,6 @@ function Landing() {
         <SampleReport />
         <Impact />
         <MemberApp />
-
         <AppSection />
         <Pricing />
         <FAQ />
