@@ -303,6 +303,11 @@
   50% { box-shadow: 0 0 0 14px rgba(192, 117, 90, 0.16); }
 }
 
+@keyframes deviceFloat {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(-12px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
