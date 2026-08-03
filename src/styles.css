@@ -168,7 +168,23 @@
   }
 }
 
-@utility cream-band {
+@utility device-gloss {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 30;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 100%);
+  }
+}
+
+@utility device-float {
+  transform: translateY(-6px);
+  animation: deviceFloat 5s ease-in-out infinite;
+}
   background-image: linear-gradient(
     180deg,
     color-mix(in oklab, var(--cream) 100%, transparent) 0%,
