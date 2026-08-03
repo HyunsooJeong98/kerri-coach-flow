@@ -805,7 +805,7 @@ function AppSection() {
   }, [pulse]);
 
   return (
-    <Section id="install" tone="cream">
+    <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36">
       <Container>
         <SectionHead
           eyebrow="Download"
@@ -818,7 +818,7 @@ function AppSection() {
           }
         />
 
-        <div className="mt-20 grid gap-6 md:grid-cols-5">
+        <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-5">
           <Reveal className="md:col-span-3">
             <div
               className={`surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
