@@ -73,7 +73,6 @@ function scrollTo(id: string) {
   };
   requestAnimationFrame(tick);
 }
-}
 
 /* ── Scroll reveal ─────────────────────────────────────────── */
 
