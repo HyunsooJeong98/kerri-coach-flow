@@ -262,14 +262,14 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
       <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
-      <Container className="grid grid-cols-1 items-center gap-8 pb-14 pt-8 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-40 lg:pt-28 lg:text-left">
+      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
           </div>
 
-          <h1 className="hero-display mt-4">
+          <h1 className="hero-display mt-3">
             <span className="sm:hidden">
               평소처럼
               <br />
@@ -282,16 +282,14 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="lead mt-4 max-w-sm text-balance">
+          <p className="lead mt-3 max-w-lg text-balance">
             <span className="sm:hidden">
-              평소처럼 레슨만 하면,
+              회원 관리부터 AI 레슨 리포트까지.
               <br />
-              AI가 기록을 정리하고 회원에게 전달합니다.
+              운영은 KERRI가 대신합니다.
             </span>
             <span className="hidden sm:inline">
-              평소처럼 레슨만 하면, AI가 기록을 정리하고
-              <br />
-              회원에게 전달합니다.
+              회원 관리부터 AI 레슨 리포트까지. 운영은 KERRI가 대신합니다.
             </span>
           </p>
         </div>
