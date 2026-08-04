@@ -1150,9 +1150,9 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background py-10 sm:py-12">
-      <Container className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-        <div className="space-y-1.5 text-[0.9rem] text-foreground/75">
+    <footer className="border-t border-border/30 bg-background py-8 sm:py-10">
+      <Container className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+        <div className="space-y-1 text-[0.85rem] text-foreground/75">
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
           <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
@@ -1166,9 +1166,9 @@ function Footer() {
             </a>
           </div>
         </div>
-        <div className="text-[0.9rem]">
-          <div className="font-semibold text-foreground">정책</div>
-          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-muted-foreground">
+        <div className="text-[0.85rem]">
+          <div className="font-medium text-foreground">정책</div>
+          <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
             <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">개인정보처리방침</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">환불정책</a></li>
@@ -1176,8 +1176,8 @@ function Footer() {
           </ul>
         </div>
       </Container>
-      <Container className="mt-8 border-t border-border/40 pt-6 text-[0.75rem] text-muted-foreground">
-        © {new Date().getFullYear()} KERRI. All rights reserved.
+      <Container className="mt-6 border-t border-border/30 pt-4 text-[0.7rem] tracking-wide text-muted-foreground">
+        © {new Date().getFullYear()} KERRI (케리). All rights reserved.
       </Container>
     </footer>
   );
