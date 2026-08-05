@@ -312,7 +312,81 @@ function PhoneMock({
   );
 }
 
+/* ── Simulator (390×844 정밀 스케일) ───────────────────────── */
+
+const SIM_W = 390;
+const SIM_H = 844;
+
+function SimulatorFrame() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => {
+      const { width, height } = el.getBoundingClientRect();
+      if (!width || !height) return;
+      // 390×844 비율을 유지하면서 컨테이너 안에 정확히 맞춤
+      setScale(Math.min(width / SIM_W, height / SIM_H));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    window.addEventListener("orientationchange", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+      window.removeEventListener("orientationchange", update);
+    };
+  }, []);
+
+  if (!SIMULATOR_URL) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
+        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
+        <p className="text-[11px] leading-[1.7] text-muted-foreground">
+          시뮬레이터 URL을 <code className="font-semibold">SIMULATOR_URL</code>에 연결하면
+          이 화면에서 바로 체험할 수 있습니다.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={wrapRef} className="relative h-full w-full overflow-hidden bg-[var(--cream)]">
+      <div
+        className="absolute left-1/2 top-1/2 origin-center"
+        style={{
+          width: SIM_W,
+          height: SIM_H,
+          transform: `translate(-50%, -50%) scale(${scale})`,
+        }}
+      >
+        {/* 노치 영역 확보용 세이프 에어리어 */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[34px] bg-white" />
+        <iframe
+          src={SIMULATOR_URL}
+          title="KERRI AI 레슨 리포트 시뮬레이터"
+          width={SIM_W}
+          height={SIM_H}
+          loading="lazy"
+          allowFullScreen
+          allow="clipboard-write; fullscreen; autoplay"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+          referrerPolicy="strict-origin-when-cross-origin"
+          scrolling="yes"
+          className="pointer-events-auto block h-full w-full border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
+          style={{ paddingTop: 34 }}
+        />
+      </div>
+    </div>
+  );
+}
+
 /* ── Hero ──────────────────────────────────────────────────── */
+
 
 function Hero() {
   return (
@@ -361,31 +435,8 @@ function Hero() {
               className="device-float device-gloss w-[88%] min-w-[280px] max-w-[420px] !aspect-[390/844] lg:w-[390px]"
               bodyClassName="relative flex flex-col overflow-hidden"
             >
-              {SIMULATOR_URL ? (
-                <>
-                  {/* 노치 영역 확보용 세이프 에어리어 */}
-                  <div className="pointer-events-none shrink-0 h-[34px] w-full bg-white" />
-                  <iframe
-                    src={SIMULATOR_URL}
-                    title="KERRI AI 레슨 리포트 시뮬레이터"
-                    loading="lazy"
-                    allowFullScreen
-                    allow="clipboard-write; fullscreen; autoplay"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    scrolling="yes"
-                    className="pointer-events-auto min-h-0 w-full flex-1 border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
-                  />
-                </>
-              ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
-                  <p className="text-[11px] leading-[1.7] text-muted-foreground">
-                    시뮬레이터 URL을 <code className="font-semibold">SIMULATOR_URL</code>에 연결하면
-                    이 화면에서 바로 체험할 수 있습니다.
-                  </p>
-                </div>
-              )}
+              <SimulatorFrame />
+
             </PhoneMock>
 
           </div>
