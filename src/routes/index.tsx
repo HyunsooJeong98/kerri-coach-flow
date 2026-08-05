@@ -366,8 +366,12 @@ function Hero() {
                   src={SIMULATOR_URL}
                   title="KERRI AI 레슨 리포트 시뮬레이터"
                   loading="lazy"
-                  allow="clipboard-write"
-                  className="h-full w-full border-0 bg-[var(--cream)]"
+                  allowFullScreen
+                  allow="clipboard-write; fullscreen; autoplay"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  scrolling="yes"
+                  className="pointer-events-auto h-full w-full border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
                   style={{ width: "100%", height: "100%" }}
                 />
               ) : (
