@@ -1431,13 +1431,14 @@ function StickyMobileCTA() {
 }
 
 function Landing() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
         <Hero />
-        <Empathy />
-        <Solution />
+        <Empathy activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <Solution activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         <Ops />
         <Problem />
         <Report />
