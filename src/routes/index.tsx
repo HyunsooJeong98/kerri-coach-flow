@@ -9,6 +9,8 @@ import {
   BellRing,
   TrendingUp,
   ArrowRight,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
