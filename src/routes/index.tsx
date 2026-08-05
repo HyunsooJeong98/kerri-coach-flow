@@ -560,24 +560,27 @@ function Empathy() {
 
 function MemberDemand() {
   return (
-    <Section id="member-demand" className="!py-28 sm:!py-36 lg:!py-48">
+    <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
       <Container>
         <SectionHead title="회원도 레슨 기록을 원합니다" center />
 
-        <div className="mt-20 space-y-6">
+        <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
           {/* Main card — message first, number second */}
           <Reveal>
-            <div className="rounded-[1.5rem] border border-border/50 bg-card p-10 sm:p-14 lg:p-16 shadow-[var(--shadow-soft)]">
+            <div className="rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-14">
               <div className="max-w-3xl">
-                <h3 className="text-[1.8rem] font-bold leading-snug tracking-tight text-foreground sm:text-[2.25rem] lg:text-[2.6rem]">
-                  <span className="block">레슨 기록이 남는다면</span>
-                  <span className="block">코치와 더 오래 함께하고 싶습니다.</span>
+                <h3 className="text-[1.55rem] font-bold leading-[1.25] tracking-tight text-foreground sm:text-[2rem] lg:text-[2.35rem]">
+                  <span className="sm:hidden">레슨 기록이 남는다면<br />코치와 더 오래 함께하고<br />싶습니다.</span>
+                  <span className="hidden sm:inline">
+                    <span className="block">레슨 기록이 남는다면</span>
+                    <span className="block">코치와 더 오래 함께하고 싶습니다.</span>
+                  </span>
                 </h3>
-                <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:items-end sm:justify-between">
-                  <div className="text-[4rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5.5rem] lg:text-[6.5rem]">
+                <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
                     96.6%
                   </div>
-                  <p className="text-[0.85rem] font-medium text-muted-foreground sm:text-right">
+                  <p className="text-[0.8rem] font-medium text-muted-foreground sm:text-[0.85rem] sm:text-right">
                     개인 레슨 이용자 설문 결과
                   </p>
                 </div>
@@ -586,35 +589,47 @@ function MemberDemand() {
           </Reveal>
 
           {/* Two supporting cards */}
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             <Reveal delay={80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-9 sm:p-12 shadow-[var(--shadow-soft)]">
-                <div className="text-[2.75rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3.25rem]">
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
+                <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem] lg:text-[3.5rem]">
                   90%
                 </div>
-                <p className="mt-6 text-[1.25rem] font-semibold leading-snug tracking-tight text-foreground sm:text-[1.4rem]">
-                  <span className="block">레슨 피드백은</span>
-                  <span className="block">대부분 말로만 전달됩니다.</span>
+                <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
+                  <span className="sm:hidden">레슨 피드백은 대부분<br />말로만 전달됩니다.</span>
+                  <span className="hidden sm:inline">
+                    <span className="block">레슨 피드백은</span>
+                    <span className="block">대부분 말로만 전달됩니다.</span>
+                  </span>
                 </p>
-                <p className="mt-4 text-[1rem] leading-[1.75] text-muted-foreground">
-                  <span className="block">레슨이 끝나면</span>
-                  <span className="block">기록은 남지 않습니다.</span>
+                <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
+                  <span className="sm:hidden">레슨이 끝나면 기록은<br />남지 않습니다.</span>
+                  <span className="hidden sm:inline">
+                    <span className="block">레슨이 끝나면</span>
+                    <span className="block">기록은 남지 않습니다.</span>
+                  </span>
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-9 sm:p-12 shadow-[var(--shadow-soft)]">
-                <div className="text-[2.75rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3.25rem]">
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
+                <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem] lg:text-[3.5rem]">
                   55%
                 </div>
-                <p className="mt-6 text-[1.25rem] font-semibold leading-snug tracking-tight text-foreground sm:text-[1.4rem]">
-                  <span className="block">배운 내용을</span>
-                  <span className="block">잊어버린 경험이 있습니다.</span>
+                <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
+                  <span className="sm:hidden">배운 내용을 잊어버린<br />경험이 있습니다.</span>
+                  <span className="hidden sm:inline">
+                    <span className="block">배운 내용을</span>
+                    <span className="block">잊어버린 경험이 있습니다.</span>
+                  </span>
                 </p>
-                <p className="mt-4 text-[1rem] leading-[1.75] text-muted-foreground">
-                  <span className="block">레슨이 끝난 뒤</span>
-                  <span className="block">복습할 기록이 없습니다.</span>
+                <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
+                  <span className="sm:hidden">레슨이 끝난 뒤 복습할<br />기록이 없습니다.</span>
+                  <span className="hidden sm:inline">
+                    <span className="block">레슨이 끝난 뒤</span>
+                    <span className="block">복습할 기록이 없습니다.</span>
+                  </span>
                 </p>
               </div>
             </Reveal>
@@ -623,16 +638,21 @@ function MemberDemand() {
 
         {/* Closing brand message */}
         <Reveal delay={120}>
-          <div className="mt-24 text-center sm:mt-32">
-            <p className="mx-auto max-w-3xl text-[1.6rem] font-bold leading-snug tracking-tight text-foreground sm:text-[2.1rem] lg:text-[2.4rem]">
-              <span className="block">좋은 코칭은</span>
-              <span className="block">기록될 때</span>
-              <span className="block text-primary">더 큰 가치가 됩니다.</span>
+          <div className="mt-18 text-center sm:mt-24">
+            <p className="mx-auto max-w-3xl text-[1.35rem] font-bold leading-[1.35] tracking-tight text-foreground sm:text-[1.8rem] lg:text-[2.1rem]">
+              <span className="sm:hidden">좋은 코칭은 기록될 때<br /><span className="text-primary">더 큰 가치가 됩니다.</span></span>
+              <span className="hidden sm:inline">
+                <span className="block">좋은 코칭은 기록될 때</span>
+                <span className="block text-primary">더 큰 가치가 됩니다.</span>
+              </span>
             </p>
-            <p className="mx-auto mt-8 max-w-2xl text-[0.95rem] leading-[1.85] text-muted-foreground">
-              <span className="block">회원은 지난 레슨을 다시 확인하며 성장하고,</span>
-              <span className="block">코치는 코칭의 흐름을 이어갑니다.</span>
-              <span className="block">쌓인 코칭 데이터는 코치만의 자산이 됩니다.</span>
+            <p className="mx-auto mt-6 max-w-2xl text-[0.9rem] leading-[1.8] text-muted-foreground sm:text-[1rem]">
+              <span className="sm:hidden">회원은 지난 레슨을 다시 확인하며 성장하고,<br />코치는 코칭의 흐름을 이어갑니다.<br />쌓인 코칭 데이터는 코치만의 자산이 됩니다.</span>
+              <span className="hidden sm:inline">
+                <span className="block">회원은 지난 레슨을 다시 확인하며 성장하고,</span>
+                <span className="block">코치는 코칭의 흐름을 이어갑니다.</span>
+                <span className="block">쌓인 코칭 데이터는 코치만의 자산이 됩니다.</span>
+              </span>
             </p>
           </div>
         </Reveal>
