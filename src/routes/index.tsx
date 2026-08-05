@@ -361,31 +361,8 @@ function Hero() {
               className="device-float device-gloss w-[88%] min-w-[280px] max-w-[420px] !aspect-[390/844] lg:w-[390px]"
               bodyClassName="relative flex flex-col overflow-hidden"
             >
-              {SIMULATOR_URL ? (
-                <>
-                  {/* 노치 영역 확보용 세이프 에어리어 */}
-                  <div className="pointer-events-none shrink-0 h-[34px] w-full bg-white" />
-                  <iframe
-                    src={SIMULATOR_URL}
-                    title="KERRI AI 레슨 리포트 시뮬레이터"
-                    loading="lazy"
-                    allowFullScreen
-                    allow="clipboard-write; fullscreen; autoplay"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    scrolling="yes"
-                    className="pointer-events-auto min-h-0 w-full flex-1 border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
-                  />
-                </>
-              ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
-                  <p className="text-[11px] leading-[1.7] text-muted-foreground">
-                    시뮬레이터 URL을 <code className="font-semibold">SIMULATOR_URL</code>에 연결하면
-                    이 화면에서 바로 체험할 수 있습니다.
-                  </p>
-                </div>
-              )}
+              <SimulatorFrame />
+
             </PhoneMock>
 
           </div>
