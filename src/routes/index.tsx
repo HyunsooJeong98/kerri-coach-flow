@@ -372,11 +372,10 @@ function SimulatorFrame() {
         style={{
           width: SIM_W,
           height: SIM_H,
-          transform: `translate(-50%, -50%) scale(${scale})`,
+          transform: `translate(-50%, calc(-50% - 9px)) scale(${scale})`,
         }}
       >
-        {/* 노치 영역 확보용 세이프 에어리어 */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[34px] bg-white" />
+
 
         {/* 로딩 스피너 */}
         {loading && !error && (
