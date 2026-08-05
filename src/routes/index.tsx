@@ -362,8 +362,11 @@ function Hero() {
               bodyClassName="relative flex flex-col overflow-hidden"
             >
               {SIMULATOR_URL ? (
-                <iframe
-                  src={SIMULATOR_URL}
+                <>
+                  {/* 노치 영역 확보용 세이프 에어리어 */}
+                  <div className="pointer-events-none shrink-0 h-[34px] w-full bg-white" />
+                  <iframe
+                    src={SIMULATOR_URL}
                   title="KERRI AI 레슨 리포트 시뮬레이터"
                   loading="lazy"
                   allowFullScreen
