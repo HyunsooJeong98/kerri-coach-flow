@@ -435,6 +435,51 @@ function SimulatorFrame() {
   );
 }
 
+/* ── Empathy ───────────────────────────────────────────────── */
+
+function Empathy() {
+  const cards = [
+    {
+      h: "레슨이 끝난 후",
+      p: "회원에게 피드백을 보내는 일이\n번거롭습니다.",
+    },
+    {
+      h: "횟수, 일정, 결제 내역을 수기와 엑셀로 관리하고 있습니다.",
+      p: "체크가 누락되거나 잘못 기록되면\n회원과 불필요한 오해가 생길 수 있습니다.",
+    },
+    {
+      h: "노쇼나 재등록 시기를 놓친 적이 있습니다.",
+      p: "회원 한 명 한 명 직접 확인하고\n연락하는 일이 반복됩니다.",
+    },
+    {
+      h: "레슨이 많아질수록",
+      p: "회원별 이전 레슨 내용을 기억하기 어렵습니다.\n지난 레슨에서 무엇을 알려줬는지\n다시 찾아보거나 기억에 의존하게 됩니다.",
+    },
+  ];
+
+  return (
+    <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
+      <Container>
+        <SectionHead title="이런 경험 있으신가요?" center />
+        <div className="mt-16 grid gap-5 sm:grid-cols-2">
+          {cards.map((c, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)]">
+                <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
+                  {c.h}
+                </h3>
+                <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
+                  {c.p}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
 /* ── Hero ──────────────────────────────────────────────────── */
 
 
@@ -1290,6 +1335,7 @@ function Landing() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
+        <Empathy />
         <Hero />
         <Ops />
         <Problem />
