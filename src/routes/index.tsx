@@ -556,6 +556,109 @@ function Empathy() {
   );
 }
 
+/* ── Member demand: 회원도 레슨 기록을 원합니다 ─────────────── */
+
+function MemberDemand() {
+  const mainCard = {
+    stat: "96.6%",
+    message: ["레슨 기록이 남는다면", "코치와 더 오래 함께하고 싶습니다."],
+    caption: "개인 레슨 이용자 설문 결과",
+  };
+
+  const cards = [
+    {
+      stat: "90%",
+      message: ["레슨 피드백은", "대부분 말로만 전달됩니다."],
+      caption: "레슨이 끝나면 기록은 남지 않습니다.",
+    },
+    {
+      stat: "55%",
+      message: ["수업이 끝난 후", "배운 내용을 잊어버린 경험이 있습니다."],
+      caption: "다시 확인할 방법이 없습니다.",
+    },
+    {
+      stat: null,
+      message: ["성장은 하지만", "얼마나 성장했는지", "객관적으로 확인하기 어렵습니다."],
+      caption: "기록이 없기 때문입니다.",
+    },
+  ];
+
+  return (
+    <Section id="member-demand">
+      <Container>
+        <SectionHead title="회원도 레슨 기록을 원합니다" center />
+
+        <div className="mt-16">
+          {/* Main card — message first, number second */}
+          <Reveal>
+            <div className="overflow-hidden rounded-[1.5rem] border border-border/50 bg-card p-10 sm:p-12 lg:p-14">
+              <div className="max-w-3xl">
+                <h3 className="text-[1.5rem] font-bold leading-snug tracking-tight text-foreground sm:text-[1.8rem] lg:text-[2rem]">
+                  {mainCard.message.map((line, i) => (
+                    <span key={i} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </h3>
+                <div className="mt-8 flex flex-col gap-2 sm:mt-10 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[4.5rem] lg:text-[5rem]">
+                    {mainCard.stat}
+                  </div>
+                  <p className="text-[0.8rem] font-medium text-muted-foreground sm:text-right">
+                    {mainCard.caption}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Three supporting cards */}
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {cards.map((c, i) => (
+              <Reveal key={i} delay={i * 90}>
+                <div className="surface h-full p-8 sm:p-10">
+                  <h4 className="text-[1.15rem] font-bold leading-snug tracking-tight text-foreground">
+                    {c.message.map((line, idx) => (
+                      <span key={idx} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </h4>
+                  <div className="mt-6 flex flex-col gap-3">
+                    {c.stat && (
+                      <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem]">
+                        {c.stat}
+                      </div>
+                    )}
+                    <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
+                      {c.caption}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* Closing message */}
+        <Reveal delay={120}>
+          <div className="mt-24 text-center sm:mt-32">
+            <p className="mx-auto max-w-2xl text-[1.5rem] font-bold leading-snug tracking-tight text-foreground sm:text-[1.9rem] lg:text-[2.1rem]">
+              <span className="block">좋은 레슨은</span>
+              <span className="block">끝나는 것이 아니라</span>
+              <span className="block text-primary">기록으로 이어집니다.</span>
+            </p>
+            <p className="mx-auto mt-8 max-w-xl text-[0.95rem] leading-[1.85] text-muted-foreground">
+              KERRI는 레슨을 기록으로 남겨 다음 레슨까지 이어지는 경험을 제공합니다.
+            </p>
+          </div>
+        </Reveal>
+      </Container>
+    </Section>
+  );
+}
+
+
 
 
 /* ── Hero ──────────────────────────────────────────────────── */
@@ -1415,6 +1518,7 @@ function Landing() {
       <main>
         <Hero />
         <Empathy />
+        <MemberDemand />
         <Ops />
         <Problem />
         <Report />
