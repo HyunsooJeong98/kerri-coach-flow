@@ -15,6 +15,11 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
+/** ▼▼ 여기에 KERRI AI 레슨 리포트 시뮬레이터 공개 URL을 넣어주세요 ▼▼ */
+const SIMULATOR_URL = ""; // 예: "https://kerri-report-simulator.lovable.app"
+
+
+
 /** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
 function headerOffset() {
   const header = document.querySelector("header");
