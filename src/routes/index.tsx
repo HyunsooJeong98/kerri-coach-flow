@@ -331,7 +331,8 @@ function SimulatorFrame() {
       const { width, height } = el.getBoundingClientRect();
       if (!width || !height) return;
       // 390×844 비율을 유지하면서 컨테이너 안에 정확히 맞춤
-      setScale(Math.min(width / SIM_W, height / SIM_H));
+      // 프레임 안을 꽉 채우도록 살짝 오버스캔(102.5%)
+      setScale(Math.min(width / SIM_W, height / SIM_H) * 1.025);
     };
     update();
     const ro = new ResizeObserver(update);
