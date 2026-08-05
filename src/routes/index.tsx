@@ -437,7 +437,13 @@ function SimulatorFrame() {
 
 /* ── Empathy ───────────────────────────────────────────────── */
 
-function Empathy() {
+function Empathy({
+  activeIndex,
+  setActiveIndex,
+}: {
+  activeIndex: number | null;
+  setActiveIndex: (i: number | null) => void;
+}) {
   const cards = [
     {
       h: "레슨이 끝난 후",
@@ -464,7 +470,21 @@ function Empathy() {
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
           {cards.map((c, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)]">
+              <div
+                className={`h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-all duration-300 outline-none ${
+                  activeIndex === i
+                    ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.3)] scale-[1.01]"
+                    : ""
+                } ${activeIndex !== null && activeIndex !== i ? "opacity-60 scale-[0.98]" : ""}`}
+                tabIndex={0}
+                role="button"
+                aria-pressed={activeIndex === i}
+                onMouseEnter={() => setActiveIndex(i)}
+                onMouseLeave={() => setActiveIndex(null)}
+                onFocus={() => setActiveIndex(i)}
+                onBlur={() => setActiveIndex(null)}
+                onClick={() => setActiveIndex(i)}
+              >
                 <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
                   {c.h}
                 </h3>
