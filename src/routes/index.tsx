@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
 });
 
 /** ▼▼ 여기에 KERRI AI 레슨 리포트 시뮬레이터 공개 URL을 넣어주세요 ▼▼ */
-const SIMULATOR_URL = ""; // 예: "https://kerri-report-simulator.lovable.app"
+const SIMULATOR_URL = "https://ai-coach-notes.lovable.app";
 
 
 
@@ -304,7 +304,7 @@ function PhoneMock({
       className={`relative mx-auto aspect-[9/19] rounded-[2.9rem] bg-[var(--ink)] p-[10px] shadow-[var(--shadow-device)] ${className}`}
     >
       <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] ring-1 ring-white/10" />
-      <div className="absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
+      <div className="pointer-events-none absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
       <div className={`h-full w-full overflow-hidden rounded-[2.3rem] bg-[var(--cream)] ${bodyClassName}`}>
         {children ?? <span className="text-xs text-muted-foreground">[스크린샷 교체 예정]</span>}
       </div>
@@ -362,14 +362,21 @@ function Hero() {
               bodyClassName="relative flex flex-col overflow-hidden"
             >
               {SIMULATOR_URL ? (
-                <iframe
-                  src={SIMULATOR_URL}
-                  title="KERRI AI 레슨 리포트 시뮬레이터"
-                  loading="lazy"
-                  allow="clipboard-write"
-                  className="h-full w-full border-0 bg-[var(--cream)]"
-                  style={{ width: "100%", height: "100%" }}
-                />
+                <>
+                  {/* 노치 영역 확보용 세이프 에어리어 */}
+                  <div className="pointer-events-none shrink-0 h-[34px] w-full bg-white" />
+                  <iframe
+                    src={SIMULATOR_URL}
+                    title="KERRI AI 레슨 리포트 시뮬레이터"
+                    loading="lazy"
+                    allowFullScreen
+                    allow="clipboard-write; fullscreen; autoplay"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    scrolling="yes"
+                    className="pointer-events-auto min-h-0 w-full flex-1 border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
+                  />
+                </>
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
                   <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
