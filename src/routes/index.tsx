@@ -530,7 +530,9 @@ function Empathy() {
                     }}
                   >
                     <div
-                      ref={(el) => (contentRefs.current[i] = el)}
+                      ref={(el) => {
+                        contentRefs.current[i] = el;
+                      }}
                       className="bg-[#F9F1EC] p-8 sm:p-10"
                     >
                       <div className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-primary">
