@@ -353,61 +353,29 @@ function Hero() {
               style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
             />
             <PhoneMock
-              className="device-float device-gloss w-[88%] min-w-[280px] max-w-[520px] lg:w-[440px]"
-              bodyClassName="flex flex-col text-left"
+              className="device-float device-gloss w-[88%] min-w-[280px] max-w-[420px] !aspect-[390/844] lg:w-[390px]"
+              bodyClassName="relative flex flex-col overflow-hidden"
             >
-              <div className="shrink-0 border-b border-border/50 bg-white/75 px-5 pb-4 pt-9 backdrop-blur">
-                <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Coach</div>
-                <div className="mt-1.5 text-[17px] font-extrabold leading-tight text-foreground">오늘의 레슨 기록</div>
-                <div className="mt-1.5 text-[11px] text-muted-foreground">김민수 회원 · 8회차</div>
-              </div>
-
-              <div className="flex-1 space-y-3 overflow-hidden px-5 py-4">
-                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
-                  <div className="text-[11px] font-bold text-foreground/90">오늘의 레슨 내용</div>
-                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
-                    서비스 라인에서 포핸드 타점을 앞으로 가져가는 훈련을 진행했습니다. 지난 레슨보다 타점이 훨씬
-                    안정적으로 형성되었고, 백핸드는 왼팔 리드가 부족해 상체가 먼저 열렸습니다.
+              {SIMULATOR_URL ? (
+                <iframe
+                  src={SIMULATOR_URL}
+                  title="KERRI AI 레슨 리포트 시뮬레이터"
+                  loading="lazy"
+                  allow="clipboard-write"
+                  className="h-full w-full border-0 bg-[var(--cream)]"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              ) : (
+                <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
+                  <p className="text-[11px] leading-[1.7] text-muted-foreground">
+                    시뮬레이터 URL을 <code className="font-semibold">SIMULATOR_URL</code>에 연결하면
+                    이 화면에서 바로 체험할 수 있습니다.
                   </p>
                 </div>
-
-                <div className="rounded-2xl border border-primary/20 bg-primary/8 px-4 py-3">
-                  <div className="text-[11px] font-bold text-primary">잘한 점</div>
-                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/70">
-                    포핸드 타점이 지난 레슨보다 안정적으로 좋아졌습니다.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
-                  <div className="text-[11px] font-bold text-foreground/90">다음엔 이렇게 해보세요</div>
-                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
-                    백핸드를 칠 때 왼팔이 먼저 리드한다는 느낌으로, 몸이 열리지 않게 끝까지 유지해 보세요.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-border/50 bg-white/85 px-4 py-3">
-                  <div className="text-[11px] font-bold text-foreground/90">오늘의 연습</div>
-                  <ul className="mt-1.5 space-y-1 text-[11px] leading-[1.6] text-foreground/65">
-                    <li>· 벽치기 10분</li>
-                    <li>· 백핸드 스윙 30회</li>
-                    <li>· 왼팔 리드 동작 20회</li>
-                  </ul>
-                </div>
-
-                <div className="rounded-2xl border border-border/50 bg-[var(--ink)]/[0.035] px-4 py-3">
-                  <div className="text-[11px] font-bold text-foreground/90">다음 레슨 목표</div>
-                  <p className="mt-1.5 text-[11px] leading-[1.7] text-foreground/65">
-                    백핸드 임팩트 안정성과 왼팔 리드 동작 익히기
-                  </p>
-                </div>
-              </div>
-
-              <div className="shrink-0 border-t border-border/50 bg-white/75 px-5 py-4 backdrop-blur">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 text-[10px] font-bold text-primary">
-                  회원에게 전달 완료 ✓
-                </span>
-              </div>
+              )}
             </PhoneMock>
+
           </div>
         </Reveal>
       </Container>
