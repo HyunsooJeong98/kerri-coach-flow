@@ -9,6 +9,8 @@ import {
   BellRing,
   TrendingUp,
   ArrowRight,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -437,147 +439,123 @@ function SimulatorFrame() {
 
 /* ── Empathy ───────────────────────────────────────────────── */
 
-function Empathy({
-  activeIndex,
-  setActiveIndex,
-}: {
-  activeIndex: number | null;
-  setActiveIndex: (i: number | null) => void;
-}) {
+function Empathy() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [heights, setHeights] = useState<number[]>([]);
+
   const cards = [
     {
       h: "레슨이 끝난 후",
       p: "회원에게 피드백을 보내는 일이\n번거롭습니다.",
+      solve: {
+        caption: "KERRI가 해결합니다.",
+        title: "AI 레슨 리포트 자동 생성",
+        body: "레슨이 끝나면 AI가 핵심 내용을 정리합니다.\n코치는 검토 후 회원에게 전송만 하면 됩니다.",
+      },
     },
     {
       h: "횟수, 일정, 결제 내역을 수기와 엑셀로 관리하고 있습니다.",
       p: "체크가 누락되거나 잘못 기록되면\n회원과 불필요한 오해가 생길 수 있습니다.",
+      solve: {
+        caption: "KERRI가 해결합니다.",
+        title: "회원 운영 통합 관리",
+        body: "회원, 횟수, 일정, 결제 내역을 하나의 플랫폼에서 함께 관리합니다.\n관리 실수를 줄이고 회원과의 혼선을 예방할 수 있습니다.",
+      },
     },
     {
       h: "노쇼나 재등록 시기를 놓친 적이 있습니다.",
       p: "회원 한 명 한 명 직접 확인하고\n연락하는 일이 반복됩니다.",
+      solve: {
+        caption: "KERRI가 해결합니다.",
+        title: "자동 알림",
+        body: "노쇼와 재등록 시기를 자동으로 알려주어 중요한 회원 관리를 놓치지 않습니다.",
+      },
     },
     {
       h: "레슨이 많아질수록",
       p: "회원별 이전 레슨 내용을 기억하기 어렵습니다.\n지난 레슨에서 무엇을 알려줬는지\n다시 찾아보거나 기억에 의존하게 됩니다.",
+      solve: {
+        caption: "KERRI가 해결합니다.",
+        title: "회원별 레슨 기록",
+        body: "회원별 레슨 기록이 자동으로 저장되어 지난 레슨부터 다음 레슨까지 자연스럽게 이어갈 수 있습니다.",
+      },
     },
   ];
+
+  useEffect(() => {
+    setHeights(contentRefs.current.map((el) => el?.scrollHeight ?? 0));
+  }, []);
 
   return (
     <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
       <Container>
         <SectionHead title="이런 경험 있으신가요?" center />
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
-          {cards.map((c, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div
-                className={`h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-all duration-300 outline-none ${
-                  activeIndex === i
-                    ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.3)] scale-[1.01]"
-                    : ""
-                } ${activeIndex !== null && activeIndex !== i ? "opacity-60 scale-[0.98]" : ""}`}
-                tabIndex={0}
-                role="button"
-                aria-pressed={activeIndex === i}
-                onMouseEnter={() => setActiveIndex(i)}
-                onMouseLeave={() => setActiveIndex(null)}
-                onFocus={() => setActiveIndex(i)}
-                onBlur={() => setActiveIndex(null)}
-                onClick={() => setActiveIndex(i)}
-              >
-                <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
-                  {c.h}
-                </h3>
-                <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
-                  {c.p}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/* ── Solution ──────────────────────────────────────────────── */
-
-function Solution({
-  activeIndex,
-  setActiveIndex,
-}: {
-  activeIndex: number | null;
-  setActiveIndex: (i: number | null) => void;
-}) {
-  const cards = [
-    {
-      h: "피드백은 AI가 자동으로 정리",
-      p: "레슨 후 녹음만 남기면 AI가 잘한 점, 개선 포인트, 연습 방법을 정리해 회원앱에 자동 전송합니다.",
-    },
-    {
-      h: "운영 데이터를 한곳에서 관리",
-      p: "회원 정보, 일정, 남은 횟수, 결제 내역을 엑셀 대신 KERRI에서 체계적으로 관리합니다.",
-    },
-    {
-      h: "중요한 순간을 놓치지 않는 알림",
-      p: "레슨 전 리마인드, 재등록 시점, 미납 알림까지 자동으로 안내합니다.",
-    },
-    {
-      h: "회원별 성장 기록이 쌓입니다",
-      p: "모든 레슨 내용이 히스토리로 축적되어 다음 수업 준비와 회원 상담이 쉬워집니다.",
-    },
-  ];
-
-  return (
-    <Section id="solution" className="!py-24 sm:!py-28 lg:!py-36">
-      <Container>
-        <SectionHead
-          title={
-            <>
-              <span className="text-primary">KERRI</span> 하나면
-              <br />
-              해결됩니다.
-            </>
-          }
-          center
-        />
-        <div className="mt-16 grid gap-5 sm:grid-cols-2">
-          {cards.map((c, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div
-                className={`h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-all duration-300 outline-none ${
-                  activeIndex === i
-                    ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.3)] scale-[1.01]"
-                    : ""
-                } ${activeIndex !== null && activeIndex !== i ? "opacity-60 scale-[0.98]" : ""}`}
-                tabIndex={0}
-                role="button"
-                aria-pressed={activeIndex === i}
-                onMouseEnter={() => setActiveIndex(i)}
-                onMouseLeave={() => setActiveIndex(null)}
-                onFocus={() => setActiveIndex(i)}
-                onBlur={() => setActiveIndex(null)}
-                onClick={() => setActiveIndex(i)}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/10 text-[0.85rem] font-bold text-primary">
-                    {i + 1}
-                  </span>
-                  <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
-                    {c.h}
-                  </h3>
+          {cards.map((c, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <Reveal key={i} delay={i * 80}>
+                <div
+                  className={`h-full overflow-hidden rounded-[1.5rem] border border-border/50 bg-card shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-shadow duration-300 ${
+                    isOpen ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.2)]" : ""
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="flex w-full items-start justify-between gap-4 p-8 sm:p-10 text-left"
+                  >
+                    <div className="flex-1">
+                      <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
+                        {c.h}
+                      </h3>
+                      <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
+                        {c.p}
+                      </p>
+                    </div>
+                    <span className="mt-1 shrink-0 text-foreground/50 transition-transform duration-300">
+                      {isOpen ? (
+                        <ChevronUp size={22} strokeWidth={1.5} />
+                      ) : (
+                        <ChevronDown size={22} strokeWidth={1.5} />
+                      )}
+                    </span>
+                  </button>
+                  <div
+                    className="transition-[max-height,opacity] duration-300 ease-out"
+                    style={{
+                      maxHeight: isOpen ? heights[i] : 0,
+                      opacity: isOpen ? 1 : 0,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      ref={(el) => {
+                        contentRefs.current[i] = el;
+                      }}
+                      className="bg-[#F9F1EC] p-8 sm:p-10"
+                    >
+                      <div className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-primary">
+                        {c.solve.caption}
+                      </div>
+                      <h4 className="mt-3 text-[1.15rem] font-bold tracking-tight text-foreground">
+                        {c.solve.title}
+                      </h4>
+                      <p className="mt-3 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
+                        {c.solve.body}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
-                  {c.p}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </Container>
     </Section>
   );
 }
+
 
 
 /* ── Hero ──────────────────────────────────────────────────── */
@@ -1431,14 +1409,12 @@ function StickyMobileCTA() {
 }
 
 function Landing() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
         <Hero />
-        <Empathy activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-        <Solution activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <Empathy />
         <Ops />
         <Problem />
         <Report />
