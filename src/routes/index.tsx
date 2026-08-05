@@ -304,7 +304,7 @@ function PhoneMock({
       className={`relative mx-auto aspect-[9/19] rounded-[2.9rem] bg-[var(--ink)] p-[10px] shadow-[var(--shadow-device)] ${className}`}
     >
       <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] ring-1 ring-white/10" />
-      <div className="absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
+      <div className="pointer-events-none absolute left-1/2 top-[14px] z-10 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-[var(--ink)]" />
       <div className={`h-full w-full overflow-hidden rounded-[2.3rem] bg-[var(--cream)] ${bodyClassName}`}>
         {children ?? <span className="text-xs text-muted-foreground">[스크린샷 교체 예정]</span>}
       </div>
