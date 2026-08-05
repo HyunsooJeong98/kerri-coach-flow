@@ -427,7 +427,8 @@ function SimulatorFrame() {
             setLoading(false);
             setError(true);
           }}
-          className="pointer-events-auto absolute inset-0 block h-full w-full border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
+          className="pointer-events-auto block h-full w-full border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
+          style={{ paddingTop: 34 }}
         />
       </div>
     </div>
