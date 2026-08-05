@@ -529,9 +529,8 @@ function SimulatorSection() {
     <section id="simulator" className="relative overflow-hidden noise">
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-60" style={{ background: "radial-gradient(600px 360px at 50% 20%, rgba(192,117,90,0.18), transparent 60%)" }} />
       <Container className="flex flex-col items-center pb-20 pt-4 text-center sm:pb-28 lg:pb-40 lg:pt-8">
-        <Reveal>
-          {/* 제목/설명 제거 */}
-        </Reveal>
+        <Reveal>{null}</Reveal>
+
 
 
         <Reveal delay={120} className="mt-12 flex justify-center lg:mt-16">
