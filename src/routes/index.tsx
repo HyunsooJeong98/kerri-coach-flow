@@ -482,13 +482,12 @@ function Empathy() {
 
 /* ── Hero ──────────────────────────────────────────────────── */
 
-
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
       <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
-      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
-        <div className="section-fade flex flex-col items-center lg:items-start">
+      <Container className="flex flex-col items-center pb-10 pt-6 text-center lg:pb-32 lg:pt-24">
+        <div className="section-fade flex flex-col items-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
@@ -518,8 +517,31 @@ function Hero() {
             </span>
           </p>
         </div>
+      </Container>
+    </section>
+  );
+}
 
-        <Reveal delay={120} className="flex justify-center">
+/* ── AI Simulator ──────────────────────────────────────────── */
+
+function SimulatorSection() {
+  return (
+    <section id="simulator" className="relative overflow-hidden noise">
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-60" style={{ background: "radial-gradient(600px 360px at 50% 20%, rgba(192,117,90,0.18), transparent 60%)" }} />
+      <Container className="flex flex-col items-center pb-20 pt-4 text-center sm:pb-28 lg:pb-40 lg:pt-8">
+        <Reveal>
+          <div className="eyebrow">직접 체험</div>
+          <h2 className="display-2 mt-5">
+            AI 레슨 리포트를
+            <br className="sm:hidden" />
+            <span className="text-primary"> 지금 바로</span> 체험해 보세요
+          </h2>
+          <p className="lead mt-6 max-w-xl text-balance">
+            아래 시뮬레이터에서 실제 코치가 받게 되는 AI 레슨 리포트를 확인해 보세요.
+          </p>
+        </Reveal>
+
+        <Reveal delay={120} className="mt-12 flex justify-center lg:mt-16">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
@@ -531,9 +553,7 @@ function Hero() {
               bodyClassName="relative flex flex-col overflow-hidden"
             >
               <SimulatorFrame />
-
             </PhoneMock>
-
           </div>
         </Reveal>
       </Container>
