@@ -367,16 +367,16 @@ function Hero() {
                   <div className="pointer-events-none shrink-0 h-[34px] w-full bg-white" />
                   <iframe
                     src={SIMULATOR_URL}
-                  title="KERRI AI 레슨 리포트 시뮬레이터"
-                  loading="lazy"
-                  allowFullScreen
-                  allow="clipboard-write; fullscreen; autoplay"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  scrolling="yes"
-                  className="pointer-events-auto h-full w-full border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
-                  style={{ width: "100%", height: "100%" }}
-                />
+                    title="KERRI AI 레슨 리포트 시뮬레이터"
+                    loading="lazy"
+                    allowFullScreen
+                    allow="clipboard-write; fullscreen; autoplay"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    scrolling="yes"
+                    className="pointer-events-auto min-h-0 w-full flex-1 border-0 bg-[var(--cream)] [touch-action:auto] [-webkit-overflow-scrolling:touch]"
+                  />
+                </>
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
                   <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">KERRI Simulator</div>
