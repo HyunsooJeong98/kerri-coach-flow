@@ -1335,8 +1335,8 @@ function Landing() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
-        <Empathy />
         <Hero />
+        <Empathy />
         <Ops />
         <Problem />
         <Report />
