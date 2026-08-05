@@ -437,7 +437,13 @@ function SimulatorFrame() {
 
 /* ── Empathy ───────────────────────────────────────────────── */
 
-function Empathy() {
+function Empathy({
+  activeIndex,
+  setActiveIndex,
+}: {
+  activeIndex: number | null;
+  setActiveIndex: (i: number | null) => void;
+}) {
   const cards = [
     {
       h: "레슨이 끝난 후",
@@ -464,7 +470,21 @@ function Empathy() {
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
           {cards.map((c, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)]">
+              <div
+                className={`h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-all duration-300 outline-none ${
+                  activeIndex === i
+                    ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.3)] scale-[1.01]"
+                    : ""
+                } ${activeIndex !== null && activeIndex !== i ? "opacity-60 scale-[0.98]" : ""}`}
+                tabIndex={0}
+                role="button"
+                aria-pressed={activeIndex === i}
+                onMouseEnter={() => setActiveIndex(i)}
+                onMouseLeave={() => setActiveIndex(null)}
+                onFocus={() => setActiveIndex(i)}
+                onBlur={() => setActiveIndex(null)}
+                onClick={() => setActiveIndex(i)}
+              >
                 <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
                   {c.h}
                 </h3>
@@ -482,7 +502,13 @@ function Empathy() {
 
 /* ── Solution ──────────────────────────────────────────────── */
 
-function Solution() {
+function Solution({
+  activeIndex,
+  setActiveIndex,
+}: {
+  activeIndex: number | null;
+  setActiveIndex: (i: number | null) => void;
+}) {
   const cards = [
     {
       h: "피드백은 AI가 자동으로 정리",
@@ -518,7 +544,21 @@ function Solution() {
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
           {cards.map((c, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)]">
+              <div
+                className={`h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-all duration-300 outline-none ${
+                  activeIndex === i
+                    ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.3)] scale-[1.01]"
+                    : ""
+                } ${activeIndex !== null && activeIndex !== i ? "opacity-60 scale-[0.98]" : ""}`}
+                tabIndex={0}
+                role="button"
+                aria-pressed={activeIndex === i}
+                onMouseEnter={() => setActiveIndex(i)}
+                onMouseLeave={() => setActiveIndex(null)}
+                onFocus={() => setActiveIndex(i)}
+                onBlur={() => setActiveIndex(null)}
+                onClick={() => setActiveIndex(i)}
+              >
                 <div className="flex items-center gap-3">
                   <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/10 text-[0.85rem] font-bold text-primary">
                     {i + 1}
@@ -1391,13 +1431,14 @@ function StickyMobileCTA() {
 }
 
 function Landing() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
         <Hero />
-        <Empathy />
-        <Solution />
+        <Empathy activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <Solution activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         <Ops />
         <Problem />
         <Report />
