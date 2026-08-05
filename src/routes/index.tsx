@@ -1397,6 +1397,7 @@ function Landing() {
       <main>
         <Hero />
         <Empathy />
+        <Solution />
         <Ops />
         <Problem />
         <Report />
