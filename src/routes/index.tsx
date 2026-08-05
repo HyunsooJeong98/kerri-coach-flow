@@ -480,6 +480,66 @@ function Empathy() {
   );
 }
 
+/* ── Solution ──────────────────────────────────────────────── */
+
+function Solution() {
+  const cards = [
+    {
+      h: "피드백은 AI가 자동으로 정리",
+      p: "레슨 후 녹음만 남기면 AI가 잘한 점, 개선 포인트, 연습 방법을 정리해 회원앱에 자동 전송합니다.",
+    },
+    {
+      h: "운영 데이터를 한곳에서 관리",
+      p: "회원 정보, 일정, 남은 횟수, 결제 내역을 엑셀 대신 KERRI에서 체계적으로 관리합니다.",
+    },
+    {
+      h: "중요한 순간을 놓치지 않는 알림",
+      p: "레슨 전 리마인드, 재등록 시점, 미납 알림까지 자동으로 안내합니다.",
+    },
+    {
+      h: "회원별 성장 기록이 쌓입니다",
+      p: "모든 레슨 내용이 히스토리로 축적되어 다음 수업 준비와 회원 상담이 쉬워집니다.",
+    },
+  ];
+
+  return (
+    <Section id="solution" className="!py-24 sm:!py-28 lg:!py-36">
+      <Container>
+        <SectionHead
+          title={
+            <>
+              <span className="text-primary">KERRI</span> 하나면
+              <br />
+              해결됩니다.
+            </>
+          }
+          center
+        />
+        <div className="mt-16 grid gap-5 sm:grid-cols-2">
+          {cards.map((c, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 sm:p-10 shadow-[0_1px_2px_rgba(36,30,26,0.03)]">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/10 text-[0.85rem] font-bold text-primary">
+                    {i + 1}
+                  </span>
+                  <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
+                    {c.h}
+                  </h3>
+                </div>
+                <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
+                  {c.p}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+
 /* ── Hero ──────────────────────────────────────────────────── */
 
 
@@ -1337,6 +1397,7 @@ function Landing() {
       <main>
         <Hero />
         <Empathy />
+        <Solution />
         <Ops />
         <Problem />
         <Report />
