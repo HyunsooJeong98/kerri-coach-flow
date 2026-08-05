@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
 });
 
 /** ▼▼ 여기에 KERRI AI 레슨 리포트 시뮬레이터 공개 URL을 넣어주세요 ▼▼ */
-const SIMULATOR_URL = ""; // 예: "https://kerri-report-simulator.lovable.app"
+const SIMULATOR_URL = "https://ai-coach-notes.lovable.app";
 
 
 
