@@ -1875,7 +1875,7 @@ function Landing() {
         <Compare />
 
         <Ops />
-        <Problem />
+        
         <Report />
         <SampleReport />
         <Impact />
