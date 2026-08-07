@@ -543,12 +543,60 @@ function Compare() {
   );
 }
 
+/* ── KERRI를 사용하면 달라집니다 ───────────────────────────── */
+
+function KERRIValue() {
+  const cards = [
+    {
+      icon: TrendingUp,
+      title: "재등록률 향상",
+      desc: "개인 맞춤 레슨 기록과 지속적인 케어로\n회원이 꾸준히 레슨을 이어갑니다.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "회원과의 신뢰",
+      desc: "레슨 횟수 · 일정 · 결제 · 레슨 기록이\n투명하게 관리되어 회원과의 신뢰를 높입니다.",
+    },
+    {
+      icon: Database,
+      title: "코칭 데이터 자산화",
+      desc: "앱을 사용할수록 회원별 코칭 데이터가 쌓여\n나의 코칭을 증명하는 자산이 됩니다.",
+    },
+    {
+      icon: Workflow,
+      title: "운영 자동화",
+      desc: "일정 · 횟수 · 결제 · 알림까지\n놓치지 않고 한 번에 관리합니다.",
+    },
+  ];
+
+  return (
+    <Section id="value" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
+      <Container>
+        <SectionHead title="KERRI를 사용하면 달라집니다." center />
+        <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          {cards.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <Reveal key={c.title} delay={i * 80}>
+                <div className="h-full rounded-[1.5rem] bg-white p-5 shadow-[0_1px_2px_rgba(36,30,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] sm:p-6 lg:p-7">
+                  <Icon className="h-7 w-7 text-primary sm:h-8 sm:w-8" strokeWidth={1.6} />
+                  <h3 className="mt-5 text-[1.05rem] font-bold leading-tight tracking-tight text-foreground sm:text-[1.15rem] lg:text-[1.2rem]">
+                    {c.title}
+                  </h3>
+                  <p className="mt-3 whitespace-pre-line text-[0.82rem] leading-[1.65] text-muted-foreground sm:text-[0.9rem]">
+                    {c.desc}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Container>
+    </Section>
+  );
+}
 
 
-
-
-
-/* ── Hero ──────────────────────────────────────────────────── */
 
 
 function Hero() {
