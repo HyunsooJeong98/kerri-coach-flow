@@ -618,23 +618,33 @@ function Hero() {
 function Shot({
   src,
   alt,
+  caption,
   className = "",
   priority = false,
 }: {
   src: string;
   alt: string;
+  caption: string;
   className?: string;
   priority?: boolean;
 }) {
   return (
-    <img
-      src={src}
-      alt={alt}
-      loading={priority ? "eager" : "lazy"}
-      className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
-    />
+    <figure
+      tabIndex={0}
+      aria-label={alt}
+      className="group m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
+      />
+      <figcaption className="sr-only">{caption}</figcaption>
+    </figure>
   );
 }
+
 
 function FeatureCopy({
   num,
