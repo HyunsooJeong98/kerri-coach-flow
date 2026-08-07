@@ -1664,6 +1664,8 @@ function Landing() {
         <Hero />
         <Empathy />
         <MemberDemand />
+        <Compare />
+
         <Ops />
         <Problem />
         <Report />
