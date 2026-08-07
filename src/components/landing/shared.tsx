@@ -142,7 +142,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative scroll-mt-24 py-28 sm:py-32 lg:py-40 ${
+      className={`relative py-28 sm:py-32 lg:py-40 ${
         tone === "cream" ? "cream-band noise" : ""
       } ${className}`}
     >
