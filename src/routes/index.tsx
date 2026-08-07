@@ -1319,8 +1319,8 @@ function StoreButtons({
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
       >
-        <span className="opacity-60">Download on the</span>
-        <span className="font-bold">App Store</span>
+        <span className="opacity-60">App Store에서</span>
+        <span className="font-bold">다운로드</span>
       </a>
       <a
         href={playStoreUrl}
@@ -1328,8 +1328,8 @@ function StoreButtons({
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
       >
-        <span className="opacity-60">Get it on</span>
-        <span className="font-bold">Google Play</span>
+        <span className="opacity-60">Google Play에서</span>
+        <span className="font-bold">다운로드</span>
       </a>
     </div>
   );
@@ -1455,18 +1455,17 @@ function AppSection() {
     <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36">
       <Container>
         <SectionHead
-          eyebrow="Download"
           title={
             <>
-              코치와 회원,
+              레슨 운영을 더 쉽게
               <br />
-              <span className="text-primary">모두를 위한</span> 레슨 플랫폼
+              <span className="text-primary">시작하세요.</span>
             </>
           }
         />
 
-        <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-5">
-          <Reveal className="md:col-span-3">
+        <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-2">
+          <Reveal>
             <div
               className={`surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
                 pulse
@@ -1475,31 +1474,28 @@ function AppSection() {
               }`}
             >
               <div className="eyebrow">추천</div>
-              <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">KERRI Coach</h3>
-              <p className="mt-6 max-w-md text-[1.02rem] leading-[1.85] text-muted-foreground">
-                회원 관리 · 레슨 일정 · 결제 관리 · AI 레슨 리포트.
+              <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 코치앱</h3>
+              <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
+                회원 관리 · 일정 · 결제 · AI 레슨 기록
                 <br />
-                레슨 운영을 하나로.
+                운영을 하나의 앱으로 관리하세요.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-5">
+              <div className="mt-10">
                 <StoreButtons appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
-                <QR url={COACH_APP_URL} label="KERRI Coach" />
               </div>
             </div>
           </Reveal>
 
-          <Reveal delay={110} className="md:col-span-2">
+          <Reveal delay={110}>
             <div className="surface h-full rounded-[1.85rem] p-8 sm:p-12">
-              <div className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">회원용</div>
-              <h3 className="mt-4 text-[1.6rem] font-extrabold tracking-tight sm:text-[1.8rem]">KERRI Member</h3>
-              <p className="mt-6 text-[0.975rem] leading-[1.85] text-muted-foreground">
-                오늘의 레슨 · AI 리포트 · 성장 기록 · 남은 횟수 확인.
+              <h3 className="text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 회원앱</h3>
+              <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
+                레슨 기록 · 성장 기록 · 일정 · 남은 횟수
                 <br />
-                내 레슨을 한곳에서.
+                회원도 자신의 레슨을 기록으로 관리하세요.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-5">
+              <div className="mt-10">
                 <StoreButtons appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
-                <QR url={MEMBER_APP_URL} label="KERRI Member" />
               </div>
             </div>
           </Reveal>
