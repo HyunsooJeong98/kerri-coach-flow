@@ -1334,9 +1334,17 @@ function Impact() {
 /* ── Store ─────────────────────────────────────────────────── */
 
 const COACH_APP_URL = "https://apps.apple.com/kr/app/kerri/id6783224934";
+const COACH_PLAY_URL = "https://play.google.com/store/apps/details?id=com.tenniscoach.app";
 const MEMBER_APP_URL = "https://apps.apple.com/kr/app/kerri-member/id6783235236";
+const MEMBER_PLAY_URL = "https://play.google.com/store/apps/details?id=com.kerri.memberapp";
 
-function StoreButtons({ appStoreUrl }: { appStoreUrl: string }) {
+function StoreButtons({
+  appStoreUrl,
+  playStoreUrl,
+}: {
+  appStoreUrl: string;
+  playStoreUrl: string;
+}) {
   return (
     <div className="flex flex-wrap gap-3">
       <a
@@ -1348,13 +1356,15 @@ function StoreButtons({ appStoreUrl }: { appStoreUrl: string }) {
         <span className="opacity-60">Download on the</span>
         <span className="font-bold">App Store</span>
       </a>
-      <div
-        aria-disabled="true"
-        className="inline-flex cursor-not-allowed items-center gap-2 rounded-[0.95rem] border border-border bg-muted px-5 py-3.5 text-[0.85rem] font-semibold text-foreground/45"
+      <a
+        href={playStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
       >
-        <span>준비 중</span>
+        <span className="opacity-60">Get it on</span>
         <span className="font-bold">Google Play</span>
-      </div>
+      </a>
     </div>
   );
 }
