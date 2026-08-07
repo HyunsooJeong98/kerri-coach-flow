@@ -1015,7 +1015,7 @@ function AppSection() {
                   : ""
               }`}
             >
-              <div className="eyebrow absolute right-0 top-0">추천</div>
+              <div className="eyebrow absolute right-4 top-4 rounded-md bg-[var(--clay)]/10 px-2 py-1">추천</div>
               <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 코치앱</h3>
               <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
                 회원 관리 · 일정 · 결제 · AI 레슨 기록
