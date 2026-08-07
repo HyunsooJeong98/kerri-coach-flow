@@ -707,7 +707,13 @@ function Ops() {
               desc="회원 현황과 오늘 레슨을 한눈에 확인"
             />
             <div className="mx-auto w-[86%] max-w-[360px] lg:w-full lg:max-w-[400px]">
-              <Shot src={appHome.url} alt="KERRI 코치앱 홈 대시보드 화면" priority />
+              <Shot
+                src={appHome.url}
+                alt="KERRI 코치앱 홈 대시보드 화면. 전체 회원 수와 오늘 예정된 레슨 목록, 회원별 남은 레슨 횟수가 정리되어 있습니다."
+                caption="홈 대시보드 — 회원 현황과 오늘 레슨을 한눈에 확인"
+                priority
+              />
+
             </div>
           </div>
         </Reveal>
