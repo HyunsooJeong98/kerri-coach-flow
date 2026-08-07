@@ -905,41 +905,6 @@ function Ops() {
 
 
 
-/* ── Impact ────────────────────────────────────────────────── */
-
-function Impact() {
-  const items = [
-    { t: "재등록률 향상", d: "회원이 성장 기록을 확인하며 레슨을 계속할 이유가 생깁니다." },
-    { t: "프로다운 브랜딩", d: "리포트 하나만으로도 ‘관리해주는 코치’라는 인상을 남깁니다." },
-    { t: "회원 데이터 축적", d: "회원별 진도와 피드백이 자동으로 쌓여 다음 레슨 준비가 쉬워집니다." },
-  ];
-  return (
-    <Section>
-      <Container>
-        <SectionHead
-          title={
-            <>
-              회원은 <span className="text-primary">더 오래</span> 다니고,
-              <br />
-              코치는 더 전문적으로 성장합니다.
-            </>
-          }
-        />
-        <div className="mt-20 grid gap-6 md:grid-cols-3">
-          {items.map((i, idx) => (
-            <Reveal key={i.t} delay={idx * 90}>
-              <div className="surface surface-hover h-full p-9">
-                <h3 className="text-[1.2rem] font-bold tracking-tight">{i.t}</h3>
-                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{i.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
 /* ── Store ─────────────────────────────────────────────────── */
 
 const COACH_APP_URL = "https://apps.apple.com/kr/app/kerri/id6783224934";
