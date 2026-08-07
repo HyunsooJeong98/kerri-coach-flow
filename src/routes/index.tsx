@@ -609,152 +609,62 @@ function Hero() {
   );
 }
 
-/* ── Feature showcase (탭 전환) ─────────────────────────────── */
+/* ── Product showcase (실제 앱 화면) ────────────────────────── */
 
-type ShowcaseTab = {
-  key: string;
-  tab: string;
-  badge?: string;
-  title: string;
-  headline: ReactNode;
-  desc: ReactNode;
-  points: string[];
-  flow?: { icon: string; label: string }[];
-  shot?: { src: string; position: string; zoom: number };
-};
-
-const SHOWCASE: ShowcaseTab[] = [
-  {
-    key: "ai",
-    tab: "AI 레슨 기록",
-    badge: "핵심 기능",
-    title: "AI 레슨 기록",
-    headline: (
-      <>
-        레슨의 핵심을
-        <br />
-        <span className="text-primary">AI가 자동으로 정리합니다.</span>
-      </>
-    ),
-    desc: (
-      <>
-        레슨 중 코치의 설명을 기록하면 AI가 핵심 내용과 개선점을 정리해 회원의 레슨 기록으로 남깁니다.
-      </>
-    ),
-    points: ["오늘 레슨 핵심 요약", "개선 포인트", "추천 연습"],
-    flow: [
-      { icon: "🎙", label: "레슨 기록" },
-      { icon: "✨", label: "AI 핵심 정리" },
-      { icon: "📄", label: "회원 기록" },
-    ],
-  },
-  {
-    key: "ops",
-    tab: "운영 관리",
-    title: "회원 운영 관리",
-    headline: (
-      <>
-        놓치기 쉬운 회원을
-        <br />
-        <span className="text-primary">먼저 확인하세요.</span>
-      </>
-    ),
-    desc: <>미납 · 잔여 횟수 · 만료 예정 · 재등록 시점을 한눈에 확인합니다.</>,
-    points: ["미납", "잔여 횟수", "만료 예정", "재등록"],
-    shot: { src: kerriHome.url, position: "50% 22%", zoom: 1.35 },
-  },
-  {
-    key: "schedule",
-    tab: "일정",
-    title: "레슨 일정",
-    headline: (
-      <>
-        오늘부터 이번 주 레슨까지
-        <br />
-        <span className="text-primary">한눈에 확인하세요.</span>
-      </>
-    ),
-    desc: <>회원별 레슨 일정을 확인하고 스케줄을 한 곳에서 관리합니다.</>,
-    points: ["오늘 레슨", "주간 일정", "회원별 스케줄"],
-    shot: { src: kerriHome.url, position: "50% 78%", zoom: 1.35 },
-  },
-  {
-    key: "payment",
-    tab: "결제",
-    title: "결제 관리",
-    headline: (
-      <>
-        누가 결제했고,
-        <br />
-        <span className="text-primary">누가 아직 결제하지 않았는지.</span>
-      </>
-    ),
-    desc: <>회원별 결제 내역과 미납 상태를 한 곳에서 확인합니다.</>,
-    points: ["납부 필요 회원", "결제 금액", "결제 완료 내역"],
-  },
-  {
-    key: "members",
-    tab: "회원 관리",
-    title: "회원 관리",
-    headline: (
-      <>
-        회원의 레슨이
-        <br />
-        <span className="text-primary">하나의 기록으로 이어집니다.</span>
-      </>
-    ),
-    desc: <>횟수 · 일정 · 결제 · 레슨 기록을 회원별로 연결해서 관리합니다.</>,
-    points: ["회원 정보", "잔여 횟수", "반복 이슈 태그", "AI 레슨 분석"],
-  },
-];
-
-function ShotFrame({ item }: { item: ShowcaseTab }) {
+function Shot({
+  src,
+  alt,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
   return (
-    <div className="relative h-[300px] w-full overflow-hidden rounded-[1.5rem] border border-border/60 bg-[var(--cream)] sm:h-[360px] lg:h-[520px]">
-      {item.shot ? (
-        <img
-          src={item.shot.src}
-          alt={`KERRI 앱 ${item.title} 화면`}
-          loading="lazy"
-          className="h-full w-full object-cover"
-          style={{
-            objectPosition: item.shot.position,
-            transform: `scale(${item.shot.zoom})`,
-            transformOrigin: item.shot.position,
-          }}
-        />
-      ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-8 text-center">
-          {item.flow ? (
-            <div className="w-full max-w-[300px] space-y-3">
-              {item.points.map((p) => (
-                <div
-                  key={p}
-                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-3.5 text-left text-[0.9rem] font-semibold text-foreground/80"
-                >
-                  {p}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <span className="text-[0.85rem] leading-relaxed text-muted-foreground">
-              {item.title} 앱 화면
-              <br />
-              스크린샷 등록 예정
-            </span>
-          )}
-        </div>
-      )}
+    <img
+      src={src}
+      alt={alt}
+      loading={priority ? "eager" : "lazy"}
+      className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
+    />
+  );
+}
+
+function FeatureCopy({
+  num,
+  title,
+  desc,
+  message,
+  className = "",
+}: {
+  num: string;
+  title: string;
+  desc: string;
+  message: string;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">{num}</div>
+      <h3 className="mt-3 text-[1.5rem] font-bold leading-[1.3] tracking-tight sm:text-[1.85rem]">
+        {message}
+      </h3>
+      <p className="mt-4 text-[0.95rem] leading-[1.8] text-muted-foreground">
+        <span className="font-semibold text-foreground/80">{title}</span> · {desc}
+      </p>
     </div>
   );
 }
 
 function Ops() {
-  const [active, setActive] = useState(0);
-  const item = SHOWCASE[active]!;
-
   return (
-    <Section id="features" tone="cream" className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28">
+    <Section
+      id="features"
+      tone="cream"
+      className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28"
+    >
       <Container>
         <SectionHead
           eyebrow="Product"
@@ -767,93 +677,106 @@ function Ops() {
           }
           body={
             <>
-              레슨 기록부터 일정, 횟수, 결제까지
-              <br className="hidden sm:block" /> 코치에게 필요한 운영을 한 곳에서 관리합니다.
+              실제 KERRI 앱 화면으로 확인하세요.
+              <br className="hidden sm:block" /> 레슨 기록, 일정, 결제, 알림까지 한 곳에서 관리합니다.
             </>
           }
         />
 
-        {/* Tabs */}
-        <div className="-mx-6 mt-14 overflow-x-auto px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:px-0">
-          <div className="flex w-max gap-2.5 lg:w-auto lg:flex-wrap">
-            {SHOWCASE.map((s, i) => {
-              const on = i === active;
-              return (
-                <button
-                  key={s.key}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-pressed={on}
-                  className={`flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-[0.925rem] font-semibold transition-colors ${
-                    on
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border/60 bg-white/70 text-foreground/70 hover:border-primary/40 hover:text-foreground"
-                  }`}
-                >
-                  {s.tab}
-                  {s.badge && (
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[0.65rem] font-bold tracking-tight ${
-                        on ? "bg-white/20 text-primary-foreground" : "bg-primary/10 text-primary"
-                      }`}
-                    >
-                      {s.badge}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+        {/* 01 홈 대시보드 */}
+        <Reveal>
+          <div className="mt-16 grid items-center gap-10 lg:mt-24 lg:grid-cols-[1fr_46%] lg:gap-16">
+            <FeatureCopy
+              num="01"
+              message="오늘의 레슨 운영을 한눈에"
+              title="홈 대시보드"
+              desc="회원 현황과 오늘 레슨을 한눈에 확인"
+            />
+            <div className="mx-auto w-[86%] max-w-[360px] lg:w-full lg:max-w-[400px]">
+              <Shot src={appHome.url} alt="KERRI 코치앱 홈 대시보드 화면" priority />
+            </div>
           </div>
-        </div>
+        </Reveal>
 
-        {/* Showcase card */}
-        <div className="surface mt-8 overflow-hidden p-6 sm:p-9 lg:p-12">
-          <div
-            key={item.key}
-            className="grid animate-[fadeUp_0.45s_ease-out] items-center gap-8 lg:grid-cols-[42%_1fr] lg:gap-12"
-          >
-            <div>
-              <div className="eyebrow">{item.title}</div>
-              <h3 className="mt-4 text-[1.65rem] font-bold leading-[1.25] tracking-tight sm:text-[2rem]">
-                {item.headline}
-              </h3>
-              <p className="mt-5 text-[0.975rem] leading-[1.85] text-muted-foreground">{item.desc}</p>
-
-              {item.flow ? (
-                <div className="mt-8 flex flex-wrap items-center gap-2.5">
-                  {item.flow.map((f, i) => (
-                    <div key={f.label} className="flex items-center gap-2.5">
-                      <div className="flex items-center gap-2 rounded-2xl border border-primary/25 bg-primary/8 px-4 py-2.5">
-                        <span aria-hidden className="text-[1rem]">
-                          {f.icon}
-                        </span>
-                        <span className="text-[0.875rem] font-bold text-foreground/85">{f.label}</span>
-                      </div>
-                      {i < item.flow!.length - 1 && <span className="text-primary/50">→</span>}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {item.points.map((p) => (
-                    <span
-                      key={p}
-                      className="rounded-full border border-border/60 bg-[var(--cream)] px-3.5 py-1.5 text-[0.825rem] font-semibold text-foreground/70"
-                    >
-                      {p}
-                    </span>
-                  ))}
-                </div>
-              )}
+        {/* 02 · 03 알림 + 결제 (겹침) */}
+        <Reveal>
+          <div className="mt-20 grid items-center gap-12 lg:mt-32 lg:grid-cols-[1fr_52%] lg:gap-16">
+            <div className="space-y-10">
+              <FeatureCopy
+                num="02"
+                message="놓치기 쉬운 운영은 자동으로"
+                title="알림 설정"
+                desc="레슨 전날, 당일, 재등록 알림 관리"
+              />
+              <FeatureCopy
+                num="03"
+                message="결제와 미납까지 한곳에서"
+                title="결제 내역 관리"
+                desc="회원별 결제와 미납 현황 관리"
+              />
             </div>
 
-            <ShotFrame item={item} />
+            <div className="relative mx-auto w-[92%] max-w-[420px] pb-[16%] lg:w-full lg:max-w-[520px]">
+              <div className="w-[74%]">
+                <Shot src={appNotify.url} alt="KERRI 코치앱 알림 설정 화면" />
+              </div>
+              <div className="absolute bottom-0 right-0 w-[62%]">
+                <Shot src={appPayment.url} alt="KERRI 코치앱 결제 관리 화면" />
+              </div>
+            </div>
           </div>
-        </div>
+        </Reveal>
+
+        {/* 04 스케줄 */}
+        <Reveal>
+          <div className="mt-20 grid items-center gap-10 lg:mt-32 lg:grid-cols-[46%_1fr] lg:gap-16">
+            <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
+              <Shot src={appSchedule.url} alt="KERRI 코치앱 스케줄 관리 화면" />
+            </div>
+            <FeatureCopy
+              className="order-1 lg:order-2"
+              num="04"
+              message="복잡한 레슨 일정도 간편하게"
+              title="스케줄 관리"
+              desc="일일 · 주간 · 월간 레슨 일정 관리"
+            />
+          </div>
+        </Reveal>
       </Container>
+
+      {/* 05 AI 레슨 기록 — 핵심 강조 */}
+      <div className="mt-20 border-y border-border/50 bg-[var(--ink)] py-16 sm:py-20 lg:mt-32 lg:py-28">
+        <Container>
+          <Reveal>
+            <div className="mx-auto max-w-[720px] text-center">
+              <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
+              <h3 className="mt-4 text-[1.9rem] font-bold leading-[1.25] tracking-tight text-white sm:text-[2.6rem] lg:text-[3rem]">
+                코칭이 끝나도,
+                <br />
+                <span className="text-primary">기록은 남습니다.</span>
+              </h3>
+              <p className="mt-5 text-[0.975rem] leading-[1.85] text-white/65 sm:text-[1.05rem]">
+                레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리합니다.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
+              <img
+                src={appReport.url}
+                alt="KERRI 회원앱 AI 레슨 리포트 화면"
+                loading="lazy"
+                className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+              />
+            </div>
+          </Reveal>
+        </Container>
+      </div>
     </Section>
   );
 }
+
 
 
 
