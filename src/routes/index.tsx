@@ -1516,7 +1516,7 @@ function AppSection() {
                 레슨 운영을 하나로.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-5">
-                <StoreButtons appStoreUrl={COACH_APP_URL} />
+                <StoreButtons appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
                 <QR url={COACH_APP_URL} label="KERRI Coach" />
               </div>
             </div>
@@ -1532,7 +1532,7 @@ function AppSection() {
                 내 레슨을 한곳에서.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-5">
-                <StoreButtons appStoreUrl={MEMBER_APP_URL} />
+                <StoreButtons appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
                 <QR url={MEMBER_APP_URL} label="KERRI Member" />
               </div>
             </div>
