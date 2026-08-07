@@ -1009,13 +1009,13 @@ function AppSection() {
         <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-2">
           <Reveal>
             <div
-              className={`surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
+              className={`relative surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
                 pulse
                   ? "!border-primary ring-4 ring-primary/20 -translate-y-1.5 shadow-[0_36px_70px_-30px_rgba(192,117,90,0.5)] animate-[installPulse_1.1s_ease-in-out_2]"
                   : ""
               }`}
             >
-              <div className="eyebrow">추천</div>
+              <div className="eyebrow absolute right-0 top-0">추천</div>
               <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 코치앱</h3>
               <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
                 회원 관리 · 일정 · 결제 · AI 레슨 기록
