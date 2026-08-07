@@ -10,6 +10,10 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
+  TrendingUp,
+  ShieldCheck,
+  Database,
+  Workflow,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -853,35 +857,55 @@ function Ops() {
 
 
 
-/* ── Impact ────────────────────────────────────────────────── */
+/* ── Impact: KERRI를 사용하면 달라집니다 ───────────────────── */
 
 function Impact() {
-  const items = [
-    { t: "재등록률 향상", d: "회원이 성장 기록을 확인하며 레슨을 계속할 이유가 생깁니다." },
-    { t: "프로다운 브랜딩", d: "리포트 하나만으로도 ‘관리해주는 코치’라는 인상을 남깁니다." },
-    { t: "회원 데이터 축적", d: "회원별 진도와 피드백이 자동으로 쌓여 다음 레슨 준비가 쉬워집니다." },
+  const cards = [
+    {
+      icon: TrendingUp,
+      title: "재등록률 향상",
+      desc: "개인 맞춤 레슨 기록과 지속적인 케어로\n회원이 꾸준히 레슨을 이어갑니다.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "회원과의 신뢰",
+      desc: "레슨 횟수 · 일정 · 결제 · 레슨 기록이\n투명하게 관리되어 회원과의 신뢰를 높입니다.",
+    },
+    {
+      icon: Database,
+      title: "코칭 데이터 자산화",
+      desc: "앱을 사용할수록 회원별 코칭 데이터가 쌓여\n나의 코칭을 증명하는 자산이 됩니다.",
+    },
+    {
+      icon: Workflow,
+      title: "운영 자동화",
+      desc: "일정 · 횟수 · 결제 · 알림까지\n놓치지 않고 한 번에 관리합니다.",
+    },
   ];
+
   return (
-    <Section>
+    <Section id="impact">
       <Container>
-        <SectionHead
-          title={
-            <>
-              회원은 <span className="text-primary">더 오래</span> 다니고,
-              <br />
-              코치는 더 전문적으로 성장합니다.
-            </>
-          }
-        />
-        <div className="mt-20 grid gap-6 md:grid-cols-3">
-          {items.map((i, idx) => (
-            <Reveal key={i.t} delay={idx * 90}>
-              <div className="surface surface-hover h-full p-9">
-                <h3 className="text-[1.2rem] font-bold tracking-tight">{i.t}</h3>
-                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{i.d}</p>
-              </div>
-            </Reveal>
-          ))}
+        <SectionHead title="KERRI를 사용하면 달라집니다." center />
+        <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
+          {cards.map((c, idx) => {
+            const Icon = c.icon;
+            return (
+              <Reveal key={c.title} delay={idx * 80}>
+                <div className="surface surface-hover h-full rounded-[1.5rem] p-5 sm:p-7">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary sm:h-11 sm:w-11">
+                    <Icon size={22} strokeWidth={1.6} />
+                  </div>
+                  <h3 className="mt-4 text-[1.05rem] font-bold leading-tight tracking-tight text-foreground sm:text-[1.2rem]">
+                    {c.title}
+                  </h3>
+                  <p className="mt-3 whitespace-pre-line text-[0.8rem] leading-[1.7] text-muted-foreground sm:text-[0.9rem]">
+                    {c.desc}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </Container>
     </Section>
@@ -1178,10 +1202,8 @@ function Landing() {
         <Empathy />
         <MemberDemand />
         <Compare />
-
-        <Ops />
-        
         <Impact />
+        <Ops />
         <MemberApp />
         <AppSection />
         <FAQ />
