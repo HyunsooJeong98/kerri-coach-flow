@@ -746,7 +746,12 @@ function Ops() {
 
               </div>
               <div className="absolute bottom-0 right-0 w-[62%]">
-                <Shot src={appPayment.url} alt="KERRI 코치앱 결제 관리 화면" />
+                <Shot
+                  src={appPayment.url}
+                  alt="KERRI 코치앱 결제 내역 화면. 회원별 결제 금액과 결제일, 미납 상태가 목록으로 표시됩니다."
+                  caption="결제 내역 관리 — 회원별 결제와 미납 현황 관리"
+                />
+
               </div>
             </div>
           </div>
