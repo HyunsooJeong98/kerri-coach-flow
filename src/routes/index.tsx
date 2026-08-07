@@ -971,29 +971,6 @@ function QR({ url, label }: { url: string; label: string }) {
   );
 }
 
-/* ── Member app teaser ─────────────────────────────────────── */
-
-function MemberApp() {
-  return (
-    <Section id="member">
-      <Container>
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="display-2">회원도 함께 사용하는 앱</h2>
-          <p className="lead mt-8">
-            회원은 지난 레슨 기록과 다음 목표를 확인하며 꾸준히 운동을 이어갑니다.
-          </p>
-          <Link
-            to="/member"
-            className="btn-base btn-primary mt-10 inline-flex items-center gap-2"
-          >
-            회원앱 자세히 보기
-            <ArrowRight size={18} strokeWidth={1.8} />
-          </Link>
-        </Reveal>
-      </Container>
-    </Section>
-  );
-}
 
 
 /* ── Install ───────────────────────────────────────────────── */
