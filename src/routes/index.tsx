@@ -714,7 +714,7 @@ const COMPARE_ROWS: {
 
 function Compare() {
   return (
-    <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40">
+    <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead title="기존 방식과 무엇이 다를까요?" center />
 
