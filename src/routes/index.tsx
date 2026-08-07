@@ -714,7 +714,7 @@ const COMPARE_ROWS: {
 
 function Compare() {
   return (
-    <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40">
+    <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead title="기존 방식과 무엇이 다를까요?" center />
 
@@ -1013,7 +1013,7 @@ function Ops() {
   const item = SHOWCASE[active]!;
 
   return (
-    <Section id="features">
+    <Section id="features" tone="cream" className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead
           eyebrow="Product"
@@ -1167,7 +1167,7 @@ function Report() {
     },
   ];
   return (
-    <Section id="report">
+    <Section id="report" className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead
           eyebrow="AI 레슨 리포트"
@@ -1179,7 +1179,7 @@ function Report() {
             </>
           }
         />
-        <div className="mt-24 grid gap-16 md:grid-cols-3 md:gap-10">
+        <div className="mt-16 sm:mt-20 lg:mt-24 grid gap-16 md:grid-cols-3 md:gap-10">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 110} className="text-center">
               <PhoneMock className="!w-[228px] sm:!w-[248px]" bodyClassName="flex items-center justify-center px-6">
@@ -1222,7 +1222,7 @@ function SampleReport() {
     },
   ];
   return (
-    <Section tone="cream">
+    <Section tone="cream" className="!pt-16 sm:!pt-20 lg:!pt-28">
       <Container>
         <SectionHead
           eyebrow="실제 리포트 예시"
