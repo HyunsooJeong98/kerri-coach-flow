@@ -1115,40 +1115,6 @@ function Ops() {
 }
 
 
-/* ── Problem ───────────────────────────────────────────────── */
-
-function Problem() {
-  const items = [
-    { h: "“오늘 뭐 배웠어요?”", p: "회원에게 매번 카톡으로 길게 설명합니다." },
-    { h: "회원이 늘수록", p: "누가 무엇을 배웠는지 기억하기 어려워집니다." },
-    { h: "열심히 가르쳐도", p: "회원은 레슨의 가치를 눈으로 확인하기 어렵습니다." },
-  ];
-  return (
-    <Section tone="cream">
-      <Container>
-        <SectionHead
-          title={
-            <>
-              레슨은 기억에 남지만,
-              <br />
-              <span className="text-primary">기록</span>은 남지 않았습니다.
-            </>
-          }
-        />
-        <div className="mt-20 grid gap-6 md:grid-cols-3">
-          {items.map((i, idx) => (
-            <Reveal key={i.h} delay={idx * 90}>
-              <div className="surface surface-hover h-full p-9">
-                <h3 className="text-[1.2rem] font-bold leading-snug">{i.h}</h3>
-                <p className="mt-4 text-[0.975rem] leading-[1.85] text-muted-foreground">{i.p}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
 
 /* ── Report ────────────────────────────────────────────────── */
 
@@ -1875,7 +1841,7 @@ function Landing() {
         <Compare />
 
         <Ops />
-        <Problem />
+        
         <Report />
         <SampleReport />
         <Impact />
