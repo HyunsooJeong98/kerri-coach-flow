@@ -6,8 +6,12 @@ export function headerOffset() {
   const header = document.querySelector("header");
   if (!(header instanceof HTMLElement)) return 64;
   const bar = header.firstElementChild;
-  const h = bar instanceof HTMLElement ? bar.offsetHeight : header.offsetHeight;
-  return Math.round(h);
+  if (bar instanceof HTMLElement) {
+    const style = window.getComputedStyle(header);
+    const borderBottom = parseFloat(style.borderBottomWidth) || 0;
+    return Math.round(bar.offsetHeight + borderBottom);
+  }
+  return Math.round(header.offsetHeight);
 }
 
 export function scrollTo(id: string) {
@@ -18,7 +22,7 @@ export function scrollTo(id: string) {
     return;
   }
 
-  const gap = window.innerWidth < 640 ? 8 : 16;
+  const gap = window.innerWidth < 640 ? 8 : 12;
   const targetTop = () =>
     Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
 
@@ -138,7 +142,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative scroll-mt-24 py-28 sm:py-32 lg:py-40 ${
+      className={`relative py-28 sm:py-32 lg:py-40 ${
         tone === "cream" ? "cream-band noise" : ""
       } ${className}`}
     >
