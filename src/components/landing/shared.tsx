@@ -205,10 +205,15 @@ export function Nav() {
         <Link
           to="/"
           onClick={() => scrollTo("top")}
-          className="text-[1.35rem] font-extrabold leading-none text-foreground"
+          className="flex items-center gap-2.5 text-[1.35rem] font-extrabold leading-none text-foreground"
           style={{ letterSpacing: "-0.05em" }}
         >
-          KERRI
+          <img
+            src={kerriLogo.url}
+            alt="KERRI 로고"
+            className="h-8 w-8 rounded-lg object-contain"
+          />
+          <span>KERRI</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
