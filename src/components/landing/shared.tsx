@@ -245,8 +245,9 @@ export function Nav() {
         </nav>
 
         <button
-          className="md:hidden -mr-2 p-2 text-foreground"
-          aria-label="메뉴 열기"
+          className="md:hidden -mr-2 p-2 text-foreground transition-opacity duration-200 hover:opacity-70"
+          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
