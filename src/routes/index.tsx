@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
+  FileText,
+  CalendarCheck,
+  Users,
+  Smartphone,
   ClipboardList,
   History,
   Dumbbell,
