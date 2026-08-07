@@ -174,9 +174,11 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const goSection = useSectionNav();
   const items = [
-    { label: "기능", id: "features" },
-    { label: "AI 리포트", id: "report" },
+    { label: "코치앱", id: "features" },
+    { label: "회원앱", id: "member" },
+    { label: "요금제", to: "/pricing", isLink: true },
     { label: "FAQ", id: "faq" },
+    { label: "계정 삭제", to: "/account-deletion", isLink: true },
   ];
 
   useEffect(() => {
@@ -205,21 +207,25 @@ export function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
-          {items.map((i) => (
-            <button
-              key={i.id}
-              onClick={() => goSection(i.id)}
-              className="transition-colors duration-200 hover:text-foreground"
-            >
-              {i.label}
-            </button>
-          ))}
-          <Link to="/pricing" className="transition-colors duration-200 hover:text-foreground">
-            요금제
-          </Link>
-          <Link to="/account-deletion" className="transition-colors duration-200 hover:text-foreground">
-            계정 삭제
-          </Link>
+          {items.map((i) =>
+            i.isLink ? (
+              <Link
+                key={i.label}
+                to={i.to!}
+                className="transition-colors duration-200 hover:text-foreground"
+              >
+                {i.label}
+              </Link>
+            ) : (
+              <button
+                key={i.label}
+                onClick={() => goSection(i.id!)}
+                className="transition-colors duration-200 hover:text-foreground"
+              >
+                {i.label}
+              </button>
+            )
+          )}
           <button
             onClick={() => goSection("install")}
             className="btn-base btn-primary !min-h-[3rem] !px-6 !text-[0.95rem] !rounded-[0.95rem]"
@@ -252,32 +258,29 @@ export function Nav() {
       {open && (
         <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl">
           <Container className="flex flex-col gap-1 py-6">
-            {items.map((i) => (
-              <button
-                key={i.id}
-                onClick={() => {
-                  setOpen(false);
-                  setTimeout(() => goSection(i.id), 60);
-                }}
-                className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
-              >
-                {i.label}
-              </button>
-            ))}
-            <Link
-              to="/pricing"
-              onClick={() => setOpen(false)}
-              className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
-            >
-              요금제
-            </Link>
-            <Link
-              to="/account-deletion"
-              onClick={() => setOpen(false)}
-              className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
-            >
-              계정 삭제
-            </Link>
+            {items.map((i) =>
+              i.isLink ? (
+                <Link
+                  key={i.label}
+                  to={i.to!}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
+                >
+                  {i.label}
+                </Link>
+              ) : (
+                <button
+                  key={i.label}
+                  onClick={() => {
+                    setOpen(false);
+                    setTimeout(() => goSection(i.id!), 60);
+                  }}
+                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
+                >
+                  {i.label}
+                </button>
+              )
+            )}
             <button
               onClick={() => {
                 setOpen(false);
