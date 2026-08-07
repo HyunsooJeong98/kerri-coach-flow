@@ -22,7 +22,7 @@ export function scrollTo(id: string) {
     return;
   }
 
-  const gap = window.innerWidth < 640 ? 8 : 16;
+  const gap = window.innerWidth < 640 ? 8 : 12;
   const targetTop = () =>
     Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
 
