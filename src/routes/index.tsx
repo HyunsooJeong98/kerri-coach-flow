@@ -1019,11 +1019,12 @@ function AppSection() {
     <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36">
       <Container>
         <SectionHead
+          eyebrow="다운로드"
           title={
             <>
-              레슨 운영을 더 쉽게
+              코치와 회원,
               <br />
-              <span className="text-primary">시작하세요.</span>
+              모두를 위한 플랫폼
             </>
           }
         />
