@@ -1202,10 +1202,8 @@ function Landing() {
         <Empathy />
         <MemberDemand />
         <Compare />
-
-        <Ops />
-        
         <Impact />
+        <Ops />
         <MemberApp />
         <AppSection />
         <FAQ />
