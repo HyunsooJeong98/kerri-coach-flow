@@ -1052,7 +1052,16 @@ function AppSection() {
 
           <Reveal delay={110}>
             <div className="surface h-full rounded-[1.85rem] p-8 sm:p-12">
-              <h3 className="text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 회원앱</h3>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <h3 className="text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 회원앱</h3>
+                <Link
+                  to="/member"
+                  className="group inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
+                >
+                  회원앱 자세히 보기
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </Link>
+              </div>
               <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
                 레슨 기록 · 성장 기록 · 일정 · 남은 횟수
                 <br />
