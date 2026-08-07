@@ -10,6 +10,10 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
+  TrendingUp,
+  ShieldCheck,
+  Database,
+  Workflow,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
