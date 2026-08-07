@@ -1,5 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import kerriHome from "@/assets/kerri-home.png.asset.json";
+import appHome from "@/assets/app-home.png.asset.json";
+import appNotify from "@/assets/app-notify.jpg.asset.json";
+import appPayment from "@/assets/app-payment.png.asset.json";
+import appSchedule from "@/assets/app-schedule.png.asset.json";
+import appReport from "@/assets/app-report.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
