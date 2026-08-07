@@ -761,7 +761,12 @@ function Ops() {
         <Reveal>
           <div className="mt-20 grid items-center gap-10 lg:mt-32 lg:grid-cols-[46%_1fr] lg:gap-16">
             <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
-              <Shot src={appSchedule.url} alt="KERRI 코치앱 스케줄 관리 화면" />
+              <Shot
+                src={appSchedule.url}
+                alt="KERRI 코치앱 스케줄 관리 화면. 주간 캘린더에 시간대별 레슨 일정과 회원 이름이 배치되어 있습니다."
+                caption="스케줄 관리 — 일일·주간·월간 레슨 일정 관리"
+              />
+
             </div>
             <FeatureCopy
               className="order-1 lg:order-2"
