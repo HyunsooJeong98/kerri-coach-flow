@@ -1013,7 +1013,7 @@ function Ops() {
   const item = SHOWCASE[active]!;
 
   return (
-    <Section id="features">
+    <Section id="features" tone="cream" className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead
           eyebrow="Product"
