@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
+  FileText,
+  CalendarCheck,
+  Users,
+  Smartphone,
   ClipboardList,
   History,
   Dumbbell,
@@ -660,6 +664,143 @@ function MemberDemand() {
     </Section>
   );
 }
+
+/* ── 기존 방식 vs KERRI ────────────────────────────────────── */
+
+const COMPARE_ROWS: {
+  icon: typeof FileText;
+  label: string;
+  before: string;
+  after: string;
+  note?: string;
+  strong?: boolean;
+  semibold?: boolean;
+}[] = [
+  {
+    icon: FileText,
+    label: "AI 레슨 리포트",
+    before: "기억하거나 직접 작성",
+    after: "AI가 핵심 내용을 자동으로 정리",
+    strong: true,
+  },
+  {
+    icon: CalendarCheck,
+    label: "운영 관리",
+    before: "일정 · 횟수 · 결제를 직접 확인",
+    after: "일정 · 횟수 · 결제가 자동으로 연결",
+    note: "출석부터 잔여 횟수 · 결제 · 재등록까지 놓치지 않게",
+    semibold: true,
+  },
+  {
+    icon: Users,
+    label: "회원 관리",
+    before: "카톡 · 엑셀 · 메모에 분산",
+    after: "회원 정보를 한곳에서 관리",
+  },
+  {
+    icon: Smartphone,
+    label: "회원 확인",
+    before: "일정 · 횟수 등을 코치에게 직접 확인",
+    after: "회원앱에서 바로 확인",
+  },
+  {
+    icon: History,
+    label: "다음 레슨",
+    before: "기억과 메모에 의존",
+    after: "지난 레슨 기록을 이어서 코칭",
+  },
+];
+
+function Compare() {
+  return (
+    <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40">
+      <Container>
+        <SectionHead title="기존 방식과 무엇이 다를까요?" center />
+
+        <Reveal delay={80}>
+          <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
+            {/* Desktop header */}
+            <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.15fr)] gap-6 border-b border-border/50 px-8 pb-4 pt-7 md:grid lg:gap-10 lg:px-10">
+              <div className="text-[0.8rem] font-semibold tracking-wide text-muted-foreground">항목</div>
+              <div className="text-[0.8rem] font-semibold tracking-wide text-muted-foreground">기존 방식</div>
+              <div className="text-[0.85rem] font-bold tracking-tight text-primary">KERRI</div>
+            </div>
+
+            <div className="divide-y divide-border/50">
+              {COMPARE_ROWS.map((row) => {
+                const Icon = row.icon;
+                return (
+                  <div key={row.label}>
+                    {/* Desktop row */}
+                    <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.15fr)] items-start gap-6 px-8 py-6 md:grid lg:gap-10 lg:px-10">
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <Icon className="h-[19px] w-[19px] shrink-0 text-primary" strokeWidth={1.6} />
+                        <span className="text-[0.975rem] font-semibold leading-[1.5] tracking-tight text-foreground">
+                          {row.label}
+                        </span>
+                      </div>
+                      <p className="text-[0.925rem] leading-[1.5] text-muted-foreground">{row.before}</p>
+                      <div
+                        className={`rounded-xl ${
+                          row.strong ? "bg-primary/[0.07] px-4 py-3 -my-1" : ""
+                        }`}
+                      >
+                        <p
+                          className={`text-[0.925rem] leading-[1.5] text-foreground ${
+                            row.strong ? "font-bold" : row.semibold ? "font-semibold" : "font-normal"
+                          }`}
+                        >
+                          {row.after}
+                        </p>
+                        {row.note && (
+                          <p className="mt-1.5 text-[0.78rem] leading-[1.5] text-muted-foreground">{row.note}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Mobile row */}
+                    <div className="px-6 py-6 md:hidden">
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <Icon className="h-[18px] w-[18px] shrink-0 text-primary" strokeWidth={1.6} />
+                        <span className="text-[0.95rem] font-semibold leading-[1.5] tracking-tight text-foreground">
+                          {row.label}
+                        </span>
+                      </div>
+                      <div className="mt-4">
+                        <div className="text-[0.72rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
+                          기존 방식
+                        </div>
+                        <p className="mt-1 break-keep text-[0.9rem] leading-[1.55] text-muted-foreground">
+                          {row.before}
+                        </p>
+                      </div>
+                      <div className={`mt-4 rounded-xl ${row.strong ? "bg-primary/[0.07] px-4 py-3.5" : ""}`}>
+                        <div className="text-[0.72rem] font-bold uppercase tracking-wider text-primary">KERRI</div>
+                        <p
+                          className={`mt-1 break-keep text-[0.9rem] leading-[1.55] text-foreground ${
+                            row.strong ? "font-bold" : row.semibold ? "font-semibold" : "font-normal"
+                          }`}
+                        >
+                          {row.after}
+                        </p>
+                        {row.note && (
+                          <p className="mt-1.5 break-keep text-[0.78rem] leading-[1.55] text-muted-foreground">
+                            {row.note}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+      </Container>
+    </Section>
+  );
+}
+
 
 
 
@@ -1523,6 +1664,8 @@ function Landing() {
         <Hero />
         <Empathy />
         <MemberDemand />
+        <Compare />
+
         <Ops />
         <Problem />
         <Report />
