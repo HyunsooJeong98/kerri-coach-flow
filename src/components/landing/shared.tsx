@@ -1,5 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import kerriLogo from "@/assets/kerri-logo.jpg.asset.json";
 
 /** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
 export function headerOffset() {
