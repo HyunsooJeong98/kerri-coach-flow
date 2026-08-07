@@ -1167,7 +1167,7 @@ function Report() {
     },
   ];
   return (
-    <Section id="report">
+    <Section id="report" className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead
           eyebrow="AI 레슨 리포트"
