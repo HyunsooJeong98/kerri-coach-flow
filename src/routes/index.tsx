@@ -1179,7 +1179,7 @@ function Report() {
             </>
           }
         />
-        <div className="mt-24 grid gap-16 md:grid-cols-3 md:gap-10">
+        <div className="mt-16 sm:mt-20 lg:mt-24 grid gap-16 md:grid-cols-3 md:gap-10">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 110} className="text-center">
               <PhoneMock className="!w-[228px] sm:!w-[248px]" bodyClassName="flex items-center justify-center px-6">
