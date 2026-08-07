@@ -738,7 +738,12 @@ function Ops() {
 
             <div className="relative mx-auto w-[92%] max-w-[420px] pb-[16%] lg:w-full lg:max-w-[520px]">
               <div className="w-[74%]">
-                <Shot src={appNotify.url} alt="KERRI 코치앱 알림 설정 화면" />
+                <Shot
+                  src={appNotify.url}
+                  alt="KERRI 코치앱 알림 설정 화면. 레슨 전날·당일 리마인드와 재등록 안내 알림을 항목별로 켜고 끌 수 있습니다."
+                  caption="알림 설정 — 레슨 전날, 당일, 재등록 알림 관리"
+                />
+
               </div>
               <div className="absolute bottom-0 right-0 w-[62%]">
                 <Shot src={appPayment.url} alt="KERRI 코치앱 결제 관리 화면" />
