@@ -798,13 +798,23 @@ function Ops() {
 
           <Reveal>
             <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
-              <img
-                src={appReport.url}
-                alt="KERRI 회원앱 AI 레슨 리포트 화면"
-                loading="lazy"
-                className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
-              />
+              <figure
+                tabIndex={0}
+                aria-label="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
+              >
+                <img
+                  src={appReport.url}
+                  alt="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                  loading="lazy"
+                  className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+                />
+                <figcaption className="sr-only">
+                  AI 레슨 기록 — 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리
+                </figcaption>
+              </figure>
             </div>
+
           </Reveal>
         </Container>
       </div>
