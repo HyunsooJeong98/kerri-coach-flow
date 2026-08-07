@@ -1191,7 +1191,6 @@ function Landing() {
         <Compare />
         <Impact />
         <Ops />
-        <MemberApp />
         <AppSection />
         <FAQ />
         <FinalCTA />
