@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import kerriHome from "@/assets/kerri-home.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -867,55 +868,252 @@ function Hero() {
   );
 }
 
-/* ── Ops ───────────────────────────────────────────────────── */
+/* ── Feature showcase (탭 전환) ─────────────────────────────── */
+
+type ShowcaseTab = {
+  key: string;
+  tab: string;
+  badge?: string;
+  title: string;
+  headline: ReactNode;
+  desc: ReactNode;
+  points: string[];
+  flow?: { icon: string; label: string }[];
+  shot?: { src: string; position: string; zoom: number };
+};
+
+const SHOWCASE: ShowcaseTab[] = [
+  {
+    key: "ai",
+    tab: "AI 레슨 기록",
+    badge: "핵심 기능",
+    title: "AI 레슨 기록",
+    headline: (
+      <>
+        레슨의 핵심을
+        <br />
+        <span className="text-primary">AI가 자동으로 정리합니다.</span>
+      </>
+    ),
+    desc: (
+      <>
+        레슨 중 코치의 설명을 기록하면 AI가 핵심 내용과 개선점을 정리해 회원의 레슨 기록으로 남깁니다.
+      </>
+    ),
+    points: ["오늘 레슨 핵심 요약", "개선 포인트", "추천 연습"],
+    flow: [
+      { icon: "🎙", label: "레슨 기록" },
+      { icon: "✨", label: "AI 핵심 정리" },
+      { icon: "📄", label: "회원 기록" },
+    ],
+  },
+  {
+    key: "ops",
+    tab: "운영 관리",
+    title: "회원 운영 관리",
+    headline: (
+      <>
+        놓치기 쉬운 회원을
+        <br />
+        <span className="text-primary">먼저 확인하세요.</span>
+      </>
+    ),
+    desc: <>미납 · 잔여 횟수 · 만료 예정 · 재등록 시점을 한눈에 확인합니다.</>,
+    points: ["미납", "잔여 횟수", "만료 예정", "재등록"],
+    shot: { src: kerriHome.url, position: "50% 22%", zoom: 1.35 },
+  },
+  {
+    key: "schedule",
+    tab: "일정",
+    title: "레슨 일정",
+    headline: (
+      <>
+        오늘부터 이번 주 레슨까지
+        <br />
+        <span className="text-primary">한눈에 확인하세요.</span>
+      </>
+    ),
+    desc: <>회원별 레슨 일정을 확인하고 스케줄을 한 곳에서 관리합니다.</>,
+    points: ["오늘 레슨", "주간 일정", "회원별 스케줄"],
+    shot: { src: kerriHome.url, position: "50% 78%", zoom: 1.35 },
+  },
+  {
+    key: "payment",
+    tab: "결제",
+    title: "결제 관리",
+    headline: (
+      <>
+        누가 결제했고,
+        <br />
+        <span className="text-primary">누가 아직 결제하지 않았는지.</span>
+      </>
+    ),
+    desc: <>회원별 결제 내역과 미납 상태를 한 곳에서 확인합니다.</>,
+    points: ["납부 필요 회원", "결제 금액", "결제 완료 내역"],
+  },
+  {
+    key: "members",
+    tab: "회원 관리",
+    title: "회원 관리",
+    headline: (
+      <>
+        회원의 레슨이
+        <br />
+        <span className="text-primary">하나의 기록으로 이어집니다.</span>
+      </>
+    ),
+    desc: <>횟수 · 일정 · 결제 · 레슨 기록을 회원별로 연결해서 관리합니다.</>,
+    points: ["회원 정보", "잔여 횟수", "반복 이슈 태그", "AI 레슨 분석"],
+  },
+];
+
+function ShotFrame({ item }: { item: ShowcaseTab }) {
+  return (
+    <div className="relative h-[300px] w-full overflow-hidden rounded-[1.5rem] border border-border/60 bg-[var(--cream)] sm:h-[360px] lg:h-[520px]">
+      {item.shot ? (
+        <img
+          src={item.shot.src}
+          alt={`KERRI 앱 ${item.title} 화면`}
+          loading="lazy"
+          className="h-full w-full object-cover"
+          style={{
+            objectPosition: item.shot.position,
+            transform: `scale(${item.shot.zoom})`,
+            transformOrigin: item.shot.position,
+          }}
+        />
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-8 text-center">
+          {item.flow ? (
+            <div className="w-full max-w-[300px] space-y-3">
+              {item.points.map((p) => (
+                <div
+                  key={p}
+                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-3.5 text-left text-[0.9rem] font-semibold text-foreground/80"
+                >
+                  {p}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <span className="text-[0.85rem] leading-relaxed text-muted-foreground">
+              {item.title} 앱 화면
+              <br />
+              스크린샷 등록 예정
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Ops() {
-  const cards = [
-    { t: "회원 관리", d: "회원 정보를 한곳에서 관리" },
-    { t: "레슨 일정", d: "오늘의 레슨을 한눈에 확인" },
-    { t: "출석 · 횟수 관리", d: "남은 횟수를 자동 관리" },
-    { t: "재등록 알림", d: "회원의 재등록 시점을 놓치지 않도록" },
-    { t: "결제 관리", d: "미납 회원과 결제 현황을 쉽게 확인" },
-    { t: "AI 레슨 리포트", d: "레슨이 끝나면 회원에게 자동 전달" },
-  ];
+  const [active, setActive] = useState(0);
+  const item = SHOWCASE[active]!;
+
   return (
     <Section id="features">
       <Container>
         <SectionHead
-          eyebrow="Operations"
+          eyebrow="Product"
           title={
             <>
-              코치는 <span className="text-primary">레슨에만</span> 집중하세요
+              레슨부터 회원 운영까지
+              <br />
+              <span className="text-primary">KERRI 하나로.</span>
             </>
           }
           body={
             <>
-              회원 관리부터 결제, 일정, 리포트까지.
-              <br className="hidden sm:block" /> 케리가 대신 관리합니다.
+              레슨 기록부터 일정, 횟수, 결제까지
+              <br className="hidden sm:block" /> 코치에게 필요한 운영을 한 곳에서 관리합니다.
             </>
           }
         />
 
-        <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cards.map((c, i) => (
-            <Reveal key={c.t} delay={i * 70}>
-              <div className="surface surface-hover h-full p-8">
-                <div className="flex items-center gap-4">
-                  <span className="text-[0.8rem] font-bold tracking-[0.14em] text-primary/70">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="text-[1.2rem] font-bold tracking-tight">{c.t}</h3>
+        {/* Tabs */}
+        <div className="-mx-6 mt-14 overflow-x-auto px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:px-0">
+          <div className="flex w-max gap-2.5 lg:w-auto lg:flex-wrap">
+            {SHOWCASE.map((s, i) => {
+              const on = i === active;
+              return (
+                <button
+                  key={s.key}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-pressed={on}
+                  className={`flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-[0.925rem] font-semibold transition-colors ${
+                    on
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border/60 bg-white/70 text-foreground/70 hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {s.tab}
+                  {s.badge && (
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[0.65rem] font-bold tracking-tight ${
+                        on ? "bg-white/20 text-primary-foreground" : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      {s.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Showcase card */}
+        <div className="surface mt-8 overflow-hidden p-6 sm:p-9 lg:p-12">
+          <div
+            key={item.key}
+            className="grid animate-[fadeUp_0.45s_ease-out] items-center gap-8 lg:grid-cols-[42%_1fr] lg:gap-12"
+          >
+            <div>
+              <div className="eyebrow">{item.title}</div>
+              <h3 className="mt-4 text-[1.65rem] font-bold leading-[1.25] tracking-tight sm:text-[2rem]">
+                {item.headline}
+              </h3>
+              <p className="mt-5 text-[0.975rem] leading-[1.85] text-muted-foreground">{item.desc}</p>
+
+              {item.flow ? (
+                <div className="mt-8 flex flex-wrap items-center gap-2.5">
+                  {item.flow.map((f, i) => (
+                    <div key={f.label} className="flex items-center gap-2.5">
+                      <div className="flex items-center gap-2 rounded-2xl border border-primary/25 bg-primary/8 px-4 py-2.5">
+                        <span aria-hidden className="text-[1rem]">
+                          {f.icon}
+                        </span>
+                        <span className="text-[0.875rem] font-bold text-foreground/85">{f.label}</span>
+                      </div>
+                      {i < item.flow!.length - 1 && <span className="text-primary/50">→</span>}
+                    </div>
+                  ))}
                 </div>
-                <p className="mt-4 text-[0.975rem] leading-[1.8] text-muted-foreground">{c.d}</p>
-                <div className="mt-8 aspect-[16/10] rounded-2xl border border-border/60 bg-[var(--cream)]" />
-              </div>
-            </Reveal>
-          ))}
+              ) : (
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {item.points.map((p) => (
+                    <span
+                      key={p}
+                      className="rounded-full border border-border/60 bg-[var(--cream)] px-3.5 py-1.5 text-[0.825rem] font-semibold text-foreground/70"
+                    >
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <ShotFrame item={item} />
+          </div>
         </div>
       </Container>
     </Section>
   );
 }
+
 
 /* ── Problem ───────────────────────────────────────────────── */
 
