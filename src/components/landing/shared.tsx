@@ -179,7 +179,7 @@ export function Nav() {
   const goSection = useSectionNav();
   const items = [
     { label: "코치앱", id: "features" },
-    { label: "회원앱", id: "member" },
+    { label: "회원앱", to: "/member", isLink: true },
     { label: "요금제", to: "/pricing", isLink: true },
     { label: "FAQ", id: "faq" },
     { label: "계정 삭제", to: "/account-deletion", isLink: true },
