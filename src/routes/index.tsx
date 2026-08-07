@@ -1238,8 +1238,6 @@ function Landing() {
 
         <Ops />
         
-        <Report />
-        <SampleReport />
         <Impact />
         <MemberApp />
         <AppSection />
