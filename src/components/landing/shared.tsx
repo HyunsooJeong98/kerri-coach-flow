@@ -245,8 +245,9 @@ export function Nav() {
         </nav>
 
         <button
-          className="md:hidden -mr-2 p-2 text-foreground"
-          aria-label="메뉴 열기"
+          className="md:hidden -mr-2 p-2 text-foreground transition-opacity duration-200 hover:opacity-70"
+          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -265,8 +266,16 @@ export function Nav() {
         </button>
       </Container>
 
-      {open && (
-        <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl">
+      <div
+        className={`md:hidden overflow-hidden border-t transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          open
+            ? "max-h-[28rem] opacity-100 translate-y-0 border-border/60"
+            : "max-h-0 opacity-0 -translate-y-1 border-transparent"
+        }`}
+        aria-hidden={!open}
+        inert={!open}
+      >
+        <div className="bg-background/95 backdrop-blur-xl">
           <Container className="flex flex-col gap-1 py-6">
             {items.map((i) =>
               i.isLink ? (
@@ -274,7 +283,7 @@ export function Nav() {
                   key={i.label}
                   to={i.to!}
                   onClick={() => setOpen(false)}
-                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
+                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
                 >
                   {i.label}
                 </Link>
@@ -285,7 +294,7 @@ export function Nav() {
                     setOpen(false);
                     setTimeout(() => goSection(i.id!), 60);
                   }}
-                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85"
+                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
                 >
                   {i.label}
                 </button>
@@ -302,7 +311,7 @@ export function Nav() {
             </button>
           </Container>
         </div>
-      )}
+      </div>
     </header>
   );
 }
