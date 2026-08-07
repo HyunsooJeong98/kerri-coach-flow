@@ -618,23 +618,33 @@ function Hero() {
 function Shot({
   src,
   alt,
+  caption,
   className = "",
   priority = false,
 }: {
   src: string;
   alt: string;
+  caption: string;
   className?: string;
   priority?: boolean;
 }) {
   return (
-    <img
-      src={src}
-      alt={alt}
-      loading={priority ? "eager" : "lazy"}
-      className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
-    />
+    <figure
+      tabIndex={0}
+      aria-label={alt}
+      className="group m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
+      />
+      <figcaption className="sr-only">{caption}</figcaption>
+    </figure>
   );
 }
+
 
 function FeatureCopy({
   num,
@@ -697,7 +707,13 @@ function Ops() {
               desc="회원 현황과 오늘 레슨을 한눈에 확인"
             />
             <div className="mx-auto w-[86%] max-w-[360px] lg:w-full lg:max-w-[400px]">
-              <Shot src={appHome.url} alt="KERRI 코치앱 홈 대시보드 화면" priority />
+              <Shot
+                src={appHome.url}
+                alt="KERRI 코치앱 홈 대시보드 화면. 전체 회원 수와 오늘 예정된 레슨 목록, 회원별 남은 레슨 횟수가 정리되어 있습니다."
+                caption="홈 대시보드 — 회원 현황과 오늘 레슨을 한눈에 확인"
+                priority
+              />
+
             </div>
           </div>
         </Reveal>
@@ -722,10 +738,20 @@ function Ops() {
 
             <div className="relative mx-auto w-[92%] max-w-[420px] pb-[16%] lg:w-full lg:max-w-[520px]">
               <div className="w-[74%]">
-                <Shot src={appNotify.url} alt="KERRI 코치앱 알림 설정 화면" />
+                <Shot
+                  src={appNotify.url}
+                  alt="KERRI 코치앱 알림 설정 화면. 레슨 전날·당일 리마인드와 재등록 안내 알림을 항목별로 켜고 끌 수 있습니다."
+                  caption="알림 설정 — 레슨 전날, 당일, 재등록 알림 관리"
+                />
+
               </div>
               <div className="absolute bottom-0 right-0 w-[62%]">
-                <Shot src={appPayment.url} alt="KERRI 코치앱 결제 관리 화면" />
+                <Shot
+                  src={appPayment.url}
+                  alt="KERRI 코치앱 결제 내역 화면. 회원별 결제 금액과 결제일, 미납 상태가 목록으로 표시됩니다."
+                  caption="결제 내역 관리 — 회원별 결제와 미납 현황 관리"
+                />
+
               </div>
             </div>
           </div>
@@ -735,7 +761,12 @@ function Ops() {
         <Reveal>
           <div className="mt-20 grid items-center gap-10 lg:mt-32 lg:grid-cols-[46%_1fr] lg:gap-16">
             <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
-              <Shot src={appSchedule.url} alt="KERRI 코치앱 스케줄 관리 화면" />
+              <Shot
+                src={appSchedule.url}
+                alt="KERRI 코치앱 스케줄 관리 화면. 주간 캘린더에 시간대별 레슨 일정과 회원 이름이 배치되어 있습니다."
+                caption="스케줄 관리 — 일일·주간·월간 레슨 일정 관리"
+              />
+
             </div>
             <FeatureCopy
               className="order-1 lg:order-2"
@@ -767,13 +798,23 @@ function Ops() {
 
           <Reveal>
             <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
-              <img
-                src={appReport.url}
-                alt="KERRI 회원앱 AI 레슨 리포트 화면"
-                loading="lazy"
-                className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
-              />
+              <figure
+                tabIndex={0}
+                aria-label="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
+              >
+                <img
+                  src={appReport.url}
+                  alt="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                  loading="lazy"
+                  className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+                />
+                <figcaption className="sr-only">
+                  AI 레슨 기록 — 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리
+                </figcaption>
+              </figure>
             </div>
+
           </Reveal>
         </Container>
       </div>
