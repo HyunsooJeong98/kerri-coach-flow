@@ -1195,11 +1195,12 @@ function Landing() {
         <Empathy />
         <MemberDemand />
         <Compare />
-
+        <KERRIValue />
         <Ops />
-        
-        <Impact />
         <MemberApp />
+        <AppSection />
+        <FAQ />
+        <FinalCTA />
         <AppSection />
         <FAQ />
         <FinalCTA />
