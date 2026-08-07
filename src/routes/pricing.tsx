@@ -24,6 +24,7 @@ export const Route = createFileRoute("/pricing")({
         property: "og:description",
         content: "무료로 시작하고 필요한 만큼 사용하세요. 월간·연간 요금제와 AI 리포트 제공량을 확인하세요.",
       },
+      { property: "og:url", content: "https://kerri.co.kr/pricing" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "요금제 | 케리 KERRI" },
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/pricing")({
         content: "무료로 시작하고 필요한 만큼 사용하세요. 월간·연간 요금제와 AI 리포트 제공량을 확인하세요.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://kerri.co.kr/pricing" }],
   }),
   component: PricingPage,
 });
