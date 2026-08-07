@@ -1222,7 +1222,7 @@ function SampleReport() {
     },
   ];
   return (
-    <Section tone="cream">
+    <Section tone="cream" className="!pt-16 sm:!pt-20 lg:!pt-28">
       <Container>
         <SectionHead
           eyebrow="실제 리포트 예시"
