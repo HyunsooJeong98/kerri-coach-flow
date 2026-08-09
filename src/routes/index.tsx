@@ -1108,7 +1108,7 @@ function AppSection() {
                 운영을 하나의 앱으로 관리하세요.
               </p>
               <div className="mt-10">
-                <StoreButtons appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
+                <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
               </div>
             </div>
           </Reveal>
