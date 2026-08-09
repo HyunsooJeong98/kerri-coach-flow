@@ -380,26 +380,26 @@ function MemberDemand() {
         </div>
 
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
-          {/* Main card — number and donut chart */}
+          {/* Main card — 55%: opening hook */}
           <Reveal>
             <div className="rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-14">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
                 <div className="max-w-2xl">
                   <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
-                    96.6%
+                    55%
                   </div>
                   <p className="mt-5 text-[1.15rem] font-semibold leading-[1.4] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                    <span className="sm:hidden">레슨 기록과 맞춤 관리는<br />코치 선택에 중요합니다.</span>
+                    <span className="sm:hidden">2명 중 1명은<br />배운 내용을 잊어버린 경험이 있습니다.</span>
                     <span className="hidden sm:inline">
-                      <span className="block">레슨 기록과 맞춤 관리는</span>
-                      <span className="block">코치 선택에 중요합니다.</span>
+                      <span className="block">2명 중 1명은</span>
+                      <span className="block">배운 내용을 잊어버린 경험이 있습니다.</span>
                     </span>
                   </p>
                   <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                    <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리가 있다면<br />지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
+                    <span className="sm:hidden">레슨이 끝난 뒤 배운 내용이 기억나지 않아<br />아쉬웠던 경험이 있습니다.</span>
                     <span className="hidden sm:inline">
-                      <span className="block">체계적인 레슨 기록과 맞춤 관리가 있다면</span>
-                      <span className="block">지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
+                      <span className="block">레슨이 끝난 뒤 배운 내용이 기억나지 않아</span>
+                      <span className="block">아쉬웠던 경험이 있습니다.</span>
                     </span>
                   </p>
                   <p className="mt-5 text-[0.75rem] font-medium uppercase tracking-wider text-muted-foreground/80 sm:text-[0.8rem]">
@@ -408,9 +408,9 @@ function MemberDemand() {
                 </div>
                 <div className="flex shrink-0 items-center justify-center sm:pl-6">
                   <div className="relative">
-                    <DonutChart value={96.6} size={144} />
+                    <DonutChart value={55} size={144} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-[1.2rem] font-extrabold text-primary sm:text-[1.4rem]">96.6</span>
+                      <span className="text-[1.2rem] font-extrabold text-primary sm:text-[1.4rem]">55</span>
                     </div>
                   </div>
                 </div>
@@ -426,10 +426,10 @@ function MemberDemand() {
                   90%
                 </div>
                 <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">10명 중 9명은<br />피드백을 말로만 받아요.</span>
+                  <span className="sm:hidden">10명 중 9명은<br />레슨 피드백을 말로 전달받고 있습니다.</span>
                   <span className="hidden sm:inline">
                     <span className="block">10명 중 9명은</span>
-                    <span className="block">피드백을 말로만 받아요.</span>
+                    <span className="block">레슨 피드백을 말로 전달받고 있습니다.</span>
                   </span>
                 </p>
                 <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
@@ -446,23 +446,23 @@ function MemberDemand() {
             <Reveal delay={160}>
               <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
                 <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem] lg:text-[3.5rem]">
-                  55%
+                  96.6%
                 </div>
                 <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">2명 중 1명은<br />배운 내용을 잊어버려요.</span>
+                  <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리는<br />코치 선택에도 영향을 줍니다.</span>
                   <span className="hidden sm:inline">
-                    <span className="block">2명 중 1명은</span>
-                    <span className="block">배운 내용을 잊어버려요.</span>
+                    <span className="block">체계적인 레슨 기록과 맞춤 관리는</span>
+                    <span className="block">코치 선택에도 영향을 줍니다.</span>
                   </span>
                 </p>
                 <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                  <span className="sm:hidden">레슨이 끝난 뒤 배운 내용이 기억나지 않아<br />아쉬웠던 경험이 있습니다.</span>
+                  <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리가 있다면<br />지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
                   <span className="hidden sm:inline">
-                    <span className="block">레슨이 끝난 뒤 배운 내용이 기억나지 않아</span>
-                    <span className="block">아쉬웠던 경험이 있습니다.</span>
+                    <span className="block">체계적인 레슨 기록과 맞춤 관리가 있다면</span>
+                    <span className="block">지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
                   </span>
                 </p>
-                <BarChart value={55} label="잊어버린 배운 내용" />
+                <BarChart value={96.6} label="코치 선택에 영향을 줌" />
               </div>
             </Reveal>
           </div>
