@@ -126,7 +126,11 @@ export function Reveal({
 /* ── Shell primitives ──────────────────────────────────────── */
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-6xl px-6 lg:px-10 ${className}`}>{children}</div>;
+  return (
+    <div className={`mx-auto w-full max-w-6xl px-[clamp(1.125rem,4.5vw,2.5rem)] ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 export function Section({
@@ -166,8 +170,12 @@ export function SectionHead({
   return (
     <Reveal className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && <div className="eyebrow">{eyebrow}</div>}
-      <h2 className={`display-2 ${eyebrow ? "mt-6" : ""}`}>{title}</h2>
-      {body && <p className="lead mt-8">{body}</p>}
+      <h2 className={`display-2 break-keep ${center ? "mx-auto" : ""} max-w-[22ch] ${eyebrow ? "mt-5" : ""}`}>
+        {title}
+      </h2>
+      {body && (
+        <p className={`lead mt-6 break-keep ${center ? "mx-auto" : ""} max-w-[38ch]`}>{body}</p>
+      )}
     </Reveal>
   );
 }
@@ -322,7 +330,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border/30 bg-background py-8 sm:py-10">
       <Container className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-        <div className="space-y-1 text-[0.85rem] text-foreground/75">
+        <div className="space-y-1.5 break-keep text-[0.85rem] leading-[1.6] text-foreground/75">
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
           <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
@@ -336,7 +344,7 @@ export function Footer() {
             </a>
           </div>
         </div>
-        <div className="text-[0.85rem]">
+        <div className="break-keep text-[0.85rem]">
           <div className="font-medium text-foreground">정책</div>
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
             <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>

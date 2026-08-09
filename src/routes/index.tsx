@@ -1050,7 +1050,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <Section id="faq" tone="cream">
-      <div className="mx-auto w-full max-w-3xl px-6 lg:px-10">
+      <div className="mx-auto w-full max-w-3xl px-[clamp(1.125rem,4.5vw,2.5rem)]">
         <SectionHead
           eyebrow="FAQ"
           title={
@@ -1106,7 +1106,7 @@ function FinalCTA() {
         className="pointer-events-none absolute inset-0 opacity-50"
         style={{ background: "radial-gradient(700px 380px at 20% 0%, rgba(255,255,255,0.22), transparent 60%)" }}
       />
-      <div className="relative mx-auto max-w-4xl px-6 text-center text-[var(--cream)] lg:px-10">
+      <div className="relative mx-auto max-w-4xl px-[clamp(1.125rem,4.5vw,2.5rem)] text-center text-[var(--cream)] lg:px-10">
         <Reveal>
           <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
             회원 관리부터 AI 레슨 기록까지. 케리 하나면 충분합니다.
