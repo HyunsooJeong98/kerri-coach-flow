@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-/** ▼▼ 여기에 KERRI AI 레슨 리포트 시뮬레이터 공개 URL을 넣어주세요 ▼▼ */
+/** ▼▼ 여기에 KERRI AI 레슨 기록 시뮬레이터 공개 URL을 넣어주세요 ▼▼ */
 const SIMULATOR_URL = "https://ai-coach-notes.lovable.app";
 
 
@@ -164,7 +164,7 @@ function SimulatorFrame() {
         <iframe
           key={retryKey}
           src={SIMULATOR_URL}
-          title="KERRI AI 레슨 리포트 시뮬레이터"
+          title="KERRI AI 레슨 기록 시뮬레이터"
           width={SIM_W}
           height={SIM_H}
           loading="lazy"
@@ -202,7 +202,7 @@ function Empathy() {
       p: "회원에게 피드백을 보내는 일이\n번거롭습니다.",
       solve: {
         caption: "KERRI가 해결합니다.",
-        title: "AI 레슨 리포트 자동 생성",
+        title: "AI 레슨 기록 자동 생성",
         body: "레슨이 끝나면 AI가 핵심 내용을 정리합니다.\n코치는 검토 후 회원에게 전송만 하면 됩니다.",
       },
     },
@@ -506,7 +506,7 @@ const COMPARE_ROWS: {
 }[] = [
   {
     icon: FileText,
-    label: "AI 레슨 리포트",
+    label: "AI 레슨 기록",
     before: "기억하거나 직접 작성",
     after: "AI가 핵심 내용을 자동으로 정리",
     strong: true,
@@ -663,12 +663,12 @@ function Hero() {
 
           <p className="lead mt-3 max-w-lg text-balance">
             <span className="sm:hidden">
-              회원 관리부터 AI 레슨 리포트까지.
+              회원 관리부터 AI 레슨 기록까지.
               <br />
               운영은 KERRI가 대신합니다.
             </span>
             <span className="hidden sm:inline">
-              회원 관리부터 AI 레슨 리포트까지. 운영은 KERRI가 대신합니다.
+              회원 관리부터 AI 레슨 기록까지. 운영은 KERRI가 대신합니다.
             </span>
           </p>
         </div>
@@ -882,12 +882,12 @@ function Ops() {
             <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
               <figure
                 tabIndex={0}
-                aria-label="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                aria-label="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
                 className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
               >
                 <img
                   src={appReport.url}
-                  alt="KERRI AI 레슨 리포트 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
+                  alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
                   loading="lazy"
                   className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
                 />
@@ -1204,7 +1204,7 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-4xl px-6 text-center text-[var(--cream)] lg:px-10">
         <Reveal>
           <h2 className="display-2">
-            회원 관리부터 AI 레슨 리포트까지.
+            회원 관리부터 AI 레슨 기록까지.
             <br />
             케리 하나면 충분합니다.
           </h2>
