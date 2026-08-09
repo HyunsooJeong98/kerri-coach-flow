@@ -367,7 +367,8 @@ function MemberDemand() {
     <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
       <Container>
         <div className="text-center">
-          <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
+          <div className="eyebrow">회원 설문</div>
+          <p className="mt-6 text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
             내가 가르친 내용,
           </p>
           <h2 className="mt-4 text-[1.8rem] font-bold leading-[1.2] tracking-tight text-foreground sm:text-[2.4rem] lg:text-[3rem]">
