@@ -221,16 +221,16 @@ function Empathy() {
       solve: {
         caption: "KERRI가 해결합니다.",
         title: "재등록 시기를 놓치지 않게",
-        body: "남은 횟수를 기준으로 재등록 시기를 알려주고,\n회원에게 재등록 안내 문자도 자동으로 발송합니다.",
+        body: "남은 횟수를 기준으로 재등록 시기를 알려주고, 회원에게 재등록 안내 문자도 자동으로 발송합니다.",
       },
     },
     {
       h: "지난번에 뭐 알려줬지? 다음엔 뭘 시키지?",
-      p: "회원이 많아질수록 지난 레슨 내용과 교정 포인트를 기억하고,\n각 회원에게 맞는 다음 훈련까지 준비하기 어렵습니다.",
+      p: "회원이 많아질수록 지난 레슨 내용과 교정 포인트를 기억하고, 각 회원에게 맞는 다음 훈련까지 준비하기 어렵습니다.",
       solve: {
         caption: "KERRI가 해결합니다.",
         title: "지난 기록부터 다음 훈련까지",
-        body: "지난 레슨 기록을 확인해 바로 이어서 코칭하고,\n회원의 실력과 레슨 내용에 맞는 훈련 드릴을 추천합니다.",
+        body: "지난 레슨 기록을 확인해 바로 이어서 코칭하고, 회원의 실력과 레슨 내용에 맞는 훈련 드릴을 추천합니다.",
       },
     },
   ];
@@ -256,17 +256,13 @@ function Empathy() {
                 >
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : i)}
-                    className="flex w-full items-start justify-between gap-4 p-8 sm:p-10 text-left"
+                    className="grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-3 p-[clamp(1.25rem,4.8vw,2.5rem)] text-left sm:gap-4"
                   >
-                    <div className="flex-1">
-                      <h3 className="text-[1.15rem] font-semibold leading-snug tracking-tight text-foreground">
-                        {c.h}
-                      </h3>
-                      <p className="mt-4 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
-                        {c.p}
-                      </p>
+                    <div className="min-w-0">
+                      <h3 className="heading-3 break-keep text-foreground">{c.h}</h3>
+                      <p className="body-2 mt-3 break-keep text-foreground/70">{c.p}</p>
                     </div>
-                    <span className="mt-1 shrink-0 text-foreground/50 transition-transform duration-300">
+                    <span className="mt-0.5 shrink-0 text-foreground/50 transition-transform duration-300">
                       {isOpen ? (
                         <ChevronUp size={22} strokeWidth={1.5} />
                       ) : (
@@ -286,17 +282,13 @@ function Empathy() {
                       ref={(el) => {
                         contentRefs.current[i] = el;
                       }}
-                      className="bg-[#F9F1EC] p-8 sm:p-10"
+                      className="bg-[#F9F1EC] p-[clamp(1.25rem,4.8vw,2.5rem)]"
                     >
                       <div className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-primary">
                         {c.solve.caption}
                       </div>
-                      <h4 className="mt-3 text-[1.15rem] font-bold tracking-tight text-foreground">
-                        {c.solve.title}
-                      </h4>
-                      <p className="mt-3 whitespace-pre-line text-[1rem] leading-[1.75] text-foreground/70">
-                        {c.solve.body}
-                      </p>
+                      <h4 className="heading-4 mt-3 break-keep text-foreground">{c.solve.title}</h4>
+                      <p className="body-2 mt-3 break-keep text-foreground/70">{c.solve.body}</p>
                     </div>
                   </div>
                 </div>
