@@ -496,8 +496,6 @@ function MemberDemand() {
 /* ── 기존 방식 vs KERRI ────────────────────────────────────── */
 
 const COMPARE_ROWS: {
-  icon: typeof FileText;
-const COMPARE_ROWS: {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   label: string;
   before: string;
