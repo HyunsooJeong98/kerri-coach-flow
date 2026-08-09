@@ -497,45 +497,40 @@ function MemberDemand() {
 
 const COMPARE_ROWS: {
   icon: typeof FileText;
+const COMPARE_ROWS: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   label: string;
   before: string;
-  after: string;
-  note?: string;
+  after: ReactNode;
   strong?: boolean;
-  semibold?: boolean;
 }[] = [
   {
     icon: FileText,
     label: "AI 레슨 기록",
     before: "기억하거나 직접 작성",
-    after: "AI가 핵심 내용을 자동으로 정리",
+    after: "AI가 레슨 내용을 자동으로 기록",
     strong: true,
   },
   {
-    icon: CalendarCheck,
-    label: "운영 관리",
-    before: "일정 · 횟수 · 결제를 직접 확인",
-    after: "일정 · 횟수 · 결제가 자동으로 연결",
-    note: "출석부터 잔여 횟수 · 결제 · 재등록까지 놓치지 않게",
-    semibold: true,
-  },
-  {
     icon: Users,
-    label: "회원 관리",
-    before: "카톡 · 엑셀 · 메모에 분산",
-    after: "회원 정보를 한곳에서 관리",
+    label: "회원 운영",
+    before: "일정 · 횟수 · 결제 · 회원 정보를 따로 관리",
+    after: "회원 관리부터 일정 · 횟수 · 결제까지 한곳에서 관리",
+    strong: true,
   },
   {
-    icon: Smartphone,
-    label: "회원 확인",
-    before: "일정 · 횟수 등을 코치에게 직접 확인",
-    after: "회원앱에서 바로 확인",
+    icon: Workflow,
+    label: "다음 레슨 준비",
+    before: "지난 수업을 기억과 메모에 의존",
+    after: "지난 레슨 기록을 이어서 코칭하고, 회원의 실력과 레슨 내용에 맞는 훈련 드릴까지 추천",
+    strong: true,
   },
   {
-    icon: History,
-    label: "다음 레슨",
-    before: "기억과 메모에 의존",
-    after: "지난 레슨 기록을 이어서 코칭",
+    icon: TrendingUp,
+    label: "코칭 실적",
+    before: "오래 가르쳐도 나의 코칭 경험과 성과가 남기 어려움",
+    after: "레슨 기록과 코칭 실적이 쌓여 나의 코칭을 증명하는 데이터가 됩니다",
+    strong: true,
   },
 ];
 
@@ -543,7 +538,7 @@ function Compare() {
   return (
     <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
-        <SectionHead eyebrow="기능 비교" title="기존 방식과 무엇이 다를까요?" center />
+        <SectionHead eyebrow="기능 비교" title="코치의 일을 이렇게 바꿉니다" center />
 
         <Reveal delay={80}>
           <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
@@ -568,33 +563,22 @@ function Compare() {
                         </span>
                       </div>
                       <p className="text-[0.925rem] leading-[1.5] text-muted-foreground">{row.before}</p>
-                      <div
-                        className={`rounded-xl ${
-                          row.strong ? "bg-primary/[0.07] px-4 py-3 -my-1" : ""
-                        }`}
-                      >
-                        <p
-                          className={`text-[0.925rem] leading-[1.5] text-foreground ${
-                            row.strong ? "font-bold" : row.semibold ? "font-semibold" : "font-normal"
-                          }`}
-                        >
+                      <div className="rounded-xl bg-primary/[0.07] px-4 py-3 -my-1">
+                        <p className="text-[0.925rem] leading-[1.5] font-bold text-foreground">
                           {row.after}
                         </p>
-                        {row.note && (
-                          <p className="mt-1.5 text-[0.78rem] leading-[1.5] text-muted-foreground">{row.note}</p>
-                        )}
                       </div>
                     </div>
 
                     {/* Mobile row */}
-                    <div className="px-6 py-6 md:hidden">
+                    <div className="px-6 py-5 md:hidden">
                       <div className="flex min-w-0 items-center gap-2.5">
                         <Icon className="h-[18px] w-[18px] shrink-0 text-primary" strokeWidth={1.6} />
                         <span className="text-[0.95rem] font-semibold leading-[1.5] tracking-tight text-foreground">
                           {row.label}
                         </span>
                       </div>
-                      <div className="mt-4">
+                      <div className="mt-3">
                         <div className="text-[0.72rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
                           기존 방식
                         </div>
@@ -602,20 +586,11 @@ function Compare() {
                           {row.before}
                         </p>
                       </div>
-                      <div className={`mt-4 rounded-xl ${row.strong ? "bg-primary/[0.07] px-4 py-3.5" : ""}`}>
+                      <div className="mt-3 rounded-xl bg-primary/[0.07] px-4 py-3.5">
                         <div className="text-[0.72rem] font-bold uppercase tracking-wider text-primary">KERRI</div>
-                        <p
-                          className={`mt-1 break-keep text-[0.9rem] leading-[1.55] text-foreground ${
-                            row.strong ? "font-bold" : row.semibold ? "font-semibold" : "font-normal"
-                          }`}
-                        >
+                        <p className="mt-1 break-keep text-[0.9rem] leading-[1.55] font-bold text-foreground">
                           {row.after}
                         </p>
-                        {row.note && (
-                          <p className="mt-1.5 break-keep text-[0.78rem] leading-[1.55] text-muted-foreground">
-                            {row.note}
-                          </p>
-                        )}
                       </div>
                     </div>
                   </div>
