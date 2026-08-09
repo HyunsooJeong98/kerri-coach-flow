@@ -240,7 +240,7 @@ function Empathy() {
   return (
     <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
       <Container>
-        <SectionHead title="이런 경험 있으신가요?" center />
+        <SectionHead eyebrow="코치의 고민" title="이런 경험 있으신가요?" center />
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
           {cards.map((c, i) => {
             const isOpen = openIndex === i;
@@ -367,7 +367,8 @@ function MemberDemand() {
     <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
       <Container>
         <div className="text-center">
-          <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
+          <div className="eyebrow">회원 설문</div>
+          <p className="mt-6 text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
             내가 가르친 내용,
           </p>
           <h2 className="mt-4 text-[1.8rem] font-bold leading-[1.2] tracking-tight text-foreground sm:text-[2.4rem] lg:text-[3rem]">
@@ -540,7 +541,7 @@ function Compare() {
   return (
     <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
-        <SectionHead title="기존 방식과 무엇이 다를까요?" center />
+        <SectionHead eyebrow="기능 비교" title="기존 방식과 무엇이 다를까요?" center />
 
         <Reveal delay={80}>
           <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
@@ -933,7 +934,7 @@ function Impact() {
   return (
     <Section id="impact">
       <Container>
-        <SectionHead title="KERRI를 사용하면 달라집니다." center />
+        <SectionHead eyebrow="기대 효과" title="KERRI를 사용하면 달라집니다." center />
         <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
           {cards.map((c, idx) => {
             const Icon = c.icon;
