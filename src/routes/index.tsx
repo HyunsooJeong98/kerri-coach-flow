@@ -1131,7 +1131,7 @@ function AppSection() {
                 회원도 자신의 레슨을 기록으로 관리하세요.
               </p>
               <div className="mt-10">
-                <StoreButtons appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
+                <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
               </div>
             </div>
           </Reveal>
