@@ -308,6 +308,60 @@ function Empathy() {
 
 /* ── Member demand: 회원도 레슨 기록을 원합니다 ─────────────── */
 
+function DonutChart({ value, size = 120 }: { value: number; size?: number }) {
+  const stroke = 10;
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const dash = Math.round((value / 100) * circumference * 100) / 100;
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      className="shrink-0 rotate-[-90deg]"
+      aria-hidden="true"
+    >
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={stroke}
+        className="text-primary/10"
+      />
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={stroke}
+        strokeDasharray={`${dash} ${circumference}`}
+        strokeLinecap="round"
+        className="text-primary"
+      />
+    </svg>
+  );
+}
+
+function BarChart({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="mt-5">
+      <div className="flex items-center justify-between text-[0.75rem] font-semibold uppercase tracking-wider text-muted-foreground sm:text-[0.8rem]">
+        <span>{label}</span>
+        <span>{value}%</span>
+      </div>
+      <div className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-primary/10">
+        <div
+          className="h-full rounded-full bg-primary transition-[width] duration-1000 ease-out"
+          style={{ width: `${value}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function MemberDemand() {
   return (
     <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
@@ -315,46 +369,54 @@ function MemberDemand() {
         <SectionHead title="회원도 레슨 기록을 원합니다" center />
 
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
-          {/* Main card — question first, number second */}
+          {/* Main card — question first, number second, donut chart */}
           <Reveal>
             <div className="rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-14">
-              <div className="max-w-3xl">
-                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
-                  내가 가르친 내용,
-                </p>
-                <h3 className="mt-3 text-[1.55rem] font-bold leading-[1.25] tracking-tight text-foreground sm:text-[2rem] lg:text-[2.35rem]">
-                  <span className="sm:hidden">회원은 얼마나<br />기억하고 있을까요?</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">회원은 얼마나 기억하고 있을까요?</span>
-                  </span>
-                </h3>
-                <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-end sm:justify-between">
-                  <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+                <div className="max-w-2xl">
+                  <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
+                    내가 가르친 내용,
+                  </p>
+                  <h3 className="mt-3 text-[1.55rem] font-bold leading-[1.25] tracking-tight text-foreground sm:text-[2rem] lg:text-[2.35rem]">
+                    <span className="sm:hidden">회원은 얼마나<br />기억하고 있을까요?</span>
+                    <span className="hidden sm:inline">
+                      <span className="block">회원은 얼마나 기억하고 있을까요?</span>
+                    </span>
+                  </h3>
+                  <div className="mt-6 text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
                     96.6%
                   </div>
-                  <p className="text-[0.8rem] font-medium text-muted-foreground sm:text-[0.85rem] sm:text-right">
+                  <p className="mt-5 text-[1.15rem] font-semibold leading-[1.4] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
+                    <span className="sm:hidden">레슨 기록과 맞춤 관리는<br />코치 선택에 중요합니다.</span>
+                    <span className="hidden sm:inline">
+                      <span className="block">레슨 기록과 맞춤 관리는</span>
+                      <span className="block">코치 선택에 중요합니다.</span>
+                    </span>
+                  </p>
+                  <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
+                    <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리가 있다면<br />지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
+                    <span className="hidden sm:inline">
+                      <span className="block">체계적인 레슨 기록과 맞춤 관리가 있다면</span>
+                      <span className="block">지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
+                    </span>
+                  </p>
+                  <p className="mt-5 text-[0.75rem] font-medium uppercase tracking-wider text-muted-foreground/80 sm:text-[0.8rem]">
                     개인 레슨 이용자 설문 결과
                   </p>
                 </div>
-                <p className="mt-6 text-[1.15rem] font-semibold leading-[1.4] tracking-tight text-foreground sm:mt-8 sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">레슨 기록과 맞춤 관리는<br />코치 선택에 중요합니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">레슨 기록과 맞춤 관리는</span>
-                    <span className="block">코치 선택에 중요합니다.</span>
-                  </span>
-                </p>
-                <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                  <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리가 있다면<br />지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">체계적인 레슨 기록과 맞춤 관리가 있다면</span>
-                    <span className="block">지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
-                  </span>
-                </p>
+                <div className="flex shrink-0 items-center justify-center sm:pl-6">
+                  <div className="relative">
+                    <DonutChart value={96.6} size={144} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-[1.2rem] font-extrabold text-primary sm:text-[1.4rem]">96.6</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
 
-          {/* Two supporting cards */}
+          {/* Two supporting cards with bar charts */}
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal delay={80}>
               <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
@@ -375,6 +437,7 @@ function MemberDemand() {
                     <span className="block">수업 중 말로 전달되고 있습니다.</span>
                   </span>
                 </p>
+                <BarChart value={90} label="말로 전달된 피드백" />
               </div>
             </Reveal>
 
@@ -397,6 +460,7 @@ function MemberDemand() {
                     <span className="block">아쉬웠던 경험이 있습니다.</span>
                   </span>
                 </p>
+                <BarChart value={55} label="잊어버린 배운 내용" />
               </div>
             </Reveal>
           </div>
@@ -424,6 +488,7 @@ function MemberDemand() {
     </Section>
   );
 }
+
 
 
 /* ── 기존 방식 vs KERRI ────────────────────────────────────── */
