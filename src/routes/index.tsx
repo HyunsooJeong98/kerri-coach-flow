@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import appleStoreBadge from "@/assets/apple-store-badge.svg.asset.json";
+import googlePlayBadge from "@/assets/google-play-badge.png.asset.json";
 import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
