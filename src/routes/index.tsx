@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import appleStoreBadge from "@/assets/apple-store-badge.svg.asset.json";
+import googlePlayBadge from "@/assets/google-play-badge.png.asset.json";
 import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
@@ -967,7 +969,7 @@ const COACH_PLAY_URL = "https://play.google.com/store/apps/details?id=com.tennis
 const MEMBER_APP_URL = "https://apps.apple.com/kr/app/kerri-member/id6783235236";
 const MEMBER_PLAY_URL = "https://play.google.com/store/apps/details?id=com.kerri.memberapp";
 
-function StoreButtons({
+function StoreBadges({
   appStoreUrl,
   playStoreUrl,
 }: {
@@ -980,19 +982,33 @@ function StoreButtons({
         href={appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
+        aria-label="App Store에서 다운로드"
+        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
-        <span className="opacity-60">App Store에서</span>
-        <span className="font-bold">다운로드</span>
+        <img
+          src={appleStoreBadge.url}
+          alt="App Store에서 다운로드"
+          width={156}
+          height={48}
+          loading="lazy"
+          className="h-12 w-auto object-contain"
+        />
       </a>
       <a
         href={playStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-[0.95rem] bg-[var(--ink)] px-5 py-3.5 text-[0.85rem] font-semibold text-[var(--cream)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
+        aria-label="Google Play에서 다운로드"
+        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
-        <span className="opacity-60">Google Play에서</span>
-        <span className="font-bold">다운로드</span>
+        <img
+          src={googlePlayBadge.url}
+          alt="Google Play에서 다운로드"
+          width={124}
+          height={48}
+          loading="lazy"
+          className="h-12 w-auto object-contain"
+        />
       </a>
     </div>
   );
@@ -1071,7 +1087,7 @@ function AppSection() {
                 운영을 하나의 앱으로 관리하세요.
               </p>
               <div className="mt-10">
-                <StoreButtons appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
+                <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
               </div>
             </div>
           </Reveal>
@@ -1094,7 +1110,7 @@ function AppSection() {
                 회원도 자신의 레슨을 기록으로 관리하세요.
               </p>
               <div className="mt-10">
-                <StoreButtons appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
+                <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
               </div>
             </div>
           </Reveal>
