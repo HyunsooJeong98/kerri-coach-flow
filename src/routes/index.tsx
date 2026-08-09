@@ -541,7 +541,7 @@ function Compare() {
   return (
     <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
-        <SectionHead title="기존 방식과 무엇이 다를까요?" center />
+        <SectionHead eyebrow="기능 비교" title="기존 방식과 무엇이 다를까요?" center />
 
         <Reveal delay={80}>
           <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
@@ -934,7 +934,7 @@ function Impact() {
   return (
     <Section id="impact">
       <Container>
-        <SectionHead title="KERRI를 사용하면 달라집니다." center />
+        <SectionHead eyebrow="기대 효과" title="KERRI를 사용하면 달라집니다." center />
         <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
           {cards.map((c, idx) => {
             const Icon = c.icon;
