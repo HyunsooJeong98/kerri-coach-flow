@@ -306,31 +306,32 @@
 }
 
 @utility display-1 {
-  font-size: clamp(2.6rem, 6.2vw, 4.75rem);
-  line-height: 1.04;
-  font-weight: 800;
-  letter-spacing: -0.045em;
-}
-
-@utility display-2 {
-  font-size: clamp(2rem, 4.4vw, 3.35rem);
-  line-height: 1.1;
+  font-size: clamp(2.125rem, 1.35rem + 4.4vw, 4.75rem);
+  line-height: 1.12;
   font-weight: 800;
   letter-spacing: -0.04em;
 }
 
-@utility hero-display {
-  font-size: clamp(3rem, 12vw, 4.75rem);
-  line-height: 1.08;
+@utility display-2 {
+  font-size: clamp(1.625rem, 1.15rem + 2.6vw, 3.35rem);
+  line-height: 1.25;
   font-weight: 800;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
+}
+
+@utility hero-display {
+  font-size: clamp(2.375rem, 1.35rem + 5.6vw, 4.75rem);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.04em;
 }
 
 @utility lead {
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
-  line-height: 1.75;
+  font-size: clamp(0.9875rem, 0.9rem + 0.55vw, 1.25rem);
+  line-height: 1.65;
   color: color-mix(in oklab, var(--color-foreground) 72%, transparent);
 }
+
 
 /* ── Motion ───────────────────────────────────────────────── */
 
