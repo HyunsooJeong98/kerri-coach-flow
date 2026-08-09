@@ -240,7 +240,7 @@ function Empathy() {
   return (
     <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
       <Container>
-        <SectionHead title="이런 경험 있으신가요?" center />
+        <SectionHead eyebrow="코치의 고민" title="이런 경험 있으신가요?" center />
         <div className="mt-16 grid gap-5 sm:grid-cols-2">
           {cards.map((c, i) => {
             const isOpen = openIndex === i;
