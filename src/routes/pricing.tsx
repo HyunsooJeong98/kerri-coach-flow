@@ -17,7 +17,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "케리 요금제 안내. 무료로 시작해 AI 레슨 리포트 사용량에 맞춰 BASIC·PRO 플랜을 선택하세요. 연간 결제 시 2개월 무료.",
+          "케리 요금제 안내. 무료로 시작해 AI 레슨 기록 사용량에 맞춰 BASIC·PRO 플랜을 선택하세요. 연간 결제 시 2개월 무료.",
       },
       { property: "og:title", content: "요금제 | 케리 KERRI" },
       {
