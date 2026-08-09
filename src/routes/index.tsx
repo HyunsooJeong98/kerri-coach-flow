@@ -977,13 +977,13 @@ function StoreBadges({
   playStoreUrl: string;
 }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-nowrap items-center gap-3">
       <a
         href={appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="App Store에서 다운로드"
-        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        className="inline-flex h-12 w-auto shrink-0 items-center overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
         <img
           src={appleStoreBadge.url}
@@ -999,7 +999,7 @@ function StoreBadges({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Google Play에서 다운로드"
-        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        className="inline-flex h-12 w-auto shrink-0 items-center overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
         <img
           src={googlePlayBadge.url}
