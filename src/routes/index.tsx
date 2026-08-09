@@ -427,20 +427,20 @@ function MemberDemand() {
                   90%
                 </div>
                 <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">10명 중 9명은<br />레슨 피드백을 말로 전달받고 있습니다.</span>
+                  <span className="sm:hidden">10명 중 9명은<br />레슨 피드백을 말로만 전달합니다.</span>
                   <span className="hidden sm:inline">
                     <span className="block">10명 중 9명은</span>
-                    <span className="block">레슨 피드백을 말로 전달받고 있습니다.</span>
+                    <span className="block">레슨 피드백을 말로만 전달합니다.</span>
                   </span>
                 </p>
                 <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                  <span className="sm:hidden">대부분의 레슨 피드백이<br />수업 중 말로 전달되고 있습니다.</span>
+                  <span className="sm:hidden">레슨 중 피드백은 대부분 말로 전달되고,<br />회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.</span>
                   <span className="hidden sm:inline">
-                    <span className="block">대부분의 레슨 피드백이</span>
-                    <span className="block">수업 중 말로 전달되고 있습니다.</span>
+                    <span className="block">레슨 중 피드백은 대부분 말로 전달되고,</span>
+                    <span className="block">회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.</span>
                   </span>
                 </p>
-                <BarChart value={90} label="말로 전달된 피드백" />
+                <BarChart value={90} label="피드백을 말로만 전달" />
               </div>
             </Reveal>
 
