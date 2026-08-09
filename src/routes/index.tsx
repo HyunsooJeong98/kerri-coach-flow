@@ -512,23 +512,23 @@ function Compare() {
                     <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.15fr)] items-start gap-6 px-8 py-6 md:grid lg:gap-10 lg:px-10">
                       <div className="flex min-w-0 items-center gap-2.5">
                         <Icon className="h-[19px] w-[19px] shrink-0 text-primary" strokeWidth={1.6} />
-                        <span className="text-[0.975rem] font-semibold leading-[1.5] tracking-tight text-foreground">
+                        <span className="body-1 break-keep font-semibold tracking-tight text-foreground">
                           {row.label}
                         </span>
                       </div>
-                      <p className="text-[0.925rem] leading-[1.5] text-muted-foreground">{row.before}</p>
+                      <p className="body-2 break-keep text-muted-foreground">{row.before}</p>
                       <div className="rounded-xl bg-primary/[0.07] px-4 py-3 -my-1">
-                        <p className="text-[0.925rem] leading-[1.5] font-bold text-foreground">
+                        <p className="body-2 break-keep font-bold text-foreground">
                           {row.after}
                         </p>
                       </div>
                     </div>
 
                     {/* Mobile row */}
-                    <div className="px-6 py-5 md:hidden">
+                    <div className="px-[clamp(1.125rem,4.5vw,1.75rem)] py-5 md:hidden">
                       <div className="flex min-w-0 items-center gap-2.5">
                         <Icon className="h-[18px] w-[18px] shrink-0 text-primary" strokeWidth={1.6} />
-                        <span className="text-[0.95rem] font-semibold leading-[1.5] tracking-tight text-foreground">
+                        <span className="body-1 min-w-0 break-keep font-semibold tracking-tight text-foreground">
                           {row.label}
                         </span>
                       </div>
@@ -536,13 +536,13 @@ function Compare() {
                         <div className="text-[0.72rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
                           기존 방식
                         </div>
-                        <p className="mt-1 break-keep text-[0.9rem] leading-[1.55] text-muted-foreground">
+                        <p className="body-2 mt-1 break-keep text-muted-foreground">
                           {row.before}
                         </p>
                       </div>
                       <div className="mt-3 rounded-xl bg-primary/[0.07] px-4 py-3.5">
                         <div className="text-[0.72rem] font-bold uppercase tracking-wider text-primary">KERRI</div>
-                        <p className="mt-1 break-keep text-[0.9rem] leading-[1.55] font-bold text-foreground">
+                        <p className="body-2 mt-1 break-keep font-bold text-foreground">
                           {row.after}
                         </p>
                       </div>
@@ -577,28 +577,12 @@ function Hero() {
             스포츠 강사를 위한 운영 플랫폼
           </div>
 
-          <h1 className="hero-display mt-3">
-            <span className="sm:hidden">
-              평소처럼
-              <br />
-              <span className="text-primary">레슨만</span> 하세요.
-            </span>
-            <span className="hidden sm:inline">
-              평소처럼 <span className="text-primary">레슨만</span>
-              <br />
-              하세요.
-            </span>
+          <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
+            평소처럼 <span className="text-primary">레슨만</span> 하세요.
           </h1>
 
-          <p className="lead mt-3 max-w-lg text-balance">
-            <span className="sm:hidden">
-              회원 관리부터 AI 레슨 기록까지.
-              <br />
-              운영은 KERRI가 대신합니다.
-            </span>
-            <span className="hidden sm:inline">
-              회원 관리부터 AI 레슨 기록까지. 운영은 KERRI가 대신합니다.
-            </span>
+          <p className="lead mt-3 max-w-[26ch] break-keep sm:max-w-[34ch]">
+            회원 관리부터 AI 레슨 기록까지. 운영은 KERRI가 대신합니다.
           </p>
         </div>
 
@@ -673,10 +657,10 @@ function FeatureCopy({
   return (
     <div className={className}>
       <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">{num}</div>
-      <h3 className="mt-3 text-[1.5rem] font-bold leading-[1.3] tracking-tight sm:text-[1.85rem]">
+      <h3 className="mt-3 max-w-[20ch] break-keep text-[clamp(1.3rem,1rem+1.6vw,1.85rem)] font-bold leading-[1.3] tracking-tight">
         {message}
       </h3>
-      <p className="mt-4 text-[0.95rem] leading-[1.8] text-muted-foreground">
+      <p className="body-2 mt-4 max-w-[36ch] break-keep text-muted-foreground">
         <span className="font-semibold text-foreground/80">{title}</span> · {desc}
       </p>
     </div>
@@ -695,15 +679,13 @@ function Ops() {
           eyebrow="코치앱 기능"
           title={
             <>
-              레슨부터 회원 운영까지
-              <br />
+              레슨부터 회원 운영까지{" "}
               <span className="text-primary">KERRI 하나로.</span>
             </>
           }
           body={
             <>
-              실제 KERRI 앱 화면으로 확인하세요.
-              <br className="hidden sm:block" /> 레슨 기록, 일정, 결제, 알림까지 한 곳에서 관리합니다.
+              실제 KERRI 앱 화면으로 확인하세요. 레슨 기록, 일정, 결제, 알림까지 한 곳에서 관리합니다.
             </>
           }
         />
@@ -796,12 +778,12 @@ function Ops() {
           <Reveal>
             <div className="mx-auto max-w-[720px] text-center">
               <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
-              <h3 className="mt-4 text-[1.9rem] font-bold leading-[1.25] tracking-tight text-white sm:text-[2.6rem] lg:text-[3rem]">
+              <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
                 코칭이 끝나도,
                 <br />
                 <span className="text-primary">기록은 남습니다.</span>
               </h3>
-              <p className="mt-5 text-[0.975rem] leading-[1.85] text-white/65 sm:text-[1.05rem]">
+              <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
                 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리합니다.
               </p>
             </div>
@@ -871,16 +853,12 @@ function Impact() {
             const Icon = c.icon;
             return (
               <Reveal key={c.title} delay={idx * 80}>
-                <div className="surface surface-hover h-full rounded-[1.5rem] p-5 sm:p-7">
+                <div className="surface surface-hover h-full rounded-[1.5rem] p-[clamp(1rem,3.6vw,1.75rem)]">
                   <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary sm:h-11 sm:w-11">
                     <Icon size={22} strokeWidth={1.6} />
                   </div>
-                  <h3 className="mt-4 text-[1.05rem] font-bold leading-tight tracking-tight text-foreground sm:text-[1.2rem]">
-                    {c.title}
-                  </h3>
-                  <p className="mt-3 whitespace-pre-line text-[0.8rem] leading-[1.7] text-muted-foreground sm:text-[0.9rem]">
-                    {c.desc}
-                  </p>
+                  <h3 className="heading-4 mt-4 break-keep text-foreground">{c.title}</h3>
+                  <p className="body-3 mt-3 break-keep text-muted-foreground">{c.desc}</p>
                 </div>
               </Reveal>
             );
@@ -992,9 +970,7 @@ function AppSection() {
           eyebrow="다운로드"
           title={
             <>
-              코치와 회원,
-              <br />
-              모두를 위한 플랫폼
+              코치와 회원, 모두를 위한 플랫폼
             </>
           }
         />
@@ -1002,18 +978,18 @@ function AppSection() {
         <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-2">
           <Reveal>
             <div
-              className={`relative surface h-full rounded-[1.85rem] p-8 sm:p-12 transition-all duration-500 ${
+              className={`relative surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)] transition-all duration-500 ${
                 pulse
                   ? "!border-primary ring-4 ring-primary/20 -translate-y-1.5 shadow-[0_36px_70px_-30px_rgba(192,117,90,0.5)] animate-[installPulse_1.1s_ease-in-out_2]"
                   : ""
               }`}
             >
               <div className="eyebrow absolute right-4 top-4 rounded-md bg-[var(--clay)]/10 px-2 py-1">추천</div>
-              <h3 className="mt-4 text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 코치앱</h3>
-              <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
-                회원 관리 · 일정 · 결제 · AI 레슨 기록
-                <br />
-                운영을 하나의 앱으로 관리하세요.
+              <h3 className="mt-4 text-[clamp(1.5rem,1.1rem+1.9vw,2.2rem)] font-extrabold leading-[1.3] tracking-tight">
+                케리 코치앱
+              </h3>
+              <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
+                회원 관리 · 일정 · 결제 · AI 레슨 기록. 운영을 하나의 앱으로 관리하세요.
               </p>
               <div className="mt-10">
                 <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
@@ -1022,9 +998,11 @@ function AppSection() {
           </Reveal>
 
           <Reveal delay={110}>
-            <div className="surface h-full rounded-[1.85rem] p-8 sm:p-12">
+            <div className="surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)]">
               <div className="flex flex-wrap items-start justify-between gap-3">
-                <h3 className="text-[1.9rem] font-extrabold tracking-tight sm:text-[2.2rem]">케리 회원앱</h3>
+                <h3 className="min-w-0 text-[clamp(1.5rem,1.1rem+1.9vw,2.2rem)] font-extrabold leading-[1.3] tracking-tight">
+                  케리 회원앱
+                </h3>
                 <Link
                   to="/member"
                   className="group inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
@@ -1033,10 +1011,8 @@ function AppSection() {
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
-              <p className="mt-6 text-[1.02rem] leading-[1.85] text-muted-foreground">
-                레슨 기록 · 성장 기록 · 일정 · 남은 횟수
-                <br />
-                회원도 자신의 레슨을 기록으로 관리하세요.
+              <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
+                레슨 기록 · 성장 기록 · 일정 · 남은 횟수. 회원도 자신의 레슨을 기록으로 관리하세요.
               </p>
               <div className="mt-10">
                 <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
@@ -1090,10 +1066,10 @@ function FAQ() {
               return (
                 <div key={it.q}>
                   <button
-                    className="flex w-full items-start justify-between gap-6 px-7 py-7 text-left transition-colors duration-200 hover:bg-foreground/[0.015]"
+                    className="grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-[clamp(1.25rem,4.8vw,1.75rem)] py-6 text-left transition-colors duration-200 hover:bg-foreground/[0.015] sm:py-7"
                     onClick={() => setOpen(isOpen ? null : idx)}
                   >
-                    <span className="text-[1.05rem] font-bold sm:text-[1.15rem]">{it.q}</span>
+                    <span className="heading-4 min-w-0 break-keep">{it.q}</span>
                     <span
                       className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-foreground/[0.05] text-foreground/60 transition-transform duration-300 ${
                         isOpen ? "rotate-45" : ""
@@ -1103,7 +1079,7 @@ function FAQ() {
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="whitespace-pre-line px-7 pb-8 -mt-2 text-[0.975rem] leading-[1.9] text-muted-foreground">
+                    <div className="body-2 -mt-1 break-keep px-[clamp(1.25rem,4.8vw,1.75rem)] pb-7 text-muted-foreground">
                       {it.a}
                     </div>
                   )}
@@ -1132,14 +1108,11 @@ function FinalCTA() {
       />
       <div className="relative mx-auto max-w-4xl px-6 text-center text-[var(--cream)] lg:px-10">
         <Reveal>
-          <h2 className="display-2">
-            회원 관리부터 AI 레슨 기록까지.
-            <br />
-            케리 하나면 충분합니다.
+          <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
+            회원 관리부터 AI 레슨 기록까지. 케리 하나면 충분합니다.
           </h2>
-          <p className="mt-8 text-[1.1rem] leading-[1.85] opacity-85">
-            코치는 레슨에만 집중하고,
-            <br className="sm:hidden" /> 운영은 KERRI가 관리합니다.
+          <p className="body-1 mx-auto mt-8 max-w-[28ch] break-keep opacity-85">
+            코치는 레슨에만 집중하고, 운영은 KERRI가 관리합니다.
           </p>
           <button onClick={() => scrollTo("install")} className="btn-base btn-light mt-12">
             코치앱 설치하기
