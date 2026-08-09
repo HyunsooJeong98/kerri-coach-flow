@@ -84,6 +84,9 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     letter-spacing: -0.011em;
+    /* 한글 가독성: 단어 중간 끊김 방지 + 카드 밖 넘침 방지 */
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   h1, h2, h3, h4 {
     letter-spacing: -0.035em;
@@ -96,6 +99,59 @@
     background: color-mix(in oklab, var(--clay) 22%, transparent);
   }
 }
+
+/* ── Fluid type scale (320px → 1024px+) ───────────────────── */
+
+@utility heading-3 {
+  font-size: clamp(1.0625rem, 0.86rem + 1.05vw, 1.35rem);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+@utility heading-4 {
+  font-size: clamp(1rem, 0.86rem + 0.7vw, 1.2rem);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.028em;
+}
+
+@utility body-1 {
+  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.0625rem);
+  line-height: 1.65;
+}
+
+@utility body-2 {
+  font-size: clamp(0.875rem, 0.83rem + 0.24vw, 1rem);
+  line-height: 1.6;
+}
+
+@utility body-3 {
+  font-size: clamp(0.8125rem, 0.79rem + 0.16vw, 0.9rem);
+  line-height: 1.6;
+}
+
+@utility stat-xl {
+  font-size: clamp(2.75rem, 1.6rem + 6vw, 6rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+@utility stat-lg {
+  font-size: clamp(2.125rem, 1.5rem + 3.2vw, 3.5rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+@utility statement {
+  font-size: clamp(1.25rem, 0.95rem + 1.6vw, 2.1rem);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
 
 /* ── Surfaces ─────────────────────────────────────────────── */
 
