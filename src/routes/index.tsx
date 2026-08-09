@@ -366,24 +366,23 @@ function MemberDemand() {
   return (
     <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
       <Container>
-        <SectionHead title="회원도 레슨 기록을 원합니다" center />
+        <div className="text-center">
+          <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
+            내가 가르친 내용,
+          </p>
+          <h2 className="mt-4 text-[1.8rem] font-bold leading-[1.2] tracking-tight text-foreground sm:text-[2.4rem] lg:text-[3rem]">
+            <span className="sm:hidden">회원은 얼마나<br />기억하고 있을까요?</span>
+            <span className="hidden sm:inline">회원은 얼마나 기억하고 있을까요?</span>
+          </h2>
+        </div>
 
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
-          {/* Main card — question first, number second, donut chart */}
+          {/* Main card — number and donut chart */}
           <Reveal>
             <div className="rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-14">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
                 <div className="max-w-2xl">
-                  <p className="text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
-                    내가 가르친 내용,
-                  </p>
-                  <h3 className="mt-3 text-[1.55rem] font-bold leading-[1.25] tracking-tight text-foreground sm:text-[2rem] lg:text-[2.35rem]">
-                    <span className="sm:hidden">회원은 얼마나<br />기억하고 있을까요?</span>
-                    <span className="hidden sm:inline">
-                      <span className="block">회원은 얼마나 기억하고 있을까요?</span>
-                    </span>
-                  </h3>
-                  <div className="mt-6 text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
+                  <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
                     96.6%
                   </div>
                   <p className="mt-5 text-[1.15rem] font-semibold leading-[1.4] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
