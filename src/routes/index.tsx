@@ -366,34 +366,23 @@ function MemberDemand() {
           <p className="mt-6 text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
             내가 가르친 내용,
           </p>
-          <h2 className="mt-4 text-[1.8rem] font-bold leading-[1.2] tracking-tight text-foreground sm:text-[2.4rem] lg:text-[3rem]">
-            <span className="sm:hidden">회원은 얼마나<br />기억하고 있을까요?</span>
-            <span className="hidden sm:inline">회원은 얼마나 기억하고 있을까요?</span>
+          <h2 className="display-2 mx-auto mt-4 max-w-[22ch] break-keep text-foreground">
+            회원은 얼마나 기억하고 있을까요?
           </h2>
         </div>
 
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
           {/* Main card — 55%: opening hook */}
           <Reveal>
-            <div className="rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-14">
+            <div className="rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-                <div className="max-w-2xl">
-                  <div className="text-[3.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[5rem] lg:text-[6rem]">
-                    55%
-                  </div>
-                  <p className="mt-5 text-[1.15rem] font-semibold leading-[1.4] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                    <span className="sm:hidden">2명 중 1명은<br />배운 내용을 잊어버린 경험이 있습니다.</span>
-                    <span className="hidden sm:inline">
-                      <span className="block">2명 중 1명은</span>
-                      <span className="block">배운 내용을 잊어버린 경험이 있습니다.</span>
-                    </span>
+                <div className="min-w-0 max-w-2xl">
+                  <div className="stat-xl text-primary">55%</div>
+                  <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
+                    2명 중 1명은 배운 내용을 잊어버린 경험이 있습니다.
                   </p>
-                  <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                    <span className="sm:hidden">레슨이 끝난 뒤 배운 내용이 기억나지 않아<br />아쉬웠던 경험이 있습니다.</span>
-                    <span className="hidden sm:inline">
-                      <span className="block">레슨이 끝난 뒤 배운 내용이 기억나지 않아</span>
-                      <span className="block">아쉬웠던 경험이 있습니다.</span>
-                    </span>
+                  <p className="body-2 mt-3 max-w-[34ch] break-keep text-muted-foreground">
+                    레슨이 끝난 뒤 배운 내용이 기억나지 않아 아쉬웠던 경험이 있습니다.
                   </p>
                   <p className="mt-5 text-[0.75rem] font-medium uppercase tracking-wider text-muted-foreground/80 sm:text-[0.8rem]">
                     개인 레슨 이용자 설문 결과
@@ -414,46 +403,26 @@ function MemberDemand() {
           {/* Two supporting cards with bar charts */}
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal delay={80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
-                <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem] lg:text-[3.5rem]">
-                  90%
-                </div>
-                <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">10명 중 9명은<br />레슨 피드백을 말로만 전달합니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">10명 중 9명은</span>
-                    <span className="block">레슨 피드백을 말로만 전달합니다.</span>
-                  </span>
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+                <div className="stat-lg text-primary">90%</div>
+                <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
+                  10명 중 9명은 레슨 피드백을 말로만 전달합니다.
                 </p>
-                <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                  <span className="sm:hidden">레슨 중 피드백은 대부분 말로 전달되고,<br />회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">레슨 중 피드백은 대부분 말로 전달되고,</span>
-                    <span className="block">회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.</span>
-                  </span>
+                <p className="body-2 mt-3 max-w-[36ch] break-keep text-muted-foreground">
+                  레슨 중 피드백은 대부분 말로 전달되고, 회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.
                 </p>
                 <BarChart value={90} label="피드백을 말로만 전달" />
               </div>
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-8 shadow-[var(--shadow-soft)] sm:p-10 lg:p-12">
-                <div className="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary sm:text-[3rem] lg:text-[3.5rem]">
-                  96.6%
-                </div>
-                <p className="mt-5 text-[1.15rem] font-semibold leading-[1.35] tracking-tight text-foreground sm:text-[1.3rem] lg:text-[1.4rem]">
-                  <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리는<br />코치 선택에도 영향을 줍니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">체계적인 레슨 기록과 맞춤 관리는</span>
-                    <span className="block">코치 선택에도 영향을 줍니다.</span>
-                  </span>
+              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+                <div className="stat-lg text-primary">96.6%</div>
+                <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
+                  체계적인 레슨 기록과 맞춤 관리는 코치 선택에도 영향을 줍니다.
                 </p>
-                <p className="mt-3 text-[0.9rem] leading-[1.7] text-muted-foreground sm:text-[1rem]">
-                  <span className="sm:hidden">체계적인 레슨 기록과 맞춤 관리가 있다면<br />지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
-                  <span className="hidden sm:inline">
-                    <span className="block">체계적인 레슨 기록과 맞춤 관리가 있다면</span>
-                    <span className="block">지금 코치와 더 오래 함께하고 싶다고 답했습니다.</span>
-                  </span>
+                <p className="body-2 mt-3 max-w-[36ch] break-keep text-muted-foreground">
+                  체계적인 레슨 기록과 맞춤 관리가 있다면 지금 코치와 더 오래 함께하고 싶다고 답했습니다.
                 </p>
                 <BarChart value={96.6} label="코치 선택에 영향을 줌" />
               </div>
@@ -464,18 +433,11 @@ function MemberDemand() {
         {/* Closing brand message */}
         <Reveal delay={120}>
           <div className="mt-18 text-center sm:mt-24">
-            <p className="mx-auto max-w-3xl text-[1.35rem] font-bold leading-[1.35] tracking-tight text-foreground sm:text-[1.8rem] lg:text-[2.1rem]">
-              <span className="sm:hidden">잘 가르치는 것만큼,<br />잘 남기는 것도 중요합니다.</span>
-              <span className="hidden sm:inline">
-                <span className="block">잘 가르치는 것만큼, 잘 남기는 것도 중요합니다.</span>
-              </span>
+            <p className="statement mx-auto max-w-[24ch] break-keep text-foreground">
+              잘 가르치는 것만큼, 잘 남기는 것도 중요합니다.
             </p>
-            <p className="mx-auto mt-6 max-w-2xl text-[0.9rem] leading-[1.8] text-muted-foreground sm:text-[1rem]">
-              <span className="sm:hidden">KERRI는 매번 사라지던 코칭을<br />회원의 레슨 기록으로 남깁니다.</span>
-              <span className="hidden sm:inline">
-                <span className="block">KERRI는 매번 사라지던 코칭을</span>
-                <span className="block">회원의 레슨 기록으로 남깁니다.</span>
-              </span>
+            <p className="body-2 mx-auto mt-6 max-w-[34ch] break-keep text-muted-foreground">
+              KERRI는 매번 사라지던 코칭을 회원의 레슨 기록으로 남깁니다.
             </p>
           </div>
         </Reveal>
@@ -483,6 +445,7 @@ function MemberDemand() {
     </Section>
   );
 }
+
 
 
 
