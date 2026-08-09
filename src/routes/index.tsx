@@ -760,7 +760,7 @@ function Ops() {
     >
       <Container>
         <SectionHead
-          eyebrow="Product"
+          eyebrow="코치앱 기능"
           title={
             <>
               레슨부터 회원 운영까지
