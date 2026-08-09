@@ -983,15 +983,15 @@ function StoreBadges({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="App Store에서 다운로드"
-        className="inline-block h-11 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
         <img
           src={appleStoreBadge.url}
           alt="App Store에서 다운로드"
-          width={130}
-          height={40}
+          width={156}
+          height={48}
           loading="lazy"
-          className="h-11 w-auto object-contain"
+          className="h-12 w-auto object-contain"
         />
       </a>
       <a
@@ -999,15 +999,15 @@ function StoreBadges({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Google Play에서 다운로드"
-        className="inline-block h-11 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        className="inline-block h-12 w-auto overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       >
         <img
           src={googlePlayBadge.url}
           alt="Google Play에서 다운로드"
-          width={103}
-          height={40}
+          width={124}
+          height={48}
           loading="lazy"
-          className="h-11 w-auto object-contain"
+          className="h-12 w-auto object-contain"
         />
       </a>
     </div>
