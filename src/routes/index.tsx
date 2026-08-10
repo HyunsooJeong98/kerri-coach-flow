@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { RoundedQR } from "@/components/landing/RoundedQR";
 import appleStoreBadge from "@/assets/apple-store-badge.svg.asset.json";
 import googlePlayBadge from "@/assets/google-play-badge.png.asset.json";
 import appHome from "@/assets/app-home.png.asset.json";
