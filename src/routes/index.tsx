@@ -996,9 +996,11 @@ function AppSection() {
               <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
                 회원 관리 · 일정 · 결제 · AI 레슨 기록. 운영을 하나의 앱으로 관리하세요.
               </p>
-              <div className="mt-10">
+              <div className="mt-10 flex items-end justify-between gap-6">
                 <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
+                <QR url={COACH_APP_URL} label="코치앱" />
               </div>
+
             </div>
           </Reveal>
 
