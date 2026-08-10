@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { RoundedQR } from "@/components/landing/RoundedQR";
 import appleStoreBadge from "@/assets/apple-store-badge.svg.asset.json";
 import googlePlayBadge from "@/assets/google-play-badge.png.asset.json";
 import appHome from "@/assets/app-home.png.asset.json";
@@ -938,19 +939,13 @@ function QR({ url, label }: { url: string; label: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} App Store QR 코드`}
-      className="hidden h-24 w-24 place-items-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[var(--shadow-soft)] md:grid"
+      className="hidden h-24 w-24 place-items-center overflow-hidden rounded-2xl border border-border/70 bg-white p-2 shadow-[var(--shadow-soft)] md:grid"
     >
-      <img
-        src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=6&data=${encodeURIComponent(url)}`}
-        alt={`${label} App Store 다운로드 QR 코드`}
-        width={96}
-        height={96}
-        loading="lazy"
-        className="h-24 w-24"
-      />
+      <RoundedQR value={url} size={80} />
     </a>
   );
 }
+
 
 
 
@@ -1001,9 +996,11 @@ function AppSection() {
               <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
                 회원 관리 · 일정 · 결제 · AI 레슨 기록. 운영을 하나의 앱으로 관리하세요.
               </p>
-              <div className="mt-10">
+              <div className="mt-10 flex items-end justify-between gap-6">
                 <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
+                <QR url={COACH_APP_URL} label="코치앱" />
               </div>
+
             </div>
           </Reveal>
 
@@ -1024,9 +1021,11 @@ function AppSection() {
               <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
                 레슨 기록 · 성장 기록 · 일정 · 남은 횟수. 회원도 자신의 레슨을 기록으로 관리하세요.
               </p>
-              <div className="mt-10">
+              <div className="mt-10 flex items-end justify-between gap-6">
                 <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
+                <QR url={MEMBER_APP_URL} label="회원앱" />
               </div>
+
             </div>
           </Reveal>
         </div>
