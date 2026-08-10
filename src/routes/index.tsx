@@ -938,19 +938,13 @@ function QR({ url, label }: { url: string; label: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} App Store QR 코드`}
-      className="hidden h-24 w-24 place-items-center overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[var(--shadow-soft)] md:grid"
+      className="hidden h-24 w-24 place-items-center overflow-hidden rounded-2xl border border-border/70 bg-white p-2 shadow-[var(--shadow-soft)] md:grid"
     >
-      <img
-        src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=6&data=${encodeURIComponent(url)}`}
-        alt={`${label} App Store 다운로드 QR 코드`}
-        width={96}
-        height={96}
-        loading="lazy"
-        className="h-24 w-24"
-      />
+      <RoundedQR value={url} size={80} />
     </a>
   );
 }
+
 
 
 
