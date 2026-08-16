@@ -2,40 +2,20 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import kerriLogo from "@/assets/kerri-logo.jpg.asset.json";
 
-/**
- * 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외) + safe-area 상단 여백을 계산.
- * 헤더 높이는 기기·폰트 크기·주소창 상태에 따라 달라지므로 항상 실측한다.
- */
+/** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
 export function headerOffset() {
   const header = document.querySelector("header");
   if (!(header instanceof HTMLElement)) return 64;
-  const style = window.getComputedStyle(header);
-  const borderBottom = parseFloat(style.borderBottomWidth) || 0;
   const bar = header.firstElementChild;
-  const barHeight =
-    bar instanceof HTMLElement ? bar.getBoundingClientRect().height : header.getBoundingClientRect().height;
-  const safeTop = parseFloat(style.paddingTop) || 0;
-  return Math.round(barHeight + borderBottom + safeTop);
+  if (bar instanceof HTMLElement) {
+    const style = window.getComputedStyle(header);
+    const borderBottom = parseFloat(style.borderBottomWidth) || 0;
+    return Math.round(bar.offsetHeight + borderBottom);
+  }
+  return Math.round(header.offsetHeight);
 }
 
-/** 문서 끝에서 더 내려갈 수 없는 최대 스크롤 값 (오버스크롤 방지) */
-function maxScrollTop() {
-  const viewport = window.visualViewport?.height ?? window.innerHeight;
-  const docHeight = Math.max(
-    document.documentElement.scrollHeight,
-    document.body?.scrollHeight ?? 0,
-  );
-  return Math.max(0, Math.round(docHeight - viewport));
-}
-
-/**
- * 섹션으로 스크롤한다.
- * 이미지·iframe 로딩으로 위쪽 레이아웃 높이가 늘어나도 목표 위치를 계속 재보정해
- * 다른 섹션으로 밀려나지 않도록 한다. 모바일 주소창 표시/숨김(visualViewport 변화)과
- * 화면 회전도 반영하고, 문서 끝을 넘어가는 오버스크롤은 클램프한다.
- * 사용자가 직접 스크롤하면 즉시 보정을 멈춘다.
- */
-export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
+export function scrollTo(id: string) {
   if (typeof window === "undefined") return;
   const el = document.getElementById(id);
   if (!el) {
@@ -43,76 +23,20 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
     return;
   }
 
-  const gapFor = () => (window.innerWidth < 640 ? 8 : 12);
-  const targetTop = () => {
-    if (id === "top") return 0;
-    const raw = el.getBoundingClientRect().top + window.scrollY - headerOffset() - gapFor();
-    return Math.min(maxScrollTop(), Math.max(0, Math.round(raw)));
-  };
+  const gap = window.innerWidth < 640 ? 8 : 12;
+  const targetTop = () =>
+    Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
 
-  let done = false;
-  let observer: ResizeObserver | null = null;
-
-  const stopEvents = ["wheel", "touchstart", "keydown"] as const;
-  const onUserScroll = () => finish();
-
-  const cleanup = () => {
-    stopEvents.forEach((ev) => window.removeEventListener(ev, onUserScroll));
-    window.removeEventListener("load", snap);
-    window.removeEventListener("orientationchange", snap);
-    window.visualViewport?.removeEventListener("resize", snap);
-    observer?.disconnect();
-    observer = null;
-  };
-
-  function snap() {
-    if (done) return;
-    const want = targetTop();
-    if (Math.abs(want - Math.round(window.scrollY)) > 1) {
-      window.scrollTo({ top: want, behavior: "auto" });
-    }
-  }
-
-  function finish() {
-    if (done) return;
-    done = true;
-    cleanup();
-    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
-  }
-
-  // 1단계: 목표 위치로 이동
-  window.scrollTo({ top: targetTop(), behavior: opts.instant ? "auto" : "smooth" });
-
-  // 2단계: 스무스 스크롤이 멈출 때까지 대기 → 안정화 보정
-  const startStabilize = () => {
-    if (done) return;
-    stopEvents.forEach((ev) => window.addEventListener(ev, onUserScroll, { passive: true }));
-    window.addEventListener("load", snap);
-    window.addEventListener("orientationchange", snap);
-    window.visualViewport?.addEventListener("resize", snap);
-    if (typeof ResizeObserver !== "undefined") {
-      observer = new ResizeObserver(() => snap());
-      observer.observe(document.documentElement);
-    }
-    const until = performance.now() + 2400;
-    const loop = () => {
-      if (done) return;
-      snap();
-      if (performance.now() < until) requestAnimationFrame(loop);
-      else finish();
-    };
-    requestAnimationFrame(loop);
-  };
-
-  if (opts.instant) {
-    startStabilize();
-    return;
+  if (id === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: targetTop(), behavior: "smooth" });
   }
 
   let last = -1;
   let idle = 0;
-  const settle = () => {
-    if (done) return;
+  let corrected = false;
+  const tick = () => {
     const y = Math.round(window.scrollY);
     if (y === last) idle += 1;
     else {
@@ -120,12 +44,23 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
       last = y;
     }
     if (idle > 3) {
-      startStabilize();
+      if (!corrected && id !== "top") {
+        corrected = true;
+        const want = targetTop();
+        if (Math.abs(want - y) > 2) {
+          window.scrollTo({ top: want, behavior: "smooth" });
+          idle = 0;
+          last = -1;
+          requestAnimationFrame(tick);
+          return;
+        }
+      }
+      window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
       return;
     }
-    requestAnimationFrame(settle);
+    requestAnimationFrame(tick);
   };
-  requestAnimationFrame(settle);
+  requestAnimationFrame(tick);
 }
 
 /** 현재 페이지가 홈이 아니면 홈으로 이동한 뒤 해당 섹션으로 스크롤 */
@@ -139,8 +74,7 @@ export function useSectionNav() {
       return;
     }
     void Promise.resolve(navigate({ to: "/" })).then(() => {
-      // 페이지 전환 직후에는 스무스 스크롤 대신 즉시 이동 + 레이아웃 안정화 보정
-      requestAnimationFrame(() => requestAnimationFrame(() => scrollTo(id, { instant: true })));
+      setTimeout(() => scrollTo(id), 160);
     });
   };
 }
