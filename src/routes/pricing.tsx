@@ -371,10 +371,30 @@ function Pricing() {
                 >
                   {p.cta}
                 </button>
+                <p className="mt-3 text-[0.78rem] leading-[1.7] text-foreground/50 break-keep">{TRIAL_NOTE}</p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* AI 레슨 기록 충전권 */}
+        <Reveal delay={40}>
+          <div className="mt-8 rounded-[1.25rem] border border-border/60 bg-card/60 p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7">
+            <div className="min-w-0">
+              <div className="text-[0.95rem] font-bold break-keep">{TOPUP.title}</div>
+              <div className="mt-1.5 text-[1.05rem] font-extrabold text-primary">{TOPUP.price}</div>
+              <p className="mt-2 text-[0.85rem] leading-relaxed text-muted-foreground break-keep">{TOPUP.desc}</p>
+            </div>
+            <ul className="mt-4 shrink-0 space-y-1.5 sm:mt-0">
+              {TOPUP.notes.map((n) => (
+                <li key={n} className="flex gap-2 text-[0.82rem] leading-relaxed text-muted-foreground break-keep">
+                  <span aria-hidden className="text-primary">·</span>
+                  <span>{n}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
 
         {/* Comparison table */}
         <Reveal className="mt-24">
