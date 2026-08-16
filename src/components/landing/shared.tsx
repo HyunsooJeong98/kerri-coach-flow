@@ -334,8 +334,9 @@ export function Footer() {
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
           <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
+          <div><span className="text-muted-foreground">통신판매업 신고번호</span> · 추후 입력</div>
           <div>
-            <span className="text-muted-foreground">연락처</span> ·{" "}
+            <span className="text-muted-foreground">고객문의</span> ·{" "}
             <a
               href="mailto:hyunsoo@kerri.co.kr"
               className="underline underline-offset-4 transition-colors hover:text-primary"
@@ -349,8 +350,7 @@ export function Footer() {
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
             <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">개인정보처리방침</a></li>
-            <li><a href="#" className="transition-colors hover:text-primary">환불정책</a></li>
-            <li><Link to="/pricing" className="transition-colors hover:text-primary">요금제</Link></li>
+            <li><a href="#" className="transition-colors hover:text-primary">유료서비스·구독·환불정책</a></li>
             <li><Link to="/account-deletion" className="transition-colors hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
           </ul>
         </div>
