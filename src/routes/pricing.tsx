@@ -294,7 +294,10 @@ function Pricing() {
                   </li>
                 ))}
               </ul>
-              <button onClick={() => goSection("install")} className="btn-base btn-ghost mt-10 w-full !text-[0.95rem]">
+              <button
+                onClick={() => goSection("install")}
+                className="btn-base btn-ghost mt-10 w-full text-[0.85rem] sm:text-[0.95rem] active:scale-[0.98] touch-manipulation"
+              >
                 {PRICING.free.cta}
               </button>
             </div>
@@ -317,9 +320,12 @@ function Pricing() {
                 )}
                 <div className="text-[0.75rem] font-bold tracking-[0.18em] text-primary">{p.name}</div>
                 <div className="mt-4">
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[0.72rem] font-bold text-primary">
+                  <button
+                    onClick={() => goSection("install")}
+                    className="inline-flex min-h-[2rem] items-center justify-center rounded-full bg-primary/10 px-3 py-2 text-[0.75rem] font-bold text-primary transition-colors hover:bg-primary/20 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:px-2.5 sm:py-1 sm:text-[0.72rem]"
+                  >
                     14일 무료 체험
-                  </span>
+                  </button>
                 </div>
 
                 <div className="mt-5 min-h-[6.4rem]">
@@ -372,7 +378,9 @@ function Pricing() {
 
                 <button
                   onClick={() => goSection("install")}
-                  className={`btn-base mt-10 w-full !text-[0.95rem] ${p.highlight ? "btn-primary" : "btn-ghost"}`}
+                  className={`btn-base mt-10 w-full text-[0.85rem] sm:text-[0.95rem] active:scale-[0.98] touch-manipulation ${
+                    p.highlight ? "btn-primary" : "btn-ghost"
+                  }`}
                 >
                   {p.cta}
                 </button>
