@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MemberRouteImport } from './routes/member'
+import { Route as DownloadRouteImport } from './routes/download'
 import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const MemberRoute = MemberRouteImport.update({
   path: '/member',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DownloadRoute = DownloadRouteImport.update({
+  id: '/download',
+  path: '/download',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountDeletionRoute = AccountDeletionRouteImport.update({
   id: '/account-deletion',
   path: '/account-deletion',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -68,15 +77,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account-deletion'
+    | '/download'
     | '/member'
     | '/pricing'
     | '/refund-policy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account-deletion' | '/member' | '/pricing' | '/refund-policy'
+  to:
+    | '/'
+    | '/account-deletion'
+    | '/download'
+    | '/member'
+    | '/pricing'
+    | '/refund-policy'
   id:
     | '__root__'
     | '/'
     | '/account-deletion'
+    | '/download'
     | '/member'
     | '/pricing'
     | '/refund-policy'
@@ -85,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountDeletionRoute: typeof AccountDeletionRoute
+  DownloadRoute: typeof DownloadRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
@@ -113,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/download': {
+      id: '/download'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account-deletion': {
       id: '/account-deletion'
       path: '/account-deletion'
@@ -133,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountDeletionRoute: AccountDeletionRoute,
+  DownloadRoute: DownloadRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
   RefundPolicyRoute: RefundPolicyRoute,
