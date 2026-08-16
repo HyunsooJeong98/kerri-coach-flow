@@ -7,7 +7,6 @@ import {
   Reveal,
   Section,
   SectionHead,
-  useSectionNav,
 } from "@/components/landing/shared";
 
 export const Route = createFileRoute("/pricing")({
@@ -212,7 +211,6 @@ function PricingPage() {
 function Pricing() {
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const goSection = useSectionNav();
 
   const paidPlans = [
     { ...PRICING.basic, highlight: false, badge: undefined as string | undefined },
