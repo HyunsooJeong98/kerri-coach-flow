@@ -74,7 +74,7 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
       observer = new ResizeObserver(() => snap());
       observer.observe(document.documentElement);
     }
-    const until = performance.now() + 1600;
+    const until = performance.now() + 2400;
     const loop = () => {
       if (done) return;
       snap();
