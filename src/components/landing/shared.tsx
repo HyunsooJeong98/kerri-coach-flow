@@ -350,7 +350,7 @@ export function Footer() {
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
             <li><a href="#" className="transition-colors hover:text-primary">이용약관</a></li>
             <li><a href="#" className="transition-colors hover:text-primary">개인정보처리방침</a></li>
-            <li><a href="#" className="transition-colors hover:text-primary">유료서비스·구독·환불정책</a></li>
+            <li><Link to="/refund-policy" className="transition-colors hover:text-primary">유료서비스·구독·환불정책</Link></li>
             <li><Link to="/account-deletion" className="transition-colors hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
           </ul>
         </div>
