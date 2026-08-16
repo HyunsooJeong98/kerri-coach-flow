@@ -65,7 +65,7 @@ const PRICING = {
       "AI 레슨 기록 월 10개",
       "AI 맞춤 코칭 분석 기본 제공",
     ],
-    cta: "Basic 시작하기",
+    cta: "14일 무료로 시작하기",
   },
   pro: {
     name: "Pro",
@@ -78,12 +78,12 @@ const PRICING = {
     launchDiscount: 51,
     features: [
       "Basic의 모든 기능",
-      "AI 레슨 기록 월 100개",
+      "AI 레슨 기록 월 50개",
       "AI 맞춤 코칭 분석 상세 제공",
       "회원별 반복 이슈 키워드 분석",
       "개인화 AI·코치 브랜딩",
     ],
-    cta: "Pro 시작하기",
+    cta: "14일 무료로 시작하기",
   },
   annualExtraDiscount: 5,
 } as const;
@@ -108,7 +108,15 @@ const COMPARE_ROWS: {
     basic: "제공",
     pro: "제공",
   },
-  { label: "AI 레슨 기록", free: "월 3개", basic: "월 10개", pro: "월 100개" },
+  { label: "AI 레슨 기록", free: "월 3개", basic: "월 10개", pro: "월 50개" },
+  { label: "14일 무료 체험", free: "제외", basic: "제공", pro: "제공" },
+  {
+    label: "AI 레슨 기록 충전권",
+    note: "10회 충전 · 4,900원 · 1회 결제",
+    free: "구매 불가",
+    basic: "구매 가능",
+    pro: "구매 가능",
+  },
   {
     label: "AI 맞춤 코칭 분석",
     note: "회원별 훈련 플랜과 반복되는 문제를 분석해요",
