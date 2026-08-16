@@ -510,6 +510,12 @@ function Pricing() {
               );
             })}
           </div>
+          <Link
+            to="/refund-policy"
+            className="mt-6 inline-block text-[0.85rem] font-semibold text-primary underline-offset-4 hover:underline"
+          >
+            자세한 내용은 유료서비스·구독·환불정책에서 확인하세요 →
+          </Link>
         </Reveal>
 
         {/* Footnotes */}
