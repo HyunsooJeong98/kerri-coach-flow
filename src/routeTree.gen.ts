@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/account-deletion': typeof AccountDeletionRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/refund-policy': typeof RefundPolicyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/refund-policy': typeof RefundPolicyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/account-deletion': typeof AccountDeletionRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/refund-policy': typeof RefundPolicyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account-deletion' | '/member' | '/pricing'
+  fullPaths:
+    | '/'
+    | '/account-deletion'
+    | '/member'
+    | '/pricing'
+    | '/refund-policy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account-deletion' | '/member' | '/pricing'
-  id: '__root__' | '/' | '/account-deletion' | '/member' | '/pricing'
+  to: '/' | '/account-deletion' | '/member' | '/pricing' | '/refund-policy'
+  id:
+    | '__root__'
+    | '/'
+    | '/account-deletion'
+    | '/member'
+    | '/pricing'
+    | '/refund-policy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +87,18 @@ export interface RootRouteChildren {
   AccountDeletionRoute: typeof AccountDeletionRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountDeletionRoute: AccountDeletionRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
