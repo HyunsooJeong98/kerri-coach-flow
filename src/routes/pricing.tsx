@@ -316,6 +316,11 @@ function Pricing() {
                   </div>
                 )}
                 <div className="text-[0.75rem] font-bold tracking-[0.18em] text-primary">{p.name}</div>
+                <div className="mt-4">
+                  <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[0.72rem] font-bold text-primary">
+                    14일 무료 체험
+                  </span>
+                </div>
 
                 <div className="mt-5 min-h-[6.4rem]">
                   {annual ? (
