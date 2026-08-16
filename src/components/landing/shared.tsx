@@ -15,7 +15,12 @@ export function headerOffset() {
   return Math.round(header.offsetHeight);
 }
 
-export function scrollTo(id: string) {
+/**
+ * 섹션으로 스크롤한다.
+ * 이미지·iframe 로딩으로 위쪽 레이아웃 높이가 늘어나도 목표 위치를 계속 재보정해
+ * 다른 섹션으로 밀려나지 않도록 한다. 사용자가 직접 스크롤하면 즉시 보정을 멈춘다.
+ */
+export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
   if (typeof window === "undefined") return;
   const el = document.getElementById(id);
   if (!el) {
@@ -25,18 +30,69 @@ export function scrollTo(id: string) {
 
   const gap = window.innerWidth < 640 ? 8 : 12;
   const targetTop = () =>
-    Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
+    id === "top"
+      ? 0
+      : Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
 
-  if (id === "top") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    window.scrollTo({ top: targetTop(), behavior: "smooth" });
+  let done = false;
+  let observer: ResizeObserver | null = null;
+
+  const stopEvents = ["wheel", "touchstart", "keydown"] as const;
+  const onUserScroll = () => finish();
+
+  const cleanup = () => {
+    stopEvents.forEach((ev) => window.removeEventListener(ev, onUserScroll));
+    window.removeEventListener("load", snap);
+    observer?.disconnect();
+    observer = null;
+  };
+
+  function snap() {
+    if (done) return;
+    const want = targetTop();
+    if (Math.abs(want - Math.round(window.scrollY)) > 1) {
+      window.scrollTo({ top: want, behavior: "auto" });
+    }
+  }
+
+  function finish() {
+    if (done) return;
+    done = true;
+    cleanup();
+    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+  }
+
+  // 1단계: 목표 위치로 이동
+  window.scrollTo({ top: targetTop(), behavior: opts.instant ? "auto" : "smooth" });
+
+  // 2단계: 스무스 스크롤이 멈출 때까지 대기 → 안정화 보정
+  const startStabilize = () => {
+    if (done) return;
+    stopEvents.forEach((ev) => window.addEventListener(ev, onUserScroll, { passive: true }));
+    window.addEventListener("load", snap);
+    if (typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(() => snap());
+      observer.observe(document.documentElement);
+    }
+    const until = performance.now() + 2400;
+    const loop = () => {
+      if (done) return;
+      snap();
+      if (performance.now() < until) requestAnimationFrame(loop);
+      else finish();
+    };
+    requestAnimationFrame(loop);
+  };
+
+  if (opts.instant) {
+    startStabilize();
+    return;
   }
 
   let last = -1;
   let idle = 0;
-  let corrected = false;
-  const tick = () => {
+  const settle = () => {
+    if (done) return;
     const y = Math.round(window.scrollY);
     if (y === last) idle += 1;
     else {
@@ -44,23 +100,12 @@ export function scrollTo(id: string) {
       last = y;
     }
     if (idle > 3) {
-      if (!corrected && id !== "top") {
-        corrected = true;
-        const want = targetTop();
-        if (Math.abs(want - y) > 2) {
-          window.scrollTo({ top: want, behavior: "smooth" });
-          idle = 0;
-          last = -1;
-          requestAnimationFrame(tick);
-          return;
-        }
-      }
-      window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+      startStabilize();
       return;
     }
-    requestAnimationFrame(tick);
+    requestAnimationFrame(settle);
   };
-  requestAnimationFrame(tick);
+  requestAnimationFrame(settle);
 }
 
 /** 현재 페이지가 홈이 아니면 홈으로 이동한 뒤 해당 섹션으로 스크롤 */
@@ -74,7 +119,8 @@ export function useSectionNav() {
       return;
     }
     void Promise.resolve(navigate({ to: "/" })).then(() => {
-      setTimeout(() => scrollTo(id), 160);
+      // 페이지 전환 직후에는 스무스 스크롤 대신 즉시 이동 + 레이아웃 안정화 보정
+      requestAnimationFrame(() => requestAnimationFrame(() => scrollTo(id, { instant: true })));
     });
   };
 }
