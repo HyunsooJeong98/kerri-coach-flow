@@ -322,7 +322,7 @@ function Pricing() {
                 <div className="mt-4">
                   <button
                     onClick={() => goSection("install")}
-                    className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[0.7rem] font-bold text-primary transition-colors hover:bg-primary/20 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="inline-flex min-h-[2rem] items-center justify-center rounded-full bg-primary/10 px-3 py-2 text-[0.75rem] font-bold text-primary transition-colors hover:bg-primary/20 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:px-2.5 sm:py-1 sm:text-[0.72rem]"
                   >
                     14일 무료 체험
                   </button>
