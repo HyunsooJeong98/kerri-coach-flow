@@ -2,23 +2,38 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import kerriLogo from "@/assets/kerri-logo.jpg.asset.json";
 
-/** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
+/**
+ * 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외) + safe-area 상단 여백을 계산.
+ * 헤더 높이는 기기·폰트 크기·주소창 상태에 따라 달라지므로 항상 실측한다.
+ */
 export function headerOffset() {
   const header = document.querySelector("header");
   if (!(header instanceof HTMLElement)) return 64;
+  const style = window.getComputedStyle(header);
+  const borderBottom = parseFloat(style.borderBottomWidth) || 0;
   const bar = header.firstElementChild;
-  if (bar instanceof HTMLElement) {
-    const style = window.getComputedStyle(header);
-    const borderBottom = parseFloat(style.borderBottomWidth) || 0;
-    return Math.round(bar.offsetHeight + borderBottom);
-  }
-  return Math.round(header.offsetHeight);
+  const barHeight =
+    bar instanceof HTMLElement ? bar.getBoundingClientRect().height : header.getBoundingClientRect().height;
+  const safeTop = parseFloat(style.paddingTop) || 0;
+  return Math.round(barHeight + borderBottom + safeTop);
+}
+
+/** 문서 끝에서 더 내려갈 수 없는 최대 스크롤 값 (오버스크롤 방지) */
+function maxScrollTop() {
+  const viewport = window.visualViewport?.height ?? window.innerHeight;
+  const docHeight = Math.max(
+    document.documentElement.scrollHeight,
+    document.body?.scrollHeight ?? 0,
+  );
+  return Math.max(0, Math.round(docHeight - viewport));
 }
 
 /**
  * 섹션으로 스크롤한다.
  * 이미지·iframe 로딩으로 위쪽 레이아웃 높이가 늘어나도 목표 위치를 계속 재보정해
- * 다른 섹션으로 밀려나지 않도록 한다. 사용자가 직접 스크롤하면 즉시 보정을 멈춘다.
+ * 다른 섹션으로 밀려나지 않도록 한다. 모바일 주소창 표시/숨김(visualViewport 변화)과
+ * 화면 회전도 반영하고, 문서 끝을 넘어가는 오버스크롤은 클램프한다.
+ * 사용자가 직접 스크롤하면 즉시 보정을 멈춘다.
  */
 export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
   if (typeof window === "undefined") return;
@@ -28,11 +43,12 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
     return;
   }
 
-  const gap = window.innerWidth < 640 ? 8 : 12;
-  const targetTop = () =>
-    id === "top"
-      ? 0
-      : Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
+  const gapFor = () => (window.innerWidth < 640 ? 8 : 12);
+  const targetTop = () => {
+    if (id === "top") return 0;
+    const raw = el.getBoundingClientRect().top + window.scrollY - headerOffset() - gapFor();
+    return Math.min(maxScrollTop(), Math.max(0, Math.round(raw)));
+  };
 
   let done = false;
   let observer: ResizeObserver | null = null;
@@ -43,6 +59,8 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
   const cleanup = () => {
     stopEvents.forEach((ev) => window.removeEventListener(ev, onUserScroll));
     window.removeEventListener("load", snap);
+    window.removeEventListener("orientationchange", snap);
+    window.visualViewport?.removeEventListener("resize", snap);
     observer?.disconnect();
     observer = null;
   };
@@ -70,6 +88,8 @@ export function scrollTo(id: string, opts: { instant?: boolean } = {}) {
     if (done) return;
     stopEvents.forEach((ev) => window.addEventListener(ev, onUserScroll, { passive: true }));
     window.addEventListener("load", snap);
+    window.addEventListener("orientationchange", snap);
+    window.visualViewport?.addEventListener("resize", snap);
     if (typeof ResizeObserver !== "undefined") {
       observer = new ResizeObserver(() => snap());
       observer.observe(document.documentElement);
