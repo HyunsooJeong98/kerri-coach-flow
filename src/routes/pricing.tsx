@@ -267,6 +267,9 @@ function Pricing() {
             <div className="text-[1.15rem] font-bold break-keep">첫 결제일부터 12개월 출시가 보장</div>
             <div className="text-[0.95rem] text-foreground/75 break-keep">Basic 48% · Pro 51% 할인</div>
           </div>
+          <p className="mt-3 text-center text-[0.82rem] leading-relaxed text-muted-foreground break-keep">
+            출시가는 첫 유료 결제일부터 12개월간 적용되며, 이후 다음 갱신부터 정가가 적용됩니다.
+          </p>
         </Reveal>
 
         {/* Plan cards */}
