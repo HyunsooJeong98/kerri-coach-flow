@@ -54,8 +54,8 @@ const PRICING = {
     monthlyList: 19000,
     monthly: 9900,
     yearlyList: 217000,
-    yearly: 113000,
-    monthlyEquiv: 9417,
+    yearly: 109000,
+    monthlyEquiv: 9083,
     launchDiscount: 48,
     features: [
       "회원 무제한 등록",
@@ -72,8 +72,8 @@ const PRICING = {
     monthlyList: 39000,
     monthly: 19000,
     yearlyList: 445000,
-    yearly: 217000,
-    monthlyEquiv: 18083,
+    yearly: 209000,
+    monthlyEquiv: 17417,
     launchDiscount: 51,
     features: [
       "Basic의 모든 기능",
