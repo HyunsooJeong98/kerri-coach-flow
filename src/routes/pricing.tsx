@@ -54,8 +54,8 @@ const PRICING = {
     monthlyList: 19000,
     monthly: 9900,
     yearlyList: 217000,
-    yearly: 113000,
-    monthlyEquiv: 9417,
+    yearly: 109000,
+    monthlyEquiv: 9083,
     launchDiscount: 48,
     features: [
       "회원 무제한 등록",
@@ -72,8 +72,8 @@ const PRICING = {
     monthlyList: 39000,
     monthly: 19000,
     yearlyList: 445000,
-    yearly: 217000,
-    monthlyEquiv: 18083,
+    yearly: 209000,
+    monthlyEquiv: 17417,
     launchDiscount: 51,
     features: [
       "Basic의 모든 기능",
@@ -130,7 +130,7 @@ const FOUNDER_BENEFITS = [
   "첫 결제일부터 12개월 동안 출시가 보장",
   "Basic 정가 대비 48% 할인",
   "Pro 정가 대비 51% 할인",
-  "연간 결제 시 약 5% 추가 할인",
+  "연간 결제 시 1개월 무료",
   "초기 회원 데이터 설정 및 온보딩 지원",
   "창립 코치 전용 배지",
   "신규 기능 우선 체험",
@@ -255,7 +255,7 @@ function Pricing() {
               연간
             </span>
             <span className="rounded-full bg-primary/10 px-3 py-1 text-[0.75rem] font-bold text-primary">
-              약 5% 추가 할인
+              1개월 무료
             </span>
           </div>
         </Reveal>
@@ -267,6 +267,9 @@ function Pricing() {
             <div className="text-[1.15rem] font-bold break-keep">첫 결제일부터 12개월 출시가 보장</div>
             <div className="text-[0.95rem] text-foreground/75 break-keep">Basic 48% · Pro 51% 할인</div>
           </div>
+          <p className="mt-3 text-center text-[0.82rem] leading-relaxed text-muted-foreground break-keep">
+            출시가는 첫 유료 결제일부터 12개월간 적용되며, 이후 다음 갱신부터 정가가 적용됩니다.
+          </p>
         </Reveal>
 
         {/* Plan cards */}
@@ -337,12 +340,12 @@ function Pricing() {
                         <span className="ml-1.5 text-[1rem] font-semibold text-muted-foreground">/년</span>
                       </div>
                       <div className="mt-1 flex flex-wrap items-center gap-2">
-                        <span className="text-[0.9rem] text-muted-foreground">월 약 {won(p.monthlyEquiv)}</span>
+                        <span className="text-[0.9rem] text-muted-foreground">월 환산 약 {won(p.monthlyEquiv)}</span>
                         <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[0.72rem] font-bold text-primary">
-                          연간 결제 약 {PRICING.annualExtraDiscount}% 추가 할인
+                          1개월 무료
                         </span>
                       </div>
-                      <p className="mt-2 text-[0.82rem] text-muted-foreground">12개월 이용권</p>
+                      <p className="mt-2 text-[0.82rem] text-muted-foreground">첫 결제일부터 12개월 적용</p>
                     </div>
                   ) : (
                     <div>
@@ -531,7 +534,7 @@ function Pricing() {
           </p>
           <ul className="mt-3 space-y-1.5 text-[0.82rem] leading-[1.9] text-muted-foreground break-keep">
             <li>창립 코치 출시가는 첫 결제일부터 12개월 동안 적용되며 이후 정가로 갱신됩니다.</li>
-            <li>연간 구독은 월간 구독 12개월 금액보다 약 5% 할인됩니다.</li>
+            <li>연간 구독은 12개월 이용 상품이며 출시가 기준 월간 요금의 11개월분만 결제합니다.</li>
             <li>결제와 구독 관리는 App Store 또는 Google Play에서 진행됩니다.</li>
           </ul>
         </Reveal>
