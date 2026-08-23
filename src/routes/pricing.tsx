@@ -255,7 +255,7 @@ function Pricing() {
               연간
             </span>
             <span className="rounded-full bg-primary/10 px-3 py-1 text-[0.75rem] font-bold text-primary">
-              약 5% 추가 할인
+              1개월 무료
             </span>
           </div>
         </Reveal>
