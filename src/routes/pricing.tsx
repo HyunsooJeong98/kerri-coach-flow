@@ -340,12 +340,12 @@ function Pricing() {
                         <span className="ml-1.5 text-[1rem] font-semibold text-muted-foreground">/년</span>
                       </div>
                       <div className="mt-1 flex flex-wrap items-center gap-2">
-                        <span className="text-[0.9rem] text-muted-foreground">월 약 {won(p.monthlyEquiv)}</span>
+                        <span className="text-[0.9rem] text-muted-foreground">월 환산 약 {won(p.monthlyEquiv)}</span>
                         <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[0.72rem] font-bold text-primary">
-                          연간 결제 약 {PRICING.annualExtraDiscount}% 추가 할인
+                          1개월 무료
                         </span>
                       </div>
-                      <p className="mt-2 text-[0.82rem] text-muted-foreground">12개월 이용권</p>
+                      <p className="mt-2 text-[0.82rem] text-muted-foreground">첫 결제일부터 12개월 적용</p>
                     </div>
                   ) : (
                     <div>
