@@ -534,7 +534,7 @@ function Pricing() {
           </p>
           <ul className="mt-3 space-y-1.5 text-[0.82rem] leading-[1.9] text-muted-foreground break-keep">
             <li>창립 코치 출시가는 첫 결제일부터 12개월 동안 적용되며 이후 정가로 갱신됩니다.</li>
-            <li>연간 구독은 월간 구독 12개월 금액보다 약 5% 할인됩니다.</li>
+            <li>연간 구독은 12개월 이용 상품이며 출시가 기준 월간 요금의 11개월분만 결제합니다.</li>
             <li>결제와 구독 관리는 App Store 또는 Google Play에서 진행됩니다.</li>
           </ul>
         </Reveal>
