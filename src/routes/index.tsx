@@ -579,17 +579,20 @@ function Compare() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <img
-        src={heroBg}
-        alt="스포츠 강사가 회원과 레슨을 진행하는 모습"
-        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
-        width={1920}
-        height={1080}
-        loading="eager"
-      />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-black/45" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/45 to-black/55 lg:bg-gradient-to-r lg:from-black/75 lg:via-black/45 lg:to-transparent" />
-      <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <img
+          src={heroBg}
+          alt="스포츠 강사가 회원과 레슨을 진행하는 모습"
+          className="h-full w-full object-cover"
+          width={1920}
+          height={1080}
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/55 lg:bg-gradient-to-r lg:from-black/75 lg:via-black/45 lg:to-transparent" />
+      </div>
+
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[0.8rem] font-semibold text-white/90 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
