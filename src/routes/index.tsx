@@ -585,7 +585,7 @@ function Hero() {
           alt="스포츠 강사가 회원과 레슨을 진행하는 모습"
           className="h-full w-full object-cover"
           width={1920}
-          height={1080}
+          height={1088}
           loading="eager"
         />
         <div className="absolute inset-0 bg-black/45" />
