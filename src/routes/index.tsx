@@ -5,6 +5,7 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
+import heroBg from "@/assets/hero-bg.png";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -577,20 +578,32 @@ function Compare() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden noise">
-      <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
-      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
+    <section id="top" className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <img
+          src={heroBg}
+          alt="스포츠 강사가 회원과 레슨을 진행하는 모습"
+          className="h-full w-full object-cover"
+          width={1920}
+          height={1088}
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/55 lg:bg-gradient-to-r lg:from-black/75 lg:via-black/45 lg:to-transparent" />
+      </div>
+
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[0.8rem] font-semibold text-white/90 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
           </div>
 
-          <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
+          <h1 className="hero-display mt-3 max-w-[13ch] break-keep text-white">
             평소처럼 <span className="text-primary">레슨만</span> 하세요.
           </h1>
 
-          <p className="lead mt-3 max-w-[26ch] break-keep sm:max-w-[34ch]">
+          <p className="lead mt-3 max-w-[26ch] break-keep !text-white/80 sm:max-w-[34ch]">
             회원 관리부터 AI 레슨 기록까지. 운영은 KERRI가 대신합니다.
           </p>
         </div>
@@ -607,9 +620,7 @@ function Hero() {
               bodyClassName="relative flex flex-col overflow-hidden"
             >
               <SimulatorFrame />
-
             </PhoneMock>
-
           </div>
         </Reveal>
       </Container>
