@@ -572,13 +572,88 @@ function Compare() {
 
 
 
-/* ── Hero ──────────────────────────────────────────────────── */
+/* ── Hero backdrop: "Movement of Coaching" ─────────────────── */
 
+function HeroBackdrop() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+      viewBox="0 0 1440 800"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+    >
+      <defs>
+        <pattern id="kdots" width="26" height="26" patternUnits="userSpaceOnUse">
+          <circle cx="1.4" cy="1.4" r="1.2" fill="#C0755A" />
+        </pattern>
+        <radialGradient id="kdotfade" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+        <mask id="kdotmask1">
+          <rect x="-80" y="470" width="580" height="460" fill="url(#kdotfade)" />
+        </mask>
+        <mask id="kdotmask2">
+          <rect x="1010" y="30" width="500" height="400" fill="url(#kdotfade)" />
+        </mask>
+      </defs>
+
+      {/* trajectory lines — 화면 밖에서 시작해 밖으로 사라지는 흐름 */}
+      <path
+        d="M -90 640 C 300 720, 640 500, 920 560 C 1180 616, 1330 420, 1560 300"
+        stroke="#C0755A"
+        strokeOpacity="0.07"
+        strokeWidth="1.4"
+      />
+      <path
+        d="M -100 170 C 260 60, 560 260, 880 200 C 1160 148, 1300 40, 1560 96"
+        stroke="#332C27"
+        strokeOpacity="0.05"
+        strokeWidth="1.2"
+        strokeDasharray="6 12"
+        className="hidden sm:block"
+      />
+      <path
+        d="M 180 880 C 480 770, 820 850, 1120 770 C 1310 720, 1430 750, 1560 706"
+        stroke="#C0755A"
+        strokeOpacity="0.05"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeDasharray="1 9"
+        className="trajectory-drift"
+      />
+
+      {/* 아주 미세한 데이터 도트 — 일부 영역에만 */}
+      <rect
+        x="-80"
+        y="470"
+        width="580"
+        height="460"
+        fill="url(#kdots)"
+        opacity="0.09"
+        mask="url(#kdotmask1)"
+        className="hidden md:block"
+      />
+      <rect
+        x="1010"
+        y="30"
+        width="500"
+        height="400"
+        fill="url(#kdots)"
+        opacity="0.07"
+        mask="url(#kdotmask2)"
+        className="hidden lg:block"
+      />
+    </svg>
+  );
+}
 
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
       <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
+      <HeroBackdrop />
       <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
@@ -598,10 +673,13 @@ function Hero() {
         <Reveal delay={120} className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
+            {/* 목업 뒤 넓고 은은한 radial glow */}
             <div
-              className="pointer-events-none absolute -inset-10 -z-10 hidden rounded-full opacity-70 blur-3xl lg:-inset-16 lg:block"
-              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
+              className="pointer-events-none absolute -inset-12 -z-10 hidden rounded-full opacity-70 blur-3xl lg:-inset-24 lg:block"
+              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.16), transparent 68%)" }}
             />
+            {/* 목업 아래 확산 그림자 */}
+            <div className="pointer-events-none absolute -bottom-6 left-1/2 -z-10 h-10 w-[78%] max-w-[300px] -translate-x-1/2 rounded-[50%] bg-[var(--ink)] opacity-[0.13] blur-2xl" />
             <PhoneMock
               className="device-float device-gloss w-[82%] min-w-[260px] max-w-[380px] !aspect-[390/844] lg:w-[390px]"
               bodyClassName="relative flex flex-col overflow-hidden"
