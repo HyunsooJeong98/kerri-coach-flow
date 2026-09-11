@@ -595,7 +595,14 @@ function Hero() {
         />
       </div>
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
-        <div className="section-fade flex flex-col items-center lg:items-start">
+        <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
+          <div
+            className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 sm:-inset-x-14"
+            style={{
+              background:
+                "radial-gradient(closest-side, color-mix(in oklab, var(--cream) 94%, transparent), color-mix(in oklab, var(--cream) 82%, transparent) 55%, transparent)",
+            }}
+          />
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
