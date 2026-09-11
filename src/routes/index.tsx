@@ -572,8 +572,82 @@ function Compare() {
 
 
 
-/* ── Hero ──────────────────────────────────────────────────── */
+/* ── Hero backdrop: "Movement of Coaching" ─────────────────── */
 
+function HeroBackdrop() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+      viewBox="0 0 1440 800"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+    >
+      <defs>
+        <pattern id="kdots" width="26" height="26" patternUnits="userSpaceOnUse">
+          <circle cx="1.4" cy="1.4" r="1.2" fill="#C0755A" />
+        </pattern>
+        <radialGradient id="kdotfade" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+        <mask id="kdotmask1">
+          <rect x="-80" y="470" width="580" height="460" fill="url(#kdotfade)" />
+        </mask>
+        <mask id="kdotmask2">
+          <rect x="1010" y="30" width="500" height="400" fill="url(#kdotfade)" />
+        </mask>
+      </defs>
+
+      {/* trajectory lines — 화면 밖에서 시작해 밖으로 사라지는 흐름 */}
+      <path
+        d="M -90 640 C 300 720, 640 500, 920 560 C 1180 616, 1330 420, 1560 300"
+        stroke="#C0755A"
+        strokeOpacity="0.07"
+        strokeWidth="1.4"
+      />
+      <path
+        d="M -100 170 C 260 60, 560 260, 880 200 C 1160 148, 1300 40, 1560 96"
+        stroke="#332C27"
+        strokeOpacity="0.05"
+        strokeWidth="1.2"
+        strokeDasharray="6 12"
+        className="hidden sm:block"
+      />
+      <path
+        d="M 180 880 C 480 770, 820 850, 1120 770 C 1310 720, 1430 750, 1560 706"
+        stroke="#C0755A"
+        strokeOpacity="0.05"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeDasharray="1 9"
+        className="trajectory-drift"
+      />
+
+      {/* 아주 미세한 데이터 도트 — 일부 영역에만 */}
+      <rect
+        x="-80"
+        y="470"
+        width="580"
+        height="460"
+        fill="url(#kdots)"
+        opacity="0.09"
+        mask="url(#kdotmask1)"
+        className="hidden md:block"
+      />
+      <rect
+        x="1010"
+        y="30"
+        width="500"
+        height="400"
+        fill="url(#kdots)"
+        opacity="0.07"
+        mask="url(#kdotmask2)"
+        className="hidden lg:block"
+      />
+    </svg>
+  );
+}
 
 function Hero() {
   return (
