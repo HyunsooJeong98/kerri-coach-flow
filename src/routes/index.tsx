@@ -623,7 +623,8 @@ function Hero() {
           </p>
         </div>
 
-        <Reveal delay={120} className="flex justify-center">
+        {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
+        <div className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
