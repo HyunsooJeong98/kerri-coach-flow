@@ -580,7 +580,7 @@ function Compare() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0">
         <img
           src={heroPc.url}
           alt=""
@@ -594,7 +594,7 @@ function Hero() {
           className="h-full w-full object-cover object-center md:hidden"
         />
       </div>
-      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
+      <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
