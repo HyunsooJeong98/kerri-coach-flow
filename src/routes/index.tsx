@@ -5,6 +5,8 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
+import heroBgDesktop from "@/assets/hero-bg-desktop.png.asset.json";
+import heroBgMobile from "@/assets/hero-bg-mobile.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -576,78 +578,41 @@ function Compare() {
 
 function HeroBackdrop() {
   return (
-    <svg
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 h-full w-full"
-      viewBox="0 0 1440 800"
-      preserveAspectRatio="xMidYMid slice"
-      fill="none"
-    >
-      <defs>
-        <pattern id="kdots" width="26" height="26" patternUnits="userSpaceOnUse">
-          <circle cx="1.4" cy="1.4" r="1.2" fill="#C0755A" />
-        </pattern>
-        <radialGradient id="kdotfade" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-        </radialGradient>
-        <mask id="kdotmask1">
-          <rect x="-80" y="470" width="580" height="460" fill="url(#kdotfade)" />
-        </mask>
-        <mask id="kdotmask2">
-          <rect x="1010" y="30" width="500" height="400" fill="url(#kdotfade)" />
-        </mask>
-      </defs>
-
-      {/* trajectory lines — 화면 밖에서 시작해 밖으로 사라지는 흐름 */}
-      <path
-        d="M -90 640 C 300 720, 640 500, 920 560 C 1180 616, 1330 420, 1560 300"
-        stroke="#C0755A"
-        strokeOpacity="0.16"
-        strokeWidth="1.6"
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+      {/* 코치 일러스트 배경 — PC/모바일 분기 */}
+      <img
+        src={heroBgDesktop.url}
+        alt=""
+        loading="eager"
+        className="absolute inset-0 hidden h-full w-full object-cover object-center md:block"
       />
-      <path
-        d="M -100 170 C 260 60, 560 260, 880 200 C 1160 148, 1300 40, 1560 96"
-        stroke="#332C27"
-        strokeOpacity="0.1"
-        strokeWidth="1.3"
-        strokeDasharray="6 12"
-        className="hidden sm:block"
+      <img
+        src={heroBgMobile.url}
+        alt=""
+        loading="eager"
+        className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
       />
-      <path
-        d="M 180 880 C 480 770, 820 850, 1120 770 C 1310 720, 1430 750, 1560 706"
-        stroke="#C0755A"
-        strokeOpacity="0.13"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeDasharray="1 9"
-        className="trajectory-drift"
+      {/* 크림 오버레이: 텍스트 영역은 더 밝게, 외곽은 일러스트가 은은히 보이도록 */}
+      <div className="absolute inset-0 bg-[#F7F0E9]/[0.74] md:bg-[#F7F0E9]/[0.72]" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(247,240,233,0.92) 0%, rgba(247,240,233,0.78) 45%, rgba(247,240,233,0.32) 100%)",
+        }}
       />
-
-      {/* 아주 미세한 데이터 도트 — 일부 영역에만 */}
-      <rect
-        x="-80"
-        y="470"
-        width="580"
-        height="460"
-        fill="url(#kdots)"
-        opacity="0.16"
-        mask="url(#kdotmask1)"
-        className="hidden md:block"
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(247,240,233,0.45) 0%, rgba(247,240,233,0.15) 40%, rgba(247,240,233,0.6) 100%)",
+        }}
       />
-      <rect
-        x="1010"
-        y="30"
-        width="500"
-        height="400"
-        fill="url(#kdots)"
-        opacity="0.13"
-        mask="url(#kdotmask2)"
-        className="hidden lg:block"
-      />
-    </svg>
+    </div>
   );
 }
+
+
 
 function Hero() {
   return (
