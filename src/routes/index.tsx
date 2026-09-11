@@ -580,20 +580,21 @@ function Compare() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
-      <div className="pointer-events-none absolute inset-0">
-        <img
-          src={heroPc.url}
-          alt=""
-          aria-hidden="true"
-          className="hidden h-full w-full object-cover object-center md:block"
-        />
+      {/* 현재 화면에 필요한 배경 이미지 1장만 다운로드 */}
+      <picture className="pointer-events-none absolute inset-0 block">
+        <source media="(min-width: 768px)" srcSet={heroPc.url} type="image/webp" />
         <img
           src={heroMobile.url}
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-center md:hidden"
+          width={941}
+          height={1672}
+          decoding="async"
+          // @ts-expect-error - 표준 HTML 속성이지만 React 타입에 아직 없음
+          fetchpriority="high"
+          className="h-full w-full object-cover object-center"
         />
-      </div>
+      </picture>
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
           <div
