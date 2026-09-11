@@ -5,6 +5,8 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
+import heroPc from "@/assets/hero-pc.png.asset.json";
+import heroMobile from "@/assets/hero-mobile.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
