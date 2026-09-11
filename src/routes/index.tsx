@@ -5,6 +5,8 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
+import heroPc from "@/assets/hero-pc.png.asset.json";
+import heroMobile from "@/assets/hero-mobile.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -578,9 +580,35 @@ function Compare() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
-      <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
-      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
-        <div className="section-fade flex flex-col items-center lg:items-start">
+      <div className="pointer-events-none absolute inset-0">
+        <img
+          src={heroPc.url}
+          alt=""
+          aria-hidden="true"
+          className="hidden h-full w-full object-cover object-center md:block"
+        />
+        <img
+          src={heroMobile.url}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover object-center md:hidden"
+        />
+      </div>
+      <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
+        <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
+          <div
+            className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 sm:-inset-x-14"
+            style={{
+              background:
+                "radial-gradient(closest-side, color-mix(in oklab, var(--cream) 96%, transparent), color-mix(in oklab, var(--cream) 90%, transparent) 62%, transparent)",
+              backdropFilter: "blur(7px)",
+              WebkitBackdropFilter: "blur(7px)",
+              maskImage:
+                "radial-gradient(closest-side, black, black 55%, transparent)",
+              WebkitMaskImage:
+                "radial-gradient(closest-side, black, black 55%, transparent)",
+            }}
+          />
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             스포츠 강사를 위한 운영 플랫폼
