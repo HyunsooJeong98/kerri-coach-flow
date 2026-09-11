@@ -77,6 +77,11 @@
   html {
     scroll-behavior: smooth;
   }
+  /* 고정 헤더(4rem) + 여백 만큼 앵커 위치를 미리 보정 → 도착 후 재보정 없음 */
+  section[id],
+  [id][data-scroll-anchor] {
+    scroll-margin-top: calc(4rem + 0.75rem);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
