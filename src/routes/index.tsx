@@ -675,12 +675,16 @@ function Shot({
   caption,
   className = "",
   priority = false,
+  width = 883,
+  height = 1920,
 }: {
   src: string;
   alt: string;
   caption: string;
   className?: string;
   priority?: boolean;
+  width?: number;
+  height?: number;
 }) {
   return (
     <figure
