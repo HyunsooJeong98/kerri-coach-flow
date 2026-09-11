@@ -868,6 +868,10 @@ function Ops() {
                   src={appReport.url}
                   alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
                   loading="lazy"
+                  decoding="async"
+                  width={883}
+                  height={1920}
+                  style={{ aspectRatio: "883 / 1920", height: "auto" }}
                   className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
                 />
                 <figcaption className="sr-only">
