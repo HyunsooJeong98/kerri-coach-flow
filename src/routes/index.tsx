@@ -24,6 +24,27 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [
+      // 현재 화면에 해당하는 Hero 배경만 우선 로드 (LCP 개선)
+      {
+        rel: "preload",
+        as: "image",
+        href: heroMobile.url,
+        type: "image/webp",
+        media: "(max-width: 767px)",
+        fetchpriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroPc.url,
+        type: "image/webp",
+        media: "(min-width: 768px)",
+        fetchpriority: "high",
+      },
+    ],
+  }),
   component: Landing,
 });
 
