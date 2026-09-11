@@ -675,8 +675,8 @@ function Hero() {
             <div className="phone-glow lg:hidden" />
             {/* 목업 뒤 넓고 은은한 radial glow */}
             <div
-              className="pointer-events-none absolute -inset-12 -z-10 hidden rounded-full opacity-70 blur-3xl lg:-inset-24 lg:block"
-              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.16), transparent 68%)" }}
+              className="pointer-events-none absolute -inset-12 -z-10 hidden rounded-full opacity-90 blur-3xl lg:-inset-24 lg:block"
+              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.24), transparent 68%)" }}
             />
             {/* 목업 아래 확산 그림자 */}
             <div className="pointer-events-none absolute -bottom-6 left-1/2 -z-10 h-10 w-[78%] max-w-[300px] -translate-x-1/2 rounded-[50%] bg-[var(--ink)] opacity-[0.13] blur-2xl" />
