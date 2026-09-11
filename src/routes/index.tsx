@@ -5,8 +5,8 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
-import heroPc from "@/assets/hero-pc.png.asset.json";
-import heroMobile from "@/assets/hero-mobile.png.asset.json";
+import heroPc from "@/assets/hero-pc.webp.asset.json";
+import heroMobile from "@/assets/hero-mobile.webp.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -24,6 +24,27 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [
+      // 현재 화면에 해당하는 Hero 배경만 우선 로드 (LCP 개선)
+      {
+        rel: "preload",
+        as: "image",
+        href: heroMobile.url,
+        type: "image/webp",
+        media: "(max-width: 767px)",
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroPc.url,
+        type: "image/webp",
+        media: "(min-width: 768px)",
+        fetchPriority: "high",
+      },
+    ],
+  }),
   component: Landing,
 });
 
@@ -580,20 +601,20 @@ function Compare() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
-      <div className="pointer-events-none absolute inset-0">
-        <img
-          src={heroPc.url}
-          alt=""
-          aria-hidden="true"
-          className="hidden h-full w-full object-cover object-center md:block"
-        />
+      {/* 현재 화면에 필요한 배경 이미지 1장만 다운로드 */}
+      <picture className="pointer-events-none absolute inset-0 block">
+        <source media="(min-width: 768px)" srcSet={heroPc.url} type="image/webp" />
         <img
           src={heroMobile.url}
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-center md:hidden"
+          width={941}
+          height={1672}
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-full object-cover object-center"
         />
-      </div>
+      </picture>
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
           <div
@@ -623,7 +644,8 @@ function Hero() {
           </p>
         </div>
 
-        <Reveal delay={120} className="flex justify-center">
+        {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
+        <div className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
@@ -639,7 +661,7 @@ function Hero() {
             </PhoneMock>
 
           </div>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );
@@ -653,12 +675,16 @@ function Shot({
   caption,
   className = "",
   priority = false,
+  width = 883,
+  height = 1920,
 }: {
   src: string;
   alt: string;
   caption: string;
   className?: string;
   priority?: boolean;
+  width?: number;
+  height?: number;
 }) {
   return (
     <figure
@@ -670,6 +696,10 @@ function Shot({
         src={src}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        width={width}
+        height={height}
+        style={{ aspectRatio: `${width} / ${height}`, height: "auto" }}
         className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
       />
       <figcaption className="sr-only">{caption}</figcaption>
@@ -770,6 +800,7 @@ function Ops() {
               <div className="w-[74%]">
                 <Shot
                   src={appNotify.url}
+                  width={928}
                   alt="KERRI 코치앱 알림 설정 화면. 레슨 전날·당일 리마인드와 재등록 안내 알림을 항목별로 켜고 끌 수 있습니다."
                   caption="알림 설정 — 레슨 전날, 당일, 재등록 알림 관리"
                 />
@@ -837,6 +868,10 @@ function Ops() {
                   src={appReport.url}
                   alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
                   loading="lazy"
+                  decoding="async"
+                  width={883}
+                  height={1920}
+                  style={{ aspectRatio: "883 / 1920", height: "auto" }}
                   className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
                 />
                 <figcaption className="sr-only">

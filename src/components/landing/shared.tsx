@@ -15,52 +15,23 @@ export function headerOffset() {
   return Math.round(header.offsetHeight);
 }
 
+/**
+ * 섹션으로 한 번만 부드럽게 이동한다.
+ * 위치 보정은 CSS scroll-margin-top(styles.css)에서 처리하므로
+ * 여기서 추가 스크롤/보정을 실행하지 않는다.
+ */
 export function scrollTo(id: string) {
   if (typeof window === "undefined") return;
-  const el = document.getElementById(id);
-  if (!el) {
-    window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
-    return;
-  }
-
-  const gap = window.innerWidth < 640 ? 8 : 12;
-  const targetTop = () =>
-    Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - headerOffset() - gap));
 
   if (id === "top") {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    window.scrollTo({ top: targetTop(), behavior: "smooth" });
+    return;
   }
 
-  let last = -1;
-  let idle = 0;
-  let corrected = false;
-  const tick = () => {
-    const y = Math.round(window.scrollY);
-    if (y === last) idle += 1;
-    else {
-      idle = 0;
-      last = y;
-    }
-    if (idle > 3) {
-      if (!corrected && id !== "top") {
-        corrected = true;
-        const want = targetTop();
-        if (Math.abs(want - y) > 2) {
-          window.scrollTo({ top: want, behavior: "smooth" });
-          idle = 0;
-          last = -1;
-          requestAnimationFrame(tick);
-          return;
-        }
-      }
-      window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
-      return;
-    }
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
+  const el = document.getElementById(id);
+  window.dispatchEvent(new CustomEvent("kerri:focus", { detail: id }));
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 /** 현재 페이지가 홈이 아니면 홈으로 이동한 뒤 해당 섹션으로 스크롤 */
