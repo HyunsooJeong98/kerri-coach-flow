@@ -600,7 +600,13 @@ function Hero() {
             className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 sm:-inset-x-14"
             style={{
               background:
-                "radial-gradient(closest-side, color-mix(in oklab, var(--cream) 94%, transparent), color-mix(in oklab, var(--cream) 82%, transparent) 55%, transparent)",
+                "radial-gradient(closest-side, color-mix(in oklab, var(--cream) 96%, transparent), color-mix(in oklab, var(--cream) 90%, transparent) 62%, transparent)",
+              backdropFilter: "blur(7px)",
+              WebkitBackdropFilter: "blur(7px)",
+              maskImage:
+                "radial-gradient(closest-side, black, black 55%, transparent)",
+              WebkitMaskImage:
+                "radial-gradient(closest-side, black, black 55%, transparent)",
             }}
           />
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
