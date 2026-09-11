@@ -696,6 +696,10 @@ function Shot({
         src={src}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        width={width}
+        height={height}
+        style={{ aspectRatio: `${width} / ${height}`, height: "auto" }}
         className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
       />
       <figcaption className="sr-only">{caption}</figcaption>
