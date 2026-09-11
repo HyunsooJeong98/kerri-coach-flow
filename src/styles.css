@@ -375,3 +375,14 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Hero trajectory dotted line — barely-perceptible drift */
+@keyframes trajectoryDrift {
+  to { stroke-dashoffset: -700; }
+}
+.trajectory-drift {
+  animation: trajectoryDrift 80s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .trajectory-drift { animation: none; }
+}
