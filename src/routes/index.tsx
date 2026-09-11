@@ -640,7 +640,7 @@ function Hero() {
             </PhoneMock>
 
           </div>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );
