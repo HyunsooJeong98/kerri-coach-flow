@@ -5,8 +5,6 @@ import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
 import appReport from "@/assets/app-report.png.asset.json";
-import heroBgDesktop from "@/assets/hero-bg-desktop.png.asset.json";
-import heroBgMobile from "@/assets/hero-bg-mobile.png.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   FileText,
@@ -574,52 +572,14 @@ function Compare() {
 
 
 
-/* ── Hero backdrop: "Movement of Coaching" ─────────────────── */
-
-function HeroBackdrop() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-      {/* 코치 일러스트 배경 — PC/모바일 분기 */}
-      <img
-        src={heroBgDesktop.url}
-        alt=""
-        loading="eager"
-        className="absolute inset-0 hidden h-full w-full object-cover object-center md:block"
-      />
-      <img
-        src={heroBgMobile.url}
-        alt=""
-        loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
-      />
-      {/* 크림 오버레이: 텍스트 영역은 더 밝게, 외곽은 일러스트가 은은히 보이도록 */}
-      <div className="absolute inset-0 bg-[#F7F0E9]/[0.74] md:bg-[#F7F0E9]/[0.72]" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(247,240,233,0.92) 0%, rgba(247,240,233,0.78) 45%, rgba(247,240,233,0.32) 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(247,240,233,0.45) 0%, rgba(247,240,233,0.15) 40%, rgba(247,240,233,0.6) 100%)",
-        }}
-      />
-    </div>
-  );
-}
-
+/* ── Hero ──────────────────────────────────────────────────── */
 
 
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden noise">
-      <div className="warm-glow pointer-events-none absolute inset-0 z-0" />
-      <HeroBackdrop />
-      <Container className="relative z-10 grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
+      <div className="warm-glow pointer-events-none absolute inset-0 -z-10" />
+      <Container className="grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade flex flex-col items-center lg:items-start">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -638,13 +598,10 @@ function Hero() {
         <Reveal delay={120} className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
-            {/* 목업 뒤 넓고 은은한 radial glow */}
             <div
-              className="pointer-events-none absolute -inset-12 -z-10 hidden rounded-full opacity-90 blur-3xl lg:-inset-24 lg:block"
-              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.24), transparent 68%)" }}
+              className="pointer-events-none absolute -inset-10 -z-10 hidden rounded-full opacity-70 blur-3xl lg:-inset-16 lg:block"
+              style={{ background: "radial-gradient(circle, rgba(192,117,90,0.22), transparent 65%)" }}
             />
-            {/* 목업 아래 확산 그림자 */}
-            <div className="pointer-events-none absolute -bottom-6 left-1/2 -z-10 h-10 w-[78%] max-w-[300px] -translate-x-1/2 rounded-[50%] bg-[var(--ink)] opacity-[0.13] blur-2xl" />
             <PhoneMock
               className="device-float device-gloss w-[82%] min-w-[260px] max-w-[380px] !aspect-[390/844] lg:w-[390px]"
               bodyClassName="relative flex flex-col overflow-hidden"
