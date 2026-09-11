@@ -590,8 +590,7 @@ function Hero() {
           width={941}
           height={1672}
           decoding="async"
-          // @ts-expect-error - 표준 HTML 속성이지만 React 타입에 아직 없음
-          fetchpriority="high"
+          fetchPriority="high"
           className="h-full w-full object-cover object-center"
         />
       </picture>
