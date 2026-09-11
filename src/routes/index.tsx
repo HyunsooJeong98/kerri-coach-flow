@@ -615,35 +615,6 @@ function Hero() {
           className="h-full w-full object-cover object-center"
         />
       </picture>
-
-      {/* 모바일 전용: 앱 목업 왼쪽 여백을 은은하게 보완하는 코칭 그래픽 */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1 top-[54%] w-[86px] opacity-[0.22] blur-[0.4px] sm:left-4 sm:w-[104px] lg:hidden"
-        style={{ transform: "rotate(-7deg)" }}
-      >
-        <svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <g
-            stroke="#C0755A"
-            strokeWidth="2.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* 클립보드 */}
-            <path d="M22 24c-4 0-7 3-7 7v78c0 4 3 7 7 7h56c4 0 7-3 7-7V31c0-4-3-7-7-7" />
-            <path d="M40 24c0-5 4-9 10-9s10 4 10 9v4H40z" />
-            {/* 코칭 메모 라인 */}
-            <path d="M31 52h38M31 66h30M31 80h34" opacity="0.75" />
-            {/* 체크 표시 */}
-            <path d="M33 96l6 6 12-13" opacity="0.9" />
-            {/* 호루라기 */}
-            <path d="M74 112c-9 0-16 6-16 14s7 14 16 14 16-6 16-14-7-14-16-14z" />
-            <path d="M90 121h14M90 130h11" opacity="0.7" />
-            <circle cx="74" cy="126" r="4.5" opacity="0.7" />
-          </g>
-        </svg>
-      </div>
-
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
           <div
