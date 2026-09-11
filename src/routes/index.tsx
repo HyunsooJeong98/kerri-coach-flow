@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
         href: heroMobile.url,
         type: "image/webp",
         media: "(max-width: 767px)",
-        fetchpriority: "high",
+        fetchPriority: "high",
       },
       {
         rel: "preload",
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
         href: heroPc.url,
         type: "image/webp",
         media: "(min-width: 768px)",
-        fetchpriority: "high",
+        fetchPriority: "high",
       },
     ],
   }),
