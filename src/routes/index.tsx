@@ -617,17 +617,31 @@ function Hero() {
       </picture>
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
         <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
+          {/* 크림 베일 — 모바일: 상단 텍스트에 강하게 / PC: 좌측 텍스트 열에 맞춰 여유 있게 */}
           <div
-            className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 sm:-inset-x-14"
+            className="pointer-events-none absolute -inset-x-6 -top-16 -bottom-28 -z-10 md:hidden"
             style={{
               background:
-                "radial-gradient(closest-side, color-mix(in oklab, var(--cream) 96%, transparent), color-mix(in oklab, var(--cream) 90%, transparent) 62%, transparent)",
-              backdropFilter: "blur(7px)",
-              WebkitBackdropFilter: "blur(7px)",
+                "radial-gradient(92% 58% at 50% 32%, color-mix(in oklab, var(--cream) 98%, transparent), color-mix(in oklab, var(--cream) 88%, transparent) 55%, transparent 82%)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
               maskImage:
-                "radial-gradient(closest-side, black, black 55%, transparent)",
+                "radial-gradient(92% 58% at 50% 32%, black, black 52%, transparent 82%)",
               WebkitMaskImage:
-                "radial-gradient(closest-side, black, black 55%, transparent)",
+                "radial-gradient(92% 58% at 50% 32%, black, black 52%, transparent 82%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute -inset-x-16 -inset-y-10 -z-10 hidden md:block lg:-inset-x-24"
+            style={{
+              background:
+                "radial-gradient(closest-side at 45% 46%, color-mix(in oklab, var(--cream) 94%, transparent), color-mix(in oklab, var(--cream) 84%, transparent) 58%, transparent)",
+              backdropFilter: "blur(9px)",
+              WebkitBackdropFilter: "blur(9px)",
+              maskImage:
+                "radial-gradient(closest-side at 45% 46%, black, black 55%, transparent)",
+              WebkitMaskImage:
+                "radial-gradient(closest-side at 45% 46%, black, black 55%, transparent)",
             }}
           />
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
