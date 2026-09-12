@@ -124,7 +124,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
             </div>
             <Link
               to="/member"
-              className="group inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
+              className="group inline-flex shrink-0 items-center gap-1 self-start text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
             >
               회원앱 자세히 보기
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
