@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { RoundedQR } from "@/components/landing/RoundedQR";
 import appleStoreBadge from "@/assets/apple-store-badge.svg.asset.json";
 import googlePlayBadge from "@/assets/google-play-badge.png.asset.json";
+import coachAppIcon from "@/assets/coach-app-icon.png.asset.json";
+import memberAppIcon from "@/assets/member-app-icon.png.asset.json";
 import { Reveal } from "@/components/landing/shared";
 
 export const COACH_APP_URL = "https://apps.apple.com/kr/app/kerri/id6783224934";
@@ -68,6 +70,29 @@ export function QR({ url, label }: { url: string; label: string }) {
   );
 }
 
+export function AppIcon({ src, name, en }: { src: string; name: string; en: string }) {
+  return (
+    <div className="flex items-center gap-4">
+      <img
+        src={src}
+        alt={`${name} 앱 아이콘`}
+        width={56}
+        height={56}
+        loading="lazy"
+        className="h-14 w-14 shrink-0 rounded-[1rem]"
+      />
+      <div className="min-w-0">
+        <h3 className="truncate text-[clamp(1.25rem,1.05rem+0.9vw,1.65rem)] font-extrabold leading-[1.25] tracking-tight">
+          {name}
+        </h3>
+        <p className="mt-1 truncate text-[0.7rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
+          {en}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
   return (
     <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-2">
@@ -80,9 +105,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
           }`}
         >
           <div className="eyebrow absolute right-4 top-4 rounded-md bg-[var(--clay)]/10 px-2 py-1">추천</div>
-          <h3 className="mt-4 text-[clamp(1.5rem,1.1rem+1.9vw,2.2rem)] font-extrabold leading-[1.3] tracking-tight">
-            케리 코치앱
-          </h3>
+          <AppIcon src={coachAppIcon.url} name="케리 코치앱" en="KERRI COACH" />
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
             회원 관리 · 일정 · 결제 · AI 레슨 기록. 운영을 하나의 앱으로 관리하세요.
           </p>
@@ -95,13 +118,13 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
 
       <Reveal delay={110}>
         <div className="surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)]">
-          <div className="flex flex-col items-start gap-2 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between min-[380px]:gap-3">
-            <h3 className="min-w-0 text-[clamp(1.5rem,1.1rem+1.9vw,2.2rem)] font-extrabold leading-[1.3] tracking-tight">
-              케리 회원앱
-            </h3>
+          <div className="flex flex-col items-start gap-2 min-[380px]:flex-row min-[380px]:items-start min-[380px]:justify-between min-[380px]:gap-3">
+            <div className="min-w-0">
+              <AppIcon src={memberAppIcon.url} name="케리 회원앱" en="KERRI MEMBER" />
+            </div>
             <Link
               to="/member"
-              className="group inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
+              className="group inline-flex shrink-0 items-center gap-1 self-start text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
             >
               회원앱 자세히 보기
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
