@@ -118,10 +118,10 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
 
       <Reveal delay={110}>
         <div className="surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)]">
-          <div className="flex flex-col items-start gap-2 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between min-[380px]:gap-3">
-            <h3 className="min-w-0 text-[clamp(1.5rem,1.1rem+1.9vw,2.2rem)] font-extrabold leading-[1.3] tracking-tight">
-              케리 회원앱
-            </h3>
+          <div className="flex flex-col items-start gap-2 min-[380px]:flex-row min-[380px]:items-start min-[380px]:justify-between min-[380px]:gap-3">
+            <div className="min-w-0">
+              <AppIcon src={memberAppIcon.url} name="케리 회원앱" en="KERRI MEMBER" />
+            </div>
             <Link
               to="/member"
               className="group inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 hover:underline underline-offset-4"
