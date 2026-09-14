@@ -630,9 +630,34 @@ function Hero() {
                 "radial-gradient(closest-side, black, black 55%, transparent)",
             }}
           />
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-[0.8rem] font-semibold text-foreground/70 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            스포츠 강사를 위한 운영 플랫폼
+          <div
+            className="inline-flex items-center rounded-[12px] backdrop-blur-[10px]"
+            style={{
+              background: "rgba(247, 240, 233, 0.62)",
+              border: "1px solid rgba(255, 255, 255, 0.55)",
+              boxShadow: "0 4px 20px rgba(62, 43, 34, 0.04)",
+              padding: "10px 16px",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              className="mr-2.5 shrink-0"
+              style={{
+                width: "24px",
+                height: "2px",
+                borderRadius: "999px",
+                backgroundColor: "#C0755A",
+              }}
+            />
+            <span
+              className="text-[0.78rem] font-semibold sm:text-[0.83rem]"
+              style={{
+                color: "#3E2B22",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              스포츠 강사를 위한 운영 플랫폼
+            </span>
           </div>
 
           <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
