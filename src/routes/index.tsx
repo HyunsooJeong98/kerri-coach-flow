@@ -631,24 +631,26 @@ function Hero() {
             }}
           />
           <div
-            className="inline-flex items-center rounded-[12px] backdrop-blur-[10px]"
+            className="inline-flex items-center backdrop-blur-[12px]"
             style={{
-              background: "rgba(247, 240, 233, 0.62)",
-              border: "1px solid rgba(255, 255, 255, 0.55)",
-              boxShadow: "0 4px 20px rgba(62, 43, 34, 0.04)",
-              padding: "10px 16px",
+              background: "rgba(247, 240, 233, 0.76)",
+              border: "1px solid rgba(255, 255, 255, 0.70)",
+              borderRadius: "16px",
+              boxShadow: "0 6px 24px rgba(62, 43, 34, 0.05)",
+              padding: "10px 18px",
             }}
           >
             <span
               aria-hidden="true"
-              className="mr-2.5 shrink-0"
-              style={{
-                width: "24px",
-                height: "2px",
-                borderRadius: "999px",
-                backgroundColor: "#C0755A",
-              }}
-            />
+              className="mr-2.5 flex shrink-0 items-start"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="#C0755A" style={{ marginTop: "1px" }}>
+                <path d="M8 0c.35 4.3 3.7 7.65 8 8-4.3.35-7.65 3.7-8 8-.35-4.3-3.7-7.65-8-8 4.3-.35 7.65-3.7 8-8Z" />
+              </svg>
+              <svg width="7" height="7" viewBox="0 0 16 16" fill="#C0755A" className="ml-0.5">
+                <path d="M8 0c.35 4.3 3.7 7.65 8 8-4.3.35-7.65 3.7-8 8-.35-4.3-3.7-7.65-8-8 4.3-.35 7.65-3.7 8-8Z" />
+              </svg>
+            </span>
             <span
               className="text-[0.78rem] font-semibold sm:text-[0.83rem]"
               style={{
