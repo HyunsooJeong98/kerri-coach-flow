@@ -306,7 +306,7 @@ export function Nav() {
             </button>
           </div>
 
-          <nav className="flex flex-1 flex-col px-1 pb-6 pt-[clamp(2rem,8vh,4.5rem)] sm:px-2">
+          <nav className="flex flex-1 flex-col px-1 pb-6 pt-[clamp(0.75rem,3vh,1.5rem)] sm:px-2">
             <div className="flex flex-col">
             {mobileItems.map((i) =>
               i.isLink ? (
@@ -314,7 +314,7 @@ export function Nav() {
                   key={i.label}
                   to={i.to!}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-12 items-center py-2 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
+                  className="flex min-h-11 items-center py-1.5 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
                   style={{ letterSpacing: "-0.02em" }}
                 >
                   {i.label}
@@ -323,7 +323,7 @@ export function Nav() {
                 <button
                   key={i.label}
                   onClick={() => selectSection(i.id!)}
-                  className="flex min-h-12 items-center py-2 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
+                  className="flex min-h-11 items-center py-1.5 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
                   style={{ letterSpacing: "-0.02em" }}
                 >
                   {i.label}
@@ -334,7 +334,7 @@ export function Nav() {
 
             <button
               onClick={() => selectSection("install")}
-              className="mt-auto inline-flex min-h-12 w-fit items-center justify-center rounded-[15px] bg-primary px-7 py-3 text-[0.95rem] font-semibold text-primary-foreground transition-colors duration-200 hover:bg-[var(--clay-dark)]"
+              className="mt-auto mx-1.5 flex min-h-[58px] w-[calc(100%-0.75rem)] items-center justify-center rounded-[16px] bg-primary py-3.5 text-[1rem] font-semibold text-primary-foreground transition-colors duration-200 hover:bg-[var(--clay-dark)] sm:mx-3 sm:w-[calc(100%-1.5rem)]"
             >
               무료로 시작하기
             </button>
