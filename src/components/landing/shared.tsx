@@ -157,7 +157,14 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const goSection = useSectionNav();
-  const items = [
+  const mobileItems = [
+    { label: "서비스 소개", id: "empathy" },
+    { label: "코치앱", id: "features" },
+    { label: "회원앱", to: "/member", isLink: true },
+    { label: "요금제", to: "/pricing", isLink: true },
+    { label: "FAQ", id: "faq" },
+  ];
+  const desktopItems = [
     { label: "코치앱", id: "features" },
     { label: "회원앱", to: "/member", isLink: true },
     { label: "요금제", to: "/pricing", isLink: true },
@@ -172,9 +179,23 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  const selectSection = (id: string) => {
+    setOpen(false);
+    goSection(id);
+  };
+
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-500 ${
+      className={`sticky top-0 z-[60] transition-all duration-500 ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border/60"
           : "bg-transparent border-b border-transparent"
@@ -195,8 +216,8 @@ export function Nav() {
           <span className="truncate">KERRI</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
-          {items.map((i) =>
+        <nav className="hidden lg:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
+          {desktopItems.map((i) =>
             i.isLink ? (
               <Link
                 key={i.label}
@@ -224,7 +245,7 @@ export function Nav() {
         </nav>
 
         <button
-          className="md:hidden -mr-2 p-2 text-foreground transition-opacity duration-200 hover:opacity-70"
+          className="-mr-2 flex min-h-12 min-w-12 items-center justify-center text-foreground transition-opacity duration-200 hover:opacity-70 lg:hidden"
           aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -246,50 +267,79 @@ export function Nav() {
       </Container>
 
       <div
-        className={`md:hidden overflow-hidden border-t transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed inset-0 z-50 flex min-h-[100dvh] flex-col overflow-y-auto bg-background transition-[opacity,transform,visibility] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           open
-            ? "max-h-[28rem] opacity-100 translate-y-0 border-border/60"
-            : "max-h-0 opacity-0 -translate-y-1 border-transparent"
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0 pointer-events-none"
         }`}
         aria-hidden={!open}
         inert={!open}
       >
-        <div className="bg-background/95 backdrop-blur-xl">
-          <Container className="flex flex-col gap-1 py-6">
-            {items.map((i) =>
+        <Container className="flex min-h-[100dvh] flex-col py-0">
+          <div className="flex h-16 shrink-0 items-center justify-between">
+            <Link
+              to="/"
+              onClick={() => {
+                setOpen(false);
+                scrollTo("top");
+              }}
+              className="flex min-w-0 items-center gap-2 text-[1.15rem] font-extrabold leading-none text-foreground sm:gap-2.5 sm:text-[1.35rem]"
+              style={{ letterSpacing: "-0.05em" }}
+            >
+              <img
+                src={kerriLogo.url}
+                alt="KERRI 로고"
+                className="h-7 w-7 shrink-0 rounded-lg object-contain sm:h-8 sm:w-8"
+              />
+              <span className="truncate">KERRI</span>
+            </Link>
+            <button
+              type="button"
+              aria-label="메뉴 닫기"
+              onClick={() => setOpen(false)}
+              className="-mr-2 flex min-h-12 min-w-12 items-center justify-center text-foreground/70 transition-colors duration-200 hover:text-foreground"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="flex flex-1 flex-col px-1 pb-6 pt-[clamp(2rem,8vh,4.5rem)] sm:px-2">
+            <div className="flex flex-col">
+            {mobileItems.map((i) =>
               i.isLink ? (
                 <Link
                   key={i.label}
                   to={i.to!}
                   onClick={() => setOpen(false)}
-                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
+                  className="flex min-h-12 items-center py-2 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
+                  style={{ letterSpacing: "-0.02em" }}
                 >
                   {i.label}
                 </Link>
               ) : (
                 <button
                   key={i.label}
-                  onClick={() => {
-                    setOpen(false);
-                    setTimeout(() => goSection(i.id!), 60);
-                  }}
-                  className="border-b border-border/50 py-4 text-left text-[1.05rem] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
+                  onClick={() => selectSection(i.id!)}
+                  className="flex min-h-12 items-center py-2 text-left text-[1.12rem] font-medium text-[#3E2B22] transition-opacity duration-200 hover:opacity-60 sm:text-[1.2rem]"
+                  style={{ letterSpacing: "-0.02em" }}
                 >
                   {i.label}
                 </button>
               )
             )}
+            </div>
+
             <button
-              onClick={() => {
-                setOpen(false);
-                setTimeout(() => goSection("install"), 60);
-              }}
-              className="btn-base btn-primary mt-6 w-full"
+              onClick={() => selectSection("install")}
+              className="mt-auto inline-flex min-h-12 w-fit items-center justify-center rounded-[15px] bg-primary px-7 py-3 text-[0.95rem] font-semibold text-primary-foreground transition-colors duration-200 hover:bg-[var(--clay-dark)]"
             >
               무료로 시작하기
             </button>
-          </Container>
-        </div>
+          </nav>
+        </Container>
       </div>
     </header>
   );
