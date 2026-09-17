@@ -305,7 +305,7 @@ export function Footer() {
           <div><span className="text-muted-foreground">회사명</span> · 케리</div>
           <div><span className="text-muted-foreground">대표자</span> · 정현수</div>
           <div><span className="text-muted-foreground">사업자등록번호</span> · 214-20-87491</div>
-          <div><span className="text-muted-foreground">통신판매업 신고번호</span> · 추후 입력</div>
+          <div><span className="text-muted-foreground">통신판매업 신고번호</span> · 제2026-서울양천-1007호</div>
           <div>
             <span className="text-muted-foreground">고객문의</span> ·{" "}
             <a
