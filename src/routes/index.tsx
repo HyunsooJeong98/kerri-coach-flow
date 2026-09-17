@@ -641,17 +641,6 @@ function Hero() {
             }}
           >
             <span
-              aria-hidden="true"
-              className="mr-2.5 flex shrink-0 items-start"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="#C0755A" style={{ marginTop: "1px" }}>
-                <path d="M8 0c.35 4.3 3.7 7.65 8 8-4.3.35-7.65 3.7-8 8-.35-4.3-3.7-7.65-8-8 4.3-.35 7.65-3.7 8-8Z" />
-              </svg>
-              <svg width="7" height="7" viewBox="0 0 16 16" fill="#C0755A" className="ml-0.5">
-                <path d="M8 0c.35 4.3 3.7 7.65 8 8-4.3.35-7.65 3.7-8 8-.35-4.3-3.7-7.65-8-8 4.3-.35 7.65-3.7 8-8Z" />
-              </svg>
-            </span>
-            <span
               className="text-[0.78rem] font-semibold sm:text-[0.83rem]"
               style={{
                 color: "#3E2B22",
