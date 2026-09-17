@@ -157,12 +157,19 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const goSection = useSectionNav();
-  const items = [
+  const mobileItems = [
     { label: "서비스 소개", id: "empathy" },
     { label: "코치앱", id: "features" },
     { label: "회원앱", to: "/member", isLink: true },
     { label: "요금제", to: "/pricing", isLink: true },
     { label: "FAQ", id: "faq" },
+  ];
+  const desktopItems = [
+    { label: "코치앱", id: "features" },
+    { label: "회원앱", to: "/member", isLink: true },
+    { label: "요금제", to: "/pricing", isLink: true },
+    { label: "FAQ", id: "faq" },
+    { label: "계정 삭제", to: "/account-deletion", isLink: true },
   ];
 
   useEffect(() => {
@@ -210,7 +217,7 @@ export function Nav() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-10 text-[0.95rem] font-medium text-foreground/70">
-          {items.map((i) =>
+          {desktopItems.map((i) =>
             i.isLink ? (
               <Link
                 key={i.label}
@@ -301,7 +308,7 @@ export function Nav() {
 
           <nav className="flex flex-1 flex-col px-1 pb-6 pt-[clamp(2rem,8vh,4.5rem)] sm:px-2">
             <div className="flex flex-col">
-            {items.map((i) =>
+            {mobileItems.map((i) =>
               i.isLink ? (
                 <Link
                   key={i.label}
