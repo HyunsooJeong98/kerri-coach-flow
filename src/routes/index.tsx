@@ -680,7 +680,7 @@ function Hero() {
         </div>
 
         {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
-        <div id="simulator" className="flex justify-center">
+        <div id="simulator" className="flex justify-center scroll-mt-20">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
