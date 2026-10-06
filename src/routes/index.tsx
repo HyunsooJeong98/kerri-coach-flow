@@ -225,7 +225,7 @@ function Empathy() {
       solve: {
         caption: "KERRI가 해결합니다.",
         title: "AI가 레슨 내용을 기록으로 정리",
-        body: "레슨 중 코칭 내용을 AI가 정리해 회원별 레슨 기록으로 남겨줍니다.",
+        body: "레슨 중 강사의 피드백을 AI가 정리해 회원별 레슨 기록으로 남겨줍니다.",
       },
     },
     {
@@ -242,8 +242,8 @@ function Empathy() {
       p: "회원마다 남은 횟수를 확인하고 재등록 시기에 맞춰 일일이 연락하기 어렵습니다.",
       solve: {
         caption: "KERRI가 해결합니다.",
-        title: "재등록 시기를 놓치지 않게",
-        body: "남은 횟수를 기준으로 재등록 시기를 알려주고, 회원에게 재등록 안내 문자도 자동으로 발송합니다.",
+        title: "남은 횟수를 한눈에",
+        body: "회원별 남은 횟수를 한눈에 확인해, 재등록 안내가 필요한 회원을 놓치지 않게 챙길 수 있습니다.",
       },
     },
     {
@@ -251,8 +251,8 @@ function Empathy() {
       p: "회원이 많아질수록 지난 레슨 내용과 교정 포인트를 기억하고, 각 회원에게 맞는 다음 훈련까지 준비하기 어렵습니다.",
       solve: {
         caption: "KERRI가 해결합니다.",
-        title: "지난 기록부터 다음 훈련까지",
-        body: "지난 레슨 기록을 확인해 바로 이어서 코칭하고, 회원의 실력과 레슨 내용에 맞는 훈련 드릴을 추천합니다.",
+        title: "지난 기록에서 다음 레슨으로",
+        body: "회원별 지난 레슨 기록과 피드백을 확인해, 이어서 지도할 내용을 준비할 수 있습니다.",
       },
     },
   ];
@@ -266,12 +266,18 @@ function Empathy() {
     <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
       <Container>
         <SectionHead
-          eyebrow="코치의 고민"
+          eyebrow="강사의 마음"
           title={
             <>
-              레슨이 끝나도,
+              정성껏 가르친 만큼,
               <br />
-              코치의 일은 끝나지 않습니다.
+              회원도 느끼고 있을까요?
+            </>
+          }
+          body={
+            <>
+              회원마다 다른 고민을 기억하고, 더 나은 레슨을 위해 준비하는 당신.
+              그 정성이 수업 시간 안에서만 머물지 않도록, KERRI로 레슨 뒤에도 이어지는 케어를 시작하세요.
             </>
           }
           center
@@ -433,7 +439,7 @@ function MemberDemand() {
           </Reveal>
 
           {/* Two supporting cards with bar charts */}
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-5">
             <Reveal delay={80}>
               <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">90%</div>
@@ -447,18 +453,6 @@ function MemberDemand() {
               </div>
             </Reveal>
 
-            <Reveal delay={160}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
-                <div className="stat-lg text-primary">96.6%</div>
-                <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
-                  체계적인 레슨 기록과 맞춤 관리는 코치 선택에도 영향을 줍니다.
-                </p>
-                <p className="body-2 mt-3 max-w-[36ch] break-keep text-muted-foreground">
-                  체계적인 레슨 기록과 맞춤 관리가 있다면 지금 코치와 더 오래 함께하고 싶다고 답했습니다.
-                </p>
-                <BarChart value={96.6} label="코치 선택에 영향을 줌" />
-              </div>
-            </Reveal>
           </div>
         </div>
 
@@ -466,10 +460,10 @@ function MemberDemand() {
         <Reveal delay={120}>
           <div className="mt-18 text-center sm:mt-24">
             <p className="statement mx-auto max-w-[24ch] break-keep text-foreground">
-              잘 가르치는 것만큼, 잘 남기는 것도 중요합니다.
+              당신의 좋은 레슨,<br className="hidden sm:inline" /> 회원도 느낄 수 있도록.
             </p>
             <p className="body-2 mx-auto mt-6 max-w-[34ch] break-keep text-muted-foreground">
-              KERRI는 매번 사라지던 코칭을 회원의 레슨 기록으로 남깁니다.
+              수업 중의 피드백을 회원이 다시 확인할 수 있는 기록으로. KERRI가 당신의 세심한 지도를 레슨 뒤에도 이어줍니다.
             </p>
           </div>
         </Reveal>
@@ -494,7 +488,7 @@ const COMPARE_ROWS: {
     icon: FileText,
     label: "AI 레슨 기록",
     before: "기억하거나 직접 작성",
-    after: "AI가 레슨 내용을 자동으로 기록",
+    after: "AI가 레슨 내용을 정리해 레슨 기록으로 남김",
     strong: true,
   },
   {
@@ -508,14 +502,14 @@ const COMPARE_ROWS: {
     icon: Workflow,
     label: "다음 레슨 준비",
     before: "지난 수업을 기억과 메모에 의존",
-    after: "지난 레슨 기록을 이어서 코칭하고, 회원의 실력과 레슨 내용에 맞는 훈련 드릴까지 추천",
+    after: "회원별 지난 레슨 기록과 피드백을 확인하고 이어서 지도",
     strong: true,
   },
   {
     icon: TrendingUp,
-    label: "코칭 실적",
-    before: "오래 가르쳐도 나의 코칭 경험과 성과가 남기 어려움",
-    after: "레슨 기록과 코칭 실적이 쌓여 나의 코칭을 증명하는 데이터가 됩니다",
+    label: "코칭 기록",
+    before: "회원별 지도 내용과 피드백이 흩어져 관리됩니다.",
+    after: "회원별 레슨 기록을 모아 지난 지도 내용과 피드백을 확인할 수 있습니다.",
     strong: true,
   },
 ];
@@ -524,7 +518,17 @@ function Compare() {
   return (
     <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
-        <SectionHead eyebrow="기능 비교" title="코치의 일을 이렇게 바꿉니다" center />
+        <SectionHead
+          eyebrow="체계적인 레슨 관리"
+          title={
+            <>
+              더 체계적인 관리가,
+              <br />
+              당신의 전문성을 보여줍니다.
+            </>
+          }
+          center
+        />
 
         <Reveal delay={80}>
           <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
@@ -647,21 +651,36 @@ function Hero() {
                 letterSpacing: "-0.02em",
               }}
             >
-              스포츠 강사를 위한 운영 플랫폼
+              스포츠 강사를 위한 AI 레슨·회원 관리
             </span>
           </div>
 
           <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
-            평소처럼 <span className="text-primary">레슨만</span> 하세요.
+            회원에게
+            <br />
+            <span className="text-primary">신뢰받는 강사.</span>
           </h1>
 
-          <p className="lead mt-3 max-w-[26ch] break-keep sm:max-w-[34ch]">
-            회원 관리부터 AI 레슨 기록까지. 운영은 KERRI가 대신합니다.
+          <p className="lead mt-4 max-w-[30ch] break-keep sm:max-w-[36ch]">
+            횟수·일정·납부 내역은 투명하게,
+            <br />
+            지난 레슨과 피드백은 세심하게.
+            <br />
+            AI 레슨 기록과 회원 관리로 당신의 전문성을 회원에게 보여주세요.
           </p>
+
+          <div className="mt-7 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+            <button onClick={() => scrollTo("install")} className="btn-base btn-primary">
+              케리 코치앱 설치하기
+            </button>
+            <button onClick={() => scrollTo("simulator")} className="btn-base btn-ghost">
+              AI 레슨 기록 체험하기
+            </button>
+          </div>
         </div>
 
         {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
-        <div className="flex justify-center">
+        <div id="simulator" className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
@@ -759,16 +778,17 @@ function Ops() {
     >
       <Container>
         <SectionHead
-          eyebrow="코치앱 기능"
+          eyebrow="케리 코치앱"
           title={
             <>
-              레슨부터 회원 운영까지{" "}
+              세심한 회원 케어,
+              <br />
               <span className="text-primary">KERRI 하나로.</span>
             </>
           }
           body={
             <>
-              실제 KERRI 앱 화면으로 확인하세요. 레슨 기록, 일정, 결제, 알림까지 한 곳에서 관리합니다.
+              AI 레슨 기록부터 일정·횟수·납부 내역까지. 체계적인 회원 관리를 실제 앱 화면으로 확인하세요.
             </>
           }
         />
@@ -778,7 +798,7 @@ function Ops() {
           <div className="mt-16 grid items-center gap-10 lg:mt-24 lg:grid-cols-[1fr_46%] lg:gap-16">
             <FeatureCopy
               num="01"
-              message="오늘의 레슨 운영을 한눈에"
+              message="오늘의 레슨과 회원 현황을 한눈에."
               title="홈 대시보드"
               desc="회원 현황과 오늘 레슨을 한눈에 확인"
             />
@@ -800,13 +820,13 @@ function Ops() {
             <div className="space-y-10">
               <FeatureCopy
                 num="02"
-                message="놓치기 쉬운 운영은 자동으로"
+                message="필요한 알림을 간편하게 설정하세요."
                 title="알림 설정"
-                desc="레슨 전날, 당일, 재등록 알림 관리"
+                desc="레슨 전날·당일, 재등록 알림 항목을 켜고 끄기"
               />
               <FeatureCopy
                 num="03"
-                message="결제와 미납까지 한곳에서"
+                message="누가, 언제, 얼마를 납부했는지 명확하게."
                 title="결제 내역 관리"
                 desc="회원별 결제와 미납 현황 관리"
               />
@@ -848,7 +868,7 @@ function Ops() {
             <FeatureCopy
               className="order-1 lg:order-2"
               num="04"
-              message="복잡한 레슨 일정도 간편하게"
+              message="복잡한 일정도 체계적으로."
               title="스케줄 관리"
               desc="일일 · 주간 · 월간 레슨 일정 관리"
             />
@@ -863,12 +883,12 @@ function Ops() {
             <div className="mx-auto max-w-[720px] text-center">
               <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
               <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
-                코칭이 끝나도,
+                당신의 피드백,
                 <br />
-                <span className="text-primary">기록은 남습니다.</span>
+                <span className="text-primary">레슨 뒤에도 이어지도록.</span>
               </h3>
               <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리합니다.
+                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 내용을 검토하고 회원에게 피드백을 전달하세요.
               </p>
             </div>
           </Reveal>
@@ -911,31 +931,31 @@ function Ops() {
 function Impact() {
   const cards = [
     {
-      icon: TrendingUp,
-      title: "재등록률 향상",
-      desc: "개인 맞춤 레슨 기록과 지속적인 케어로\n회원이 꾸준히 레슨을 이어갑니다.",
-    },
-    {
       icon: ShieldCheck,
-      title: "회원과의 신뢰",
-      desc: "레슨 횟수 · 일정 · 결제 · 레슨 기록이\n투명하게 관리되어 회원과의 신뢰를 높입니다.",
+      title: "믿을 수 있는 강사",
+      desc: "일정·출석·남은 횟수·납부 내역을 명확하게 관리하세요. 회원이 안심하고 레슨에 집중할 수 있도록.",
     },
     {
-      icon: Database,
-      title: "코칭 데이터 자산화",
-      desc: "앱을 사용할수록 회원별 코칭 데이터가 쌓여\n나의 코칭을 증명하는 자산이 됩니다.",
+      icon: History,
+      title: "나를 기억하는 강사",
+      desc: "지난 레슨과 피드백을 확인해, 회원에게 필요한 지도를 이어가세요.",
+    },
+    {
+      icon: TrendingUp,
+      title: "성장을 챙기는 강사",
+      desc: "잘한 점과 연습할 내용을 기록으로 남기세요. 회원과 함께 변화를 살펴보고 다음 연습 방향을 잡을 수 있도록.",
     },
     {
       icon: Workflow,
-      title: "운영 자동화",
-      desc: "일정 · 횟수 · 결제 · 알림까지\n놓치지 않고 한 번에 관리합니다.",
+      title: "레슨에 집중하는 강사",
+      desc: "회원·일정·횟수·납부 관리를 한곳에서. 확인하는 수고를 줄이고 회원에게 더 집중하세요.",
     },
   ];
 
   return (
     <Section id="impact">
       <Container>
-        <SectionHead eyebrow="기대 효과" title="KERRI를 사용하면 달라집니다." center />
+        <SectionHead eyebrow="회원이 느끼는 가치" title="회원이 느끼는 당신의 차이." center />
         <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
           {cards.map((c, idx) => {
             const Icon = c.icon;
@@ -983,7 +1003,9 @@ function AppSection() {
           eyebrow="다운로드"
           title={
             <>
-              코치와 회원, 모두를 위한 플랫폼
+              강사의 세심한 관리,
+              <br />
+              회원의 손안까지.
             </>
           }
         />
@@ -1018,7 +1040,7 @@ function FAQ() {
       q: "레슨 전체를 녹음해야 하나요?",
       a: (
         <>
-          아니요. 코치가 편한 방식으로 기록할 수 있습니다.
+          아니요. 강사가 편한 방식으로 기록할 수 있습니다.
           <br />
           레슨 전체 내용을 남기고 싶다면 수업 시간 동안 녹음하고,
           <br />
@@ -1046,7 +1068,7 @@ function FAQ() {
       q: "회원도 앱을 설치해야 하나요?",
       a: (
         <>
-          네. 코치가 회원을 초대하면
+          네. 강사가 회원을 초대하면
           <br />
           KERRI 코치앱과 회원앱이 서로 연결됩니다.
           <br />
@@ -1064,7 +1086,7 @@ function FAQ() {
           <br />
           테니스, 골프, 배드민턴, 탁구, PT 등
           <br />
-          코치와 회원이 레슨을 진행하는 다양한 스포츠에서 사용할 수 있습니다.
+          강사와 회원이 레슨을 진행하는 다양한 스포츠에서 사용할 수 있습니다.
         </>
       ),
     },
@@ -1143,13 +1165,13 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-4xl px-[clamp(1.125rem,4.5vw,2.5rem)] text-center text-[var(--cream)] lg:px-10">
         <Reveal>
           <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
-            회원 관리부터 AI 레슨 기록까지. 케리 하나면 충분합니다.
+            나를 제대로 챙겨주는 강사.
           </h2>
           <p className="body-1 mx-auto mt-8 max-w-[28ch] break-keep opacity-85">
-            코치는 레슨에만 집중하고, 운영은 KERRI가 관리합니다.
+            지난 피드백을 기억하고, 일정과 남은 횟수를 명확하게. 세심한 회원 케어를 KERRI로 시작하세요.
           </p>
           <button onClick={() => scrollTo("install")} className="btn-base btn-light mt-12">
-            코치앱 설치하기
+            케리 코치앱 설치하기
             <ArrowRight size={18} strokeWidth={1.75} />
           </button>
         </Reveal>
@@ -1174,7 +1196,7 @@ function StickyMobileCTA() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-background via-background/95 to-transparent p-4 pt-10 md:hidden">
       <button onClick={() => scrollTo("install")} className="btn-base btn-primary w-full">
-        앱 설치하기
+        케리 코치앱 설치하기
       </button>
     </div>
   );
