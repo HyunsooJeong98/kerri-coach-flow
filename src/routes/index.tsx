@@ -570,9 +570,9 @@ function MemberDemand() {
               <br />
               강사에게는 변화와 다음 목표를 챙길 기록을
               <span className="block h-3" />
-              오늘의 레슨이 다음 수업으로 이어지도록
+              회원 한 명 한 명을 챙기는 관리로
               <br />
-              KERRI로 기록하고 관리하세요
+              재등록률을 높여보세요
             </p>
           </div>
         </Reveal>
