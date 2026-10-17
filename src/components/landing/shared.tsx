@@ -240,7 +240,7 @@ export function Nav() {
             onClick={() => goSection("install")}
             className="btn-base btn-primary !min-h-[3rem] !px-6 !text-[0.95rem] !rounded-[0.95rem]"
           >
-            무료로 시작하기
+            케리 코치앱 설치하기
           </button>
         </nav>
 
@@ -336,7 +336,7 @@ export function Nav() {
               onClick={() => selectSection("install")}
               className="mt-auto mx-1.5 flex min-h-[58px] w-[calc(100%-0.75rem)] items-center justify-center rounded-[16px] bg-primary py-3.5 text-[1rem] font-semibold text-primary-foreground transition-colors duration-200 hover:bg-[var(--clay-dark)] sm:mx-3 sm:w-[calc(100%-1.5rem)]"
             >
-              무료로 시작하기
+              케리 코치앱 설치하기
             </button>
           </nav>
         </Container>
