@@ -433,7 +433,7 @@ function DonutChart({ value, size = 120 }: { value: number; size?: number }) {
   );
 }
 
-function BarChart({ value, label }: { value: number; label: string }) {
+function BarChart({ value, label }: { value: number; label: ReactNode }) {
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between text-[0.75rem] font-semibold uppercase tracking-wider text-muted-foreground sm:text-[0.8rem]">
@@ -456,26 +456,33 @@ function MemberDemand() {
       <Container>
         <div className="text-center">
           <div className="eyebrow">회원 설문</div>
-          <p className="mt-6 text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-[0.9rem]">
-            내가 가르친 내용,
-          </p>
-          <h2 className="display-2 mx-auto mt-4 max-w-[22ch] break-keep text-foreground">
-            회원은 얼마나 기억하고 있을까요?
+          <h2 className="display-2 mx-auto mt-5 max-w-[19em] break-keep text-foreground">
+            열심히 가르친 오늘의 레슨
+            <br />
+            회원의 기억에만 맡기고 있나요
           </h2>
         </div>
 
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
-          {/* Main card — 55%: opening hook */}
+          {/* Main card — 78%: opening hook */}
           <Reveal>
             <div className="rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0 max-w-2xl">
-                  <div className="stat-xl text-primary">55%</div>
-                  <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
-                    2명 중 1명은 배운 내용을 잊어버린 경험이 있습니다.
+                  <div className="stat-xl text-primary">78%</div>
+                  <p className="heading-3 mt-5 max-w-[18em] break-keep text-foreground">
+                    회원 10명 중 약 8명
+                    <br />
+                    배운 내용을 잊어버린 경험이 있습니다
                   </p>
-                  <p className="body-2 mt-3 max-w-[34ch] break-keep text-muted-foreground">
-                    레슨이 끝난 뒤 배운 내용이 기억나지 않아 아쉬웠던 경험이 있습니다.
+                  <p className="body-2 mt-3 max-w-[21em] break-keep text-muted-foreground">
+                    수업 중에는 이해했던 설명도
+                    <br />
+                    혼자 연습할 때는 떠오르지 않을 수 있습니다
+                    <br />
+                    다시 볼 기록이 없다면
+                    <br />
+                    정성껏 알려준 내용도 기억에만 의존하게 됩니다
                   </p>
                   <p className="mt-5 text-[0.75rem] font-medium uppercase tracking-wider text-muted-foreground/80 sm:text-[0.8rem]">
                     개인 레슨 이용자 설문 결과
@@ -483,9 +490,9 @@ function MemberDemand() {
                 </div>
                 <div className="flex shrink-0 items-center justify-center sm:pl-6">
                   <div className="relative">
-                    <DonutChart value={55} size={144} />
+                    <DonutChart value={78} size={144} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-[1.2rem] font-extrabold text-primary sm:text-[1.4rem]">55</span>
+                      <span className="text-[1.2rem] font-extrabold text-primary sm:text-[1.4rem]">78</span>
                     </div>
                   </div>
                 </div>
@@ -498,26 +505,51 @@ function MemberDemand() {
             <Reveal delay={80}>
               <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">90%</div>
-                <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
-                  10명 중 9명은 레슨 피드백을 말로만 전달합니다.
+                <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
+                  레슨 설명은 말로
+                  <br />
+                  다시 볼 기록은 남기고 있나요
                 </p>
-                <p className="body-2 mt-3 max-w-[36ch] break-keep text-muted-foreground">
-                  레슨 중 피드백은 대부분 말로 전달되고, 회원이 다시 확인할 수 있는 기록으로는 남지 않습니다.
+                <p className="body-2 mt-3 max-w-[26em] break-keep text-muted-foreground">
+                  설문 응답자의 90%가
+                  <br />
+                  레슨 내용을 말로만 전달받는다고 답했습니다
+                  <span className="block h-3" />
+                  오늘 짚어준 자세와 연습할 내용
+                  <br />
+                  수업이 끝난 뒤에도 회원이 <span className="hidden md:block lg:hidden" />꺼내 볼 수 있도록 남겨주세요
                 </p>
-                <BarChart value={90} label="피드백을 말로만 전달" />
+                <BarChart value={90} label="레슨 내용을 말로만 전달받음" />
               </div>
             </Reveal>
 
             <Reveal delay={160}>
               <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">96.6%</div>
-                <p className="heading-3 mt-5 max-w-[24ch] break-keep text-foreground">
-                  체계적인 레슨 기록과 맞춤 관리가 있다면, 지금 강사와 더 오래 함께하고 싶습니다.
+                <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
+                  체계적으로 챙겨주는 강사와
+                  <br />
+                  더 오래 함께하고 싶으니까
                 </p>
-                <p className="body-2 mt-3 max-w-[36ch] break-keep text-muted-foreground">
-                  응답자 대부분이 체계적인 기록과 관리가 강사와 함께하는 기간에 영향을 준다고 답했습니다.
+                <p className="body-2 mt-3 max-w-[23em] break-keep text-muted-foreground">
+                  응답자의 96.6%가
+                  <br />
+                  체계적인 레슨 기록과 맞춤 관리가 있다면
+                  <br />
+                  현재 강사와 더 오래 <span className="hidden md:block lg:hidden" />함께하고 싶다고 답했습니다
+                  <span className="block h-3" />
+                  회원이 원하는 세심한 관리
+                  <br />
+                  레슨 기록과 성장 확인으로 보여주세요
                 </p>
-                <BarChart value={96.6} label="더 오래 함께하고 싶음" />
+                <BarChart
+                  value={96.6}
+                  label={
+                    <>
+                      기록과 맞춤 관리가 있다면 <span className="hidden md:block lg:hidden" />더 오래 함께하고 싶음
+                    </>
+                  }
+                />
               </div>
             </Reveal>
           </div>
@@ -526,14 +558,21 @@ function MemberDemand() {
         {/* Closing brand message */}
         <Reveal delay={120}>
           <div className="mt-18 text-center sm:mt-24">
-            <p className="statement mx-auto max-w-[24ch] break-keep text-foreground">
-              당신의 좋은 레슨,
+            <p className="statement mx-auto max-w-[15em] break-keep text-foreground">
+              좋은 레슨을 했다는 것
               <br />
-              회원도 느낄 수 있도록.
+              회원도 확인할 수 있어야 하니까
             </p>
-            <p className="body-2 mx-auto mt-6 max-w-[34ch] break-keep text-muted-foreground">
-              수업 중의 피드백을 회원이 다시 확인할 수 있는 기록으로.
-              KERRI가 당신의 세심한 지도를 레슨 뒤에도 이어줍니다.
+            <p className="body-2 mx-auto mt-6 max-w-[21em] break-keep text-muted-foreground">
+              음성 녹음이나 짧은 입력을 AI 레슨 리포트로
+              <br />
+              회원에게는 다시 꺼내 볼 수업 내용을
+              <br />
+              강사에게는 변화와 다음 목표를 챙길 기록을
+              <span className="block h-3" />
+              오늘의 레슨이 다음 수업으로 이어지도록
+              <br />
+              KERRI로 기록하고 관리하세요
             </p>
           </div>
         </Reveal>
