@@ -890,7 +890,7 @@ function Ops() {
     <Section
       id="features"
       tone="cream"
-      className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28"
+      className=""
     >
       <Container>
         <SectionHead
@@ -1113,7 +1113,7 @@ function AppSection() {
   }, [pulse]);
 
   return (
-    <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36 !pb-16 sm:!pb-20 lg:!pb-24">
+    <Section id="install" tone="cream">
       <Container>
         <SectionHead
           eyebrow="다운로드"
