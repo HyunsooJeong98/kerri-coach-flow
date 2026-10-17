@@ -344,9 +344,8 @@
 
 @utility reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @utility reveal-in {
@@ -375,7 +374,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .section-fade, .device-float { animation: none !important; }
 }
 
 @keyframes fadeUp {
