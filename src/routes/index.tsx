@@ -244,7 +244,7 @@ function Empathy() {
             쌓인 레슨 기록으로
             <br />
             회원이 나아진 점과
-            <span className="hidden sm:block lg:hidden" />
+            <span className="hidden sm:block lg:hidden" />{" "}
             반복되는 교정 포인트를 살펴보고
             <br />
             다음 수업에서 챙길 목표까지 이어가세요
