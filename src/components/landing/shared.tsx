@@ -69,6 +69,19 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setShown(true);
+      return;
+    }
+    // 이미 화면 안/위에 있으면 즉시 표시
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 1.1) {
+      setShown(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -76,7 +89,8 @@ export function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.01, rootMargin: "0px 0px 0px 0px" },
+      // 화면에 들어오기 전에 미리 표시 → 빈 화면 구간 없음
+      { threshold: 0, rootMargin: "0px 0px 25% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -86,7 +100,7 @@ export function Reveal({
   return (
     <Comp
       ref={ref as any}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${Math.min(delay, 120)}ms` }}
       className={`reveal ${shown ? "reveal-in" : ""} ${className}`}
     >
       {children}
