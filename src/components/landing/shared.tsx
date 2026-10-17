@@ -133,7 +133,7 @@ export function SectionHead({
   body,
   center = false,
 }: {
-  eyebrow?: string;
+  eyebrow?: ReactNode;
   title: ReactNode;
   body?: ReactNode;
   center?: boolean;
