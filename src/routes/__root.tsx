@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "케리 KERRI | 스포츠 강사를 위한 운영 플랫폼" },
+      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
       {
         name: "description",
         content:
