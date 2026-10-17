@@ -452,7 +452,7 @@ function BarChart({ value, label }: { value: number; label: ReactNode }) {
 
 function MemberDemand() {
   return (
-    <Section id="member-demand" className="!py-24 sm:!py-32 lg:!py-40">
+    <Section id="member-demand" className="pt-24 pb-14 sm:pt-32 sm:pb-18 lg:pt-40 lg:pb-20">
       <Container>
         <div className="text-center">
           <div className="eyebrow">회원 설문</div>
@@ -557,22 +557,11 @@ function MemberDemand() {
 
         {/* Closing brand message */}
         <Reveal delay={120}>
-          <div className="mt-18 text-center sm:mt-24">
-            <p className="statement mx-auto max-w-[15em] break-keep text-foreground">
-              좋은 레슨을 했다는 것
-              <br />
-              회원도 확인할 수 있어야 하니까
-            </p>
-            <p className="body-2 mx-auto mt-6 max-w-[21em] break-keep text-muted-foreground">
-              음성 녹음이나 짧은 입력을 AI 레슨 리포트로
-              <br />
-              회원에게는 다시 꺼내 볼 수업 내용을
-              <br />
-              강사에게는 변화와 다음 목표를 챙길 기록을
-              <span className="block h-3" />
-              회원 한 명 한 명을 챙기는 관리로
-              <br />
-              재등록률을 높여보세요
+          <div className="mt-14 text-center sm:mt-16">
+            <p className="statement mx-auto max-w-[34em] break-keep text-foreground">
+              <span>회원 한 명 한 명을 챙기는 관리로</span>
+              <br className="lg:hidden" />{" "}
+              <span className="text-primary">재등록률을 높여보세요</span>
             </p>
           </div>
         </Reveal>
