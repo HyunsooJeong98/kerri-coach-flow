@@ -222,7 +222,7 @@ function Empathy() {
       h: "“오늘 레슨 내용 보내드려야 하는데…”",
       p: "정리할 시간이 없으셨나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
+        caption: "KERRI가 해결합니다",
         title: (
           <>
             레슨 기록을 전하고
@@ -253,8 +253,8 @@ function Empathy() {
       h: "“저 몇 회 남았어요?”",
       p: "물어볼 때마다 다시 확인하고 있나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "일정·출석·남은 횟수·납부 내역을 한곳에서 관리하세요.",
+        caption: "KERRI가 해결합니다",
+        title: "일정·출석·남은 횟수·납부 내역을 한곳에서 관리하세요",
         body: (
           <>
             카톡을 뒤지고, 장부를 열고, 출석을 세어보고.
@@ -270,8 +270,8 @@ function Empathy() {
       h: "“벌써 마지막 레슨이었네.”",
       p: "재등록 이야기, 또 늦어졌나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "마지막 수업 전에, 다음 레슨을 미리 이야기하세요.",
+        caption: "KERRI가 해결합니다",
+        title: "마지막 수업 전에 다음 레슨을 미리 이야기하세요",
         body: (
           <>
             오늘 수업을 챙기다 보면
@@ -289,8 +289,8 @@ function Empathy() {
       h: "“지난번에 어디까지 했더라?”",
       p: "수업 직전, 기억을 더듬고 있나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "회원이 다시 설명하기 전에, 지난 레슨부터 챙기는 강사.",
+        caption: "KERRI가 해결합니다",
+        title: "회원이 다시 설명하기 전에 지난 레슨부터 챙기는 강사",
         body: (
           <>
             AI가 회원별 레슨 리포트에서
@@ -897,9 +897,9 @@ function Ops() {
           eyebrow="케리 코치앱"
           title={
             <>
-              세심한 회원 케어,
+              세심한 회원 케어
               <br />
-              <span className="text-primary">KERRI 하나로.</span>
+              <span className="text-primary">KERRI 하나로</span>
             </>
           }
           body={
@@ -1119,9 +1119,9 @@ function AppSection() {
           eyebrow="다운로드"
           title={
             <>
-              강사의 세심한 관리,
+              강사의 세심한 관리
               <br />
-              회원의 손안까지.
+              회원의 손안까지
             </>
           }
         />
