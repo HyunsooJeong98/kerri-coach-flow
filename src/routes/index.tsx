@@ -560,7 +560,7 @@ function MemberDemand() {
           <div className="mt-14 text-center sm:mt-16">
             <p className="statement mx-auto max-w-[34em] break-keep text-foreground">
               <span>회원 한 명 한 명을 챙기는 관리로</span>
-              <br className="lg:hidden" />
+              <br className="lg:hidden" />{" "}
               <span className="text-primary">재등록률을 높여보세요</span>
             </p>
           </div>
