@@ -324,7 +324,7 @@ function Empathy() {
             <>
               잘 가르치는 건 기본
               <br />
-              잘 챙기는 강사로 기억되세요
+              <span className="text-primary">잘 챙기는 강사로 기억되세요</span>
             </>
           }
           body={
