@@ -118,7 +118,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative py-28 sm:py-32 lg:py-40 ${
+      className={`relative py-16 lg:py-24 ${
         tone === "cream" ? "cream-band noise" : ""
       } ${className}`}
     >
@@ -141,7 +141,7 @@ export function SectionHead({
   return (
     <Reveal className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && <div className="eyebrow">{eyebrow}</div>}
-      <h2 className={`display-2 break-keep ${center ? "mx-auto" : ""} max-w-[22ch] ${eyebrow ? "mt-5" : ""}`}>
+      <h2 className={`display-2 break-keep ${center ? "mx-auto" : ""} max-w-[22ch] ${eyebrow ? "mt-4" : ""}`}>
         {title}
       </h2>
       {body && (
