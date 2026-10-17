@@ -517,7 +517,7 @@ function MemberDemand() {
                   <span className="block h-3" />
                   오늘 짚어준 자세와 연습할 내용
                   <br />
-                  수업이 끝난 뒤에도 회원이 꺼내 볼 수 있도록 남겨주세요
+                  수업이 끝난 뒤에도 회원이 <span className="hidden md:block lg:hidden" />꺼내 볼 수 있도록 남겨주세요
                 </p>
                 <BarChart value={90} label="레슨 내용을 말로만 전달받음" />
               </div>
@@ -536,7 +536,7 @@ function MemberDemand() {
                   <br />
                   체계적인 레슨 기록과 맞춤 관리가 있다면
                   <br />
-                  현재 강사와 더 오래 함께하고 싶다고 답했습니다
+                  현재 강사와 더 오래 <span className="hidden md:block lg:hidden" />함께하고 싶다고 답했습니다
                   <span className="block h-3" />
                   회원이 원하는 세심한 관리
                   <br />
