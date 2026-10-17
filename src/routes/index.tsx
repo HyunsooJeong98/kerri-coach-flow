@@ -1266,6 +1266,18 @@ function FAQ() {
             })}
           </div>
         </Reveal>
+        <p className="mt-6 break-keep text-center text-[0.875rem] leading-[1.75] text-muted-foreground">
+          더 궁금한 점이 있으신가요?
+          <br />
+          <a
+            href="http://pf.kakao.com/_CrxgwX"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary transition-colors duration-200 hover:text-[var(--clay-dark)]"
+          >
+            케리(KERRI) 카카오톡 채널
+          </a>을 추가하고 편하게 문의해주세요
+        </p>
       </div>
     </Section>
   );
