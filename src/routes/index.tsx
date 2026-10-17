@@ -433,7 +433,7 @@ function DonutChart({ value, size = 120 }: { value: number; size?: number }) {
   );
 }
 
-function BarChart({ value, label }: { value: number; label: string }) {
+function BarChart({ value, label }: { value: number; label: ReactNode }) {
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between text-[0.75rem] font-semibold uppercase tracking-wider text-muted-foreground sm:text-[0.8rem]">
@@ -542,7 +542,14 @@ function MemberDemand() {
                   <br />
                   레슨 기록과 성장 확인으로 보여주세요
                 </p>
-                <BarChart value={96.6} label="기록과 맞춤 관리가 있다면 더 오래 함께하고 싶음" />
+                <BarChart
+                  value={96.6}
+                  label={
+                    <>
+                      기록과 맞춤 관리가 있다면 <span className="hidden md:block lg:hidden" />더 오래 함께하고 싶음
+                    </>
+                  }
+                />
               </div>
             </Reveal>
           </div>
