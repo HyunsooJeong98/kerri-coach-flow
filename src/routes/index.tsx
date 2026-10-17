@@ -342,8 +342,8 @@ function Empathy() {
             return (
               <Reveal key={i} delay={i * 80}>
                 <div
-                  className={`h-full overflow-hidden rounded-[1.5rem] border border-border/50 bg-card shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-shadow duration-300 ${
-                    isOpen ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.2)]" : ""
+                  className={`h-full overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card shadow-[var(--shadow-soft)] transition-shadow duration-300 ${
+                    isOpen ? "ring-1 ring-primary/50" : ""
                   }`}
                 >
                   <button
@@ -465,7 +465,7 @@ function MemberDemand() {
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
           {/* Main card — 78%: opening hook */}
           <Reveal>
-            <div className="rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
+            <div className="rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0 max-w-2xl">
                   <div className="stat-xl text-primary">78%</div>
@@ -502,7 +502,7 @@ function MemberDemand() {
           {/* Two supporting cards with bar charts */}
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal delay={80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+              <div className="h-full rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">90%</div>
                 <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
                   레슨 설명은 말로
@@ -523,7 +523,7 @@ function MemberDemand() {
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+              <div className="h-full rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">96.6%</div>
                 <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
                   체계적으로 챙겨주는 강사와
@@ -621,7 +621,7 @@ function Compare() {
         <Reveal delay={80}>
           {/* PC: 3열 비교표 */}
           <div
-            className={`mt-14 hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card sm:mt-18 lg:mt-20 lg:block`}
+            className={`mt-10 hidden overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card lg:block`}
           >
             <div className={`grid border-b border-border/50 ${COMPARE_COLS}`}>
               <div className="px-5 pb-4 pt-7 lg:px-6">
@@ -676,7 +676,7 @@ function Compare() {
               return (
                 <div
                   key={row.label}
-                  className="overflow-hidden rounded-[1.25rem] border border-border/60 bg-card"
+                  className="overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card"
                 >
                   <div className="flex min-w-0 items-center gap-2.5 px-4 pb-2.5 pt-3.5">
                     <Icon
@@ -1077,7 +1077,7 @@ function Impact() {
             const Icon = c.icon;
             return (
               <Reveal key={c.title} delay={idx * 80}>
-                <div className="surface surface-hover h-full rounded-[1.5rem] p-[clamp(1rem,3.6vw,1.75rem)]">
+                <div className="surface surface-hover h-full rounded-[20px] lg:rounded-[24px] p-[clamp(1rem,3.6vw,1.75rem)]">
                   <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary sm:h-11 sm:w-11">
                     <Icon size={22} strokeWidth={1.6} />
                   </div>
@@ -1238,7 +1238,7 @@ function FAQ() {
           }
         />
         <Reveal delay={80}>
-          <div className="surface mt-16 divide-y divide-border/60 overflow-hidden rounded-[1.5rem]">
+          <div className="surface mt-8 lg:mt-10 divide-y divide-border/60 overflow-hidden rounded-[20px] lg:rounded-[24px]">
             {items.map((it, idx) => {
               const isOpen = open === idx;
               return (
