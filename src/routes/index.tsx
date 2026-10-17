@@ -706,14 +706,14 @@ function Compare() {
 
         <Reveal delay={80}>
           {/* PC: 3열 비교표 */}
-          <div className="mt-14 hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card md:block sm:mt-18 lg:mt-20">
-            <div className="grid grid-cols-[18%_41%_41%] border-b border-border/50">
-              <div className="px-6 pb-4 pt-7 lg:px-9">
+          <div className="mt-14 hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card lg:block sm:mt-18 lg:mt-20">
+            <div className="grid grid-cols-[20%_40%_40%] border-b border-border/50 xl:grid-cols-[18%_41%_41%]">
+              <div className="px-5 pb-4 pt-7 lg:px-6">
                 <div className="text-[0.78rem] font-semibold tracking-wide text-muted-foreground">
                   비교 항목
                 </div>
               </div>
-              <div className="px-6 pb-4 pt-7 lg:px-9">
+              <div className="px-5 pb-4 pt-7 lg:px-7">
                 <div className="text-[0.86rem] font-bold tracking-tight text-foreground">
                   기존 방식
                 </div>
@@ -721,7 +721,7 @@ function Compare() {
                   엑셀 · 카카오톡 · 구글 스프레드시트 · 운영 관리 앱
                 </div>
               </div>
-              <div className="bg-primary px-6 pb-4 pt-7 lg:px-9">
+              <div className="bg-primary px-5 pb-4 pt-7 lg:px-7">
                 <div className="text-[0.92rem] font-bold tracking-tight text-primary-foreground">
                   KERRI
                 </div>
@@ -732,8 +732,8 @@ function Compare() {
               {COMPARE_ROWS.map((row) => {
                 const Icon = row.icon;
                 return (
-                  <div key={row.label} className="grid grid-cols-[18%_41%_41%]">
-                    <div className="px-6 py-6 lg:px-9">
+                  <div key={row.label} className="grid grid-cols-[20%_40%_40%] xl:grid-cols-[18%_41%_41%]">
+                    <div className="px-5 py-6 lg:px-6">
                       <div className="flex min-w-0 items-center gap-2.5">
                         <Icon
                           className="h-[18px] w-[18px] shrink-0 text-primary"
@@ -744,10 +744,10 @@ function Compare() {
                         </span>
                       </div>
                     </div>
-                    <div className="body-2 break-keep px-6 py-6 text-muted-foreground lg:px-9">
+                    <div className="body-2 break-keep px-5 py-6 text-muted-foreground lg:px-7">
                       {row.before}
                     </div>
-                    <div className="body-2 break-keep bg-primary/[0.06] px-6 py-6 text-foreground lg:px-9">
+                    <div className="body-2 break-keep bg-primary/[0.06] px-5 py-6 text-foreground lg:px-7">
                       {row.after}
                     </div>
                   </div>
@@ -757,7 +757,7 @@ function Compare() {
           </div>
 
           {/* 모바일: 항목별 비교 카드 */}
-          <div className="mt-10 md:hidden">
+          <div className="mt-10 lg:hidden">
             <p className="text-center text-[0.72rem] leading-relaxed break-keep font-medium tracking-wide text-muted-foreground">
               엑셀 · 카카오톡 · 구글 스프레드시트 · 운영 관리 앱
             </p>
