@@ -785,9 +785,9 @@ function Hero() {
           </h1>
 
           <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
-            횟수·일정·납부 내역은 투명하게,
+            횟수·일정·납부 내역은 투명하게
             <br />
-            지난 레슨과 피드백은 세심하게
+            회원별 레슨 기록은 세심하게
             <br />
             AI 레슨 기록과 회원 관리로
             <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요
@@ -999,12 +999,12 @@ function Ops() {
             <div className="mx-auto max-w-[720px] text-center">
               <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
               <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
-                당신의 피드백,
+                당신의 레슨을
                 <br />
-                <span className="text-primary">레슨 뒤에도 이어지도록.</span>
+                <span className="text-primary">다시 볼 수 있는 기록으로</span>
               </h3>
               <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 내용을 검토하고 회원에게 피드백을 전달하세요.
+                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 정리된 레슨 기록을 검토하고 회원에게 전달하세요.
               </p>
             </div>
           </Reveal>
@@ -1054,7 +1054,7 @@ function Impact() {
     {
       icon: ShieldCheck,
       title: "나를 기억하는 강사",
-      desc: "지난 레슨과 피드백을 확인해, 회원에게 필요한 지도를 이어가세요.",
+      desc: "회원별 레슨 기록을 확인해 회원에게 필요한 지도를 이어가세요.",
     },
     {
       icon: Database,
@@ -1299,10 +1299,10 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-4xl px-[clamp(1.125rem,4.5vw,2.5rem)] text-center text-[var(--cream)] lg:px-10">
         <Reveal>
           <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
-            나를 제대로 챙겨주는 강사.
+            나를 제대로 챙겨주는 강사
           </h2>
           <p className="body-1 mx-auto mt-8 max-w-[28ch] break-keep opacity-85">
-            지난 피드백을 기억하고,
+            지난 레슨 기록을 확인하고
             <br />
             일정과 남은 횟수를 명확하게.
             <br />
