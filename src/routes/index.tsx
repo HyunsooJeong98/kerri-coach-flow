@@ -589,37 +589,93 @@ function MemberDemand() {
 const COMPARE_ROWS: {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   label: string;
-  before: string;
+  before: ReactNode;
   after: ReactNode;
-  strong?: boolean;
 }[] = [
   {
     icon: FileText,
     label: "AI 레슨 기록",
-    before: "기억하거나 직접 작성",
-    after: "AI가 레슨 내용을 정리해 기록으로 남김",
-    strong: true,
+    before: (
+      <>
+        <span className="block">운영 내역과 별개로 작성하는 수업 내용</span>
+        <span className="block">회원에게 보낼 레슨 기록도 따로 정리</span>
+      </>
+    ),
+    after: (
+      <>
+        <span className="block">
+          음성을 <span className="font-bold">녹음하거나 핵심만 짧게 입력</span>
+        </span>
+        <span className="block">
+          AI가 <span className="font-bold">회원별 레슨 리포트</span>로 정리해
+        </span>
+        <span className="block">작성부터 전달까지 한곳에서</span>
+      </>
+    ),
   },
   {
     icon: Users,
     label: "회원 운영",
-    before: "일정 · 횟수 · 결제 · 회원 정보를 따로 관리",
-    after: "회원 관리부터 일정 · 횟수 · 결제까지 한곳에서 관리",
-    strong: true,
+    before: (
+      <>
+        <span className="block">엑셀과 시트에 적어둔 횟수</span>
+        <span className="block">카톡으로 주고받은 일정과 납부 확인</span>
+        <span className="block">여러 도구를 쓰면 확인도 각각</span>
+      </>
+    ),
+    after: (
+      <>
+        <span className="block">회원별 일정과 출석</span>
+        <span className="block">
+          남은 횟수와 <span className="font-bold">납부 내역을 한곳에서</span>
+        </span>
+        <span className="block">
+          <span className="font-bold">레슨 기록까지 같은 회원 정보로 연결</span>
+        </span>
+      </>
+    ),
   },
   {
     icon: Workflow,
     label: "다음 레슨 준비",
-    before: "지난 수업을 기억과 메모에 의존",
-    after: "회원별 지난 레슨 기록과 피드백을 확인하고 이어서 지도",
-    strong: true,
+    before: (
+      <>
+        <span className="block">일정은 캘린더에서 확인하고</span>
+        <span className="block">지난 수업 내용은 카톡과 메모에서 다시 찾기</span>
+      </>
+    ),
+    after: (
+      <>
+        <span className="block">
+          AI가 레슨 리포트에서 <span className="font-bold">반복되는 교정 포인트</span>를 추출
+        </span>
+        <span className="block">
+          <span className="font-bold">홈 대시보드에서 핵심만 확인</span>하고
+        </span>
+        <span className="block">오늘 지도할 내용을 미리 준비</span>
+      </>
+    ),
   },
   {
     icon: TrendingUp,
-    label: "코칭 기록",
-    before: "회원별 지도 내용과 피드백이 흩어져 관리됩니다",
-    after: "회원별 레슨 기록을 모아 지난 지도 내용과 피드백을 확인할 수 있습니다",
-    strong: true,
+    label: "회원 성장 관리",
+    before: (
+      <>
+        <span className="block">출석과 이용 횟수는 확인해도</span>
+        <span className="block">회원의 변화는 지난 기록을 따로 찾아 비교</span>
+      </>
+    ),
+    after: (
+      <>
+        <span className="block">
+          쌓인 레슨 기록으로 <span className="font-bold">나아진 점</span>과
+        </span>
+        <span className="block">반복해서 연습할 내용을 확인</span>
+        <span className="block">
+          <span className="font-bold">다음 목표까지 이어지는 관리</span>
+        </span>
+      </>
+    ),
   },
 ];
 
@@ -628,74 +684,141 @@ function Compare() {
     <Section id="compare" className="!py-24 sm:!py-32 lg:!py-40 !pb-16 sm:!pb-20 lg:!pb-28">
       <Container>
         <SectionHead
-          eyebrow="체계적인 레슨 관리"
+          eyebrow="엑셀과 카톡으로 관리하고 있다면"
           title={
             <>
-              더 체계적인 관리가,
+              일정과 횟수 관리에서
               <br />
-              당신의 전문성을 보여줍니다.
+              회원의 성장 관리까지
+            </>
+          }
+          body={
+            <>
+              누가 언제 오는지 관리하는 것에서 한 걸음 더
+              <br />
+              무엇을 배웠고 무엇을 챙겨야 하는지까지
+              <br />
+              KERRI로 연결하세요
             </>
           }
           center
         />
 
         <Reveal delay={80}>
-          <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-border/50 bg-card sm:mt-18 lg:mt-20">
-            {/* Desktop header */}
-            <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.15fr)] gap-6 border-b border-border/50 px-8 pb-4 pt-7 md:grid lg:gap-10 lg:px-10">
-              <div className="text-[0.8rem] font-semibold tracking-wide text-muted-foreground">항목</div>
-              <div className="text-[0.8rem] font-semibold tracking-wide text-muted-foreground">기존 방식</div>
-              <div className="text-[0.85rem] font-bold tracking-tight text-primary">KERRI</div>
+          {/* PC: 3열 비교표 */}
+          <div className="mt-14 hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card lg:block sm:mt-18 lg:mt-20">
+            <div className="grid grid-cols-[20%_40%_40%] border-b border-border/50 xl:grid-cols-[18%_41%_41%]">
+              <div className="px-5 pb-4 pt-7 lg:px-6">
+                <div className="text-[0.78rem] font-semibold tracking-wide text-muted-foreground">
+                  비교 항목
+                </div>
+              </div>
+              <div className="px-5 pb-4 pt-7 lg:px-7">
+                <div className="text-[0.86rem] font-bold tracking-tight text-foreground">
+                  기존 방식
+                </div>
+                <div className="mt-1 text-[0.72rem] leading-relaxed break-keep text-muted-foreground">
+                  엑셀 · 카카오톡 · 구글 스프레드시트 · 운영 관리 앱
+                </div>
+              </div>
+              <div className="bg-primary px-5 pb-4 pt-7 lg:px-7">
+                <div className="text-[0.92rem] font-bold tracking-tight text-primary-foreground">
+                  KERRI
+                </div>
+              </div>
             </div>
 
             <div className="divide-y divide-border/50">
               {COMPARE_ROWS.map((row) => {
                 const Icon = row.icon;
                 return (
-                  <div key={row.label}>
-                    {/* Desktop row */}
-                    <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.15fr)] items-start gap-6 px-8 py-6 md:grid lg:gap-10 lg:px-10">
+                  <div key={row.label} className="grid grid-cols-[20%_40%_40%] xl:grid-cols-[18%_41%_41%]">
+                    <div className="px-5 py-6 lg:px-6">
                       <div className="flex min-w-0 items-center gap-2.5">
-                        <Icon className="h-[19px] w-[19px] shrink-0 text-primary" strokeWidth={1.6} />
-                        <span className="body-1 break-keep font-semibold tracking-tight text-foreground">
-                          {row.label}
-                        </span>
-                      </div>
-                      <p className="body-2 break-keep text-muted-foreground">{row.before}</p>
-                      <div className="rounded-xl bg-primary/[0.07] px-4 py-3 -my-1">
-                        <p className="body-2 break-keep font-bold text-foreground">
-                          {row.after}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Mobile row */}
-                    <div className="px-[clamp(1.125rem,4.5vw,1.75rem)] py-5 md:hidden">
-                      <div className="flex min-w-0 items-center gap-2.5">
-                        <Icon className="h-[18px] w-[18px] shrink-0 text-primary" strokeWidth={1.6} />
+                        <Icon
+                          className="h-[18px] w-[18px] shrink-0 text-primary"
+                          strokeWidth={1.6}
+                        />
                         <span className="body-1 min-w-0 break-keep font-semibold tracking-tight text-foreground">
                           {row.label}
                         </span>
                       </div>
-                      <div className="mt-3">
-                        <div className="text-[0.72rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
-                          기존 방식
-                        </div>
-                        <p className="body-2 mt-1 break-keep text-muted-foreground">
-                          {row.before}
-                        </p>
-                      </div>
-                      <div className="mt-3 rounded-xl bg-primary/[0.07] px-4 py-3.5">
-                        <div className="text-[0.72rem] font-bold uppercase tracking-wider text-primary">KERRI</div>
-                        <p className="body-2 mt-1 break-keep font-bold text-foreground">
-                          {row.after}
-                        </p>
-                      </div>
+                    </div>
+                    <div className="body-2 break-keep px-5 py-6 text-muted-foreground lg:px-7">
+                      {row.before}
+                    </div>
+                    <div className="body-2 break-keep bg-primary/[0.06] px-5 py-6 text-foreground lg:px-7">
+                      {row.after}
                     </div>
                   </div>
                 );
               })}
             </div>
+          </div>
+
+          {/* 모바일: 항목별 비교 카드 */}
+          <div className="mt-10 lg:hidden">
+            <p className="text-center text-[0.72rem] leading-relaxed break-keep font-medium tracking-wide text-muted-foreground">
+              엑셀 · 카카오톡 · 구글 스프레드시트 · 운영 관리 앱
+            </p>
+            <div className="mt-3 space-y-2.5">
+              {COMPARE_ROWS.map((row) => {
+                const Icon = row.icon;
+                return (
+                  <div
+                    key={row.label}
+                    className="overflow-hidden rounded-[1.25rem] border border-border/60 bg-card"
+                  >
+                    <div className="flex min-w-0 items-center gap-2.5 px-4 pb-2.5 pt-3.5">
+                      <Icon
+                        className="h-[17px] w-[17px] shrink-0 text-primary"
+                        strokeWidth={1.6}
+                      />
+                      <span className="min-w-0 break-keep text-[1.02rem] font-semibold tracking-tight text-foreground">
+                        {row.label}
+                      </span>
+                    </div>
+                    <div className="px-4 pb-3">
+                      <div className="text-[0.7rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
+                        기존 방식
+                      </div>
+                      <p className="mt-1 break-keep text-[1rem] leading-[1.7] text-muted-foreground">
+                        {row.before}
+                      </p>
+                    </div>
+                    <div className="bg-primary/[0.08] px-4 py-3.5">
+                      <div className="text-[0.7rem] font-bold uppercase tracking-wider text-primary">
+                        KERRI
+                      </div>
+                      <p className="mt-1 break-keep text-[1rem] leading-[1.7] text-foreground">
+                        {row.after}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-[0.74rem] leading-relaxed break-keep text-muted-foreground/80 md:mt-8">
+            <span className="block lg:inline">기존 방식은 여러 도구를 병행하는 사용 예시이며</span>
+            {" "}
+            <span className="block lg:inline">서비스별 제공 기능은 다를 수 있습니다</span>
+          </p>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="mt-14 text-center sm:mt-18">
+            <p className="statement mx-auto max-w-[17em] break-keep text-foreground">
+              회원 관리는 기본
+              <br />
+              레슨의 흐름까지 이어주는 KERRI
+            </p>
+            <p className="body-2 mx-auto mt-5 max-w-[24em] break-keep text-muted-foreground">
+              일정과 횟수부터 레슨 기록과 성장 관리까지
+              <br />
+              회원 한 명을 챙기는 데 필요한 정보를 한곳에서
+            </p>
           </div>
         </Reveal>
       </Container>
