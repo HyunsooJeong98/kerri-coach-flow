@@ -313,7 +313,9 @@ function Empathy() {
             <>
               잘 가르치는 건 기본,
               <br />
-              잘 챙기는 강사로 기억되고 싶으니까.
+              잘 챙기는 강사로{" "}
+              <br className="sm:hidden" />
+              기억되고 싶으니까.
             </>
           }
           body={
@@ -329,7 +331,7 @@ function Empathy() {
           }
           center
         />
-        <div className="mt-16 grid gap-5 sm:grid-cols-2">
+        <div className="mt-16 grid items-start gap-5 sm:grid-cols-2">
           {cards.map((c, i) => {
             const isOpen = openIndex === i;
             return (
