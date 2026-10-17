@@ -1298,16 +1298,17 @@ function FinalCTA() {
       />
       <div className="relative mx-auto max-w-4xl px-[clamp(1.125rem,4.5vw,2.5rem)] text-center text-[var(--cream)] lg:px-10">
         <Reveal>
-          <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
-            나를 제대로 챙겨주는 강사
+          <h2 className="display-2 mx-auto max-w-[22ch] break-keep">
+            회원이 알아보는 차별화
+            <br />
+            KERRI로 시작하세요
           </h2>
-          <p className="body-1 mx-auto mt-8 max-w-[28ch] break-keep opacity-85">
-            지난 레슨 기록을 확인하고
+          <p className="body-1 mx-auto mt-8 max-w-[24rem] break-keep opacity-85">
+            레슨 기록부터 성장 관리까지
             <br />
-            일정과 남은 횟수를 명확하게.
-            <br />
-            세심한 회원 케어를 KERRI로 시작하세요.
+            당신의 세심한 관리가 전문성으로 전해지도록
           </p>
+
           <button onClick={() => scrollTo("install")} className="btn-base btn-light mt-12">
             케리 코치앱 설치하기
             <ArrowRight size={18} strokeWidth={1.75} />
