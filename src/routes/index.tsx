@@ -222,7 +222,7 @@ function Empathy() {
       h: "“오늘 레슨 내용 보내드려야 하는데…”",
       p: "정리할 시간이 없으셨나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
+        caption: "KERRI가 해결합니다",
         title: (
           <>
             레슨 기록을 전하고
@@ -253,8 +253,8 @@ function Empathy() {
       h: "“저 몇 회 남았어요?”",
       p: "물어볼 때마다 다시 확인하고 있나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "일정·출석·남은 횟수·납부 내역을 한곳에서 관리하세요.",
+        caption: "KERRI가 해결합니다",
+        title: "일정·출석·남은 횟수·납부 내역을 한곳에서 관리하세요",
         body: (
           <>
             카톡을 뒤지고, 장부를 열고, 출석을 세어보고.
@@ -270,8 +270,8 @@ function Empathy() {
       h: "“벌써 마지막 레슨이었네.”",
       p: "재등록 이야기, 또 늦어졌나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "마지막 수업 전에, 다음 레슨을 미리 이야기하세요.",
+        caption: "KERRI가 해결합니다",
+        title: "마지막 수업 전에 다음 레슨을 미리 이야기하세요",
         body: (
           <>
             오늘 수업을 챙기다 보면
@@ -289,8 +289,8 @@ function Empathy() {
       h: "“지난번에 어디까지 했더라?”",
       p: "수업 직전, 기억을 더듬고 있나요?",
       solve: {
-        caption: "KERRI가 해결합니다.",
-        title: "회원이 다시 설명하기 전에, 지난 레슨부터 챙기는 강사.",
+        caption: "KERRI가 해결합니다",
+        title: "회원이 다시 설명하기 전에 지난 레슨부터 챙기는 강사",
         body: (
           <>
             AI가 회원별 레슨 리포트에서
@@ -342,8 +342,8 @@ function Empathy() {
             return (
               <Reveal key={i} delay={i * 80}>
                 <div
-                  className={`h-full overflow-hidden rounded-[1.5rem] border border-border/50 bg-card shadow-[0_1px_2px_rgba(36,30,26,0.03)] transition-shadow duration-300 ${
-                    isOpen ? "ring-1 ring-primary/50 shadow-[0_12px_40px_-16px_rgba(192,117,90,0.2)]" : ""
+                  className={`h-full overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card shadow-[var(--shadow-soft)] transition-shadow duration-300 ${
+                    isOpen ? "ring-1 ring-primary/50" : ""
                   }`}
                 >
                   <button
@@ -465,7 +465,7 @@ function MemberDemand() {
         <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
           {/* Main card — 78%: opening hook */}
           <Reveal>
-            <div className="rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
+            <div className="rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
               <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0 max-w-2xl">
                   <div className="stat-xl text-primary">78%</div>
@@ -502,7 +502,7 @@ function MemberDemand() {
           {/* Two supporting cards with bar charts */}
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal delay={80}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+              <div className="h-full rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">90%</div>
                 <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
                   레슨 설명은 말로
@@ -523,7 +523,7 @@ function MemberDemand() {
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="h-full rounded-[1.5rem] border border-border/50 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
+              <div className="h-full rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3rem)] shadow-[var(--shadow-soft)]">
                 <div className="stat-lg text-primary">96.6%</div>
                 <p className="heading-3 mt-5 max-w-[14em] break-keep text-foreground">
                   체계적으로 챙겨주는 강사와
@@ -621,7 +621,7 @@ function Compare() {
         <Reveal delay={80}>
           {/* PC: 3열 비교표 */}
           <div
-            className={`mt-14 hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card sm:mt-18 lg:mt-20 lg:block`}
+            className={`mt-10 hidden overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card lg:block`}
           >
             <div className={`grid border-b border-border/50 ${COMPARE_COLS}`}>
               <div className="px-5 pb-4 pt-7 lg:px-6">
@@ -676,7 +676,7 @@ function Compare() {
               return (
                 <div
                   key={row.label}
-                  className="overflow-hidden rounded-[1.25rem] border border-border/60 bg-card"
+                  className="overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card"
                 >
                   <div className="flex min-w-0 items-center gap-2.5 px-4 pb-2.5 pt-3.5">
                     <Icon
@@ -785,9 +785,9 @@ function Hero() {
           </h1>
 
           <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
-            횟수·일정·납부 내역은 투명하게,
+            횟수·일정·납부 내역은 투명하게
             <br />
-            지난 레슨과 피드백은 세심하게
+            회원별 레슨 기록은 세심하게
             <br />
             AI 레슨 기록과 회원 관리로
             <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요
@@ -890,16 +890,16 @@ function Ops() {
     <Section
       id="features"
       tone="cream"
-      className="!pt-16 sm:!pt-20 lg:!pt-28 !pb-16 sm:!pb-20 lg:!pb-28"
+      className=""
     >
       <Container>
         <SectionHead
           eyebrow="케리 코치앱"
           title={
             <>
-              세심한 회원 케어,
+              세심한 회원 케어
               <br />
-              <span className="text-primary">KERRI 하나로.</span>
+              <span className="text-primary">KERRI 하나로</span>
             </>
           }
           body={
@@ -999,12 +999,12 @@ function Ops() {
             <div className="mx-auto max-w-[720px] text-center">
               <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
               <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
-                당신의 피드백,
+                당신의 레슨을
                 <br />
-                <span className="text-primary">레슨 뒤에도 이어지도록.</span>
+                <span className="text-primary">다시 볼 수 있는 기록으로</span>
               </h3>
               <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 내용을 검토하고 회원에게 피드백을 전달하세요.
+                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 정리된 레슨 기록을 검토하고 회원에게 전달하세요.
               </p>
             </div>
           </Reveal>
@@ -1054,7 +1054,7 @@ function Impact() {
     {
       icon: ShieldCheck,
       title: "나를 기억하는 강사",
-      desc: "지난 레슨과 피드백을 확인해, 회원에게 필요한 지도를 이어가세요.",
+      desc: "회원별 레슨 기록을 확인해 회원에게 필요한 지도를 이어가세요.",
     },
     {
       icon: Database,
@@ -1077,7 +1077,7 @@ function Impact() {
             const Icon = c.icon;
             return (
               <Reveal key={c.title} delay={idx * 80}>
-                <div className="surface surface-hover h-full rounded-[1.5rem] p-[clamp(1rem,3.6vw,1.75rem)]">
+                <div className="surface surface-hover h-full rounded-[20px] lg:rounded-[24px] p-[clamp(1rem,3.6vw,1.75rem)]">
                   <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary sm:h-11 sm:w-11">
                     <Icon size={22} strokeWidth={1.6} />
                   </div>
@@ -1113,15 +1113,15 @@ function AppSection() {
   }, [pulse]);
 
   return (
-    <Section id="install" tone="cream" className="!pt-20 sm:!pt-28 lg:!pt-36 !pb-16 sm:!pb-20 lg:!pb-24">
+    <Section id="install" tone="cream">
       <Container>
         <SectionHead
           eyebrow="다운로드"
           title={
             <>
-              강사의 세심한 관리,
+              강사의 세심한 관리
               <br />
-              회원의 손안까지.
+              회원의 손안까지
             </>
           }
         />
@@ -1238,7 +1238,7 @@ function FAQ() {
           }
         />
         <Reveal delay={80}>
-          <div className="surface mt-16 divide-y divide-border/60 overflow-hidden rounded-[1.5rem]">
+          <div className="surface mt-8 lg:mt-10 divide-y divide-border/60 overflow-hidden rounded-[20px] lg:rounded-[24px]">
             {items.map((it, idx) => {
               const isOpen = open === idx;
               return (
@@ -1299,10 +1299,10 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-4xl px-[clamp(1.125rem,4.5vw,2.5rem)] text-center text-[var(--cream)] lg:px-10">
         <Reveal>
           <h2 className="display-2 mx-auto max-w-[20ch] break-keep">
-            나를 제대로 챙겨주는 강사.
+            나를 제대로 챙겨주는 강사
           </h2>
           <p className="body-1 mx-auto mt-8 max-w-[28ch] break-keep opacity-85">
-            지난 피드백을 기억하고,
+            지난 레슨 기록을 확인하고
             <br />
             일정과 남은 횟수를 명확하게.
             <br />
@@ -1342,7 +1342,7 @@ function StickyMobileCTA() {
 
 function Landing() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen pb-24 md:pb-0 bg-background text-foreground">
       <Nav />
       <main>
         <Hero />

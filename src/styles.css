@@ -65,7 +65,7 @@
   --ink: #241E1A;
   --charcoal: #332C27;
 
-  --shadow-soft: 0 1px 2px rgba(36, 30, 26, 0.04), 0 12px 32px -18px rgba(36, 30, 26, 0.14);
+  --shadow-soft: 0 8px 24px -16px rgba(36, 30, 26, 0.12);
   --shadow-lift: 0 2px 4px rgba(36, 30, 26, 0.04), 0 28px 60px -28px rgba(36, 30, 26, 0.22);
   --shadow-device: 0 52px 120px -44px rgba(36, 30, 26, 0.55), 0 12px 32px -14px rgba(36, 30, 26, 0.22), 0 2px 4px rgba(36, 30, 26, 0.06);
 }
@@ -122,8 +122,9 @@
 }
 
 @utility body-1 {
-  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.0625rem);
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.7;
+  @media (width >= 64rem) { font-size: 1.125rem; }
 }
 
 @utility body-2 {
@@ -132,7 +133,7 @@
 }
 
 @utility body-3 {
-  font-size: clamp(0.8125rem, 0.79rem + 0.16vw, 0.9rem);
+  font-size: 0.875rem;
   line-height: 1.6;
 }
 
@@ -332,8 +333,9 @@
 }
 
 @utility lead {
-  font-size: clamp(0.9875rem, 0.9rem + 0.55vw, 1.25rem);
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.7;
+  @media (width >= 64rem) { font-size: 1.125rem; }
   color: color-mix(in oklab, var(--color-foreground) 72%, transparent);
 }
 

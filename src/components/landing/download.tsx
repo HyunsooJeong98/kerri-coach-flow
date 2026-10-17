@@ -95,10 +95,10 @@ export function AppIcon({ src, name, en }: { src: string; name: string; en: stri
 
 export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
   return (
-    <div className="mt-12 grid gap-6 sm:mt-16 md:mt-20 md:grid-cols-2">
+    <div className="mt-8 grid gap-6 lg:mt-10 md:grid-cols-2">
       <Reveal>
         <div
-          className={`relative surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)] transition-all duration-500 ${
+          className={`relative surface h-full rounded-[20px] lg:rounded-[24px] p-[clamp(1.25rem,4.8vw,3rem)] transition-all duration-500 ${
             pulse
               ? "!border-primary ring-4 ring-primary/20 -translate-y-1.5 shadow-[0_36px_70px_-30px_rgba(192,117,90,0.5)] animate-[installPulse_1.1s_ease-in-out_2]"
               : ""
@@ -117,7 +117,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
       </Reveal>
 
       <Reveal delay={110}>
-        <div className="surface h-full rounded-[1.85rem] p-[clamp(1.25rem,4.8vw,3rem)]">
+        <div className="surface h-full rounded-[20px] lg:rounded-[24px] p-[clamp(1.25rem,4.8vw,3rem)]">
           <div className="flex flex-col items-start gap-2 min-[380px]:flex-row min-[380px]:items-start min-[380px]:justify-between min-[380px]:gap-3">
             <div className="min-w-0">
               <AppIcon src={memberAppIcon.url} name="케리 회원앱" en="KERRI MEMBER" />
