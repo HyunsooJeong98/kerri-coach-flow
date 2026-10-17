@@ -131,7 +131,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
             </Link>
           </div>
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
-            레슨 기록 · 성장 기록 · 일정 · 남은 횟수. 회원도 자신의 레슨을 기록으로 관리하세요.
+            레슨 기록과 일정, 남은 횟수를 직접 확인하세요. 회원도 자신의 레슨 과정을 함께 살펴볼 수 있습니다.
           </p>
           <div className="mt-10 flex items-end justify-between gap-6">
             <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
