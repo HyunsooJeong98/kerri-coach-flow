@@ -1071,7 +1071,7 @@ function Impact() {
   return (
     <Section id="impact">
       <Container>
-        <SectionHead eyebrow="회원이 느끼는 가치" title="회원이 느끼는 당신의 차이." center />
+        <SectionHead eyebrow="회원이 느끼는 가치" title="회원이 느끼는 좋은 강사의 차이" center />
         <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
           {cards.map((c, idx) => {
             const Icon = c.icon;
