@@ -107,7 +107,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
           <div className="eyebrow absolute right-4 top-4 rounded-md bg-[var(--clay)]/10 px-2 py-1">추천</div>
           <AppIcon src={coachAppIcon.url} name="케리 코치앱" en="KERRI COACH" />
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
-            회원 관리 · 일정 · 결제 · AI 레슨 기록. 운영을 하나의 앱으로 관리하세요.
+            회원·일정·횟수·납부 관리부터 AI 레슨 기록까지. 체계적인 회원 케어를 시작하세요.
           </p>
           <div className="mt-10 flex items-end justify-between gap-6">
             <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
@@ -131,7 +131,7 @@ export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
             </Link>
           </div>
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
-            레슨 기록 · 성장 기록 · 일정 · 남은 횟수. 회원도 자신의 레슨을 기록으로 관리하세요.
+            레슨 기록과 일정, 남은 횟수를 직접 확인하세요. 회원도 자신의 레슨 과정을 함께 살펴볼 수 있습니다.
           </p>
           <div className="mt-10 flex items-end justify-between gap-6">
             <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />
