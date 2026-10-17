@@ -666,7 +666,7 @@ function Hero() {
                 letterSpacing: "-0.02em",
               }}
             >
-              스포츠 강사를 위한 AI 레슨·회원 관리
+              스포츠 강사를 위한 AI 레슨·회원 관리앱
             </span>
           </div>
 
@@ -685,15 +685,6 @@ function Hero() {
             <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요.
           </p>
 
-          <div className="mt-6 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
-            <button onClick={() => scrollTo("install")} className="btn-base btn-primary">
-              케리 코치앱 설치하기
-              <ArrowRight size={18} strokeWidth={1.75} />
-            </button>
-            <button onClick={() => scrollTo("try-ai")} className="btn-base btn-ghost">
-              AI 레슨 기록 체험하기
-            </button>
-          </div>
         </div>
 
         {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
