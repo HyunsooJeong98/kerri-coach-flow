@@ -76,7 +76,7 @@ export function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.01, rootMargin: "0px 0px 0px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -118,7 +118,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative py-16 lg:py-24 ${
+      className={`relative py-12 sm:py-16 lg:py-20 xl:py-24 ${
         tone === "cream" ? "cream-band noise" : ""
       } ${className}`}
     >

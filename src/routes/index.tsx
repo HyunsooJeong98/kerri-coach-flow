@@ -236,9 +236,9 @@ function Empathy() {
             <br />
             수업 후 핵심만 짧게 입력하세요
             <br />
-            AI가 수업 내용과 잘한 점과
+            AI가 수업 핵심 내용과 잘한 점
             <br />
-            개선할 내용을 리포트로 정리해줍니다
+            개선할 내용을 레슨 리포트로 정리해줍니다
             <span className="block h-3" />
             쌓인 레슨 기록으로
             <br />
@@ -312,7 +312,7 @@ function Empathy() {
   }, []);
 
   return (
-    <Section id="empathy" tone="cream" className="!py-24 sm:!py-28 lg:!py-36">
+    <Section id="empathy" tone="cream">
       <Container>
         <SectionHead
           eyebrow={
@@ -451,7 +451,7 @@ function BarChart({ value, label }: { value: number; label: ReactNode }) {
 
 function MemberDemand() {
   return (
-    <Section id="member-demand" className="pt-24 pb-14 sm:pt-32 sm:pb-18 lg:pt-40 lg:pb-20">
+    <Section id="member-demand" className="!pb-6 lg:!pb-10">
       <Container>
         <div className="text-center">
           <div className="eyebrow">회원 설문</div>
@@ -462,7 +462,7 @@ function MemberDemand() {
           </h2>
         </div>
 
-        <div className="mt-14 space-y-5 sm:mt-18 md:mt-20">
+        <div className="mt-8 space-y-5 lg:mt-10">
           {/* Main card — 78%: opening hook */}
           <Reveal>
             <div className="rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card p-[clamp(1.25rem,4.8vw,3.5rem)] shadow-[var(--shadow-soft)]">
@@ -604,7 +604,7 @@ const COMPARE_COLS = "grid-cols-[26%_37%_37%] xl:grid-cols-[24%_38%_38%]";
 
 function Compare() {
   return (
-    <Section id="compare" className="pt-24 pb-14 sm:pt-32 sm:pb-18 lg:pt-40 lg:pb-20">
+    <Section id="compare" className="!pt-6 lg:!pt-10">
       <Container>
         <SectionHead
           eyebrow="KERRI의 차이"
@@ -708,7 +708,7 @@ function Compare() {
             })}
           </div>
 
-          <p className="mt-6 text-center text-[0.8rem] font-medium break-keep tracking-tight text-muted-foreground md:mt-8">
+          <p className="mt-6 text-center text-[0.875rem] font-medium break-keep tracking-tight text-muted-foreground md:mt-8">
             일정 · 출석 · 횟수 · 납부 관리도 한곳에서
           </p>
         </Reveal>
@@ -911,10 +911,10 @@ function Ops() {
 
         {/* 01 홈 대시보드 */}
         <Reveal>
-          <div className="mt-16 grid items-center gap-10 lg:mt-24 lg:grid-cols-[1fr_46%] lg:gap-16">
+          <div className="mt-10 grid items-center gap-7 lg:mt-14 lg:grid-cols-[1fr_46%] lg:gap-14">
             <FeatureCopy
               num="01"
-              message="오늘의 레슨과 회원 현황을 한눈에."
+              message="오늘의 레슨과 회원 현황을 한눈에"
               title="홈 대시보드"
               desc="회원 현황과 오늘 레슨을 한눈에 확인"
             />
@@ -932,17 +932,17 @@ function Ops() {
 
         {/* 02 · 03 알림 + 결제 (겹침) */}
         <Reveal>
-          <div className="mt-20 grid items-center gap-12 lg:mt-32 lg:grid-cols-[1fr_52%] lg:gap-16">
-            <div className="space-y-10">
+          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[1fr_52%] lg:gap-14">
+            <div className="space-y-8 lg:space-y-10">
               <FeatureCopy
                 num="02"
-                message="필요한 알림을 간편하게 설정하세요."
+                message="필요한 알림을 간편하게 설정하세요"
                 title="알림 설정"
                 desc="레슨 전날·당일, 재등록 알림을 항목별로 켜고 끄기"
               />
               <FeatureCopy
                 num="03"
-                message="누가, 언제, 얼마를 납부했는지 명확하게."
+                message="납부 내역을 한눈에 명확하게"
                 title="결제 내역 관리"
                 desc="회원별 납부 내역과 미납 현황 관리"
               />
@@ -972,7 +972,7 @@ function Ops() {
 
         {/* 04 스케줄 */}
         <Reveal>
-          <div className="mt-20 grid items-center gap-10 lg:mt-32 lg:grid-cols-[46%_1fr] lg:gap-16">
+          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[46%_1fr] lg:gap-14">
             <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
               <Shot
                 src={appSchedule.url}
@@ -984,7 +984,7 @@ function Ops() {
             <FeatureCopy
               className="order-1 lg:order-2"
               num="04"
-              message="복잡한 일정도 체계적으로."
+              message="복잡한 일정도 체계적으로"
               title="스케줄 관리"
               desc="일일 · 주간 · 월간 레슨 일정 관리"
             />
@@ -993,7 +993,7 @@ function Ops() {
       </Container>
 
       {/* 05 AI 레슨 기록 — 핵심 강조 */}
-      <div className="mt-20 border-y border-border/50 bg-[var(--ink)] py-16 sm:py-20 lg:mt-32 lg:py-28">
+      <div className="mt-14 border-y border-border/50 bg-[var(--ink)] py-14 sm:py-16 lg:mt-20 lg:py-20">
         <Container>
           <Reveal>
             <div className="mx-auto max-w-[720px] text-center">
@@ -1072,7 +1072,7 @@ function Impact() {
     <Section id="impact">
       <Container>
         <SectionHead eyebrow="회원이 느끼는 가치" title="회원이 느끼는 좋은 강사의 차이" center />
-        <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:mt-18 lg:mt-20 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-4">
           {cards.map((c, idx) => {
             const Icon = c.icon;
             return (
@@ -1082,7 +1082,7 @@ function Impact() {
                     <Icon size={22} strokeWidth={1.6} />
                   </div>
                   <h3 className="heading-4 mt-4 break-keep text-foreground">{c.title}</h3>
-                  <p className="body-3 mt-3 break-keep text-muted-foreground">{c.desc}</p>
+                  <p className="body-2 mt-3 break-keep text-muted-foreground">{c.desc}</p>
                 </div>
               </Reveal>
             );
@@ -1289,7 +1289,7 @@ function FinalCTA() {
   return (
     <section
       id="cta"
-      className="noise relative overflow-hidden py-28 sm:py-32 lg:py-40"
+      className="noise relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{ background: "linear-gradient(145deg, #C0755A 0%, #A55E45 55%, #8E4E39 100%)" }}
     >
       <div
