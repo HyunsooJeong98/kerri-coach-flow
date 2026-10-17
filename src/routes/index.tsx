@@ -17,7 +17,6 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
-  TrendingUp,
   ShieldCheck,
   Database,
   Workflow,
