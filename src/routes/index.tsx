@@ -459,7 +459,7 @@ function MemberDemand() {
           <h2 className="display-2 mx-auto mt-5 max-w-[19em] break-keep text-foreground">
             열심히 가르친 오늘의 레슨
             <br />
-            회원의 기억에만 맡기고 있나요
+            회원의 기억에만 맡기고 있나요?
           </h2>
         </div>
 
