@@ -128,8 +128,8 @@
 }
 
 @utility body-2 {
-  font-size: clamp(0.875rem, 0.83rem + 0.24vw, 1rem);
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 @utility body-3 {
@@ -344,8 +344,8 @@
 
 @utility reveal {
   opacity: 0;
-  transform: translateY(28px) scale(0.985);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
