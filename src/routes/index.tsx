@@ -801,7 +801,9 @@ function Compare() {
           </div>
 
           <p className="mt-6 text-center text-[0.74rem] leading-relaxed break-keep text-muted-foreground/80 md:mt-8">
-            기존 방식은 여러 도구를 병행하는 사용 예시이며 서비스별 제공 기능은 다를 수 있습니다
+            <span className="block lg:inline">기존 방식은 여러 도구를 병행하는 사용 예시이며</span>
+            {" "}
+            <span className="block lg:inline">서비스별 제공 기능은 다를 수 있습니다</span>
           </p>
         </Reveal>
 
