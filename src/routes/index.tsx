@@ -673,7 +673,7 @@ function Hero() {
           <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
             회원에게
             <br />
-            <span className="text-primary">신뢰받는 강사.</span>
+            <span className="text-primary">신뢰받는 강사</span>
           </h1>
 
           <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
