@@ -1342,7 +1342,7 @@ function StickyMobileCTA() {
 
 function Landing() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen pb-24 md:pb-0 bg-background text-foreground">
       <Nav />
       <main>
         <Hero />
