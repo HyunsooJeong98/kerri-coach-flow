@@ -787,10 +787,10 @@ function Hero() {
           <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
             횟수·일정·납부 내역은 투명하게,
             <br />
-            지난 레슨과 피드백은 세심하게.
+            지난 레슨과 피드백은 세심하게
             <br />
             AI 레슨 기록과 회원 관리로
-            <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요.
+            <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요
           </p>
 
         </div>
