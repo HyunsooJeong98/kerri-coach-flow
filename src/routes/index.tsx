@@ -24,6 +24,16 @@ import {
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    meta: [
+      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      { name: "description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
+      { property: "og:title", content: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      { property: "og:description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: heroPc.url },
+      { name: "twitter:image", content: heroPc.url },
+    ],
     links: [
       // 현재 화면에 해당하는 Hero 배경만 우선 로드 (LCP 개선)
       {
