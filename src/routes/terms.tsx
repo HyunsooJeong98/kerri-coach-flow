@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { PolicyLayout, Chapter, P, Body, List } from "@/components/landing/PolicyLayout";
 
 export const Route = createFileRoute("/terms")({
   component: Terms,
@@ -16,62 +17,11 @@ export const Route = createFileRoute("/terms")({
   }),
 });
 
-/* ── Building blocks ───────────────────────────────────────── */
-
-function Chapter({ children }: { children: string }) {
-  return (
-    <h2 className="mt-14 border-b border-border/60 pb-3 text-xl font-extrabold tracking-tight text-foreground break-keep sm:text-2xl">
-      {children}
-    </h2>
-  );
-}
-
-function P({ children }: { children: React.ReactNode }) {
-  return <p>{children}</p>;
-}
-
-function Body({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mt-3 space-y-3.5 text-[0.95rem] leading-[1.85] text-foreground/80 break-keep sm:text-base">
-      {children}
-    </div>
-  );
-}
-
-function List({ items }: { items: string[] }) {
-  return (
-    <ul className="list-disc space-y-2 pl-5">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
-}
-
 /* ── Page ──────────────────────────────────────────────────── */
 
 function Terms() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-5 lg:px-8">
-          <Link
-            to="/"
-            className="text-xl font-extrabold tracking-tight text-foreground"
-            style={{ letterSpacing: "-0.04em" }}
-          >
-            KERRI
-          </Link>
-          <Link
-            to="/"
-            className="text-sm font-medium text-foreground/70 transition-colors hover:text-primary"
-          >
-            홈으로
-          </Link>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-3xl px-5 py-14 sm:py-20 lg:px-8">
+    <PolicyLayout>
         <p className="text-sm font-semibold text-primary">KERRI POLICY</p>
         <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-foreground break-keep sm:text-4xl">
           KERRI 서비스 이용약관
@@ -691,7 +641,6 @@ function Terms() {
           <P>제 1 조 (시행일) 본 약관은 2026 년 9 월 22 일부터 시행합니다.</P>
           <P>제 2 조 (공고일) 본 약관은 2026 년 9 월 14 일에 공고합니다.</P>
         </Body>
-      </main>
-    </div>
+    </PolicyLayout>
   );
 }

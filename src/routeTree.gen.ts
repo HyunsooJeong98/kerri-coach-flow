@@ -14,6 +14,7 @@ import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
 
@@ -42,6 +43,11 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RefundPolicyRoute = RefundPolicyRouteImport.update({
   id: '/refund-policy',
   path: '/refund-policy',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/download'
     | '/member'
     | '/pricing'
+    | '/privacy'
     | '/refund-policy'
     | '/terms'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/download'
     | '/member'
     | '/pricing'
+    | '/privacy'
     | '/refund-policy'
     | '/terms'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/download'
     | '/member'
     | '/pricing'
+    | '/privacy'
     | '/refund-policy'
     | '/terms'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   DownloadRoute: typeof DownloadRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   TermsRoute: typeof TermsRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/refund-policy': {
       id: '/refund-policy'
       path: '/refund-policy'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadRoute: DownloadRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   TermsRoute: TermsRoute,
 }
