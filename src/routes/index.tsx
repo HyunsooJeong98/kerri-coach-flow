@@ -620,9 +620,9 @@ function Compare() {
           eyebrow="KERRI의 차이"
           title={
             <>
-              회원 관리에
+              성장을 이끄는 강사는
               <br />
-              레슨의 깊이를 더하세요
+              <span className="text-primary">레슨 기록부터 다릅니다</span>
             </>
           }
           center
