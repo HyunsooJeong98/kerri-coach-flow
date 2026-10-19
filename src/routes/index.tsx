@@ -9,7 +9,6 @@ import heroPc from "@/assets/hero-pc.webp.asset.json";
 import heroMobile from "@/assets/hero-mobile.webp.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
-  FileText,
   CalendarCheck,
   TrendingUp,
   Smartphone,
@@ -17,9 +16,6 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
-  ShieldCheck,
-  Database,
-  Workflow,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
