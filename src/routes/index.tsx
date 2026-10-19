@@ -585,25 +585,21 @@ function MemberDemand() {
 /* ── 기존 방식 vs KERRI ────────────────────────────────────── */
 
 const COMPARE_ROWS: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   label: string;
   before: string;
   after: string;
 }[] = [
   {
-    icon: FileText,
     label: "레슨 기록",
     before: "수업 내용을 직접 정리해 전달",
     after: "녹음이나 짧은 입력을 AI 레슨 리포트로",
   },
   {
-    icon: Workflow,
     label: "다음 수업 준비",
     before: "지난 기록을 찾아 지도할 내용 확인",
     after: "반복 교정 포인트를 홈에서 한눈에",
   },
   {
-    icon: TrendingUp,
     label: "성장 관리",
     before: "기록을 하나씩 비교해 변화 확인",
     after: "쌓인 기록으로 변화와 다음 목표 확인",
@@ -615,7 +611,7 @@ const COMPARE_COLS = "grid-cols-[26%_37%_37%] xl:grid-cols-[24%_38%_38%]";
 function Compare() {
   return (
     <Section id="compare" className="!pt-6 lg:!pt-10">
-      <Container>
+      <Container className="!px-6 lg:!px-10">
         <SectionHead
           eyebrow="KERRI의 차이"
           title={
@@ -631,7 +627,7 @@ function Compare() {
         <Reveal delay={80}>
           {/* PC: 3열 비교표 */}
           <div
-            className={`mt-10 hidden overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card lg:block`}
+            className="mt-10 hidden overflow-hidden rounded-[20px] border border-border bg-card lg:block"
           >
             <div className={`grid border-b border-border/50 ${COMPARE_COLS}`}>
               <div className="px-5 pb-4 pt-7 lg:px-6">
@@ -653,24 +649,19 @@ function Compare() {
 
             <div className="divide-y divide-border/50">
               {COMPARE_ROWS.map((row) => {
-                const Icon = row.icon;
                 return (
-                  <div key={row.label} className={`grid ${COMPARE_COLS}`}>
+                  <div key={row.label} className={`grid items-stretch ${COMPARE_COLS}`}>
                     <div className="px-5 py-6 lg:px-6">
-                      <div className="flex min-w-0 items-center gap-2.5">
-                        <Icon
-                          className="h-[18px] w-[18px] shrink-0 text-primary"
-                          strokeWidth={1.6}
-                        />
-                        <span className="body-1 min-w-0 break-keep font-semibold tracking-tight text-foreground">
+                      <div className="flex min-w-0 items-center">
+                        <span className="min-w-0 break-keep text-xl font-semibold leading-[1.65] text-foreground">
                           {row.label}
                         </span>
                       </div>
                     </div>
-                    <div className="body-2 break-keep px-5 py-6 text-muted-foreground lg:px-7">
+                    <div className="break-keep px-5 py-6 text-base leading-[1.65] text-foreground/70 lg:px-7">
                       {row.before}
                     </div>
-                    <div className="body-2 break-keep bg-primary/[0.06] px-5 py-6 text-foreground lg:px-7">
+                    <div className="break-keep bg-primary/[0.06] px-5 py-6 text-base font-medium leading-[1.65] text-foreground lg:px-7">
                       {row.after}
                     </div>
                   </div>
@@ -680,36 +671,31 @@ function Compare() {
           </div>
 
           {/* 모바일: 항목별 짧게 대비 */}
-          <div className="mt-10 space-y-2.5 lg:hidden">
+          <div className="mt-8 space-y-5 lg:hidden">
             {COMPARE_ROWS.map((row) => {
-              const Icon = row.icon;
               return (
                 <div
                   key={row.label}
-                  className="overflow-hidden rounded-[20px] lg:rounded-[24px] border border-border/60 bg-card"
+                  className="overflow-hidden rounded-[20px] border border-border bg-card text-left"
                 >
-                  <div className="flex min-w-0 items-center gap-2.5 px-4 pb-2.5 pt-3.5">
-                    <Icon
-                      className="h-[17px] w-[17px] shrink-0 text-primary"
-                      strokeWidth={1.6}
-                    />
-                    <span className="min-w-0 break-keep text-[1.02rem] font-semibold tracking-tight text-foreground">
+                  <div className="px-6 pt-6">
+                    <h3 className="break-keep text-xl font-semibold leading-[1.4] tracking-normal text-foreground">
                       {row.label}
-                    </span>
+                    </h3>
                   </div>
-                  <div className="px-4 pb-3">
-                    <div className="text-[0.7rem] font-semibold uppercase tracking-wider text-muted-foreground/80">
+                  <div className="px-6 pb-6 pt-3">
+                    <div className="text-sm font-semibold tracking-normal text-foreground/70">
                       직접 관리할 때
                     </div>
-                    <p className="mt-1 break-keep text-[1rem] leading-[1.7] text-muted-foreground">
+                    <p className="mt-3 break-keep text-base leading-[1.65] tracking-normal text-foreground/70">
                       {row.before}
                     </p>
                   </div>
-                  <div className="bg-primary/[0.08] px-4 py-3.5">
-                    <div className="text-[0.7rem] font-bold uppercase tracking-wider text-primary">
+                  <div className="border-t border-border/50 bg-primary/[0.06] p-6">
+                    <div className="text-sm font-semibold tracking-normal text-primary">
                       KERRI
                     </div>
-                    <p className="mt-1 break-keep text-[1rem] leading-[1.7] text-foreground">
+                    <p className="mt-3 break-keep text-base font-medium leading-[1.65] tracking-normal text-foreground">
                       {row.after}
                     </p>
                   </div>
@@ -1057,42 +1043,39 @@ function Ops() {
 function Impact() {
   const cards = [
     {
-      icon: TrendingUp,
       title: "믿을 수 있는 강사",
-      desc: "일정·출석·남은 횟수·납부 내역을 명확하게 관리하세요. 회원이 안심하고 레슨에 집중할 수 있도록.",
+      desc: "일정과 남은 횟수부터 납부 내역까지 회원도 안심할 수 있는 투명한 관리",
     },
     {
-      icon: ShieldCheck,
       title: "나를 기억하는 강사",
-      desc: "회원별 레슨 기록을 확인해 회원에게 필요한 지도를 이어가세요.",
+      desc: "지난 레슨을 기억하고 회원에게 필요한 지도를 이어가세요",
     },
     {
-      icon: Database,
       title: "성장을 챙기는 강사",
-      desc: "잘한 점과 연습할 내용을 기록으로 남기세요. 회원과 함께 변화를 살펴보고 다음 연습 방향을 잡을 수 있도록.",
+      desc: "쌓인 레슨 기록으로 변화를 살피고 다음 목표까지 함께 챙기세요",
     },
     {
-      icon: Workflow,
       title: "레슨에 집중하는 강사",
-      desc: "회원·일정·횟수·납부 관리를 한곳에서. 확인하는 수고를 줄이고 회원에게 더 집중하세요.",
+      desc: "회원 관리에 드는 수고를 줄이고 눈앞의 레슨에 집중하세요",
     },
   ];
 
   return (
     <Section id="impact">
-      <Container>
+      <Container className="!px-6 lg:!px-10">
         <SectionHead eyebrow="회원이 느끼는 가치" title="회원이 느끼는 좋은 강사의 차이" center />
-        <div className="mt-8 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-y-8 lg:mt-10 lg:grid-cols-2 lg:gap-x-16">
           {cards.map((c, idx) => {
-            const Icon = c.icon;
             return (
               <Reveal key={c.title} delay={idx * 80}>
-                <div className="surface surface-hover h-full rounded-[20px] lg:rounded-[24px] p-[clamp(1rem,3.6vw,1.75rem)]">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary sm:h-11 sm:w-11">
-                    <Icon size={22} strokeWidth={1.6} />
+                <div className="grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-3 border-t border-border pt-7 text-left">
+                  <span className="pt-1 text-sm font-medium leading-6 tracking-normal text-primary">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="break-keep text-xl font-semibold leading-[1.4] tracking-normal text-foreground lg:text-[22px]">{c.title}</h3>
+                    <p className="mt-3 break-keep text-base leading-[1.65] tracking-normal text-foreground/70">{c.desc}</p>
                   </div>
-                  <h3 className="heading-4 mt-4 break-keep text-foreground">{c.title}</h3>
-                  <p className="body-2 mt-3 break-keep text-muted-foreground">{c.desc}</p>
                 </div>
               </Reveal>
             );
