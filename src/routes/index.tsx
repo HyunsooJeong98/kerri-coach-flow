@@ -770,11 +770,11 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="hero-display mt-3 max-w-[13ch] break-keep">
-            회원에게
-            <br />
-            <span className="text-primary">신뢰받는 강사</span>
+          <h1 className="hero-display mt-3 break-keep leading-[1.18]">
+            <span className="block whitespace-nowrap">회원이 알아보는</span>
+            <span className="block whitespace-nowrap text-primary">좋은 강사의 차이</span>
           </h1>
+
 
           <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
             횟수·일정·납부 내역은 투명하게
