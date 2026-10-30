@@ -812,72 +812,46 @@ function Hero() {
 
 /* ── Product showcase (실제 앱 화면) ────────────────────────── */
 
-function Shot({
-  src,
-  alt,
-  caption,
-  className = "",
-  priority = false,
-  width = 883,
-  height = 1920,
-}: {
-  src: string;
-  alt: string;
-  caption: string;
-  className?: string;
-  priority?: boolean;
-  width?: number;
-  height?: number;
-}) {
-  return (
-    <figure
-      tabIndex={0}
-      aria-label={alt}
-      className="group m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        width={width}
-        height={height}
-        style={{ aspectRatio: `${width} / ${height}`, height: "auto" }}
-        className={`block w-full rounded-[1.6rem] border border-black/5 bg-white shadow-[0_34px_70px_-30px_rgba(0,0,0,0.32)] ${className}`}
-      />
-      <figcaption className="sr-only">{caption}</figcaption>
-    </figure>
-  );
-}
-
-
-function FeatureCopy({
-  num,
-  title,
-  desc,
-  message,
-  className = "",
-}: {
-  num: string;
-  title: string;
-  desc: string;
-  message: string;
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">{num}</div>
-      <h3 className="mt-3 max-w-[20ch] break-keep text-[clamp(1.3rem,1rem+1.6vw,1.85rem)] font-bold leading-[1.3] tracking-tight">
-        {message}
-      </h3>
-      <p className="body-2 mt-4 max-w-[36ch] break-keep text-muted-foreground">
-        <span className="font-semibold text-foreground/80">{title}</span> · {desc}
-      </p>
-    </div>
-  );
-}
+const FEATURE_SHOTS = [
+  {
+    src: featAiRecord.url,
+    alt: "KERRI 코치앱 AI 레슨 기록 화면. 오늘 레슨 요약과 이전 레슨 대비 변화, 다음 레슨 목표가 정리되어 있습니다.",
+    caption: "AI 레슨 기록 — 잘 가르친 만큼 제대로 인정받으세요",
+  },
+  {
+    src: featDashboard.url,
+    alt: "KERRI 코치앱 홈 대시보드와 AI 브리핑 화면. 오늘 레슨 현황과 회원별 레슨 브리핑, 오늘의 레슨 포인트가 표시되어 있습니다.",
+    caption: "홈 대시보드와 AI 브리핑 — 지난 레슨을 기억하는 세심함",
+  },
+  {
+    src: featSchedule.url,
+    alt: "KERRI 코치앱 스케줄 관리 화면. 주간 캘린더의 레슨 일정과 일간·월간 현황이 표시되어 있습니다.",
+    caption: "스케줄 관리 — 일정 찾느라 레슨 흐름 끊지 마세요",
+  },
+  {
+    src: featMember.url,
+    alt: "KERRI 코치앱 회원 관리 화면. 회원 상세 정보와 이용 중인 레슨권, 남은 레슨 횟수, 정기 레슨 시간이 표시되어 있습니다.",
+    caption: "회원 관리 — 몇 회 남았는지 다시 세지 마세요",
+  },
+];
 
 function Ops() {
+  const [zoom, setZoom] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (zoom === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(null);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [zoom]);
+
   return (
     <Section
       id="features"
@@ -896,137 +870,60 @@ function Ops() {
           }
           body={
             <>
-              AI 레슨 기록부터 일정·횟수·납부 내역까지. 체계적인 회원 관리를 실제 앱 화면으로 확인하세요.
+              AI 레슨 기록부터 일정·회원 관리까지. 체계적인 회원 관리를 실제 앱 화면으로 확인하세요.
             </>
           }
         />
 
-        {/* 01 홈 대시보드 */}
-        <Reveal>
-          <div className="mt-10 grid items-center gap-7 lg:mt-14 lg:grid-cols-[1fr_46%] lg:gap-14">
-            <FeatureCopy
-              num="01"
-              message="오늘의 레슨과 회원 현황을 한눈에"
-              title="홈 대시보드"
-              desc="회원 현황과 오늘 레슨을 한눈에 확인"
-            />
-            <div className="mx-auto w-[86%] max-w-[360px] lg:w-full lg:max-w-[400px]">
-              <Shot
-                src={appHome.url}
-                alt="KERRI 코치앱 홈 대시보드 화면. 전체 회원 수와 오늘 예정된 레슨 목록, 회원별 남은 레슨 횟수가 정리되어 있습니다."
-                caption="홈 대시보드 — 회원 현황과 오늘 레슨을 한눈에 확인"
-                priority
-              />
-
-            </div>
-          </div>
-        </Reveal>
-
-        {/* 02 · 03 알림 + 결제 (겹침) */}
-        <Reveal>
-          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[1fr_52%] lg:gap-14">
-            <div className="space-y-8 lg:space-y-10">
-              <FeatureCopy
-                num="02"
-                message="필요한 알림을 간편하게 설정하세요"
-                title="알림 설정"
-                desc="레슨 전날·당일, 재등록 알림을 항목별로 켜고 끄기"
-              />
-              <FeatureCopy
-                num="03"
-                message="납부 내역을 한눈에 명확하게"
-                title="결제 내역 관리"
-                desc="회원별 납부 내역과 미납 현황 관리"
-              />
-            </div>
-
-            <div className="relative mx-auto w-[92%] max-w-[420px] pb-[16%] lg:w-full lg:max-w-[520px]">
-              <div className="w-[74%]">
-                <Shot
-                  src={appNotify.url}
-                  width={928}
-                  alt="KERRI 코치앱 알림 설정 화면. 레슨 전날·당일 리마인드와 재등록 안내 알림을 항목별로 켜고 끌 수 있습니다."
-                  caption="알림 설정 — 레슨 전날, 당일, 재등록 알림 관리"
-                />
-
-              </div>
-              <div className="absolute bottom-0 right-0 w-[62%]">
-                <Shot
-                  src={appPayment.url}
-                  alt="KERRI 코치앱 결제 내역 화면. 회원별 결제 금액과 결제일, 미납 상태가 목록으로 표시됩니다."
-                  caption="결제 내역 관리 — 회원별 결제와 미납 현황 관리"
-                />
-
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* 04 스케줄 */}
-        <Reveal>
-          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[46%_1fr] lg:gap-14">
-            <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
-              <Shot
-                src={appSchedule.url}
-                alt="KERRI 코치앱 스케줄 관리 화면. 주간 캘린더에 시간대별 레슨 일정과 회원 이름이 배치되어 있습니다."
-                caption="스케줄 관리 — 일일·주간·월간 레슨 일정 관리"
-              />
-
-            </div>
-            <FeatureCopy
-              className="order-1 lg:order-2"
-              num="04"
-              message="복잡한 일정도 체계적으로"
-              title="스케줄 관리"
-              desc="일일 · 주간 · 월간 레슨 일정 관리"
-            />
-          </div>
-        </Reveal>
-      </Container>
-
-      {/* 05 AI 레슨 기록 — 핵심 강조 */}
-      <div className="mt-14 border-y border-border/50 bg-[var(--ink)] py-14 sm:py-16 lg:mt-20 lg:py-20">
-        <Container>
-          <Reveal>
-            <div className="mx-auto max-w-[720px] text-center">
-              <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
-              <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
-                당신의 레슨을
-                <br />
-                <span className="text-primary">다시 볼 수 있는 기록으로</span>
-              </h3>
-              <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 정리된 레슨 기록을 검토하고 회원에게 전달하세요.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
-              <figure
-                tabIndex={0}
-                aria-label="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
+        <div className="-mx-2.5 mt-10 space-y-5 sm:mx-0 sm:space-y-6 lg:mt-14 lg:space-y-12">
+          {FEATURE_SHOTS.map((s, i) => (
+            <Reveal key={s.caption} delay={i * 60}>
+              <button
+                type="button"
+                onClick={() => setZoom(i)}
+                aria-label={`${s.caption} 이미지 크게 보기`}
+                className="block w-full cursor-zoom-in rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
               >
                 <img
-                  src={appReport.url}
-                  alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                  loading="lazy"
+                  src={s.src}
+                  alt={s.alt}
+                  loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
-                  width={883}
-                  height={1920}
-                  style={{ aspectRatio: "883 / 1920", height: "auto" }}
-                  className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+                  width={1536}
+                  height={1024}
+                  style={{ aspectRatio: "3 / 2", height: "auto" }}
+                  className="block w-full"
                 />
-                <figcaption className="sr-only">
-                  AI 레슨 기록 — 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리
-                </figcaption>
-              </figure>
-            </div>
+              </button>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
 
-          </Reveal>
-        </Container>
-      </div>
+      {zoom !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={FEATURE_SHOTS[zoom].caption}
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-4 sm:p-8"
+          onClick={() => setZoom(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setZoom(null)}
+            aria-label="확대 보기 닫기"
+            className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-foreground shadow-lg transition hover:bg-white"
+          >
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+          <img
+            src={FEATURE_SHOTS[zoom].src}
+            alt={FEATURE_SHOTS[zoom].alt}
+            className="max-h-full max-w-full rounded-lg object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </Section>
   );
 }
