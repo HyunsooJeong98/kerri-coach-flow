@@ -4,7 +4,7 @@ import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify.jpg.asset.json";
 import appPayment from "@/assets/app-payment.png.asset.json";
 import appSchedule from "@/assets/app-schedule.png.asset.json";
-import appReport from "@/assets/app-report.png.asset.json";
+import aiRecord from "@/assets/ai-record.webp.asset.json";
 import heroPc from "@/assets/hero-pc.webp.asset.json";
 import heroMobile from "@/assets/hero-mobile.webp.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -985,48 +985,21 @@ function Ops() {
       </Container>
 
       {/* 05 AI 레슨 기록 — 핵심 강조 */}
-      <div className="mt-14 border-y border-border/50 bg-[var(--ink)] py-14 sm:py-16 lg:mt-20 lg:py-20">
-        <Container>
-          <Reveal>
-            <div className="mx-auto max-w-[720px] text-center">
-              <div className="text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
-              <h3 className="mx-auto mt-4 max-w-[16ch] break-keep text-[clamp(1.6rem,1.1rem+2.6vw,3rem)] font-bold leading-[1.25] tracking-tight text-white">
-                당신의 레슨을
-                <br />
-                <span className="text-primary">다시 볼 수 있는 기록으로</span>
-              </h3>
-              <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 정리된 레슨 기록을 검토하고 회원에게 전달하세요.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
-              <figure
-                tabIndex={0}
-                aria-label="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
-              >
-                <img
-                  src={appReport.url}
-                  alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                  loading="lazy"
-                  decoding="async"
-                  width={883}
-                  height={1920}
-                  style={{ aspectRatio: "883 / 1920", height: "auto" }}
-                  className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
-                />
-                <figcaption className="sr-only">
-                  AI 레슨 기록 — 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리
-                </figcaption>
-              </figure>
-            </div>
-
-          </Reveal>
-        </Container>
-      </div>
+      <Reveal className="mt-14 sm:mt-16 lg:mt-20">
+        <div className="mx-auto w-full max-w-[1200px] px-2 sm:px-4 lg:px-6">
+          <div className="text-center text-[0.8rem] font-bold tracking-[0.18em] text-primary">05</div>
+          <img
+            src={aiRecord.url}
+            alt="KERRI AI 레슨 기록 — 오늘 레슨 요약, 이전 레슨 대비 변화, 다음 레슨 목표"
+            loading="lazy"
+            decoding="async"
+            width={1536}
+            height={1024}
+            style={{ aspectRatio: "3 / 2" }}
+            className="mt-5 block h-auto w-full object-contain sm:mt-6"
+          />
+        </div>
+      </Reveal>
     </Section>
   );
 }
