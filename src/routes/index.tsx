@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
-import appHome from "@/assets/app-home.png.asset.json";
-import appNotify from "@/assets/app-notify.jpg.asset.json";
-import appPayment from "@/assets/app-payment.png.asset.json";
-import appSchedule from "@/assets/app-schedule.png.asset.json";
-import appReport from "@/assets/app-report.png.asset.json";
+import featAiRecord from "@/assets/feat-ai-record.webp.asset.json";
+import featDashboard from "@/assets/feat-dashboard.webp.asset.json";
+import featSchedule from "@/assets/feat-schedule.webp.asset.json";
+import featMember from "@/assets/feat-member.webp.asset.json";
 import heroPc from "@/assets/hero-pc.webp.asset.json";
 import heroMobile from "@/assets/hero-mobile.webp.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -16,6 +15,7 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
+  X,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
