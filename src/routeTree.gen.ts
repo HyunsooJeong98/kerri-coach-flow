@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
+import { Route as CoachesRouteImport } from './routes/coaches'
+import { Route as CoachSlugRouteImport } from './routes/coach/$slug'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -21,6 +23,16 @@ import { Route as TermsRouteImport } from './routes/terms'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachesRoute = CoachesRouteImport.update({
+  id: '/coaches',
+  path: '/coaches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachSlugRoute = CoachSlugRouteImport.update({
+  id: '/coach/$slug',
+  path: '/coach/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountDeletionRoute = AccountDeletionRouteImport.update({
@@ -62,6 +74,8 @@ const TermsRoute = TermsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/coaches': typeof CoachesRoute
+  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -72,6 +86,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/coaches': typeof CoachesRoute
+  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -83,6 +99,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
+  '/coaches': typeof CoachesRoute
+  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -95,6 +113,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account-deletion'
+    | '/coaches'
+    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
@@ -105,6 +125,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/account-deletion'
+    | '/coaches'
+    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
@@ -115,6 +137,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/account-deletion'
+    | '/coaches'
+    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
@@ -126,6 +150,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountDeletionRoute: typeof AccountDeletionRoute
+  CoachesRoute: typeof CoachesRoute
+  CoachSlugRoute: typeof CoachSlugRoute
   DownloadRoute: typeof DownloadRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
@@ -141,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coaches': {
+      id: '/coaches'
+      path: '/coaches'
+      fullPath: '/coaches'
+      preLoaderRoute: typeof CoachesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach/$slug': {
+      id: '/coach/$slug'
+      path: '/coach/$slug'
+      fullPath: '/coach/$slug'
+      preLoaderRoute: typeof CoachSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account-deletion': {
@@ -198,6 +238,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountDeletionRoute: AccountDeletionRoute,
+  CoachesRoute: CoachesRoute,
+  CoachSlugRoute: CoachSlugRoute,
   DownloadRoute: DownloadRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
