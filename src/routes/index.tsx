@@ -967,13 +967,30 @@ function Ops() {
         {/* 04 스케줄 */}
         <Reveal>
           <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[46%_1fr] lg:gap-14">
-            <div className="order-2 mx-auto w-[86%] max-w-[360px] lg:order-1 lg:w-full lg:max-w-[400px]">
-              <Shot
-                src={appSchedule.url}
-                alt="KERRI 코치앱 스케줄 관리 화면. 주간 캘린더에 시간대별 레슨 일정과 회원 이름이 배치되어 있습니다."
-                caption="스케줄 관리 — 일일·주간·월간 레슨 일정 관리"
-              />
-
+            <div className="order-2 lg:order-1">
+              <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:snap-none lg:grid-cols-3 lg:items-center lg:gap-4 lg:overflow-visible lg:pb-0">
+                <div className="w-[72%] flex-none snap-center lg:mt-10 lg:w-auto">
+                  <Shot
+                    src={scheduleDaily.url}
+                    alt="KERRI 코치앱 스케줄 일간 화면. 시간대별 레슨과 회원 이름이 목록으로 배치되어 있습니다."
+                    caption="스케줄 관리 — 일간 레슨 일정"
+                  />
+                </div>
+                <div className="w-[72%] flex-none snap-center lg:w-auto lg:-my-3">
+                  <Shot
+                    src={scheduleWeekly.url}
+                    alt="KERRI 코치앱 스케줄 주간 화면. 한 주 캘린더에 시간대별 레슨 일정과 회원 이름이 배치되어 있습니다."
+                    caption="스케줄 관리 — 주간 레슨 일정"
+                  />
+                </div>
+                <div className="w-[72%] flex-none snap-center lg:mt-10 lg:w-auto">
+                  <Shot
+                    src={scheduleMonthly.url}
+                    alt="KERRI 코치앱 스케줄 월간 화면. 월간 캘린더에 일별 레슨 수와 선택한 날의 레슨 목록이 표시됩니다."
+                    caption="스케줄 관리 — 월간 레슨 일정"
+                  />
+                </div>
+              </div>
             </div>
             <FeatureCopy
               className="order-1 lg:order-2"
