@@ -56,6 +56,7 @@ const submitRequest = createServerFn({ method: "POST" })
       return { ok: false, error: "잠시 후 다시 시도해주세요." };
     }
 
+    const today = new Date().toISOString().slice(0, 10);
     const { error } = await supabase.from("lesson_requests").insert({
       coach_id: coachId,
       guest_name: guestName.trim(),
@@ -64,6 +65,9 @@ const submitRequest = createServerFn({ method: "POST" })
       message: message.trim() || null,
       source: "web",
       status: "pending",
+      requested_date: today,
+      start_time: "00:00:00",
+      end_time: "00:00:00",
     });
 
     if (error) return { ok: false, error: "요청 중 오류가 발생했습니다." };
