@@ -71,6 +71,30 @@ const submitRequest = createServerFn({ method: "POST" })
     });
 
     if (error) return { ok: false, error: "요청 중 오류가 발생했습니다." };
+
+    // 코치에게 시스템 푸시 알림 전송 (실패해도 문의 접수는 성공)
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "https://luhuiwyhewofjxnbzbdt.supabase.co";
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY ?? "";
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+      await fetch(`${supabaseUrl}/functions/v1/send-push`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${supabaseAnonKey}`,
+          "apikey": supabaseAnonKey,
+        },
+        body: JSON.stringify({
+          recipient_type: "coach",
+          recipient_id: coachId,
+          title: "신규 상담 문의 요청",
+          body: `${guestName.trim()} · ${timeStr} 접수`,
+          data: { source: "web" },
+        }),
+      });
+    } catch {}
+
     return { ok: true, error: null };
   });
 
