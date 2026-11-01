@@ -12,32 +12,27 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as CoachesRouteImport } from './routes/coaches'
-import { Route as CoachSlugRouteImport } from './routes/coach/$slug'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as CoachSlugRouteImport } from './routes/coach/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CoachesRoute = CoachesRouteImport.update({
-  id: '/coaches',
-  path: '/coaches',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoachSlugRoute = CoachSlugRouteImport.update({
-  id: '/coach/$slug',
-  path: '/coach/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AccountDeletionRoute = AccountDeletionRouteImport.update({
   id: '/account-deletion',
   path: '/account-deletion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachesRoute = CoachesRouteImport.update({
+  id: '/coaches',
+  path: '/coaches',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DownloadRoute = DownloadRouteImport.update({
@@ -70,43 +65,48 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachSlugRoute = CoachSlugRouteImport.update({
+  id: '/coach/$slug',
+  path: '/coach/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/coach/$slug': typeof CoachSlugRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -114,50 +114,50 @@ export interface FileRouteTypes {
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
     | '/privacy'
     | '/refund-policy'
     | '/terms'
+    | '/coach/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
     | '/privacy'
     | '/refund-policy'
     | '/terms'
+    | '/coach/$slug'
   id:
     | '__root__'
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/coach/$slug'
     | '/download'
     | '/member'
     | '/pricing'
     | '/privacy'
     | '/refund-policy'
     | '/terms'
+    | '/coach/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountDeletionRoute: typeof AccountDeletionRoute
   CoachesRoute: typeof CoachesRoute
-  CoachSlugRoute: typeof CoachSlugRoute
   DownloadRoute: typeof DownloadRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   TermsRoute: typeof TermsRoute
+  CoachSlugRoute: typeof CoachSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -169,25 +169,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/coaches': {
-      id: '/coaches'
-      path: '/coaches'
-      fullPath: '/coaches'
-      preLoaderRoute: typeof CoachesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/coach/$slug': {
-      id: '/coach/$slug'
-      path: '/coach/$slug'
-      fullPath: '/coach/$slug'
-      preLoaderRoute: typeof CoachSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/account-deletion': {
       id: '/account-deletion'
       path: '/account-deletion'
       fullPath: '/account-deletion'
       preLoaderRoute: typeof AccountDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coaches': {
+      id: '/coaches'
+      path: '/coaches'
+      fullPath: '/coaches'
+      preLoaderRoute: typeof CoachesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/download': {
@@ -232,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach/$slug': {
+      id: '/coach/$slug'
+      path: '/coach/$slug'
+      fullPath: '/coach/$slug'
+      preLoaderRoute: typeof CoachSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -239,13 +239,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountDeletionRoute: AccountDeletionRoute,
   CoachesRoute: CoachesRoute,
-  CoachSlugRoute: CoachSlugRoute,
   DownloadRoute: DownloadRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   TermsRoute: TermsRoute,
+  CoachSlugRoute: CoachSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
