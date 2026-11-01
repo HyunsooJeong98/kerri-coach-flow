@@ -835,7 +835,7 @@ function Shot({
     <figure
       tabIndex={0}
       aria-label={alt}
-      className="group m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
+      className="group relative m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--cream)]"
     >
       <img
         src={src}
