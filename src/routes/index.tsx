@@ -967,7 +967,7 @@ function Ops() {
         {/* 04 스케줄 */}
         <Reveal>
           <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
-            <div className="order-2 lg:order-1">
+            <div className="order-2 min-w-0 lg:order-1">
               <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:snap-none lg:grid-cols-3 lg:items-center lg:gap-4 lg:overflow-visible lg:pb-0">
                 <div className="w-[72%] flex-none snap-center lg:mt-10 lg:w-auto">
                   <Shot
