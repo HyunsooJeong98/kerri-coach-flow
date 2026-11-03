@@ -383,8 +383,10 @@ export function Footer() {
         <div className="break-keep text-[0.85rem]">
           <div className="font-medium text-foreground">정책</div>
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
-            <li><Link to="/terms" className="transition-colors hover:text-primary">이용약관</Link></li>
-            <li><Link to="/privacy" className="transition-colors hover:text-primary">개인정보처리방침</Link></li>
+            <li><Link to="/legal/coach/terms" className="transition-colors hover:text-primary">코치앱 이용약관</Link></li>
+            <li><Link to="/legal/coach/privacy" className="transition-colors hover:text-primary">코치앱 개인정보 처리방침</Link></li>
+            <li><Link to="/legal/member/terms" className="transition-colors hover:text-primary">멤버앱 이용약관</Link></li>
+            <li><Link to="/legal/member/privacy" className="transition-colors hover:text-primary">멤버앱 개인정보 처리방침</Link></li>
             <li><Link to="/refund-policy" className="transition-colors hover:text-primary">유료서비스·구독·환불정책</Link></li>
             <li><Link to="/account-deletion" className="transition-colors hover:text-primary">계정 및 데이터 삭제 요청</Link></li>
           </ul>
