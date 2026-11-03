@@ -1,8 +1,10 @@
 import { type ReactNode } from "react";
-import { createFileRoute, useSearch } from "@tanstack/react-router";
+import { Link, createFileRoute, useSearch } from "@tanstack/react-router";
 import { PolicyLayout } from "@/components/landing/PolicyLayout";
 import {
-  ServiceToggle,
+  SegmentedToggle,
+  segmentClass,
+  scrollTopOnSwitch,
   readService,
   type LegalService,
 } from "@/components/landing/legal/service-toggle";
@@ -81,7 +83,26 @@ function Terms() {
     <PolicyLayout>
       <p className="text-sm font-semibold text-primary">KERRI POLICY</p>
 
-      <ServiceToggle to="/terms" />
+      <SegmentedToggle>
+        <Link
+          to="/terms"
+          search={{ service: "coach" }}
+          aria-pressed={service === "coach"}
+          onClick={scrollTopOnSwitch}
+          className={segmentClass(service === "coach")}
+        >
+          코치용
+        </Link>
+        <Link
+          to="/terms"
+          search={{ service: "member" }}
+          aria-pressed={service === "member"}
+          onClick={scrollTopOnSwitch}
+          className={segmentClass(service === "member")}
+        >
+          멤버용
+        </Link>
+      </SegmentedToggle>
 
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-foreground break-keep sm:text-4xl">
         {doc.h1}
