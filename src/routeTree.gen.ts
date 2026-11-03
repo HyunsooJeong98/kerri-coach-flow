@@ -19,10 +19,6 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CoachSlugRouteImport } from './routes/coach/$slug'
-import { Route as LegalCoachPrivacyRouteImport } from './routes/legal/coach/privacy'
-import { Route as LegalCoachTermsRouteImport } from './routes/legal/coach/terms'
-import { Route as LegalMemberPrivacyRouteImport } from './routes/legal/member/privacy'
-import { Route as LegalMemberTermsRouteImport } from './routes/legal/member/terms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -74,26 +70,6 @@ const CoachSlugRoute = CoachSlugRouteImport.update({
   path: '/coach/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LegalCoachPrivacyRoute = LegalCoachPrivacyRouteImport.update({
-  id: '/legal/coach/privacy',
-  path: '/legal/coach/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalCoachTermsRoute = LegalCoachTermsRouteImport.update({
-  id: '/legal/coach/terms',
-  path: '/legal/coach/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalMemberPrivacyRoute = LegalMemberPrivacyRouteImport.update({
-  id: '/legal/member/privacy',
-  path: '/legal/member/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalMemberTermsRoute = LegalMemberTermsRouteImport.update({
-  id: '/legal/member/terms',
-  path: '/legal/member/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -106,10 +82,6 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/coach/$slug': typeof CoachSlugRoute
-  '/legal/coach/privacy': typeof LegalCoachPrivacyRoute
-  '/legal/coach/terms': typeof LegalCoachTermsRoute
-  '/legal/member/privacy': typeof LegalMemberPrivacyRoute
-  '/legal/member/terms': typeof LegalMemberTermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -122,10 +94,6 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/coach/$slug': typeof CoachSlugRoute
-  '/legal/coach/privacy': typeof LegalCoachPrivacyRoute
-  '/legal/coach/terms': typeof LegalCoachTermsRoute
-  '/legal/member/privacy': typeof LegalMemberPrivacyRoute
-  '/legal/member/terms': typeof LegalMemberTermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,10 +107,6 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/coach/$slug': typeof CoachSlugRoute
-  '/legal/coach/privacy': typeof LegalCoachPrivacyRoute
-  '/legal/coach/terms': typeof LegalCoachTermsRoute
-  '/legal/member/privacy': typeof LegalMemberPrivacyRoute
-  '/legal/member/terms': typeof LegalMemberTermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -157,10 +121,6 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/terms'
     | '/coach/$slug'
-    | '/legal/coach/privacy'
-    | '/legal/coach/terms'
-    | '/legal/member/privacy'
-    | '/legal/member/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -173,10 +133,6 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/terms'
     | '/coach/$slug'
-    | '/legal/coach/privacy'
-    | '/legal/coach/terms'
-    | '/legal/member/privacy'
-    | '/legal/member/terms'
   id:
     | '__root__'
     | '/'
@@ -189,10 +145,6 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/terms'
     | '/coach/$slug'
-    | '/legal/coach/privacy'
-    | '/legal/coach/terms'
-    | '/legal/member/privacy'
-    | '/legal/member/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -206,10 +158,6 @@ export interface RootRouteChildren {
   RefundPolicyRoute: typeof RefundPolicyRoute
   TermsRoute: typeof TermsRoute
   CoachSlugRoute: typeof CoachSlugRoute
-  LegalCoachPrivacyRoute: typeof LegalCoachPrivacyRoute
-  LegalCoachTermsRoute: typeof LegalCoachTermsRoute
-  LegalMemberPrivacyRoute: typeof LegalMemberPrivacyRoute
-  LegalMemberTermsRoute: typeof LegalMemberTermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -284,34 +232,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoachSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/legal/coach/privacy': {
-      id: '/legal/coach/privacy'
-      path: '/legal/coach/privacy'
-      fullPath: '/legal/coach/privacy'
-      preLoaderRoute: typeof LegalCoachPrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal/coach/terms': {
-      id: '/legal/coach/terms'
-      path: '/legal/coach/terms'
-      fullPath: '/legal/coach/terms'
-      preLoaderRoute: typeof LegalCoachTermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal/member/privacy': {
-      id: '/legal/member/privacy'
-      path: '/legal/member/privacy'
-      fullPath: '/legal/member/privacy'
-      preLoaderRoute: typeof LegalMemberPrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal/member/terms': {
-      id: '/legal/member/terms'
-      path: '/legal/member/terms'
-      fullPath: '/legal/member/terms'
-      preLoaderRoute: typeof LegalMemberTermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -326,10 +246,6 @@ const rootRouteChildren: RootRouteChildren = {
   RefundPolicyRoute: RefundPolicyRoute,
   TermsRoute: TermsRoute,
   CoachSlugRoute: CoachSlugRoute,
-  LegalCoachPrivacyRoute: LegalCoachPrivacyRoute,
-  LegalCoachTermsRoute: LegalCoachTermsRoute,
-  LegalMemberPrivacyRoute: LegalMemberPrivacyRoute,
-  LegalMemberTermsRoute: LegalMemberTermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
