@@ -381,7 +381,7 @@ export function Footer() {
           </div>
         </div>
         <div className="break-keep text-[0.85rem]">
-          <div className="font-medium text-foreground">정책</div>
+          <div className="font-medium text-foreground">법적 고지</div>
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground">
             <li><Link to="/legal/coach/terms" className="transition-colors hover:text-primary">코치앱 이용약관</Link></li>
             <li><Link to="/legal/coach/privacy" className="transition-colors hover:text-primary">코치앱 개인정보 처리방침</Link></li>
