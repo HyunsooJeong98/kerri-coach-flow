@@ -4,5 +4,5 @@
 - [x] Reuse the terms layout for /privacy without changing the terms content or appearance.
 - [x] Publish the supplied privacy text verbatim and connect the footer and contact links.
 - [x] Verify desktop/mobile text, navigation, and absence of the fixed install button.
-- [ ] Separate coach/member terms and privacy using URL-backed selectors; blocked on coach-only terms and coach-only privacy originals. Member terms and member privacy supplied; existing originals cover both services and cannot be relabeled as coach-only.
-- [ ] Verify all four legal documents verbatim, direct links, refresh/back, top-of-page switching, copy selection and mobile/desktop layout after the remaining originals arrive.
+- [x] Separate coach/member terms and privacy using URL-backed selectors; user designated the existing v1.2 terms and v1.0 privacy as the coach documents.
+- [x] Verify all four legal documents verbatim, direct links, refresh/back, top-of-page switching, copy selection and mobile/desktop layout.
