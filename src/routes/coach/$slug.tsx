@@ -1,11 +1,17 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { MapPin, Clock, Award, ChevronDown, ChevronUp, Send } from "lucide-react";
+import {
+  MapPin, Clock, Award, ChevronDown, ChevronUp, Send,
+  BookOpen, Briefcase, FileText, Trophy, Users, Layers,
+  Flame, MessageCircle,
+} from "lucide-react";
 import { supabase, type CoachProfile, type LessonPackage } from "@/lib/supabase";
 import { Nav, Footer, Container } from "@/components/landing/shared";
 
 /* ── Server functions ─────────────────────────────────────── */
+
+type JourneyStats = { members: number; lessons: number; reports: number };
 
 const fetchCoach = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
@@ -26,7 +32,30 @@ const fetchCoach = createServerFn({ method: "GET" })
       .eq("is_active", true)
       .order("price");
 
-    return { profile: profile as CoachProfile, packages: (packages ?? []) as LessonPackage[] };
+    // journey stats (best-effort — anon RLS may block; graceful fallback)
+    let journeyStats: JourneyStats | null = null;
+    if (profile.show_coaching_journey) {
+      try {
+        const [membersRes, lessonsRes, reportsRes] = await Promise.all([
+          supabase.from("members").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
+          supabase.from("lessons").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
+          supabase.from("lesson_plans").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
+        ]);
+        if (!membersRes.error && !lessonsRes.error && !reportsRes.error) {
+          journeyStats = {
+            members: membersRes.count ?? 0,
+            lessons: lessonsRes.count ?? 0,
+            reports: reportsRes.count ?? 0,
+          };
+        }
+      } catch {}
+    }
+
+    return {
+      profile: profile as CoachProfile,
+      packages: (packages ?? []) as LessonPackage[],
+      journeyStats,
+    };
   });
 
 const submitRequest = createServerFn({ method: "POST" })
@@ -42,7 +71,6 @@ const submitRequest = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { coachId, guestName, guestPhone, packageId, message } = data;
 
-    // Simple rate limit: block if same phone submitted in last 5 min
     const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
     const { data: recent } = await supabase
       .from("lesson_requests")
@@ -72,7 +100,6 @@ const submitRequest = createServerFn({ method: "POST" })
 
     if (error) return { ok: false, error: "요청 중 오류가 발생했습니다." };
 
-    // 코치에게 시스템 푸시 알림 전송 (실패해도 문의 접수는 성공)
     try {
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "https://luhuiwyhewofjxnbzbdt.supabase.co";
       const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY ?? "";
@@ -114,7 +141,7 @@ export const Route = createFileRoute("/coach/$slug")({
     const sport = profile.sport ?? "테니스";
     const bioSnippet = (profile.bio ?? "").slice(0, 120);
     const title = `${name} 코치 · ${district} ${sport} 레슨 | KERRI`;
-    const desc = bioSnippet;
+    const desc = bioSnippet || `${name} 코치의 ${sport} 레슨 프로필입니다.`;
     const url = `https://kerri.co.kr/coach/${profile.public_slug}`;
     const avatar = profile.avatar_url ?? "";
 
@@ -124,15 +151,16 @@ export const Route = createFileRoute("/coach/$slug")({
         {
           "@type": "Person",
           name,
-          description: bioSnippet,
+          description: desc,
           image: avatar,
           url,
           jobTitle: `${sport} 코치`,
+          ...(profile.career_details ? { description: profile.career_details.slice(0, 200) } : {}),
         },
         {
           "@type": "LocalBusiness",
           name: `${name} 코치 레슨`,
-          description: bioSnippet,
+          description: desc,
           image: avatar,
           url,
           address: {
@@ -159,12 +187,7 @@ export const Route = createFileRoute("/coach/$slug")({
         { name: "twitter:description", content: desc },
       ],
       links: [{ rel: "canonical", href: url }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify(jsonLd),
-        },
-      ],
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
     };
   },
   notFoundComponent: () => (
@@ -180,20 +203,61 @@ export const Route = createFileRoute("/coach/$slug")({
 /* ── Component ────────────────────────────────────────────── */
 
 function CoachPage() {
-  const { profile, packages } = Route.useLoaderData();
+  const { profile, packages, journeyStats } = Route.useLoaderData();
+
+  const hasBasicInfo = !!(
+    profile.specialties?.length ||
+    profile.coaching_style ||
+    profile.coaching_years
+  );
+
+  const hasCareer = !!(
+    profile.has_player_career ||
+    profile.career_details ||
+    profile.certifications ||
+    profile.awards
+  );
+
+  const hasJourney =
+    profile.show_coaching_journey &&
+    journeyStats &&
+    (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Nav />
-      <main className="flex-1 pt-16">
+      {/* pb-24 on mobile to clear sticky CTA */}
+      <main className="flex-1 pt-[60px] sm:pt-16 pb-24 sm:pb-0">
         <CoachHero profile={profile} />
-        <Container className="py-12 space-y-12">
+        <Container className="py-8 sm:py-12 space-y-8 sm:space-y-10 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
-          {packages.length > 0 && <PackagesSection packages={packages} />}
-          <RequestForm coachId={profile.coach_id} coachName={profile.display_name} packages={packages} />
+          {hasBasicInfo && <BasicInfoSection profile={profile} />}
+          {hasJourney && <JourneySection stats={journeyStats!} />}
+          {hasCareer && <CareerSection profile={profile} />}
+          {packages.length > 0 && (
+            <PackagesSection packages={packages} />
+          )}
+          <div id="request-form">
+            <RequestForm
+              coachId={profile.coach_id}
+              coachName={profile.display_name}
+              packages={packages}
+            />
+          </div>
         </Container>
       </main>
       <Footer />
+
+      {/* Sticky CTA — mobile only */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden border-t border-border bg-background/95 backdrop-blur px-5 py-3 safe-area-inset-bottom">
+        <a
+          href="#request-form"
+          className="flex items-center justify-center gap-2 w-full rounded-xl bg-clay px-6 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-clay-dark transition-colors"
+        >
+          <MessageCircle className="w-4 h-4" />
+          레슨 문의하기
+        </a>
+      </div>
     </div>
   );
 }
@@ -205,35 +269,39 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
   const location = [region_city, region_district].filter(Boolean).join(" ");
 
   return (
-    <section className="bg-gradient-to-b from-cream/60 to-background border-b border-border/50">
-      <Container className="py-12">
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+    <section className="border-b border-border/50 bg-gradient-to-b from-[#FBF2EF] to-background">
+      <Container className="py-8 sm:py-10 px-5">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
           {avatar_url ? (
-            <img src={avatar_url} alt={display_name} className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover ring-4 ring-white shadow-lg flex-shrink-0" />
+            <img
+              src={avatar_url}
+              alt={display_name}
+              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover ring-4 ring-white shadow-md flex-shrink-0"
+            />
           ) : (
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-clay/20 flex items-center justify-center text-4xl flex-shrink-0 ring-4 ring-white shadow-lg">
-              🎾
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-clay/20 flex items-center justify-center text-3xl flex-shrink-0 ring-4 ring-white shadow-md">
+              <span className="text-2xl font-bold text-clay">{display_name.charAt(0)}</span>
             </div>
           )}
           <div className="text-center sm:text-left">
             <h1 className="text-2xl sm:text-3xl font-bold text-ink">{display_name} 코치</h1>
-            {sport && <p className="mt-1 text-clay font-semibold">{sport}</p>}
-            <div className="mt-2 flex flex-wrap justify-center sm:justify-start gap-3 text-sm text-muted-foreground">
+            {sport && <p className="mt-1 text-clay font-semibold text-sm">{sport}</p>}
+            <div className="mt-2.5 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
               {location && (
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                   {location}
                 </span>
               )}
               {center_name && (
-                <span className="flex items-center gap-1">
-                  <Award className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 flex-shrink-0" />
                   {center_name}
                 </span>
               )}
               {coaching_years && (
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 flex-shrink-0" />
                   경력 {coaching_years}년
                 </span>
               )}
@@ -242,6 +310,17 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
         </div>
       </Container>
     </section>
+  );
+}
+
+/* ── Section heading helper ───────────────────────────────── */
+
+function SectionHeading({ icon, title }: { icon: React.ReactNode; title: string }) {
+  return (
+    <h2 className="flex items-center gap-2 text-base font-bold text-ink mb-4">
+      <span className="text-clay">{icon}</span>
+      {title}
+    </h2>
   );
 }
 
@@ -254,16 +333,124 @@ function BioSection({ bio }: { bio: string }) {
 
   return (
     <section>
-      <h2 className="text-lg font-bold text-ink mb-3">코치 소개</h2>
-      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
-      {isLong && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="mt-2 flex items-center gap-1 text-sm text-clay hover:text-clay-dark font-medium"
-        >
-          {expanded ? <><ChevronUp className="w-4 h-4" />접기</> : <><ChevronDown className="w-4 h-4" />더 보기</>}
-        </button>
-      )}
+      <SectionHeading icon={<BookOpen className="w-4 h-4" />} title="코치 소개" />
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+        <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
+        {isLong && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-3 flex items-center gap-1 text-sm text-clay hover:text-clay-dark font-medium"
+          >
+            {expanded
+              ? <><ChevronUp className="w-4 h-4" />접기</>
+              : <><ChevronDown className="w-4 h-4" />더 보기</>}
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── Basic Info ───────────────────────────────────────────── */
+
+function BasicInfoSection({ profile }: { profile: CoachProfile }) {
+  const rows: { label: string; value: string }[] = [];
+
+  if (profile.specialties?.length) {
+    rows.push({ label: "전문 분야", value: profile.specialties.join(", ") });
+  }
+  if (profile.coaching_style) {
+    rows.push({ label: "코칭 스타일", value: profile.coaching_style });
+  }
+  if (profile.coaching_years) {
+    rows.push({ label: "코칭 경력", value: `${profile.coaching_years}년` });
+  }
+  if (!rows.length) return null;
+
+  return (
+    <section>
+      <SectionHeading icon={<Layers className="w-4 h-4" />} title="기본정보" />
+      <div className="rounded-2xl border border-border bg-card shadow-[0_1px_6px_rgba(0,0,0,0.06)] overflow-hidden">
+        {rows.map((row, i) => (
+          <div
+            key={row.label}
+            className={`flex gap-4 px-5 py-3.5 text-sm ${i > 0 ? "border-t border-border/60" : ""}`}
+          >
+            <span className="w-28 flex-shrink-0 text-muted-foreground font-medium">{row.label}</span>
+            <span className="text-foreground">{row.value}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Journey ──────────────────────────────────────────────── */
+
+function JourneySection({ stats }: { stats: JourneyStats }) {
+  const cells = [
+    { label: "함께한 회원", value: `${stats.members}명` },
+    { label: "진행한 레슨", value: `${stats.lessons.toLocaleString()}회` },
+    { label: "남긴 레슨 기록", value: `${stats.reports}개` },
+  ].filter((_, i) => [stats.members, stats.lessons, stats.reports][i] > 0);
+
+  if (!cells.length) return null;
+
+  return (
+    <section>
+      <SectionHeading icon={<Flame className="w-4 h-4" />} title="나의 코칭 여정" />
+      <div className="grid grid-cols-3 gap-3">
+        {cells.map((c) => (
+          <div
+            key={c.label}
+            className="rounded-2xl border border-border bg-card p-4 text-center shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
+          >
+            <p className="text-xl font-bold text-clay">{c.value}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{c.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Career & Certifications ──────────────────────────────── */
+
+function CareerSection({ profile }: { profile: CoachProfile }) {
+  const sections: { icon: React.ReactNode; title: string; value: string }[] = [];
+
+  if (profile.has_player_career) {
+    sections.push({ icon: <Trophy className="w-3.5 h-3.5" />, title: "선수 경력", value: "있음" });
+  }
+  if (profile.career_details) {
+    sections.push({ icon: <Briefcase className="w-3.5 h-3.5" />, title: "주요 경력", value: profile.career_details });
+  }
+  if (profile.certifications) {
+    sections.push({ icon: <FileText className="w-3.5 h-3.5" />, title: "자격증", value: profile.certifications });
+  }
+  if (profile.awards) {
+    sections.push({ icon: <Award className="w-3.5 h-3.5" />, title: "수상·대회", value: profile.awards });
+  }
+
+  if (!sections.length) return null;
+
+  return (
+    <section>
+      <SectionHeading icon={<Users className="w-4 h-4" />} title="경력·자격" />
+      <div className="rounded-2xl border border-border bg-card shadow-[0_1px_6px_rgba(0,0,0,0.06)] overflow-hidden">
+        {sections.map((s, i) => (
+          <div
+            key={s.title}
+            className={`px-5 py-4 text-sm ${i > 0 ? "border-t border-border/60" : ""}`}
+          >
+            <div className="flex items-center gap-1.5 text-clay font-semibold mb-1.5">
+              {s.icon}
+              <span className="text-xs">{s.title}</span>
+            </div>
+            <p className="text-foreground leading-relaxed whitespace-pre-wrap">{s.value}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -273,20 +460,25 @@ function BioSection({ bio }: { bio: string }) {
 function PackagesSection({ packages }: { packages: LessonPackage[] }) {
   return (
     <section>
-      <h2 className="text-lg font-bold text-ink mb-4">레슨 패키지</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <SectionHeading icon={<Clock className="w-4 h-4" />} title="레슨권" />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {packages.map((pkg) => (
-          <div key={pkg.id} className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: pkg.color }} />
-              <span className="font-semibold text-foreground">{pkg.title}</span>
+          <div
+            key={pkg.id}
+            className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: pkg.color }} />
+              <span className="font-semibold text-sm text-foreground">{pkg.title}</span>
             </div>
-            <div className="flex gap-4 text-sm text-muted-foreground">
-              <span>⏱ {pkg.duration_minutes}분</span>
-              <span>🎾 {pkg.total_credits === 1 ? "원타임" : `${pkg.total_credits}회`}</span>
+            <div className="flex gap-3 text-xs text-muted-foreground mb-2.5">
+              <span className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />{pkg.duration_minutes}분
+              </span>
+              <span>{pkg.total_credits === 1 ? "원타임" : `${pkg.total_credits}회`}</span>
             </div>
-            <p className="mt-3 text-lg font-bold text-ink">{pkg.price.toLocaleString()}원</p>
-            {pkg.notes && <p className="mt-1 text-xs text-muted-foreground">{pkg.notes}</p>}
+            <p className="text-base font-bold text-ink">{pkg.price.toLocaleString()}원</p>
+            {pkg.notes && <p className="mt-1.5 text-xs text-muted-foreground leading-snug">{pkg.notes}</p>}
           </div>
         ))}
       </div>
@@ -327,13 +519,7 @@ function RequestForm({
     setError("");
 
     const result = await submitRequest({
-      data: {
-        coachId,
-        guestName: name,
-        guestPhone: phoneClean,
-        packageId: selectedPkg || null,
-        message,
-      },
+      data: { coachId, guestName: name, guestPhone: phoneClean, packageId: selectedPkg || null, message },
     });
 
     setSubmitting(false);
@@ -346,21 +532,26 @@ function RequestForm({
 
   if (done) {
     return (
-      <section className="rounded-3xl bg-cream/50 border border-border/50 p-8 text-center">
-        <p className="text-4xl mb-3">✅</p>
-        <h3 className="text-lg font-bold text-ink">{coachName} 코치에게 전달됐어요</h3>
-        <p className="mt-2 text-sm text-muted-foreground">코치가 확인 후 연락드릴 거예요.</p>
+      <section className="rounded-2xl bg-[#FBF2EF] border border-clay/20 p-8 text-center">
+        <div className="w-12 h-12 rounded-full bg-clay/15 flex items-center justify-center mx-auto mb-3">
+          <Send className="w-5 h-5 text-clay" />
+        </div>
+        <h3 className="text-base font-bold text-ink">{coachName} 코치에게 전달됐어요</h3>
+        <p className="mt-1.5 text-sm text-muted-foreground">코치가 확인 후 연락드릴 거예요.</p>
       </section>
     );
   }
 
   return (
     <section>
-      <h2 className="text-lg font-bold text-ink mb-4">레슨 문의하기</h2>
-      <form onSubmit={handleSubmit} className="rounded-3xl bg-card border border-border p-6 sm:p-8 space-y-4 shadow-sm">
+      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title="레슨 문의하기" />
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-2xl bg-card border border-border p-5 sm:p-6 space-y-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
+      >
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1.5">이름 *</label>
+            <label className="block text-xs font-medium text-muted-foreground mb-1.5">이름 *</label>
             <input
               type="text"
               required
@@ -371,7 +562,7 @@ function RequestForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1.5">전화번호 *</label>
+            <label className="block text-xs font-medium text-muted-foreground mb-1.5">전화번호 *</label>
             <input
               type="tel"
               required
@@ -385,7 +576,7 @@ function RequestForm({
 
         {packages.length > 0 && (
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1.5">관심 패키지 (선택)</label>
+            <label className="block text-xs font-medium text-muted-foreground mb-1.5">관심 레슨권 (선택)</label>
             <select
               value={selectedPkg}
               onChange={(e) => setSelectedPkg(e.target.value)}
@@ -402,7 +593,7 @@ function RequestForm({
         )}
 
         <div>
-          <label className="block text-sm font-medium text-muted-foreground mb-1.5">문의 내용 (선택)</label>
+          <label className="block text-xs font-medium text-muted-foreground mb-1.5">문의 내용 (선택)</label>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}

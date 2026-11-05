@@ -20,8 +20,8 @@ export type CoachProfile = {
   coaching_style: string | null;
   has_player_career: boolean | null;
   career_details: string | null;
-  certifications: string[] | null;
-  awards: string[] | null;
+  certifications: string | null;
+  awards: string | null;
   show_coaching_journey: boolean | null;
   journey_snapshot: string | null;
   public_slug: string;
