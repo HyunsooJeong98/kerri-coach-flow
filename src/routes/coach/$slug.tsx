@@ -254,34 +254,21 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
   const hasSpecialties = specialties && specialties.length > 0;
   if (!hasSpecialties && !coaching_style && !coaching_years) return null;
 
+  const rows: { label: string; value: string }[] = [];
+  if (hasSpecialties) rows.push({ label: "전문 분야", value: specialties!.join(", ") });
+  if (coaching_style) rows.push({ label: "코칭 스타일", value: coaching_style });
+  if (coaching_years) rows.push({ label: "코칭 경력", value: `${coaching_years}년` });
+
   return (
     <section>
       <h2 className="text-lg font-bold text-ink mb-4">기본정보</h2>
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-4">
-        {hasSpecialties && (
-          <div>
-            <p className="text-xs font-medium text-muted-foreground mb-2">전문 분야</p>
-            <div className="flex flex-wrap gap-2">
-              {specialties!.map((s) => (
-                <span key={s} className="rounded-full bg-clay/10 text-clay px-3 py-1 text-xs font-medium">
-                  {s}
-                </span>
-              ))}
-            </div>
+      <div className="rounded-2xl border border-border bg-card shadow-sm divide-y divide-border/60">
+        {rows.map((row) => (
+          <div key={row.label} className="flex gap-4 px-5 py-4">
+            <span className="w-20 flex-shrink-0 text-xs font-medium text-muted-foreground pt-0.5">{row.label}</span>
+            <span className="text-sm text-foreground/80 leading-relaxed">{row.value}</span>
           </div>
-        )}
-        {coaching_style && (
-          <div>
-            <p className="text-xs font-medium text-muted-foreground mb-1">코칭 스타일</p>
-            <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{coaching_style}</p>
-          </div>
-        )}
-        {coaching_years && (
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <Clock className="w-3.5 h-3.5" />
-            코칭 경력 {coaching_years}년
-          </div>
-        )}
+        ))}
       </div>
     </section>
   );
@@ -289,15 +276,15 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
 
 /* ── Coaching Journey ─────────────────────────────────────── */
 
-function JourneySection({ snapshot }: { snapshot: string }) {
-  // journey_snapshot is a pre-rendered snapshot string; show whenever it has data.
-  let items: string[] | null = null;
-  try {
-    const parsed = JSON.parse(snapshot);
-    if (Array.isArray(parsed)) items = parsed.map(String).filter(Boolean);
-  } catch {
-    items = null;
-  }
+function JourneySection({ snapshot }: { snapshot: NonNullable<CoachProfile["journey_snapshot"]> }) {
+  const { members_count, lessons_count, reports_count } = snapshot;
+  if (members_count <= 0 && lessons_count <= 0 && reports_count <= 0) return null;
+
+  const stats = [
+    { label: "함께한 회원", value: `${members_count}명` },
+    { label: "진행한 레슨", value: `${lessons_count}회` },
+    { label: "남긴 레슨 기록", value: `${reports_count}개` },
+  ];
 
   return (
     <section>
@@ -305,22 +292,14 @@ function JourneySection({ snapshot }: { snapshot: string }) {
         <RouteIcon className="w-5 h-5 text-clay" />
         나의 코칭 여정
       </h2>
-      {items && items.length > 0 ? (
-        <ol className="space-y-3">
-          {items.map((item, i) => (
-            <li key={i} className="flex gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-clay/10 text-clay text-xs font-bold flex items-center justify-center">
-                {i + 1}
-              </span>
-              <p className="text-sm text-foreground/80 leading-relaxed">{item}</p>
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-          <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{snapshot}</p>
-        </div>
-      )}
+      <div className="grid grid-cols-3 gap-3">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-2xl border border-border bg-card p-4 shadow-sm text-center">
+            <p className="text-lg sm:text-xl font-bold text-clay">{s.value}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -333,48 +312,31 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
   const hasAwards = awards && awards.length > 0;
   if (!has_player_career && !career_details && !hasCerts && !hasAwards) return null;
 
+  const cards: { icon: React.ReactNode; title: string; lines: string[] }[] = [];
+  if (has_player_career) cards.push({ icon: <Sparkles className="w-4 h-4 text-clay" />, title: "선수경력", lines: ["선수 출신 코치"] });
+  if (career_details) cards.push({ icon: <Award className="w-4 h-4 text-clay" />, title: "주요경력", lines: [career_details] });
+  if (hasCerts) cards.push({ icon: <BadgeCheck className="w-4 h-4 text-clay" />, title: "자격증", lines: certifications! });
+  if (hasAwards) cards.push({ icon: <Trophy className="w-4 h-4 text-clay" />, title: "수상·대회", lines: awards! });
+
   return (
     <section>
       <h2 className="text-lg font-bold text-ink mb-4">경력·자격</h2>
       <div className="grid sm:grid-cols-2 gap-4">
-        {(has_player_career || career_details) && (
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        {cards.map((card) => (
+          <div key={card.title} className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-4 h-4 text-clay" />
-              <span className="font-semibold text-foreground">선수 경력</span>
-            </div>
-            {has_player_career && <p className="text-sm text-clay font-medium">선수 출신</p>}
-            {career_details && (
-              <p className="mt-1 text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{career_details}</p>
-            )}
-          </div>
-        )}
-        {hasCerts && (
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <BadgeCheck className="w-4 h-4 text-clay" />
-              <span className="font-semibold text-foreground">자격·인증</span>
+              {card.icon}
+              <span className="font-semibold text-foreground">{card.title}</span>
             </div>
             <ul className="space-y-1">
-              {certifications!.map((c) => (
-                <li key={c} className="text-sm text-foreground/80">· {c}</li>
+              {card.lines.map((line, i) => (
+                <li key={i} className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">
+                  {card.lines.length > 1 ? `· ${line}` : line}
+                </li>
               ))}
             </ul>
           </div>
-        )}
-        {hasAwards && (
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <Trophy className="w-4 h-4 text-clay" />
-              <span className="font-semibold text-foreground">수상 경력</span>
-            </div>
-            <ul className="space-y-1">
-              {awards!.map((a) => (
-                <li key={a} className="text-sm text-foreground/80">· {a}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        ))}
       </div>
     </section>
   );

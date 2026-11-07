@@ -23,7 +23,7 @@ export type CoachProfile = {
   certifications: string[] | null;
   awards: string[] | null;
   show_coaching_journey: boolean | null;
-  journey_snapshot: string | null;
+  journey_snapshot: { members_count: number; lessons_count: number; reports_count: number } | null;
   public_slug: string;
   is_public: boolean;
 };
