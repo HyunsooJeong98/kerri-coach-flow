@@ -32,23 +32,15 @@ const fetchCoach = createServerFn({ method: "GET" })
       .eq("is_active", true)
       .order("price");
 
-    // journey stats (best-effort — anon RLS may block; graceful fallback)
+    // journey stats — read from journey_snapshot stored in profile (anon can't query live tables)
     let journeyStats: JourneyStats | null = null;
-    if (profile.show_coaching_journey) {
-      try {
-        const [membersRes, lessonsRes, reportsRes] = await Promise.all([
-          supabase.from("members").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
-          supabase.from("lessons").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
-          supabase.from("lesson_plans").select("id", { count: "exact", head: true }).eq("coach_id", profile.coach_id),
-        ]);
-        if (!membersRes.error && !lessonsRes.error && !reportsRes.error) {
-          journeyStats = {
-            members: membersRes.count ?? 0,
-            lessons: lessonsRes.count ?? 0,
-            reports: reportsRes.count ?? 0,
-          };
-        }
-      } catch {}
+    if (profile.show_coaching_journey && profile.journey_snapshot) {
+      const snap = profile.journey_snapshot;
+      journeyStats = {
+        members: snap.members_count ?? 0,
+        lessons: snap.lessons_count ?? 0,
+        reports: snap.reports_count ?? 0,
+      };
     }
 
     return {
