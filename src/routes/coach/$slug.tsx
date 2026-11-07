@@ -197,11 +197,6 @@ export const Route = createFileRoute("/coach/$slug")({
 function CoachPage() {
   const { profile, packages, journeyStats } = Route.useLoaderData();
 
-  const hasBasicInfo = !!(
-    profile.specialties?.length ||
-    profile.coaching_style
-  );
-
   const hasCareer = !!(
     profile.has_player_career ||
     profile.career_details ||
@@ -221,7 +216,6 @@ function CoachPage() {
         <CoachHero profile={profile} />
         <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
-          {hasBasicInfo && <BasicInfoSection profile={profile} />}
           {hasJourney && <JourneySection stats={journeyStats!} />}
           {hasCareer && <CareerSection profile={profile} />}
           {packages.length > 0 && (
