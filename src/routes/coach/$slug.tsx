@@ -247,6 +247,139 @@ function BioSection({ bio }: { bio: string }) {
   );
 }
 
+/* ── Basic Info ───────────────────────────────────────────── */
+
+function BasicInfoSection({ profile }: { profile: CoachProfile }) {
+  const { specialties, coaching_style, coaching_years } = profile;
+  const hasSpecialties = specialties && specialties.length > 0;
+  if (!hasSpecialties && !coaching_style && !coaching_years) return null;
+
+  return (
+    <section>
+      <h2 className="text-lg font-bold text-ink mb-4">기본정보</h2>
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-4">
+        {hasSpecialties && (
+          <div>
+            <p className="text-xs font-medium text-muted-foreground mb-2">전문 분야</p>
+            <div className="flex flex-wrap gap-2">
+              {specialties!.map((s) => (
+                <span key={s} className="rounded-full bg-clay/10 text-clay px-3 py-1 text-xs font-medium">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        {coaching_style && (
+          <div>
+            <p className="text-xs font-medium text-muted-foreground mb-1">코칭 스타일</p>
+            <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{coaching_style}</p>
+          </div>
+        )}
+        {coaching_years && (
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <Clock className="w-3.5 h-3.5" />
+            코칭 경력 {coaching_years}년
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── Coaching Journey ─────────────────────────────────────── */
+
+function JourneySection({ snapshot }: { snapshot: string }) {
+  // journey_snapshot is a pre-rendered snapshot string; show whenever it has data.
+  let items: string[] | null = null;
+  try {
+    const parsed = JSON.parse(snapshot);
+    if (Array.isArray(parsed)) items = parsed.map(String).filter(Boolean);
+  } catch {
+    items = null;
+  }
+
+  return (
+    <section>
+      <h2 className="text-lg font-bold text-ink mb-4 flex items-center gap-2">
+        <RouteIcon className="w-5 h-5 text-clay" />
+        나의 코칭 여정
+      </h2>
+      {items && items.length > 0 ? (
+        <ol className="space-y-3">
+          {items.map((item, i) => (
+            <li key={i} className="flex gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-clay/10 text-clay text-xs font-bold flex items-center justify-center">
+                {i + 1}
+              </span>
+              <p className="text-sm text-foreground/80 leading-relaxed">{item}</p>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+          <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{snapshot}</p>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ── Career & Certifications ──────────────────────────────── */
+
+function CareerSection({ profile }: { profile: CoachProfile }) {
+  const { has_player_career, career_details, certifications, awards } = profile;
+  const hasCerts = certifications && certifications.length > 0;
+  const hasAwards = awards && awards.length > 0;
+  if (!has_player_career && !career_details && !hasCerts && !hasAwards) return null;
+
+  return (
+    <section>
+      <h2 className="text-lg font-bold text-ink mb-4">경력·자격</h2>
+      <div className="grid sm:grid-cols-2 gap-4">
+        {(has_player_career || career_details) && (
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-4 h-4 text-clay" />
+              <span className="font-semibold text-foreground">선수 경력</span>
+            </div>
+            {has_player_career && <p className="text-sm text-clay font-medium">선수 출신</p>}
+            {career_details && (
+              <p className="mt-1 text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{career_details}</p>
+            )}
+          </div>
+        )}
+        {hasCerts && (
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <BadgeCheck className="w-4 h-4 text-clay" />
+              <span className="font-semibold text-foreground">자격·인증</span>
+            </div>
+            <ul className="space-y-1">
+              {certifications!.map((c) => (
+                <li key={c} className="text-sm text-foreground/80">· {c}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {hasAwards && (
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <Trophy className="w-4 h-4 text-clay" />
+              <span className="font-semibold text-foreground">수상 경력</span>
+            </div>
+            <ul className="space-y-1">
+              {awards!.map((a) => (
+                <li key={a} className="text-sm text-foreground/80">· {a}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /* ── Packages ─────────────────────────────────────────────── */
 
 function PackagesSection({ packages }: { packages: LessonPackage[] }) {
