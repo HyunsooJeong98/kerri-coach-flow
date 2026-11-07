@@ -220,7 +220,7 @@ function CoachPage() {
       {/* pb-24 on mobile to clear sticky CTA */}
       <main className="flex-1 pt-[60px] sm:pt-16 pb-24 sm:pb-0">
         <CoachHero profile={profile} />
-        <Container className="py-8 sm:py-12 space-y-8 sm:space-y-10 px-5">
+        <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
           {hasBasicInfo && <BasicInfoSection profile={profile} />}
           {hasJourney && <JourneySection stats={journeyStats!} />}
@@ -261,43 +261,45 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
 
   return (
     <section className="border-b border-border/50 bg-gradient-to-b from-[#FBF2EF] to-background">
-      <Container className="py-8 sm:py-10 px-5">
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-          {avatar_url ? (
-            <img
-              src={avatar_url}
-              alt={display_name}
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover ring-4 ring-white shadow-md flex-shrink-0"
-            />
-          ) : (
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-clay/20 flex items-center justify-center text-3xl flex-shrink-0 ring-4 ring-white shadow-md">
-              <span className="text-2xl font-bold text-clay">{display_name.charAt(0)}</span>
-            </div>
-          )}
+      <Container className="py-7 sm:py-9 px-5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+          {/* text info */}
           <div className="text-center sm:text-left">
-            <h1 className="text-2xl sm:text-3xl font-bold text-ink">{display_name} 코치</h1>
-            {sport && <p className="mt-1 text-clay font-semibold text-sm">{sport}</p>}
-            <div className="mt-2.5 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
+            <h1 className="text-3xl sm:text-4xl font-bold text-ink">{display_name} 코치</h1>
+            {sport && <p className="mt-1.5 text-clay font-semibold text-base">{sport}</p>}
+            <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-base text-muted-foreground">
               {location && (
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
                   {location}
                 </span>
               )}
               {center_name && (
                 <span className="flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 flex-shrink-0" />
+                  <Award className="w-4 h-4 flex-shrink-0" />
                   {center_name}
                 </span>
               )}
               {coaching_years && (
                 <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                  <Clock className="w-4 h-4 flex-shrink-0" />
                   경력 {coaching_years}년
                 </span>
               )}
             </div>
           </div>
+          {/* avatar — right side on desktop */}
+          {avatar_url ? (
+            <img
+              src={avatar_url}
+              alt={display_name}
+              className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0 self-center"
+            />
+          ) : (
+            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg self-center">
+              <span className="text-4xl font-bold text-clay">{display_name.charAt(0)}</span>
+            </div>
+          )}
         </div>
       </Container>
     </section>
@@ -308,7 +310,7 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
 
 function SectionHeading({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <h2 className="flex items-center gap-2 text-base font-bold text-ink mb-4">
+    <h2 className="flex items-center gap-2 text-xl font-bold text-ink mb-4">
       <span className="text-clay">{icon}</span>
       {title}
     </h2>
@@ -326,7 +328,7 @@ function BioSection({ bio }: { bio: string }) {
     <section>
       <SectionHeading icon={<BookOpen className="w-4 h-4" />} title="코치 소개" />
       <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
-        <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
+        <p className="text-base text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
@@ -365,7 +367,7 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
         {rows.map((row, i) => (
           <div
             key={row.label}
-            className={`flex gap-4 px-5 py-3.5 text-sm ${i > 0 ? "border-t border-border/60" : ""}`}
+            className={`flex gap-4 px-5 py-4 text-base ${i > 0 ? "border-t border-border/60" : ""}`}
           >
             <span className="w-28 flex-shrink-0 text-muted-foreground font-medium">{row.label}</span>
             <span className="text-foreground">{row.value}</span>
@@ -396,8 +398,8 @@ function JourneySection({ stats }: { stats: JourneyStats }) {
             key={c.label}
             className="rounded-2xl border border-border bg-card p-4 text-center shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
           >
-            <p className="text-xl font-bold text-clay">{c.value}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{c.label}</p>
+            <p className="text-2xl font-bold text-clay">{c.value}</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">{c.label}</p>
           </div>
         ))}
       </div>
@@ -422,8 +424,8 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               <Trophy className="w-4 h-4" />
             </span>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">선수 경력</p>
-              <p className="text-sm font-semibold text-foreground mt-0.5">선수 출신 코치</p>
+              <p className="text-sm text-muted-foreground font-medium">선수 경력</p>
+              <p className="text-base font-semibold text-foreground mt-0.5">선수 출신 코치</p>
             </div>
           </div>
         )}
@@ -433,9 +435,9 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
                 <Briefcase className="w-3.5 h-3.5" />
               </span>
-              <p className="text-xs text-muted-foreground font-medium">주요 경력</p>
+              <p className="text-sm text-muted-foreground font-medium">주요 경력</p>
             </div>
-            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.career_details}</p>
+            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.career_details}</p>
           </div>
         )}
         {profile.certifications && (
@@ -444,9 +446,9 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
                 <FileText className="w-3.5 h-3.5" />
               </span>
-              <p className="text-xs text-muted-foreground font-medium">자격증</p>
+              <p className="text-sm text-muted-foreground font-medium">자격증</p>
             </div>
-            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.certifications}</p>
+            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.certifications}</p>
           </div>
         )}
         {profile.awards && (
@@ -455,9 +457,9 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
                 <Award className="w-3.5 h-3.5" />
               </span>
-              <p className="text-xs text-muted-foreground font-medium">수상·대회</p>
+              <p className="text-sm text-muted-foreground font-medium">수상·대회</p>
             </div>
-            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.awards}</p>
+            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.awards}</p>
           </div>
         )}
       </div>
