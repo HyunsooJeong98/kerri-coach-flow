@@ -32,9 +32,9 @@ const fetchCoach = createServerFn({ method: "GET" })
       .eq("is_active", true)
       .order("price");
 
-    // journey stats — read from journey_snapshot stored in profile (anon can't query live tables)
+    // journey stats — read from journey_snapshot; show if data exists regardless of show_coaching_journey flag
     let journeyStats: JourneyStats | null = null;
-    if (profile.show_coaching_journey && profile.journey_snapshot) {
+    if (profile.journey_snapshot) {
       const snap = profile.journey_snapshot;
       journeyStats = {
         members: snap.members_count ?? 0,
@@ -211,8 +211,7 @@ function CoachPage() {
   );
 
   const hasJourney =
-    profile.show_coaching_journey &&
-    journeyStats &&
+    !!journeyStats &&
     (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0);
 
   return (
@@ -409,39 +408,58 @@ function JourneySection({ stats }: { stats: JourneyStats }) {
 /* ── Career & Certifications ──────────────────────────────── */
 
 function CareerSection({ profile }: { profile: CoachProfile }) {
-  const sections: { icon: React.ReactNode; title: string; value: string }[] = [];
-
-  if (profile.has_player_career) {
-    sections.push({ icon: <Trophy className="w-3.5 h-3.5" />, title: "선수 경력", value: "있음" });
+  if (!profile.has_player_career && !profile.career_details && !profile.certifications && !profile.awards) {
+    return null;
   }
-  if (profile.career_details) {
-    sections.push({ icon: <Briefcase className="w-3.5 h-3.5" />, title: "주요 경력", value: profile.career_details });
-  }
-  if (profile.certifications) {
-    sections.push({ icon: <FileText className="w-3.5 h-3.5" />, title: "자격증", value: profile.certifications });
-  }
-  if (profile.awards) {
-    sections.push({ icon: <Award className="w-3.5 h-3.5" />, title: "수상·대회", value: profile.awards });
-  }
-
-  if (!sections.length) return null;
 
   return (
     <section>
       <SectionHeading icon={<Users className="w-4 h-4" />} title="경력·자격" />
-      <div className="rounded-2xl border border-border bg-card shadow-[0_1px_6px_rgba(0,0,0,0.06)] overflow-hidden">
-        {sections.map((s, i) => (
-          <div
-            key={s.title}
-            className={`px-5 py-4 text-sm ${i > 0 ? "border-t border-border/60" : ""}`}
-          >
-            <div className="flex items-center gap-1.5 text-clay font-semibold mb-1.5">
-              {s.icon}
-              <span className="text-xs">{s.title}</span>
+      <div className="space-y-3">
+        {profile.has_player_career && (
+          <div className="flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
+              <Trophy className="w-4 h-4" />
+            </span>
+            <div>
+              <p className="text-xs text-muted-foreground font-medium">선수 경력</p>
+              <p className="text-sm font-semibold text-foreground mt-0.5">선수 출신 코치</p>
             </div>
-            <p className="text-foreground leading-relaxed whitespace-pre-wrap">{s.value}</p>
           </div>
-        ))}
+        )}
+        {profile.career_details && (
+          <div className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
+                <Briefcase className="w-3.5 h-3.5" />
+              </span>
+              <p className="text-xs text-muted-foreground font-medium">주요 경력</p>
+            </div>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.career_details}</p>
+          </div>
+        )}
+        {profile.certifications && (
+          <div className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
+                <FileText className="w-3.5 h-3.5" />
+              </span>
+              <p className="text-xs text-muted-foreground font-medium">자격증</p>
+            </div>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.certifications}</p>
+          </div>
+        )}
+        {profile.awards && (
+          <div className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-clay/10 text-clay flex-shrink-0">
+                <Award className="w-3.5 h-3.5" />
+              </span>
+              <p className="text-xs text-muted-foreground font-medium">수상·대회</p>
+            </div>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{profile.awards}</p>
+          </div>
+        )}
       </div>
     </section>
   );
