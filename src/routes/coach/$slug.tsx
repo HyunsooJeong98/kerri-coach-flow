@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { MapPin, Clock, Award, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { MapPin, Clock, Award, ChevronDown, ChevronUp, Send, Sparkles, Trophy, BadgeCheck, Route as RouteIcon } from "lucide-react";
 import { supabase, type CoachProfile, type LessonPackage } from "@/lib/supabase";
 import { Nav, Footer, Container } from "@/components/landing/shared";
 
@@ -164,7 +164,10 @@ function CoachPage() {
       <main className="flex-1 pt-16">
         <CoachHero profile={profile} />
         <Container className="py-12 space-y-12">
+          <BasicInfoSection profile={profile} />
           {profile.bio && <BioSection bio={profile.bio} />}
+          {profile.journey_snapshot && <JourneySection snapshot={profile.journey_snapshot} />}
+          <CareerSection profile={profile} />
           {packages.length > 0 && <PackagesSection packages={packages} />}
           <RequestForm coachId={profile.coach_id} coachName={profile.display_name} packages={packages} />
         </Container>
