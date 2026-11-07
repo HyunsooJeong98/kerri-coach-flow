@@ -52,7 +52,7 @@ export function PolicyLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-5 py-14 sm:py-20 lg:px-8">
+      <main className="mx-auto max-w-3xl select-text px-5 py-14 sm:py-20 lg:px-8">
         {children}
       </main>
     </div>
