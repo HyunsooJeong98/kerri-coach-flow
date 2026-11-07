@@ -321,7 +321,7 @@ function BioSection({ bio }: { bio: string }) {
     <section>
       <SectionHeading icon={<BookOpen className="w-4 h-4" />} title="코치 소개" />
       <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
-        <p className="text-base text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
+        <p className="text-lg font-medium text-foreground/80 leading-relaxed whitespace-pre-wrap">{displayed}</p>
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
@@ -415,7 +415,7 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
             </span>
             <div>
               <p className="text-sm text-muted-foreground font-medium">선수 경력</p>
-              <p className="text-base font-semibold text-foreground mt-0.5">선수 출신 코치</p>
+              <p className="text-lg font-semibold text-foreground mt-0.5">선수 출신 코치</p>
             </div>
           </div>
         )}
@@ -427,7 +427,7 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               </span>
               <p className="text-sm text-muted-foreground font-medium">주요 경력</p>
             </div>
-            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.career_details}</p>
+            <p className="text-lg font-medium text-foreground leading-relaxed whitespace-pre-wrap">{profile.career_details}</p>
           </div>
         )}
         {profile.certifications && (
@@ -438,7 +438,7 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               </span>
               <p className="text-sm text-muted-foreground font-medium">자격증</p>
             </div>
-            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.certifications}</p>
+            <p className="text-lg font-medium text-foreground leading-relaxed whitespace-pre-wrap">{profile.certifications}</p>
           </div>
         )}
         {profile.awards && (
@@ -449,7 +449,7 @@ function CareerSection({ profile }: { profile: CoachProfile }) {
               </span>
               <p className="text-sm text-muted-foreground font-medium">수상·대회</p>
             </div>
-            <p className="text-base text-foreground leading-relaxed whitespace-pre-wrap">{profile.awards}</p>
+            <p className="text-lg font-medium text-foreground leading-relaxed whitespace-pre-wrap">{profile.awards}</p>
           </div>
         )}
       </div>
