@@ -199,8 +199,7 @@ function CoachPage() {
 
   const hasBasicInfo = !!(
     profile.specialties?.length ||
-    profile.coaching_style ||
-    profile.coaching_years
+    profile.coaching_style
   );
 
   const hasCareer = !!(
@@ -354,9 +353,6 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
   }
   if (profile.coaching_style) {
     rows.push({ label: "코칭 스타일", value: profile.coaching_style });
-  }
-  if (profile.coaching_years) {
-    rows.push({ label: "코칭 경력", value: `${profile.coaching_years}년` });
   }
   if (!rows.length) return null;
 
