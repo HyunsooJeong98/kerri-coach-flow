@@ -255,9 +255,9 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
   return (
     <section className="border-b border-border/50 bg-gradient-to-b from-[#FBF2EF] to-background">
       <Container className="py-7 sm:py-9 px-5">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-          {/* text info */}
-          <div className="text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          {/* text info — constrained width */}
+          <div className="text-center sm:text-left sm:max-w-xs">
             <h1 className="text-3xl sm:text-4xl font-bold text-ink">{display_name} 코치</h1>
             {sport && <p className="mt-1.5 text-clay font-semibold text-base">{sport}</p>}
             <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-base text-muted-foreground">
@@ -281,16 +281,16 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
               )}
             </div>
           </div>
-          {/* avatar — right side on desktop */}
+          {/* avatar — right side, larger */}
           {avatar_url ? (
             <img
               src={avatar_url}
               alt={display_name}
-              className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0 self-center"
+              className="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0 self-center"
             />
           ) : (
-            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg self-center">
-              <span className="text-4xl font-bold text-clay">{display_name.charAt(0)}</span>
+            <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg self-center">
+              <span className="text-5xl font-bold text-clay">{display_name.charAt(0)}</span>
             </div>
           )}
         </div>
