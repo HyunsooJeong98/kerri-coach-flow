@@ -286,10 +286,10 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
             <img
               src={avatar_url}
               alt={display_name}
-              className="w-36 h-44 sm:w-44 sm:h-56 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0"
+              className="w-44 h-44 sm:w-56 sm:h-56 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0"
             />
           ) : (
-            <div className="w-36 h-44 sm:w-44 sm:h-56 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg">
+            <div className="w-44 h-44 sm:w-56 sm:h-56 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg">
               <span className="text-5xl font-bold text-clay">{display_name.charAt(0)}</span>
             </div>
           )}
