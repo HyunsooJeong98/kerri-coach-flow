@@ -255,12 +255,12 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
   return (
     <section className="border-b border-border/50 bg-gradient-to-b from-[#FBF2EF] to-background">
       <Container className="py-7 sm:py-9 px-5">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div className="flex flex-row items-center justify-between gap-5">
           {/* text info — constrained width */}
-          <div className="text-center sm:text-left sm:max-w-xs">
+          <div className="text-left max-w-[55%]">
             <h1 className="text-3xl sm:text-4xl font-bold text-ink">{display_name} 코치</h1>
             {sport && <p className="mt-1.5 text-clay font-semibold text-base">{sport}</p>}
-            <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-base text-muted-foreground">
+            <div className="mt-3 flex flex-wrap justify-start gap-x-3 gap-y-2 text-sm sm:text-base text-muted-foreground">
               {location && (
                 <span className="flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 flex-shrink-0" />
@@ -286,10 +286,10 @@ function CoachHero({ profile }: { profile: CoachProfile }) {
             <img
               src={avatar_url}
               alt={display_name}
-              className="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0 self-center"
+              className="w-36 h-44 sm:w-44 sm:h-56 rounded-2xl object-cover ring-4 ring-white shadow-lg flex-shrink-0"
             />
           ) : (
-            <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg self-center">
+            <div className="w-36 h-44 sm:w-44 sm:h-56 rounded-2xl bg-clay/20 flex items-center justify-center flex-shrink-0 ring-4 ring-white shadow-lg">
               <span className="text-5xl font-bold text-clay">{display_name.charAt(0)}</span>
             </div>
           )}
