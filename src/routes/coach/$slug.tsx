@@ -43,10 +43,20 @@ const fetchCoach = createServerFn({ method: "GET" })
       };
     }
 
+    const { data: reviews } = await supabase
+      .from("coach_reviews")
+      .select("id, rating, comment, submitted_at")
+      .eq("coach_id", profile.coach_id)
+      .eq("is_deleted", false)
+      .not("comment", "is", null)
+      .order("submitted_at", { ascending: false })
+      .limit(5);
+
     return {
       profile: profile as CoachProfile,
       packages: (packages ?? []) as LessonPackage[],
       journeyStats,
+      reviews: (reviews ?? []) as { id: string; rating: number; comment: string; submitted_at: string }[],
     };
   });
 
@@ -195,7 +205,7 @@ export const Route = createFileRoute("/coach/$slug")({
 /* ── Component ────────────────────────────────────────────── */
 
 function CoachPage() {
-  const { profile, packages, journeyStats } = Route.useLoaderData();
+  const { profile, packages, journeyStats, reviews } = Route.useLoaderData();
 
   const hasCareer = !!(
     profile.has_player_career ||
@@ -217,6 +227,7 @@ function CoachPage() {
         <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
           {hasJourney && <JourneySection stats={journeyStats!} />}
+          {reviews.length > 0 && <ReviewsSection reviews={reviews} />}
           {hasCareer && <CareerSection profile={profile} />}
           {packages.length > 0 && (
             <PackagesSection packages={packages} />
@@ -361,6 +372,33 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
           >
             <span className="w-28 flex-shrink-0 text-muted-foreground font-medium">{row.label}</span>
             <span className="text-foreground">{row.value}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Reviews ─────────────────────────────────────────────── */
+
+type Review = { id: string; rating: number; comment: string; submitted_at: string };
+
+function ReviewsSection({ reviews }: { reviews: Review[] }) {
+  return (
+    <section>
+      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title="회원 리뷰" />
+      <div className="space-y-3">
+        {reviews.map((r) => (
+          <div
+            key={r.id}
+            className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
+          >
+            <div className="flex items-center gap-1 mb-2">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span key={i} className={i < r.rating ? "text-clay" : "text-border"}>★</span>
+              ))}
+            </div>
+            <p className="text-sm text-foreground leading-relaxed">{r.comment}</p>
           </div>
         ))}
       </div>
