@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
 import appHome from "@/assets/app-home.png.asset.json";
-import appNotify from "@/assets/app-notify.jpg.asset.json";
-import appPayment from "@/assets/app-payment.png.asset.json";
+import appNotify from "@/assets/app-notify-lockscreen.png.asset.json";
+import appPayment from "@/assets/app-payment-ledger.png.asset.json";
 import scheduleDaily from "@/assets/schedule-daily.png.asset.json";
 import scheduleWeekly from "@/assets/schedule-weekly.png.asset.json";
 import scheduleMonthly from "@/assets/schedule-monthly.png.asset.json";
-import appReport from "@/assets/app-report.png.asset.json";
+import appReportSummary from "@/assets/app-report-summary.png.asset.json";
+import appReportPlan from "@/assets/app-report-plan.png.asset.json";
 import heroPc from "@/assets/hero-pc.webp.asset.json";
 import heroMobile from "@/assets/hero-mobile.webp.asset.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -946,17 +947,20 @@ function Ops() {
               <div className="w-[74%]">
                 <Shot
                   src={appNotify.url}
-                  width={928}
-                  alt="KERRI 코치앱 알림 설정 화면. 레슨 전날·당일 리마인드와 재등록 안내 알림을 항목별로 켜고 끌 수 있습니다."
-                  caption="알림 설정 — 레슨 전날, 당일, 재등록 알림 관리"
+                  width={852}
+                  height={1846}
+                  alt="KERRI 코치앱 알림 화면. 잠금 화면에 내일 레슨 시간 안내와 남은 레슨권 횟수 안내 알림이 표시되어 있습니다."
+                  caption="알림 — 레슨 일정과 남은 횟수 안내"
                 />
 
               </div>
               <div className="absolute bottom-0 right-0 w-[62%]">
                 <Shot
                   src={appPayment.url}
-                  alt="KERRI 코치앱 결제 내역 화면. 회원별 결제 금액과 결제일, 미납 상태가 목록으로 표시됩니다."
-                  caption="결제 내역 관리 — 회원별 결제와 미납 현황 관리"
+                  width={884}
+                  height={1920}
+                  alt="KERRI 코치앱 결제 화면. 결제 수단별 매출 요약과 월간 총 매출액, 미납·부분납·완납 필터, 회원별 결제 목록이 표시됩니다."
+                  caption="결제 내역 관리 — 매출 요약과 회원별 납부 현황"
                 />
 
               </div>
@@ -1021,28 +1025,50 @@ function Ops() {
           </Reveal>
 
           <Reveal>
-            <div className="mx-auto mt-12 w-[90%] max-w-[420px] sm:mt-14 lg:max-w-[460px]">
-              <figure
-                tabIndex={0}
-                aria-label="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
-              >
-                <img
-                  src={appReport.url}
-                  alt="KERRI AI 레슨 기록 화면. AI가 정리한 레슨 핵심 내용, 성과, 개선점, 다음 연습 방향이 항목별로 표시됩니다."
-                  loading="lazy"
-                  decoding="async"
-                  width={883}
-                  height={1920}
-                  style={{ aspectRatio: "883 / 1920", height: "auto" }}
-                  className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
-                />
-                <figcaption className="sr-only">
-                  AI 레슨 기록 — 레슨 내용을 AI가 핵심 내용, 성과, 개선점, 연습 방향으로 정리
-                </figcaption>
-              </figure>
+            <div className="relative mx-auto mt-12 w-[92%] max-w-[440px] pb-[14%] sm:mt-14 lg:max-w-[520px]">
+              <div className="w-[76%]">
+                <figure
+                  tabIndex={0}
+                  aria-label="KERRI AI 레슨 기록 화면 상단. 오늘 레슨 요약, 이전 레슨 대비 변화, 오늘 잘한 점이 항목별로 표시됩니다."
+                  className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
+                >
+                  <img
+                    src={appReportSummary.url}
+                    alt="KERRI AI 레슨 기록 화면 상단. 오늘 레슨 요약, 이전 레슨 대비 변화, 오늘 잘한 점이 항목별로 표시됩니다."
+                    loading="lazy"
+                    decoding="async"
+                    width={884}
+                    height={1920}
+                    style={{ aspectRatio: "884 / 1920", height: "auto" }}
+                    className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+                  />
+                  <figcaption className="sr-only">
+                    AI 레슨 기록 — 오늘 레슨 요약과 이전 레슨 대비 변화
+                  </figcaption>
+                </figure>
+              </div>
+              <div className="absolute bottom-0 right-0 w-[64%]">
+                <figure
+                  tabIndex={0}
+                  aria-label="KERRI AI 레슨 기록 화면 하단. 교정 포인트, 개인 맞춤 연습 플랜, 다음 레슨 목표가 항목별로 표시됩니다."
+                  className="m-0 rounded-[1.6rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--ink)]"
+                >
+                  <img
+                    src={appReportPlan.url}
+                    alt="KERRI AI 레슨 기록 화면 하단. 교정 포인트, 개인 맞춤 연습 플랜, 다음 레슨 목표가 항목별로 표시됩니다."
+                    loading="lazy"
+                    decoding="async"
+                    width={884}
+                    height={1920}
+                    style={{ aspectRatio: "884 / 1920", height: "auto" }}
+                    className="block w-full rounded-[1.6rem] border border-white/10 bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]"
+                  />
+                  <figcaption className="sr-only">
+                    AI 레슨 기록 — 교정 포인트와 다음 레슨 목표
+                  </figcaption>
+                </figure>
+              </div>
             </div>
-
           </Reveal>
         </Container>
       </div>
