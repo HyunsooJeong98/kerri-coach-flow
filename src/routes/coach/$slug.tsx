@@ -11,7 +11,7 @@ import { Nav, Footer, Container } from "@/components/landing/shared";
 
 /* ── Server functions ─────────────────────────────────────── */
 
-type JourneyStats = { members: number; lessons: number; reports: number };
+type JourneyStats = { members: number; lessons: number; reports: number; reviewCount: number; reviewAvg: number | null };
 
 const fetchCoach = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
@@ -33,30 +33,39 @@ const fetchCoach = createServerFn({ method: "GET" })
       .order("price");
 
     // journey stats — read from journey_snapshot; show if data exists regardless of show_coaching_journey flag
-    let journeyStats: JourneyStats | null = null;
-    if (profile.journey_snapshot) {
-      const snap = profile.journey_snapshot;
-      journeyStats = {
-        members: snap.members_count ?? 0,
-        lessons: snap.lessons_count ?? 0,
-        reports: snap.reports_count ?? 0,
-      };
-    }
-
-    const { data: reviews } = await supabase
+    // fetch all non-deleted reviews for aggregate stat + display
+    const { data: allReviews } = await supabase
       .from("coach_reviews")
       .select("id, rating, comment, submitted_at")
       .eq("coach_id", profile.coach_id)
       .eq("is_deleted", false)
-      .not("comment", "is", null)
-      .order("submitted_at", { ascending: false })
-      .limit(5);
+      .order("submitted_at", { ascending: false });
+
+    const reviewCount = (allReviews ?? []).length;
+    const reviewAvg = reviewCount > 0
+      ? Math.round((allReviews!.reduce((s, r) => s + r.rating, 0) / reviewCount) * 10) / 10
+      : null;
+
+    // only cards with actual comment text
+    const reviews = (allReviews ?? []).filter((r) => r.comment != null);
+
+    let journeyStats: JourneyStats | null = null;
+    if (profile.journey_snapshot || reviewCount > 0) {
+      const snap = profile.journey_snapshot;
+      journeyStats = {
+        members: snap?.members_count ?? 0,
+        lessons: snap?.lessons_count ?? 0,
+        reports: snap?.reports_count ?? 0,
+        reviewCount,
+        reviewAvg,
+      };
+    }
 
     return {
       profile: profile as CoachProfile,
       packages: (packages ?? []) as LessonPackage[],
       journeyStats,
-      reviews: (reviews ?? []) as { id: string; rating: number; comment: string; submitted_at: string }[],
+      reviews: reviews as { id: string; rating: number; comment: string; submitted_at: string }[],
     };
   });
 
@@ -216,7 +225,7 @@ function CoachPage() {
 
   const hasJourney =
     !!journeyStats &&
-    (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0);
+    (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0 || journeyStats.reviewCount > 0);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -409,11 +418,16 @@ function ReviewsSection({ reviews }: { reviews: Review[] }) {
 /* ── Journey ──────────────────────────────────────────────── */
 
 function JourneySection({ stats }: { stats: JourneyStats }) {
+  const reviewValue = stats.reviewCount > 0
+    ? (stats.reviewAvg != null ? `★${stats.reviewAvg}` : `${stats.reviewCount}개`)
+    : null;
+
   const cells = [
-    { label: "함께한 회원", value: `${stats.members}명` },
-    { label: "진행한 레슨", value: `${stats.lessons.toLocaleString()}회` },
-    { label: "남긴 레슨 기록", value: `${stats.reports}개` },
-  ].filter((_, i) => [stats.members, stats.lessons, stats.reports][i] > 0);
+    stats.members > 0 ? { label: "함께한 회원", value: `${stats.members}명` } : null,
+    stats.lessons > 0 ? { label: "진행한 레슨", value: `${stats.lessons.toLocaleString()}회` } : null,
+    stats.reports > 0 ? { label: "남긴 레슨 기록", value: `${stats.reports}개` } : null,
+    reviewValue ? { label: "받은 회원 후기", value: reviewValue } : null,
+  ].filter(Boolean) as { label: string; value: string }[];
 
   if (!cells.length) return null;
 
