@@ -42,6 +42,9 @@ const fetchCoach = createServerFn({ method: "GET" })
       .order("submitted_at", { ascending: false });
 
     const reviewCount = (allReviews ?? []).length;
+    const reviewAvg = reviewCount > 0
+      ? Math.round((allReviews!.reduce((s, r) => s + r.rating, 0) / reviewCount) * 10) / 10
+      : null;
 
     // only cards with actual comment text
     const reviews = (allReviews ?? []).filter((r) => r.comment != null);
@@ -61,6 +64,7 @@ const fetchCoach = createServerFn({ method: "GET" })
       packages: (packages ?? []) as LessonPackage[],
       journeyStats,
       reviewCount,
+      reviewAvg,
       reviews: reviews as { id: string; rating: number; comment: string; submitted_at: string }[],
     };
   });
@@ -210,7 +214,7 @@ export const Route = createFileRoute("/coach/$slug")({
 /* ── Component ────────────────────────────────────────────── */
 
 function CoachPage() {
-  const { profile, packages, journeyStats, reviews, reviewCount } = Route.useLoaderData();
+  const { profile, packages, journeyStats, reviews, reviewCount, reviewAvg } = Route.useLoaderData();
 
   const hasCareer = !!(
     profile.has_player_career ||
@@ -232,7 +236,7 @@ function CoachPage() {
         <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
           {hasJourney && <JourneySection stats={journeyStats!} />}
-          {reviewCount > 0 && <ReviewsSection reviews={reviews} totalCount={reviewCount} />}
+          {reviewCount > 0 && <ReviewsSection reviews={reviews} totalCount={reviewCount} avgRating={reviewAvg} />}
           {hasCareer && <CareerSection profile={profile} />}
           {packages.length > 0 && (
             <PackagesSection packages={packages} />
@@ -388,10 +392,13 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
 
 type Review = { id: string; rating: number; comment: string; submitted_at: string };
 
-function ReviewsSection({ reviews, totalCount }: { reviews: Review[]; totalCount: number }) {
+function ReviewsSection({ reviews, totalCount, avgRating }: { reviews: Review[]; totalCount: number; avgRating: number | null }) {
+  const ratingBadge = avgRating != null
+    ? ` ★ ${avgRating.toFixed(1)} (${totalCount}개)`
+    : ` ${totalCount}개`;
   return (
     <section>
-      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title={`회원 리뷰 ${totalCount}개`} />
+      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title={`회원 리뷰${ratingBadge}`} />
       {reviews.length > 0 && (
         <div className="space-y-3">
           {reviews.map((r) => (
