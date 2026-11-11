@@ -231,7 +231,7 @@ function CoachPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <Nav />
       {/* pb-24 on mobile to clear sticky CTA */}
-      <main className="flex-1 pt-[60px] sm:pt-16 pb-24 sm:pb-0">
+      <main className="flex-1 pb-24 sm:pb-0">
         <CoachHero profile={profile} />
         <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
