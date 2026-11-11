@@ -11,7 +11,7 @@ import { Nav, Footer, Container } from "@/components/landing/shared";
 
 /* ── Server functions ─────────────────────────────────────── */
 
-type JourneyStats = { members: number; lessons: number; reports: number; reviewCount: number; reviewAvg: number | null };
+type JourneyStats = { members: number; lessons: number; reports: number };
 
 const fetchCoach = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
@@ -42,22 +42,17 @@ const fetchCoach = createServerFn({ method: "GET" })
       .order("submitted_at", { ascending: false });
 
     const reviewCount = (allReviews ?? []).length;
-    const reviewAvg = reviewCount > 0
-      ? Math.round((allReviews!.reduce((s, r) => s + r.rating, 0) / reviewCount) * 10) / 10
-      : null;
 
     // only cards with actual comment text
     const reviews = (allReviews ?? []).filter((r) => r.comment != null);
 
     let journeyStats: JourneyStats | null = null;
-    if (profile.journey_snapshot || reviewCount > 0) {
+    if (profile.journey_snapshot) {
       const snap = profile.journey_snapshot;
       journeyStats = {
-        members: snap?.members_count ?? 0,
-        lessons: snap?.lessons_count ?? 0,
-        reports: snap?.reports_count ?? 0,
-        reviewCount,
-        reviewAvg,
+        members: snap.members_count ?? 0,
+        lessons: snap.lessons_count ?? 0,
+        reports: snap.reports_count ?? 0,
       };
     }
 
@@ -65,6 +60,7 @@ const fetchCoach = createServerFn({ method: "GET" })
       profile: profile as CoachProfile,
       packages: (packages ?? []) as LessonPackage[],
       journeyStats,
+      reviewCount,
       reviews: reviews as { id: string; rating: number; comment: string; submitted_at: string }[],
     };
   });
@@ -214,7 +210,7 @@ export const Route = createFileRoute("/coach/$slug")({
 /* ── Component ────────────────────────────────────────────── */
 
 function CoachPage() {
-  const { profile, packages, journeyStats, reviews } = Route.useLoaderData();
+  const { profile, packages, journeyStats, reviews, reviewCount } = Route.useLoaderData();
 
   const hasCareer = !!(
     profile.has_player_career ||
@@ -225,7 +221,7 @@ function CoachPage() {
 
   const hasJourney =
     !!journeyStats &&
-    (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0 || journeyStats.reviewCount > 0);
+    (journeyStats.members > 0 || journeyStats.lessons > 0 || journeyStats.reports > 0);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -236,7 +232,7 @@ function CoachPage() {
         <Container className="py-6 sm:py-8 space-y-6 sm:space-y-8 px-5">
           {profile.bio && <BioSection bio={profile.bio} />}
           {hasJourney && <JourneySection stats={journeyStats!} />}
-          {reviews.length > 0 && <ReviewsSection reviews={reviews} />}
+          {reviewCount > 0 && <ReviewsSection reviews={reviews} totalCount={reviewCount} />}
           {hasCareer && <CareerSection profile={profile} />}
           {packages.length > 0 && (
             <PackagesSection packages={packages} />
@@ -392,25 +388,27 @@ function BasicInfoSection({ profile }: { profile: CoachProfile }) {
 
 type Review = { id: string; rating: number; comment: string; submitted_at: string };
 
-function ReviewsSection({ reviews }: { reviews: Review[] }) {
+function ReviewsSection({ reviews, totalCount }: { reviews: Review[]; totalCount: number }) {
   return (
     <section>
-      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title="회원 리뷰" />
-      <div className="space-y-3">
-        {reviews.map((r) => (
-          <div
-            key={r.id}
-            className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
-          >
-            <div className="flex items-center gap-1 mb-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className={i < r.rating ? "text-clay" : "text-border"}>★</span>
-              ))}
+      <SectionHeading icon={<MessageCircle className="w-4 h-4" />} title={`회원 리뷰 ${totalCount}개`} />
+      {reviews.length > 0 && (
+        <div className="space-y-3">
+          {reviews.map((r) => (
+            <div
+              key={r.id}
+              className="rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
+            >
+              <div className="flex items-center gap-1 mb-2">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} className={i < r.rating ? "text-clay" : "text-border"}>★</span>
+                ))}
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">{r.comment}</p>
             </div>
-            <p className="text-sm text-foreground leading-relaxed">{r.comment}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
@@ -418,32 +416,28 @@ function ReviewsSection({ reviews }: { reviews: Review[] }) {
 /* ── Journey ──────────────────────────────────────────────── */
 
 function JourneySection({ stats }: { stats: JourneyStats }) {
-  const reviewValue = stats.reviewCount > 0
-    ? (stats.reviewAvg != null ? `★${stats.reviewAvg}` : `${stats.reviewCount}개`)
-    : null;
-
   const cells = [
-    stats.members > 0 ? { label: "함께한 회원", value: `${stats.members}명` } : null,
-    stats.lessons > 0 ? { label: "진행한 레슨", value: `${stats.lessons.toLocaleString()}회` } : null,
-    stats.reports > 0 ? { label: "남긴 레슨 기록", value: `${stats.reports}개` } : null,
-    reviewValue ? { label: "받은 회원 후기", value: reviewValue } : null,
-  ].filter(Boolean) as { label: string; value: string }[];
+    stats.members > 0 ? { label: "함께한 회원", num: stats.members.toLocaleString(), unit: "명" } : null,
+    stats.lessons > 0 ? { label: "진행한 레슨", num: stats.lessons.toLocaleString(), unit: "회" } : null,
+    stats.reports > 0 ? { label: "남긴 레슨 기록", num: stats.reports.toLocaleString(), unit: "개" } : null,
+  ].filter(Boolean) as { label: string; num: string; unit: string }[];
 
   if (!cells.length) return null;
 
   return (
     <section>
       <SectionHeading icon={<Flame className="w-4 h-4" />} title="나의 코칭 여정" />
-      <div className="grid grid-cols-3 gap-3">
-        {cells.map((c) => (
-          <div
-            key={c.label}
-            className="rounded-2xl border border-border bg-card p-4 text-center shadow-[0_1px_6px_rgba(0,0,0,0.06)]"
-          >
-            <p className="text-2xl font-bold text-clay">{c.value}</p>
-            <p className="mt-1.5 text-sm text-muted-foreground">{c.label}</p>
-          </div>
-        ))}
+      <div className="rounded-2xl border border-border bg-card shadow-[0_1px_6px_rgba(0,0,0,0.06)] overflow-hidden">
+        <div className="flex divide-x divide-border">
+          {cells.map((c) => (
+            <div key={c.label} className="flex-1 flex flex-col items-center justify-center py-5 px-2 text-center min-w-0">
+              <p className="font-bold text-clay leading-tight text-lg sm:text-2xl">
+                {c.num}<span className="text-sm sm:text-base font-semibold">{c.unit}</span>
+              </p>
+              <p className="mt-1 text-[11px] sm:text-sm text-muted-foreground leading-snug">{c.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
