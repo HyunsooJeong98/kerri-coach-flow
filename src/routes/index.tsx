@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
+import { Button } from "@/components/ui/button";
 import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify-lockscreen.png.asset.json";
 import appPayment from "@/assets/app-payment-ledger.png.asset.json";
@@ -25,16 +26,18 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
-      { name: "description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
-      { property: "og:title", content: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
-      { property: "og:description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
+      { title: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { name: "description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
+      { property: "og:title", content: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { property: "og:description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
+      { property: "og:url", content: "https://kerri.co.kr/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: heroPc.url },
-      { name: "twitter:image", content: heroPc.url },
+      { name: "twitter:title", content: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { name: "twitter:description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
     ],
     links: [
+      { rel: "canonical", href: "https://kerri.co.kr/" },
       // 현재 화면에 해당하는 Hero 배경만 우선 로드 (LCP 개선)
       {
         rel: "preload",
@@ -570,7 +573,7 @@ function MemberDemand() {
             <p className="statement mx-auto max-w-[34em] break-keep text-foreground">
               <span>회원 한 명 한 명을 챙기는 관리로</span>
               <br className="lg:hidden" />{" "}
-              <span className="text-primary">재등록률을 높여보세요</span>
+              <span className="text-primary">다음 레슨까지 함께 챙기세요</span>
             </p>
           </div>
         </Reveal>
@@ -770,7 +773,7 @@ function Hero() {
                 letterSpacing: "-0.02em",
               }}
             >
-              스포츠 강사를 위한 AI 레슨·회원 관리앱
+              스포츠 강사를 위한 회원관리 · AI 레슨 기록
             </span>
           </div>
 
@@ -780,13 +783,23 @@ function Hero() {
           </h1>
 
 
-          <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
-            횟수·일정·납부 내역은 투명하게
+          <p className="mt-4 text-xl font-semibold leading-[1.6] text-foreground">
+            회원 관리는 더 간편하게
             <br />
-            회원별 레슨 기록은 세심하게
+            레슨의 가치는 더 분명하게
+          </p>
+          <p className="lead mt-3 max-w-[38ch] break-keep">
+            일정·출석·횟수·결제는 한곳에서 관리하고
             <br />
-            AI 레슨 기록과 회원 관리로
-            <br className="sm:hidden" /> 당신의 전문성을 회원에게 보여주세요
+            AI 레슨 기록으로 회원에게 세심한 코칭을 보여주세요.
+          </p>
+          <Button onClick={() => scrollTo("install")} className="btn-base btn-primary mt-6 h-auto">
+            14일 무료로 시작하기
+            <ArrowRight size={18} strokeWidth={1.75} />
+          </Button>
+          <p className="mt-3 max-w-[42ch] break-keep text-sm leading-[1.65] text-muted-foreground">
+            Basic·Pro 대상 이용자에게 제공됩니다. 체험 종료 후 동의한 구독 조건에 따라 결제·자동 갱신됩니다.
+            조건과 결제일은 앱 결제 화면에서 확인하고, 종료 전 스토어에서 취소할 수 있습니다.
           </p>
 
         </div>
@@ -1020,7 +1033,7 @@ function Ops() {
                 <span className="text-primary">다시 볼 수 있는 기록으로</span>
               </h3>
               <p className="body-1 mx-auto mt-5 max-w-[34ch] break-keep text-white/65">
-                AI가 레슨 내용을 핵심 내용, 잘한 점, 연습할 내용으로 정리합니다. 정리된 레슨 기록을 검토하고 회원에게 전달하세요.
+                코치가 남긴 음성이나 메모를 AI가 회원별 레슨 리포트로 정리합니다. 핵심 내용, 잘한 점, 연습할 내용을 검토해 전달하고, 회원이 지난 레슨과 성장 과정을 확인하도록 도와주세요.
               </p>
             </div>
           </Reveal>
@@ -1161,7 +1174,7 @@ function AppSection() {
           }
         />
 
-        <DownloadCards pulse={pulse} />
+        <DownloadCards pulse={pulse} showTrialNote />
       </Container>
     </Section>
   );
@@ -1251,11 +1264,11 @@ function FAQ() {
       q: "무료로 사용해볼 수 있나요?",
       a: (
         <>
-          네. 처음 14일 동안 무료로 체험할 수 있습니다.
+          Basic 또는 Pro 플랜을 선택한 대상 이용자는 14일 무료체험을 이용할 수 있습니다. 조건과 이용 가능 여부는 앱 결제 화면에서 확인해주세요.
           <br />
-          직접 사용해보고 계속 이용할지 결정하면 되며,
+          유료 전환에 필요한 동의가 완료되면 체험 종료 후 선택한 플랜으로 결제되며, 구독 조건에 따라 자동 갱신됩니다.
           <br />
-          서비스가 맞지 않는다면 언제든지 해지할 수 있습니다.
+          체험 종료 전 App Store 또는 Google Play의 구독 관리에서 취소할 수 있습니다. 앱 삭제만으로 구독이 취소되지는 않습니다.
         </>
       ),
     },
@@ -1282,7 +1295,7 @@ function FAQ() {
                     className="grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-[clamp(1.25rem,4.8vw,1.75rem)] py-6 text-left transition-colors duration-200 hover:bg-foreground/[0.015] sm:py-7"
                     onClick={() => setOpen(isOpen ? null : idx)}
                   >
-                    <span className="heading-4 min-w-0 break-keep">{it.q}</span>
+                    <h3 className="heading-4 min-w-0 break-keep">{it.q}</h3>
                     <span
                       className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-foreground/[0.05] text-foreground/60 transition-transform duration-300 ${
                         isOpen ? "rotate-45" : ""
@@ -1346,10 +1359,10 @@ function FinalCTA() {
             당신의 세심함을 오래 남는 경험으로
           </p>
 
-          <button onClick={() => scrollTo("install")} className="btn-base btn-light mt-9 sm:mt-10">
-            케리 코치앱 설치하기
+          <Button onClick={() => scrollTo("install")} className="btn-base btn-light mt-9 h-auto sm:mt-10">
+            14일 무료로 시작하기
             <ArrowRight size={18} strokeWidth={1.75} />
-          </button>
+          </Button>
         </Reveal>
       </div>
     </section>
@@ -1371,9 +1384,9 @@ function StickyMobileCTA() {
   if (hide) return null;
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-background via-background/95 to-transparent p-4 pt-10 md:hidden">
-      <button onClick={() => scrollTo("install")} className="btn-base btn-primary w-full">
-        케리 코치앱 설치하기
-      </button>
+      <Button onClick={() => scrollTo("install")} className="btn-base btn-primary h-auto w-full">
+        14일 무료로 시작하기
+      </Button>
     </div>
   );
 }
