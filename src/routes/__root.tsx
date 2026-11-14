@@ -82,6 +82,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "naver-site-verification",
         content: "d4c9d0fc2fef2c00072e913007ac2ef66f98a18d",
       },
+      {
+        name: "google-site-verification",
+        content: "A3GEhSLyY3UwEJhnfgEF4G6ch9ohRMyWlVVOVt8vP-w",
+      },
       { property: "og:site_name", content: "케리 KERRI" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
