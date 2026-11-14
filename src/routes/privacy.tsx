@@ -7,6 +7,7 @@ import {
   scrollTopOnSwitch,
   readService,
   type LegalService,
+  readOptionalService,
 } from "@/components/landing/legal/service-toggle";
 import {
   privacyTitle,
@@ -65,7 +66,7 @@ const PRIVACY_DOCS: Record<LegalService, PrivacyDoc> = {
 export const Route = createFileRoute("/privacy")({
   staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>) => ({
-    service: readService(search.service),
+    service: readOptionalService(search.service),
   }),
   head: ({ match }) => {
     const doc = PRIVACY_DOCS[readService(match.search.service)];
@@ -145,7 +146,7 @@ function Blocks({ blocks }: { blocks: string[] }) {
 }
 
 function Privacy() {
-  const { service } = useSearch({ from: "/privacy" });
+  const service = readService(useSearch({ from: "/privacy" }).service);
   const doc = PRIVACY_DOCS[readService(service)];
 
   return (

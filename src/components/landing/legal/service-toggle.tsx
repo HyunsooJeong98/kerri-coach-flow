@@ -38,3 +38,8 @@ export function segmentClass(selected: boolean) {
 export function scrollTopOnSwitch() {
   window.scrollTo({ top: 0 });
 }
+
+/** validateSearch 용: 값이 없으면 생략해 `/terms`, `/privacy`가 리다이렉트 없이 바로 열리게 한다. */
+export function readOptionalService(value: unknown): LegalService | undefined {
+  return value === "member" || value === "coach" ? value : undefined;
+}

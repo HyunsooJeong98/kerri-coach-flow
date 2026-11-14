@@ -7,6 +7,7 @@ import {
   scrollTopOnSwitch,
   readService,
   type LegalService,
+  readOptionalService,
 } from "@/components/landing/legal/service-toggle";
 import { CoachTermsBody } from "@/components/landing/legal/coach-terms-body";
 import { MemberTermsBody } from "@/components/landing/legal/member-terms-body";
@@ -56,7 +57,7 @@ const TERMS_DOCS: Record<LegalService, TermsDoc> = {
 export const Route = createFileRoute("/terms")({
   staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>) => ({
-    service: readService(search.service),
+    service: readOptionalService(search.service),
   }),
   head: ({ match }) => {
     const doc = TERMS_DOCS[readService(match.search.service)];
@@ -77,7 +78,7 @@ export const Route = createFileRoute("/terms")({
 });
 
 function Terms() {
-  const { service } = useSearch({ from: "/terms" });
+  const service = readService(useSearch({ from: "/terms" }).service);
   const doc = TERMS_DOCS[readService(service)];
 
   return (
