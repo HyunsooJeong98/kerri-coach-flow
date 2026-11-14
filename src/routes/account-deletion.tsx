@@ -18,8 +18,10 @@ export const Route = createFileRoute("/account-deletion")({
           "KERRI 앱 계정 삭제 요청 방법과 삭제·보관 데이터, 처리 기간을 안내합니다.",
       },
       { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://kerri.co.kr/account-deletion" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://kerri.co.kr/account-deletion" }],
   }),
 });
 

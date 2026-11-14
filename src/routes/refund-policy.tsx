@@ -18,8 +18,10 @@ export const Route = createFileRoute("/refund-policy")({
           "KERRI 구독 결제·자동 갱신·청약철회·환불 절차를 담은 유료서비스·구독·환불정책 전문입니다.",
       },
       { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://kerri.co.kr/refund-policy" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://kerri.co.kr/refund-policy" }],
   }),
 });
 

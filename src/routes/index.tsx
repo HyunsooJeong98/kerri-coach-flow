@@ -25,16 +25,18 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
-      { name: "description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
-      { property: "og:title", content: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
-      { property: "og:description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 운영 플랫폼 KERRI." },
+      { title: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { name: "description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
+      { property: "og:title", content: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { property: "og:description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
+      { property: "og:url", content: "https://kerri.co.kr/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: heroPc.url },
-      { name: "twitter:image", content: heroPc.url },
+      { name: "twitter:title", content: "스포츠 강사 회원관리·AI 레슨 기록 | 케리 KERRI" },
+      { name: "twitter:description", content: "회원·일정·출석·레슨 횟수·결제 관리부터 AI 레슨 기록까지. 관리 시간을 줄이고 회원에게 코칭의 가치를 보여주세요. KERRI로 시작하세요." },
     ],
     links: [
+      { rel: "canonical", href: "https://kerri.co.kr/" },
       // 현재 화면에 해당하는 Hero 배경만 우선 로드 (LCP 개선)
       {
         rel: "preload",

@@ -19,6 +19,7 @@ export const Route = createFileRoute("/download")({
         content: "코치앱과 회원앱을 지금 설치하고 케리를 무료로 시작해 보세요.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kerri.co.kr/download" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "앱 다운로드 | 케리 KERRI" },
       {

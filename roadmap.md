@@ -6,3 +6,6 @@
 - [x] Verify desktop/mobile text, navigation, and absence of the fixed install button.
 - [x] Separate coach/member terms and privacy using URL-backed selectors; user designated the existing v1.2 terms and v1.0 privacy as the coach documents.
 - [x] Verify all four legal documents verbatim, direct links, refresh/back, top-of-page switching, copy selection and mobile/desktop layout.
+- [x] Update homepage SEO metadata without changing visible content, styling or actions.
+- [x] Verify rendered metadata, readable service HTML, existing sitemap/robots and desktop/mobile presentation.
+- [x] Review existing traffic/click measurement and report app-conversion and Core Web Vitals limitations before publication; details recorded in SEO_REVIEW.md.
