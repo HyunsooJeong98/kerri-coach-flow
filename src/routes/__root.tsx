@@ -82,8 +82,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "naver-site-verification",
         content: "d4c9d0fc2fef2c00072e913007ac2ef66f98a18d",
       },
+      { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },
+      {
+        name: "description",
+        content:
+          "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요.",
+      },
+      { property: "og:title", content: "케리 KERRI | 스포츠 강사를 위한 운영 플랫폼" },
+      {
+        property: "og:description",
+        content:
+          "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "케리 KERRI | 스포츠 강사를 위한 운영 플랫폼" },
+      { name: "twitter:description", content: "회원 관리, 일정, 결제, AI 레슨 기록까지. 스포츠 강사를 위한 올인원 운영 플랫폼 KERRI. 무료로 시작해 보세요." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -109,7 +123,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>

@@ -93,7 +93,7 @@ export function AppIcon({ src, name, en }: { src: string; name: string; en: stri
   );
 }
 
-export function DownloadCards({ pulse = false, showTrialNote = false }: { pulse?: boolean; showTrialNote?: boolean }) {
+export function DownloadCards({ pulse = false }: { pulse?: boolean }) {
   return (
     <div className="mt-8 grid gap-6 lg:mt-10 md:grid-cols-2">
       <Reveal>
@@ -107,17 +107,12 @@ export function DownloadCards({ pulse = false, showTrialNote = false }: { pulse?
           <div className="eyebrow absolute right-4 top-4 rounded-md bg-[var(--clay)]/10 px-2 py-1">추천</div>
           <AppIcon src={coachAppIcon.url} name="케리 코치앱" en="KERRI COACH" />
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
-            흩어진 회원·일정·출석·횟수·납부 내역을 한곳에서 관리하고, AI 레슨 기록으로 회원별 코칭을 이어가세요.
+            회원·일정·횟수·납부 관리부터 AI 레슨 기록까지. 체계적인 회원 케어를 시작하세요.
           </p>
           <div className="mt-10 flex items-end justify-between gap-6">
             <StoreBadges appStoreUrl={COACH_APP_URL} playStoreUrl={COACH_PLAY_URL} />
             <QR url={COACH_APP_URL} label="코치앱" />
           </div>
-          {showTrialNote && (
-            <p className="mt-5 break-keep text-sm leading-[1.65] text-muted-foreground">
-              앱 설치 후 Basic·Pro 플랜을 선택하세요. 대상 이용자에게 14일 무료체험이 제공되며, 동의한 조건에 따라 체험 종료 후 결제·자동 갱신됩니다. 앱 결제 화면에서 조건과 결제일을 확인하고, 종료 전 스토어에서 취소할 수 있습니다.
-            </p>
-          )}
         </div>
       </Reveal>
 
@@ -136,7 +131,7 @@ export function DownloadCards({ pulse = false, showTrialNote = false }: { pulse?
             </Link>
           </div>
           <p className="body-1 mt-6 max-w-[30ch] break-keep text-muted-foreground">
-            지난 레슨 기록과 성장 과정, 일정과 남은 횟수를 직접 확인하세요. 회원도 자신의 레슨 과정을 함께 살펴볼 수 있습니다.
+            레슨 기록과 일정, 남은 횟수를 직접 확인하세요. 회원도 자신의 레슨 과정을 함께 살펴볼 수 있습니다.
           </p>
           <div className="mt-10 flex items-end justify-between gap-6">
             <StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} />

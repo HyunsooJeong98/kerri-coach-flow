@@ -13,4 +13,3 @@
 - Privacy policy content lives in a verbatim browser-safe content module; link formatting must not alter the legal text.
 
 - Sitemap is served by src/routes/sitemap[.]xml.ts; every route must declare staticData.sitemap, and coach profiles are included only when is_public is true (same filter as the profile page).
-- Keep page-specific search and social copy in leaf route heads, not root defaults, so child pages never inherit unrelated promotional metadata.
