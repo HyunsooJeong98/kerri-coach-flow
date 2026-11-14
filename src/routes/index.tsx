@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "케리 KERRI | 개인 레슨 코치를 위한 운영 플랫폼" },

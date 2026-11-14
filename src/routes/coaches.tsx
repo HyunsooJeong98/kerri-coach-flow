@@ -19,6 +19,7 @@ const fetchCoaches = createServerFn({ method: "GET" }).handler(async () => {
 /* ── Route ────────────────────────────────────────────────── */
 
 export const Route = createFileRoute("/coaches")({
+  staticData: { sitemap: true },
   loader: () => fetchCoaches(),
   head: () => ({
     meta: [

@@ -139,6 +139,7 @@ const submitRequest = createServerFn({ method: "POST" })
 /* ── Route ────────────────────────────────────────────────── */
 
 export const Route = createFileRoute("/coach/$slug")({
+  staticData: { sitemap: true },
   loader: async ({ params }) => {
     const result = await fetchCoach({ data: params.slug });
     if (!result) throw notFound();

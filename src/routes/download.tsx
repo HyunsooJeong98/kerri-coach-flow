@@ -4,6 +4,7 @@ import { Container, Footer, Nav, Reveal, Section, SectionHead } from "@/componen
 import { DownloadCards } from "@/components/landing/download";
 
 export const Route = createFileRoute("/download")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "앱 다운로드 | 케리 KERRI 코치앱·회원앱" },

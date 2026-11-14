@@ -63,6 +63,7 @@ const PRIVACY_DOCS: Record<LegalService, PrivacyDoc> = {
 /* ── Route ─────────────────────────────────────────────────── */
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>) => ({
     service: readService(search.service),
   }),

@@ -54,6 +54,7 @@ const TERMS_DOCS: Record<LegalService, TermsDoc> = {
 /* ── Route ─────────────────────────────────────────────────── */
 
 export const Route = createFileRoute("/terms")({
+  staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>) => ({
     service: readService(search.service),
   }),

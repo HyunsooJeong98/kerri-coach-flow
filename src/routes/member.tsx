@@ -18,6 +18,7 @@ import {
 } from "@/components/landing/shared";
 
 export const Route = createFileRoute("/member")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "회원앱 | 케리 KERRI 회원 레슨 기록 앱" },

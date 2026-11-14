@@ -10,6 +10,7 @@ import {
 } from "@/components/landing/shared";
 
 export const Route = createFileRoute("/pricing")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "요금제 | 케리 KERRI 스포츠 강사 운영 플랫폼" },

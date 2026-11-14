@@ -11,3 +11,5 @@
 
 - Legal document pages reuse `PolicyLayout` and its typography primitives so the terms and privacy pages retain the same presentation without duplicating layout styles.
 - Privacy policy content lives in a verbatim browser-safe content module; link formatting must not alter the legal text.
+
+- Sitemap is served by src/routes/sitemap[.]xml.ts; every route must declare staticData.sitemap, and coach profiles are included only when is_public is true (same filter as the profile page).

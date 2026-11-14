@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/account-deletion")({
+  staticData: { sitemap: true },
   component: AccountDeletion,
   head: () => ({
     meta: [

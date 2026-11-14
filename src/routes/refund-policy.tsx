@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/refund-policy")({
+  staticData: { sitemap: true },
   component: RefundPolicy,
   head: () => ({
     meta: [
