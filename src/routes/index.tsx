@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
+import { AppConnection, HomeMotion, LessonFlow, ManagementMotion } from "@/components/landing/home-motion";
 import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify-lockscreen.png.asset.json";
 import appPayment from "@/assets/app-payment-ledger.png.asset.json";
@@ -741,7 +742,7 @@ function Hero() {
         />
       </picture>
       <Container className="relative grid grid-cols-1 items-center gap-6 pb-10 pt-6 text-center lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-32 lg:pt-24 lg:text-left">
-        <div className="section-fade relative isolate flex flex-col items-center lg:items-start">
+        <div className="relative isolate flex flex-col items-center lg:items-start">
           <div
             className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 sm:-inset-x-14"
             style={{
@@ -776,13 +777,13 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="hero-display mt-3 break-keep leading-[1.18]">
+          <h1 data-hero-enter className="hero-display mt-3 break-keep leading-[1.18]">
             <span className="block whitespace-nowrap">회원이 알아보는</span>
             <span className="block whitespace-nowrap text-primary">좋은 강사의 차이</span>
           </h1>
 
 
-          <p className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
+          <p data-hero-enter className="lead mt-3 max-w-[30ch] break-keep sm:max-w-[34ch]">
             횟수·일정·납부 내역은 투명하게
             <br />
             회원별 레슨 기록은 세심하게
@@ -794,7 +795,7 @@ function Hero() {
         </div>
 
         {/* 첫 화면은 지연 없이 한 번에 표시 (스크롤 리빌 제외) */}
-        <div id="try-ai" className="flex justify-center">
+        <div id="try-ai" data-hero-enter className="flex justify-center">
           <div className="relative">
             <div className="phone-glow lg:hidden" />
             <div
@@ -923,7 +924,7 @@ function Ops() {
                 caption="홈 대시보드 — 회원 현황과 오늘 레슨을 한눈에 확인"
                 priority
               />
-
+              <ManagementMotion />
             </div>
           </div>
         </Reveal>
@@ -1073,6 +1074,7 @@ function Ops() {
               </div>
             </div>
           </Reveal>
+          <LessonFlow />
         </Container>
       </div>
     </Section>
@@ -1163,6 +1165,7 @@ function AppSection() {
           }
         />
 
+        <AppConnection />
         <DownloadCards pulse={pulse} />
       </Container>
     </Section>
@@ -1382,6 +1385,7 @@ function StickyMobileCTA() {
 
 function Landing() {
   return (
+    <HomeMotion>
     <div className="min-h-screen pb-24 md:pb-0 bg-background text-foreground">
       <Nav />
       <main>
@@ -1398,5 +1402,6 @@ function Landing() {
       <Footer />
       <StickyMobileCTA />
     </div>
+    </HomeMotion>
   );
 }

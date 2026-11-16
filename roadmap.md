@@ -9,3 +9,5 @@
 - [x] Update homepage SEO metadata without changing visible content, styling or actions.
 - [x] Verify rendered metadata, readable service HTML, existing sitemap/robots and desktop/mobile presentation.
 - [x] Review existing traffic/click measurement and report app-conversion and Core Web Vitals limitations before publication; details recorded in SEO_REVIEW.md.
+- [x] Enhance homepage entrance, screenshot layers and service-flow motion without changing existing copy, images, section order or links.
+- [x] Verify desktop/mobile, reduced motion, fail-open content, sample flows, SEO and performance; compare before/after without publishing (MOTION_REVIEW.md).
