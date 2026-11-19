@@ -930,8 +930,8 @@ function Ops() {
 
         {/* 02 · 03 알림 + 결제 (겹침) */}
         <Reveal>
-          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[1fr_52%] lg:gap-14">
-            <div className="space-y-8 lg:space-y-10">
+          <div className="mt-14 grid items-center gap-7 lg:mt-20 lg:grid-cols-[1fr_52%] lg:gap-14 lg:items-stretch">
+            <div className="flex flex-col gap-8 lg:justify-between">
               <FeatureCopy
                 num="02"
                 message="필요한 알림을 제때 받아보세요"
