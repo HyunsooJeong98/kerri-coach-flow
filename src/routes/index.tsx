@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
 import appHome from "@/assets/app-home.png.asset.json";
-import appNotify from "@/assets/app-notify-lockscreen.png.asset.json";
+import appNotify from "@/assets/app-notify-alerts.png.asset.json";
 import appPayment from "@/assets/app-payment-ledger.png.asset.json";
 import scheduleDaily from "@/assets/schedule-daily.png.asset.json";
 import scheduleWeekly from "@/assets/schedule-weekly.png.asset.json";
@@ -934,9 +934,9 @@ function Ops() {
             <div className="space-y-8 lg:space-y-10">
               <FeatureCopy
                 num="02"
-                message="필요한 알림을 간편하게 설정하세요"
-                title="알림 설정"
-                desc="레슨 전날·당일, 재등록 알림을 항목별로 켜고 끄기"
+                message="필요한 알림을 제때 받아보세요"
+                title="레슨 알림"
+                desc="레슨 일정, 남은 횟수, 회원 문의가 한 화면에"
               />
               <FeatureCopy
                 num="03"
@@ -946,18 +946,18 @@ function Ops() {
               />
             </div>
 
-            <div className="relative mx-auto w-[92%] max-w-[420px] pb-[16%] lg:w-full lg:max-w-[520px]">
-              <div className="w-[74%]">
+            <div className="relative mx-auto w-[92%] max-w-[420px] pb-[46%] lg:w-full lg:max-w-[520px]">
+              <div className="w-[86%]">
                 <Shot
                   src={appNotify.url}
-                  width={852}
-                  height={1846}
-                  alt="KERRI 코치앱 알림 화면. 잠금 화면에 내일 레슨 시간 안내와 남은 레슨권 횟수 안내 알림이 표시되어 있습니다."
-                  caption="알림 — 레슨 일정과 남은 횟수 안내"
+                  width={884}
+                  height={1920}
+                  alt="KERRI 코치앱 알림 화면. 잠금 화면에 남은 레슨 횟수 안내, 보강 레슨 신청, 새 상담 문의, 회원 메시지, 레슨 시작 예정, 내일 레슨 안내 알림이 한꺼번에 표시되어 있습니다."
+                  caption="알림 — 레슨 일정과 남은 횟수, 회원 문의를 한 화면에서 확인"
                 />
 
               </div>
-              <div className="absolute bottom-0 right-0 w-[62%]">
+              <div className="absolute bottom-0 right-0 w-[58%]">
                 <Shot
                   src={appPayment.url}
                   width={884}
