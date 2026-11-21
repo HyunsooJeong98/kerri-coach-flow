@@ -10,4 +10,4 @@
 - [x] Verify rendered metadata, readable service HTML, existing sitemap/robots and desktop/mobile presentation.
 - [x] Review existing traffic/click measurement and report app-conversion and Core Web Vitals limitations before publication; details recorded in SEO_REVIEW.md.
 - [x] Replace the coach-app push-notification photo (02) with the supplied lock-screen alert screenshot and keep it readable next to the payment photo.
-- [x] Reword the 02 copy to match the notification-arrival photo.
+- [x] Reword the 02 copy to match the notification-arrival photo.- [x] Rebuild /member as a story-driven page with replaceable member-app screenshot slots (7 images pending from user).
