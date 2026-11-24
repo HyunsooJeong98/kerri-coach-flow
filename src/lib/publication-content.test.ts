@@ -17,5 +17,11 @@ test("home shows only the three latest published updates", () => {
 
 test("missing verified content stays absent instead of becoming demo data", () => {
   assert.deepEqual(visibleStories(coachStories), []);
-  assert.deepEqual(visibleUpdates(productUpdates), []);
+});
+
+test("the published 1.2.0 update shows with its verified date and version", () => {
+  const shown = visibleUpdates(productUpdates);
+  assert.equal(shown.length, 1);
+  assert.equal(shown[0]?.date, "2026-11-21");
+  assert.equal(shown[0]?.version, "1.2.0");
 });

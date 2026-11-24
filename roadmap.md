@@ -15,4 +15,5 @@
 - [x] Refine the homepage around actual product screens, workflow, connected member experience, compact survey, shared prices and store downloads while preserving existing SEO and actions.
 - [x] Add frontend publication data for real testimonials and updates; keep unverified entries hidden and provide /updates and /demo pages.
 - [x] Verify desktop/mobile interactions, downloads, demo and existing public pages.
-- [ ] Populate real testimonials, updates and the member report screenshot (awaiting user-provided material).
+- [x] Publish the verified 1.2.0 update (2026-11-21) on the homepage and /updates.
+- [ ] Populate real testimonials and the member report screenshot (awaiting user-provided material).
