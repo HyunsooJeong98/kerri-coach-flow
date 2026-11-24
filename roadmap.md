@@ -16,4 +16,5 @@
 - [x] Add frontend publication data for real testimonials and updates; keep unverified entries hidden and provide /updates and /demo pages.
 - [x] Verify desktop/mobile interactions, downloads, demo and existing public pages.
 - [x] Publish the verified 1.2.0 update (2026-11-21) on the homepage and /updates.
-- [ ] Populate real testimonials and the member report screenshot (awaiting user-provided material).
+- [x] Replace the member report placeholder with the supplied report screenshot and show its correction/next-goal detail on the homepage and member page.
+- [ ] Populate real testimonials (awaiting user-provided material).

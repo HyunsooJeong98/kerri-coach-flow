@@ -1,3 +1,6 @@
+import memberReport from "@/assets/member-lesson-report.png.asset.json";
+import memberGoals from "@/assets/member-lesson-goals.jpg.asset.json";
+
 /**
  * 회원앱 실제 스크린샷 자리. src가 없으면 교체 가능한 placeholder를 보여준다.
  * 스크린샷은 기기 프레임 없이 들어온다고 가정하고, 웹에서 같은 프레임을 씌운다.
@@ -16,7 +19,7 @@ export const MEMBER_SCREENS: Record<
   { label: string; alt: string; src?: string }
 > = {
   home: { label: "Member Home", alt: "KERRI Member 홈 화면" },
-  report: { label: "AI Lesson Report", alt: "KERRI Member AI 레슨 기록 상세 화면" },
+  report: { label: "AI Lesson Report", alt: "KERRI Member 레슨 기록 — 오늘 레슨 요약, 이전 레슨 대비 변화, 오늘 잘한 점", src: memberReport.url },
   growth: { label: "Growth Journey", alt: "KERRI Member 성장 기록 화면" },
   schedule: { label: "Weekly Schedule", alt: "KERRI Member 주간 레슨 일정 화면" },
   message: { label: "Coach Message", alt: "KERRI Member 코치 1:1 메시지 화면" },
@@ -62,6 +65,10 @@ export function AppScreen({
       </div>
     </div>
   );
+}
+
+export function MemberReportDetail({ className = "" }: { className?: string }) {
+  return <img src={memberGoals.url} alt="KERRI Member 레슨 기록 — 교정 포인트와 다음 레슨 목표" width={773} height={768} loading="lazy" decoding="async" className={`block h-auto w-full rounded-lg ${className}`} />;
 }
 
 /** 앱 화면 밖으로 확장된 작은 정보 칩 */

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Container, Footer, Nav, Reveal, scrollTo } from "@/components/landing/shared";
-import { AppScreen, InfoChip, type MemberScreenKey } from "@/components/member/AppScreen";
+import { AppScreen, InfoChip, MemberReportDetail, type MemberScreenKey } from "@/components/member/AppScreen";
 
 export const Route = createFileRoute("/member")({
   staticData: { sitemap: true },
@@ -143,6 +143,7 @@ const STEPS: {
     title: (<>오늘 배운 내용<br />잊기 전에 다시 한번</>),
     body: (<>레슨에서 배운 핵심 내용과 교정 포인트를 정리해<br className="hidden sm:block" /> 언제든 다시 꺼내볼 수 있어요</>),
     extra: (
+      <>
       <ol className="mt-8 space-y-3 text-[0.95rem] font-semibold text-foreground/75">
         {["오늘의 요약", "잘한 점", "교정 포인트", "개인 맞춤 연습", "다음 레슨 목표"].map((t, i) => (
           <li key={t} className="flex items-center gap-3">
@@ -151,6 +152,8 @@ const STEPS: {
           </li>
         ))}
       </ol>
+      <MemberReportDetail className="mx-auto mt-8 max-w-[360px] lg:mx-0" />
+      </>
     ),
   },
   {

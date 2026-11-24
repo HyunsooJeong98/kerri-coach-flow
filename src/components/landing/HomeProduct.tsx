@@ -4,7 +4,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container, Reveal, Section, SectionHead, scrollTo } from "@/components/landing/shared";
 import { StoreBadges, COACH_APP_URL, COACH_PLAY_URL, MEMBER_APP_URL, MEMBER_PLAY_URL } from "@/components/landing/download";
-import { MEMBER_SCREENS } from "@/components/member/AppScreen";
+import { MEMBER_SCREENS, MemberReportDetail } from "@/components/member/AppScreen";
 import { PRICING } from "@/lib/pricing";
 import { coachStories, productUpdates, surveySource, visibleStories, visibleUpdates } from "@/lib/publication-content";
 import appHome from "@/assets/app-home.png.asset.json";
@@ -92,7 +92,7 @@ export function ConnectedExperience() {
       <Reveal className="mx-auto w-[80%] max-w-[290px]"><p className="mb-4 text-center text-sm font-semibold">KERRI Coach · AI 레슨 기록</p><ProductScreen src={report.url} alt="코치앱 AI 레슨 기록 — 오늘 레슨 요약, 이전 레슨 대비 변화, 오늘 잘한 점" /></Reveal>
       <div className="flex items-center justify-center gap-3 text-sm text-primary lg:flex-col lg:gap-4"><span>AI 정리</span><ArrowRight aria-hidden className="hidden lg:block" /><ArrowDown aria-hidden className="lg:hidden" /><span>회원에게 전달</span></div>
       <Reveal delay={80} className="mx-auto w-full max-w-[370px]">
-        {memberReport.src ? <div className="mx-auto w-[80%] max-w-[290px]"><p className="mb-4 text-center text-sm font-semibold">KERRI Member · 레슨 브리핑</p><ProductScreen src={memberReport.src} alt={memberReport.alt} /></div> : <div className="border-t border-border pt-7 lg:border-t-0 lg:pt-0"><div className="flex items-center gap-3"><img src={memberIcon.url} width={52} height={52} alt="KERRI Member 앱 아이콘" loading="lazy" className="rounded-xl" /><h3 className="text-2xl font-bold">KERRI Member</h3></div><p className="mt-6 text-xl font-semibold leading-relaxed">오늘 배운 내용이<br />회원의 다음 연습까지</p><ul className="mt-5 space-y-4 text-base text-muted-foreground"><li className="border-b border-border pb-4">오늘의 요약과 교정 포인트</li><li className="border-b border-border pb-4">개인 맞춤 연습과 다음 레슨 목표</li><li>레슨 기록과 성장 과정</li></ul></div>}
+        {memberReport.src ? <div className="mx-auto w-[80%] max-w-[290px]"><p className="mb-4 text-center text-sm font-semibold">KERRI Member · 레슨 기록</p><ProductScreen src={memberReport.src} alt={memberReport.alt} /><MemberReportDetail className="mt-5" /></div> : <div className="border-t border-border pt-7 lg:border-t-0 lg:pt-0"><div className="flex items-center gap-3"><img src={memberIcon.url} width={52} height={52} alt="KERRI Member 앱 아이콘" loading="lazy" className="rounded-xl" /><h3 className="text-2xl font-bold">KERRI Member</h3></div><p className="mt-6 text-xl font-semibold leading-relaxed">오늘 배운 내용이<br />회원의 다음 연습까지</p><ul className="mt-5 space-y-4 text-base text-muted-foreground"><li className="border-b border-border pb-4">오늘의 요약과 교정 포인트</li><li className="border-b border-border pb-4">개인 맞춤 연습과 다음 레슨 목표</li><li>레슨 기록과 성장 과정</li></ul></div>}
         <Button variant="link" asChild className="mt-6 h-auto justify-start px-0"><Link to="/member">회원앱 자세히 보기<ArrowRight /></Link></Button>
         <div className="mt-5"><StoreBadges appStoreUrl={MEMBER_APP_URL} playStoreUrl={MEMBER_PLAY_URL} /></div>
       </Reveal>
