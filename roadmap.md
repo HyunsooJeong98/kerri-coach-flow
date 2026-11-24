@@ -10,4 +10,9 @@
 - [x] Verify rendered metadata, readable service HTML, existing sitemap/robots and desktop/mobile presentation.
 - [x] Review existing traffic/click measurement and report app-conversion and Core Web Vitals limitations before publication; details recorded in SEO_REVIEW.md.
 - [x] Replace the coach-app push-notification photo (02) with the supplied lock-screen alert screenshot and keep it readable next to the payment photo.
-- [x] Reword the 02 copy to match the notification-arrival photo.- [x] Rebuild /member as a story-driven page with replaceable member-app screenshot slots (7 images pending from user).
+- [x] Reword the 02 copy to match the notification-arrival photo.
+- [x] Rebuild /member as a story-driven page with replaceable member-app screenshot slots (7 images pending from user).
+- [x] Refine the homepage around actual product screens, workflow, connected member experience, compact survey, shared prices and store downloads while preserving existing SEO and actions.
+- [x] Add frontend publication data for real testimonials and updates; keep unverified entries hidden and provide /updates and /demo pages.
+- [x] Verify desktop/mobile interactions, downloads, demo and existing public pages.
+- [ ] Populate real testimonials, updates and the member report screenshot (awaiting user-provided material).

@@ -382,3 +382,44 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Homepage refinement stays scoped so legal and product pages retain typography. */
+.home-refined {
+  letter-spacing: 0;
+}
+.home-refined h1, .home-refined h2, .home-refined h3, .home-refined h4,
+.home-refined .eyebrow, .home-refined .btn-base {
+  letter-spacing: 0;
+}
+.home-refined .hero-display {
+  font-size: 32px;
+  line-height: 1.25;
+}
+.home-refined .display-2 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+.home-refined .heading-4 { font-size: 17px; letter-spacing: 0; }
+.home-refined .cream-band { background: var(--cream); }
+.home-refined .noise::after { display: none; }
+.product-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in oklab, var(--cream) 93%, transparent);
+}
+@media (min-width: 640px) {
+  .home-refined .hero-display { font-size: 44px; }
+  .home-refined .display-2 { font-size: 36px; }
+}
+@media (min-width: 1024px) {
+  .product-hero::before {
+    background: linear-gradient(90deg, var(--cream) 0%, color-mix(in oklab, var(--cream) 95%, transparent) 48%, color-mix(in oklab, var(--cream) 60%, transparent) 100%);
+  }
+  .home-refined .hero-display { font-size: 52px; }
+  .home-refined .display-2 { font-size: 42px; }
+}
+@media (min-width: 1280px) {
+  .home-refined .hero-display { font-size: 56px; }
+}
