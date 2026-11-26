@@ -14,7 +14,3 @@
 
 - Sitemap is served by src/routes/sitemap[.]xml.ts; every route must declare staticData.sitemap, and coach profiles are included only when is_public is true (same filter as the profile page).
 - Keep page-specific SEO metadata and canonical links in leaf route heads; root owns only shared defaults to prevent inherited page identity and duplicate canonicals.
-- Share browser-safe pricing data between the homepage and pricing page to prevent offer drift.
-- Keep verified publication content in a browser-safe data module; absent testimonials, updates and member imagery must not become fabricated public content.
-- Share member report screenshots and detail rendering through the member screen module so homepage and member-page imagery stay consistent.
-- Keep the existing external simulator embedded under the internal demo route; do not proxy or replace its application logic.

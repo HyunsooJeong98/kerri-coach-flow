@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as CoachesRouteImport } from './routes/coaches'
-import { Route as DemoRouteImport } from './routes/demo'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -20,7 +19,6 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as UpdatesRouteImport } from './routes/updates'
 import { Route as CoachSlugRouteImport } from './routes/coach/$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,11 +34,6 @@ const AccountDeletionRoute = AccountDeletionRouteImport.update({
 const CoachesRoute = CoachesRouteImport.update({
   id: '/coaches',
   path: '/coaches',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoRoute = DemoRouteImport.update({
-  id: '/demo',
-  path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DownloadRoute = DownloadRouteImport.update({
@@ -78,11 +71,6 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UpdatesRoute = UpdatesRouteImport.update({
-  id: '/updates',
-  path: '/updates',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CoachSlugRoute = CoachSlugRouteImport.update({
   id: '/coach/$slug',
   path: '/coach/$slug',
@@ -93,7 +81,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/demo': typeof DemoRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -101,14 +88,12 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/updates': typeof UpdatesRoute
   '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/demo': typeof DemoRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -116,7 +101,6 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/updates': typeof UpdatesRoute
   '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRoutesById {
@@ -124,7 +108,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account-deletion': typeof AccountDeletionRoute
   '/coaches': typeof CoachesRoute
-  '/demo': typeof DemoRoute
   '/download': typeof DownloadRoute
   '/member': typeof MemberRoute
   '/pricing': typeof PricingRoute
@@ -132,7 +115,6 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
-  '/updates': typeof UpdatesRoute
   '/coach/$slug': typeof CoachSlugRoute
 }
 export interface FileRouteTypes {
@@ -141,7 +123,6 @@ export interface FileRouteTypes {
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/demo'
     | '/download'
     | '/member'
     | '/pricing'
@@ -149,14 +130,12 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/sitemap.xml'
     | '/terms'
-    | '/updates'
     | '/coach/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/demo'
     | '/download'
     | '/member'
     | '/pricing'
@@ -164,14 +143,12 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/sitemap.xml'
     | '/terms'
-    | '/updates'
     | '/coach/$slug'
   id:
     | '__root__'
     | '/'
     | '/account-deletion'
     | '/coaches'
-    | '/demo'
     | '/download'
     | '/member'
     | '/pricing'
@@ -179,7 +156,6 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/sitemap.xml'
     | '/terms'
-    | '/updates'
     | '/coach/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -187,7 +163,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountDeletionRoute: typeof AccountDeletionRoute
   CoachesRoute: typeof CoachesRoute
-  DemoRoute: typeof DemoRoute
   DownloadRoute: typeof DownloadRoute
   MemberRoute: typeof MemberRoute
   PricingRoute: typeof PricingRoute
@@ -195,7 +170,6 @@ export interface RootRouteChildren {
   RefundPolicyRoute: typeof RefundPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
-  UpdatesRoute: typeof UpdatesRoute
   CoachSlugRoute: typeof CoachSlugRoute
 }
 
@@ -220,13 +194,6 @@ declare module '@tanstack/react-router' {
       path: '/coaches'
       fullPath: '/coaches'
       preLoaderRoute: typeof CoachesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/download': {
@@ -278,13 +245,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/updates': {
-      id: '/updates'
-      path: '/updates'
-      fullPath: '/updates'
-      preLoaderRoute: typeof UpdatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/coach/$slug': {
       id: '/coach/$slug'
       path: '/coach/$slug'
@@ -299,7 +259,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountDeletionRoute: AccountDeletionRoute,
   CoachesRoute: CoachesRoute,
-  DemoRoute: DemoRoute,
   DownloadRoute: DownloadRoute,
   MemberRoute: MemberRoute,
   PricingRoute: PricingRoute,
@@ -307,7 +266,6 @@ const rootRouteChildren: RootRouteChildren = {
   RefundPolicyRoute: RefundPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
-  UpdatesRoute: UpdatesRoute,
   CoachSlugRoute: CoachSlugRoute,
 }
 export const routeTree = rootRouteImport
