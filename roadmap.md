@@ -1,4 +1,6 @@
 # Tasks
+- [x] Unify customer-support links with the existing KERRI Kakao channel chat; preserve verbatim legal documents and coach lesson inquiries.
+- [x] Verify support navigation and mobile/desktop presentation; the external Kakao chat URL returns 200 and opens in a new tab, but sending a message requires Kakao access.
 - [x] Restyle the value list and comparison area using the supplied editorial brief.
 - [x] Verify both areas at 360px, 390px, 430px and desktop, preserving install actions.
 - [x] Reuse the terms layout for /privacy without changing the terms content or appearance.

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ContactLink } from "@/components/landing/ContactLink";
 
 export const Route = createFileRoute("/refund-policy")({
   staticData: { sitemap: true },
@@ -108,7 +109,7 @@ function RefundPolicy() {
           <div>
             <dt className="inline text-muted-foreground">고객문의 · </dt>
             <dd className="inline">
-              <Mail />
+              <ContactLink />
             </dd>
           </div>
           <div>

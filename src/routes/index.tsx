@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DownloadCards } from "@/components/landing/download";
+import { ContactLink } from "@/components/landing/ContactLink";
 import appHome from "@/assets/app-home.png.asset.json";
 import appNotify from "@/assets/app-notify-alerts.png.asset.json";
 import appPayment from "@/assets/app-payment-ledger.png.asset.json";
@@ -1306,14 +1307,11 @@ function FAQ() {
         <p className="mt-6 break-keep text-center text-[0.875rem] leading-[1.75] text-muted-foreground">
           더 궁금한 점이 있으신가요?
           <br />
-          <a
-            href="http://pf.kakao.com/_CrxgwX"
-            target="_blank"
-            rel="noopener noreferrer"
+          <ContactLink
             className="text-primary transition-colors duration-200 hover:text-[var(--clay-dark)]"
           >
             케리(KERRI) 카카오톡 채널
-          </a>을 추가하고 편하게 문의해주세요
+          </ContactLink>에서 편하게 문의해주세요
         </p>
       </div>
     </Section>

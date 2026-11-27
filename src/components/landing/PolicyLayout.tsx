@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { ContactLink } from "@/components/landing/ContactLink";
 
 export function Chapter({ children }: { children: string }) {
   return (
@@ -54,6 +55,9 @@ export function PolicyLayout({ children }: { children: ReactNode }) {
 
       <main className="mx-auto max-w-3xl select-text px-5 py-14 sm:py-20 lg:px-8">
         {children}
+        <div className="mt-12 border-t border-border/60 pt-6 text-sm text-muted-foreground">
+          고객문의 · <ContactLink />
+        </div>
       </main>
     </div>
   );

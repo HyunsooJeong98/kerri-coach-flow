@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ContactLink } from "@/components/landing/ContactLink";
 
 export const Route = createFileRoute("/account-deletion")({
   staticData: { sitemap: true },
@@ -87,18 +88,12 @@ function AccountDeletion() {
                 <p className="mt-1">앱 실행 → 내 정보 → 계정 삭제</p>
               </div>
               <div>
-                <div className="font-semibold text-foreground">이메일</div>
+                <div className="font-semibold text-foreground">카카오톡 채널</div>
                 <p className="mt-1">
-                  <a
-                    href="mailto:hyunsoo@kerri.co.kr?subject=%5B%EA%B3%84%EC%A0%95%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD%5D%20%EA%B0%80%EC%9E%85%20%EC%9D%B4%EB%A9%94%EC%9D%BC%20%EC%A3%BC%EC%86%8C"
-                    className="font-medium text-primary hover:underline"
-                  >
-                    hyunsoo@kerri.co.kr
-                  </a>
-                  로 가입 이메일과 함께 요청
+                  <ContactLink />에서 가입 이메일과 함께 계정 삭제 요청
                 </p>
                 <p className="mt-2 rounded-lg bg-muted px-4 py-3 text-sm text-foreground/70">
-                  제목: [계정 삭제 요청] 가입 이메일 주소
+                  요청 내용: [계정 삭제 요청] 가입 이메일 주소
                 </p>
               </div>
             </div>

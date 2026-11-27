@@ -1,6 +1,7 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import kerriLogo from "@/assets/kerri-logo.jpg.asset.json";
+import { ContactLink } from "@/components/landing/ContactLink";
 
 /** 고정 헤더의 실제 높이(모바일 메뉴 확장분 제외)를 계산 */
 export function headerOffset() {
@@ -372,12 +373,7 @@ export function Footer() {
           <div><span className="text-muted-foreground">통신판매업 신고번호</span> · 제2026-서울양천-1007호</div>
           <div>
             <span className="text-muted-foreground">고객문의</span> ·{" "}
-            <a
-              href="mailto:hyunsoo@kerri.co.kr"
-              className="underline underline-offset-4 transition-colors hover:text-primary"
-            >
-              hyunsoo@kerri.co.kr
-            </a>
+            <ContactLink />
           </div>
         </div>
         <div className="break-keep text-[0.85rem]">

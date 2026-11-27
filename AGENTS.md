@@ -14,3 +14,4 @@
 
 - Sitemap is served by src/routes/sitemap[.]xml.ts; every route must declare staticData.sitemap, and coach profiles are included only when is_public is true (same filter as the profile page).
 - Keep page-specific SEO metadata and canonical links in leaf route heads; root owns only shared defaults to prevent inherited page identity and duplicate canonicals.
+- Customer-support entry points reuse ContactLink and the shared contact URL so destinations remain consistent without changing verbatim legal documents or coach lesson inquiries.
